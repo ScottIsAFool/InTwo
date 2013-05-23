@@ -59,6 +59,8 @@ namespace InTwo.ViewModel
                                                           ProgressText = "Creating user";
 
                                                           var response = await _scoreoidClient.CreatePlayerAsync(SelectedPlayer);
+
+                                                          MessageBox.Show(response, "Success", MessageBoxButton.OK);
                                                       }
                                                       catch (ScoreoidException ex)
                                                       {
