@@ -11,6 +11,7 @@
                             xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                             xmlns:scottbehaviours="clr-namespace:ScottIsAFool.WindowsPhone.Behaviours;assembly=ScottIsAFool.WindowsPhone"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
+                            xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -24,6 +25,12 @@
                                  IsVisible="{Binding ProgressIsVisible}"
                                  IsIndeterminate="True"/>
     </shell:SystemTray.ProgressIndicator>
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding CreateNewUserPageLoaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"

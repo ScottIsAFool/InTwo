@@ -1,4 +1,5 @@
-﻿using Cimbalino.Phone.Toolkit.Services;
+﻿using System.Windows;
+using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Scoreoid;
@@ -50,7 +51,29 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                                                   {
+                                                      if (SelectedPlayer == null || string.IsNullOrEmpty(SelectedPlayer.username)) return;
 
+                                                      try
+                                                      {
+                                                          ProgressIsVisible = true;
+                                                          ProgressText = "Creating user";
+
+                                                          var response = await _scoreoidClient.CreatePlayerAsync(SelectedPlayer);
+                                                      }
+                                                      catch (ScoreoidException ex)
+                                                      {
+                                                          if (ex.Message.Equals(Constants.UserAlreadyExists))
+                                                          {
+                                                              MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                                                          }
+                                                          else
+                                                          {
+                                                              
+                                                          }
+                                                      }
+
+                                                      ProgressIsVisible = false;
+                                                      ProgressText = string.Empty;
                                                   });
             }
         }
