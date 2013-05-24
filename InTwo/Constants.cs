@@ -17,6 +17,8 @@
         public static class Pages
         {
             public const string MainPage = "/Views/MainPage.xaml";
+            public const string ScoreBoard = "/Views/ScoreBoardView.xaml";
+            public const string Settings = "/Views/SettingsView.xaml";
 
             public static class Scoreoid
             {

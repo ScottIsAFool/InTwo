@@ -17,7 +17,7 @@
                             Orientation="Portrait"
                             mc:Ignorable="d"
                             shell:SystemTray.IsVisible="True"
-                            DataContext="{Binding Scores, Source={StaticResource Locator}}">
+                            DataContext="{Binding Scoreoid, Source={StaticResource Locator}}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
@@ -26,8 +26,8 @@
             <cimbalino:ApplicationBarBehavior BackgroundColor="Purple">
                 <cimbalino:ApplicationBarIconButton Text="sign in"
                                                     IconUri="/Icons/check.png"
-                                                    Command="{Binding SignInCommand}"/>
-                                                    <!--IsEnabled="{Binding SelectedPlayer.username.Length, Converter={StaticResource CountToEnabled}, ConverterParameter=delete}" />-->
+                                                    Command="{Binding SignInCommand}"
+                                                    IsEnabled="{Binding Username.Length, Converter={StaticResource CountToEnabled}, ConverterParameter=delete}" />
             </cimbalino:ApplicationBarBehavior>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
@@ -50,10 +50,6 @@
               Grid.Row="1"
               Margin="12,0,12,0">
             <StackPanel Orientation="Vertical">
-                <Image Source="/Images/ScoreoidLogo.png"
-                       Height="60"
-                       HorizontalAlignment="Left"
-                       Margin="12,0" />
                 <TextBlock Text="Please sign in using your Scoreoid username."
                            Style="{StaticResource PhoneTextNormalStyle}" />
                 <TextBlock Text="username:"
@@ -79,8 +75,18 @@
                 <HyperlinkButton Content="Create new user"
                                  HorizontalContentAlignment="Left"
                                  Foreground="{StaticResource PhoneAccentBrush}"
-                                 NavigateUri="/Views/Scoreoid/CreateNewUserView.xaml">
-                </HyperlinkButton>
+                                 NavigateUri="/Views/Scoreoid/CreateNewUserView.xaml"/>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,24,12,0"
+                            HorizontalAlignment="Right">
+                    <TextBlock Text="powered by"
+                               Style="{StaticResource PhoneTextSmallStyle}"
+                               Foreground="{StaticResource PhoneForegroundBrush}"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top" />
+                    <Image Source="/Images/ScoreoidLogo.png"
+                           Height="50" />
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

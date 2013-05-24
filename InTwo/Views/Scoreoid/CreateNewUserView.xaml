@@ -20,7 +20,7 @@
                             SupportedOrientations="Portrait"
                             Orientation="Portrait"
                             shell:SystemTray.IsVisible="True"
-                            DataContext="{Binding Scores, Source={StaticResource Locator}}">
+                            DataContext="{Binding Scoreoid, Source={StaticResource Locator}}">
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="{Binding ProgressText}"
                                  IsVisible="{Binding ProgressIsVisible}"

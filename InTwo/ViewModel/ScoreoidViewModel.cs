@@ -13,14 +13,14 @@ namespace InTwo.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class ScoresViewModel : ViewModelBase
+    public class ScoreoidViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly ScoreoidClient _scoreoidClient;
         /// <summary>
         /// Initializes a new instance of the ScoresViewModel class.
         /// </summary>
-        public ScoresViewModel(INavigationService navigation, ScoreoidClient scoreoidClient)
+        public ScoreoidViewModel(INavigationService navigation, ScoreoidClient scoreoidClient)
         {
             _navigationService = navigation;
             _scoreoidClient = scoreoidClient;
@@ -123,6 +123,8 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                     {
+                        if (string.IsNullOrEmpty(Username)) return;
+
                         ProgressIsVisible = true;
                         ProgressText = "Logging in...";
 

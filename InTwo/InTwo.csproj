@@ -101,13 +101,15 @@
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Design\DesignApplicationSettingsService.cs" />
     <Compile Include="Extensions\LinqToVisualTree.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Model\SettingsWrapper.cs" />
     <Compile Include="ThemeManager.cs" />
-    <Compile Include="ViewModel\ScoresViewModel.cs" />
+    <Compile Include="ViewModel\ScoreBoardViewModel.cs" />
+    <Compile Include="ViewModel\ScoreoidViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -119,6 +121,9 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\ScoreBoardView.xaml.cs">
+      <DependentUpon>ScoreBoardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Scoreoid\CreateNewUserView.xaml.cs">
       <DependentUpon>CreateNewUserView.xaml</DependentUpon>
     </Compile>
@@ -127,6 +132,9 @@
     </Compile>
     <Compile Include="Views\Scoreoid\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Welcome\ScoreoidWelcomeView.xaml.cs">
       <DependentUpon>ScoreoidWelcomeView.xaml</DependentUpon>
@@ -148,6 +156,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ScoreBoardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Scoreoid\CreateNewUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scoreoid\SignInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -58,20 +58,23 @@ namespace InTwo.ViewModel
                 SimpleIoc.Default.Register(()=> new ScoreoidClient(Constants.ScoreoidApiKey, Constants.ScoreoidGameId));
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<ScoresViewModel>();
+            SimpleIoc.Default.Register<ScoreoidViewModel>();
+            SimpleIoc.Default.Register<ScoreBoardViewModel>();
         }
 
         public MainViewModel Main
         {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
+            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
         }
 
-        public ScoresViewModel Scores
+        public ScoreoidViewModel Scoreoid
         {
-            get { return ServiceLocator.Current.GetInstance<ScoresViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<ScoreoidViewModel>(); }
+        }
+
+        public ScoreBoardViewModel ScoreBoard
+        {
+            get { return ServiceLocator.Current.GetInstance<ScoreBoardViewModel>(); }
         }
         
         public static void Cleanup()

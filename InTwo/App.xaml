@@ -7,8 +7,9 @@
              xmlns:vm="clr-namespace:InTwo.ViewModel"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:model="clr-namespace:InTwo.Model"
-             xmlns:converters="clr-namespace:Cimbalino.Phone.Toolkit.Converters;assembly=Cimbalino.Phone.Toolkit"
+             xmlns:cimbalinoConverters="clr-namespace:Cimbalino.Phone.Toolkit.Converters;assembly=Cimbalino.Phone.Toolkit"
              xmlns:scottConverters="clr-namespace:ScottIsAFool.WindowsPhone.Converters;assembly=ScottIsAFool.WindowsPhone"
+             xmlns:localConverters="clr-namespace:InTwo.Converters"
              mc:Ignorable="d">
 
     <!--Application Resources-->
@@ -22,11 +23,13 @@
             <system:String x:Key="AppName">In Two</system:String>
 
             <!--Converters-->
-            <converters:StringToLowercaseConverter x:Key="StringToLowercaseConverter"/>
-            <converters:StringToUppercaseConverter x:Key="StringToUppercaseConverter"/>
-            <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter"/>
+            <cimbalinoConverters:StringToLowercaseConverter x:Key="StringToLowercaseConverter"/>
+            <cimbalinoConverters:StringToUppercaseConverter x:Key="StringToUppercaseConverter"/>
+            <cimbalinoConverters:NegativeBooleanConverter x:Key="NegativeBooleanConverter"/>
 
             <scottConverters:CountToEnabled x:Key="CountToEnabled"/>
+
+            <localConverters:CurrentUserConverter x:Key="CurrentUserConverter"/>
             
             <ResourceDictionary.MergedDictionaries>
 
