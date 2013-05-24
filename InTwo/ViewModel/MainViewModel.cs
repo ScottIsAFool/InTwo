@@ -50,5 +50,13 @@ namespace InTwo.ViewModel
                                             });
             }
         }
+
+        public RelayCommand<string> NavigateToPage
+        {
+            get
+            {
+                return new RelayCommand<string>(_navigationService.NavigateTo);
+            }
+        }
     }
 }

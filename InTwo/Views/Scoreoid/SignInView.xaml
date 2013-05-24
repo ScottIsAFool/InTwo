@@ -1,47 +1,33 @@
-﻿<phone:PhoneApplicationPage x:Class="InTwo.Views.Scoreoid.CreateNewUserView"
+﻿<phone:PhoneApplicationPage x:Class="InTwo.Views.Scoreoid.SignInView"
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:ignore="http://www.ignore.com"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                            xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                             xmlns:scottbehaviours="clr-namespace:ScottIsAFool.WindowsPhone.Behaviours;assembly=ScottIsAFool.WindowsPhone"
+                            xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
-                            xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
-                            xmlns:controls="clr-namespace:InTwo.Controls"
-                            mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
                             SupportedOrientations="Portrait"
                             Orientation="Portrait"
+                            mc:Ignorable="d"
                             shell:SystemTray.IsVisible="True"
                             DataContext="{Binding Scores, Source={StaticResource Locator}}">
-    <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator Text="{Binding ProgressText}"
-                                 IsVisible="{Binding ProgressIsVisible}"
-                                 IsIndeterminate="True"/>
-    </shell:SystemTray.ProgressIndicator>
-    
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding CreateNewUserPageLoaded}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <i:Interaction.Behaviors>
             <cimbalino:ApplicationBarBehavior BackgroundColor="Purple">
-                <cimbalino:ApplicationBarIconButton Text="create user"
+                <cimbalino:ApplicationBarIconButton Text="sign in"
                                                     IconUri="/Icons/check.png"
-                                                    Command="{Binding CreateNewUserCommand}"
-                                                    IsEnabled="{Binding SelectedPlayer.username.Length, Converter={StaticResource CountToEnabled}, ConverterParameter=delete}"/>
+                                                    Command="{Binding SignInCommand}"/>
+                                                    <!--IsEnabled="{Binding SelectedPlayer.username.Length, Converter={StaticResource CountToEnabled}, ConverterParameter=delete}" />-->
             </cimbalino:ApplicationBarBehavior>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
@@ -50,13 +36,11 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel"
-                    Grid.Row="0"
+        <StackPanel Grid.Row="0"
                     Margin="12,17,0,28">
             <TextBlock Text="{Binding Source={StaticResource AppName}, Converter={StaticResource StringToUppercaseConverter}}"
-                       Style="{StaticResource PhoneTextNormalStyle}"
-                       Margin="12,0" />
-            <TextBlock Text="create new user"
+                       Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBlock Text="login"
                        Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
@@ -65,20 +49,40 @@
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
               Margin="12,0,12,0">
-           
-            <controls:UserDetails Player="{Binding SelectedPlayer}"
-                                  EnterCommandString="CreateNewUserCommand"
-                                  Description="Create your new scoreoid user here"
-                                  IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"/>
+            <StackPanel Orientation="Vertical">
+                <Image Source="/Images/ScoreoidLogo.png"
+                       Height="60"
+                       HorizontalAlignment="Left"
+                       Margin="12,0" />
+                <TextBlock Text="Please sign in using your Scoreoid username."
+                           Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBlock Text="username:"
+                           Style="{StaticResource PhoneTextSubtleStyle}" />
+                <toolkit:PhoneTextBox Hint="enter your username"
+                                      Text="{Binding Username, Mode=TwoWay}">
+                    <i:Interaction.Behaviors>
+                        <behaviours:EnterKeyHandler />
+                        <scottbehaviours:UpdateTextBindingOnPropertyChanged />
+                    </i:Interaction.Behaviors>
+                </toolkit:PhoneTextBox>
+                <TextBlock Text="password:"
+                           Style="{StaticResource PhoneTextSubtleStyle}"/>
+                <PasswordBox Password="{Binding Password, Mode=TwoWay}">
+                    <i:Interaction.Behaviors>
+                        <behaviours:EnterKeyHandler EnterKeyAction="ExecuteCommand"
+                                                    CommandString="SignInCommand"/>
+                        <scottbehaviours:UpdateTextBindingOnPropertyChanged />
+                    </i:Interaction.Behaviors>
+                </PasswordBox>
+                <TextBlock Text="Not registered?"
+                           Style="{StaticResource PhoneTextNormalStyle}"/>
+                <HyperlinkButton Content="Create new user"
+                                 HorizontalContentAlignment="Left"
+                                 Foreground="{StaticResource PhoneAccentBrush}"
+                                 NavigateUri="/Views/Scoreoid/CreateNewUserView.xaml">
+                </HyperlinkButton>
+            </StackPanel>
         </Grid>
-
-        <!--Uncomment to see an alignment grid to help ensure your controls are
-            aligned on common boundaries.  The image has a top margin of -32px to
-            account for the System Tray. Set this to 0 (or remove the margin altogether)
-            if the System Tray is hidden.
-
-            Before shipping remove this XAML and the image itself.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>
 
 </phone:PhoneApplicationPage>

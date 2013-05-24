@@ -98,6 +98,9 @@
     </Compile>
     <Compile Include="Behaviours\EnterKeyBehaviour.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controls\UserDetails.xaml.cs">
+      <DependentUpon>UserDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\DesignApplicationSettingsService.cs" />
     <Compile Include="Extensions\LinqToVisualTree.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -119,6 +122,12 @@
     <Compile Include="Views\Scoreoid\CreateNewUserView.xaml.cs">
       <DependentUpon>CreateNewUserView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Scoreoid\EditUserView.xaml.cs">
+      <DependentUpon>EditUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scoreoid\SignInView.xaml.cs">
+      <DependentUpon>SignInView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Welcome\ScoreoidWelcomeView.xaml.cs">
       <DependentUpon>ScoreoidWelcomeView.xaml</DependentUpon>
     </Compile>
@@ -131,11 +140,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="Controls\UserDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Scoreoid\CreateNewUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scoreoid\EditUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scoreoid\SignInView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +199,7 @@
     </Content>
     <Content Include="FodyWeavers.xml" />
     <Content Include="Icons\check.png" />
+    <Content Include="Icons\save.png" />
     <Content Include="Images\ScoreoidLogo.png" />
     <Content Include="MVVMLight.Nuget.Readme.txt" />
     <Content Include="README_FIRST.txt" />
