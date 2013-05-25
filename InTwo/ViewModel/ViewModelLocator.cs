@@ -60,6 +60,7 @@ namespace InTwo.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ScoreoidViewModel>();
             SimpleIoc.Default.Register<ScoreBoardViewModel>();
+            SimpleIoc.Default.Register<UserProfileViewModel>();
         }
 
         public MainViewModel Main
@@ -75,6 +76,11 @@ namespace InTwo.ViewModel
         public ScoreBoardViewModel ScoreBoard
         {
             get { return ServiceLocator.Current.GetInstance<ScoreBoardViewModel>(); }
+        }
+
+        public UserProfileViewModel UserProfile
+        {
+            get { return ServiceLocator.Current.GetInstance<UserProfileViewModel>(); }
         }
         
         public static void Cleanup()

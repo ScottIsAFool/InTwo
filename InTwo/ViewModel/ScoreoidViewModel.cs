@@ -26,6 +26,11 @@ namespace InTwo.ViewModel
         {
             _navigationService = navigation;
             _scoreoidClient = scoreoidClient;
+
+            if (IsInDesignMode)
+            {
+                CurrentPlayer = App.CurrentPlayer;
+            }
         }
 
         public string ProgressText { get; set; }
@@ -118,48 +123,6 @@ namespace InTwo.ViewModel
                         ProgressIsVisible = false;
                         ProgressText = string.Empty;
                     });
-            }
-        }
-
-        public RelayCommand EditUserCommand
-        {
-            get
-            {
-                return new RelayCommand(() =>
-                                            {
-                                                CurrentPlayer = App.CurrentPlayer;
-                                                _navigationService.NavigateTo(Constants.Pages.Scoreoid.EditUser);
-                                            });
-            }
-        }
-
-        public RelayCommand DeleteUserCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                                            {
-                                                var result = MessageBox.Show("Are you sure you want to delete your user? Once you do this, there's no going back, I can assure you! If you just want to logout, use the logout button", "Are you sure?", MessageBoxButton.OKCancel);
-
-                                                if (result == MessageBoxResult.Cancel) return;
-
-                                                try
-                                                {
-                                                    await _scoreoidClient.DeletePlayerAsync(App.SettingsWrapper.AppSettings.CurrentPlayer);
-
-                                                    App.SettingsWrapper.AppSettings.CurrentPlayer = null;
-
-                                                    _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
-                                                }
-                                                catch (ScoreoidException ex)
-                                                {
-
-                                                }
-                                                catch (Exception ex)
-                                                {
-                                                    
-                                                }
-                                            });
             }
         }
 

@@ -9,6 +9,8 @@
                             xmlns:controls="clr-namespace:ScottIsAFool.WindowsPhone.Controls;assembly=ScottIsAFool.WindowsPhone"
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -16,13 +18,47 @@
                             SupportedOrientations="Portrait"
                             Orientation="Portrait"
                             shell:SystemTray.IsVisible="True"
-                            DataContext="{Binding Scoreoid, Source={StaticResource Locator}}">
+                            DataContext="{Binding UserProfile, Source={StaticResource Locator}}">
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="True"
+                                 Text="{Binding ProgressText}"
+                                 IsVisible="{Binding ProgressIsVisible}"/>
+    </shell:SystemTray.ProgressIndicator>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding UserProfilePageLoaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn" />
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut" />
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut" />
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <i:Interaction.Behaviors>
             <cimbalino:ApplicationBarBehavior BackgroundColor="Purple">
+                <cimbalino:ApplicationBarIconButton Text="refresh details"
+                                                    IconUri="/Icons/refresh.png"
+                                                    Command="{Binding RefreshUserCommand}" />
                 <cimbalino:ApplicationBarIconButton Text="edit user"
                                                     IconUri="/Icons/edit.png"
                                                     Command="{Binding EditUserCommand}" />
@@ -52,13 +88,13 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
-              Margin="12,0,12,0"
-              DataContext="{Binding AppSettings.CurrentPlayer, Source={StaticResource Settings}}">
+              Margin="12,0,12,0">
             <ScrollViewer Margin="12,0,0,0">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal"
                                 VerticalAlignment="Top"
-                                HorizontalAlignment="Left">
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,24">
                         <Border Background="{StaticResource PhoneAccentBrush}">
                             <Path Width="173"
                                   Height="173"
@@ -68,22 +104,23 @@
                                   Fill="{StaticResource PhoneForegroundBrush}"
                                   Data="F1 M 38,19C 43.5417,19 45.9167,22.1667 45.1174,28.8134C 45.8315,29.2229 46.3125,29.9928 46.3125,30.875C 46.3125,31.9545 45.5923,32.8658 44.6061,33.1546C 44.1941,34.623 43.5543,35.9229 42.75,36.9628L 42.75,41.9583C 45.3889,42.4861 47.5,42.75 50.6667,44.3333C 53.8333,45.9167 54.8889,47.3681 57,49.4792L 57,57L 19,57L 19,49.4792C 21.1111,47.3681 22.1667,45.9167 25.3333,44.3333C 28.5,42.75 30.6111,42.4861 33.25,41.9583L 33.25,36.9628C 32.4457,35.9229 31.8059,34.623 31.3939,33.1546C 30.4077,32.8658 29.6875,31.9545 29.6875,30.875C 29.6875,29.9928 30.1685,29.2229 30.8826,28.8134C 30.0833,22.1667 32.4583,19 38,19 Z " />
                         </Border>
-                        <TextBlock Text="{Binding username}"
+                        <TextBlock Text="{Binding CurrentPlayer.username}"
                                    Style="{StaticResource PhoneTextLargeStyle}" />
                     </StackPanel>
 
-                    <controls:HeaderAndDetail HeaderText="current score"
-                                              DetailText="{Binding best_score}"
-                                              DetailTextForeground="{StaticResource PhoneAccentBrush}"
-                                              Margin="-12,0,0,0" />
-
+                    <controls:HeaderAndDetail HeaderText="best score"
+                                              DetailText="{Binding CurrentPlayer.best_score}"
+                                              Margin="-12,0,0,0"/>
                     <controls:HeaderAndDetail HeaderText="current rank"
-                                              DetailText="{Binding rank}"
-                                              DetailTextForeground="{StaticResource PhoneAccentBrush}"
+                                              DetailText="{Binding CurrentPlayer.rank}"
+                                              Margin="-12,0,0,0"/>
+                    <controls:HeaderAndDetail HeaderText="total points"
+                                              DetailText="{Binding TotalScore}"
                                               Margin="-12,0,0,0" />
-
+                    <controls:HeaderAndDetail HeaderText="number of games"
+                                              DetailText="{Binding NumberOfGames}"
+                                              Margin="-12,0,0,0" />
                 </StackPanel>
-
             </ScrollViewer>
         </Grid>
 
