@@ -12,6 +12,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using InTwo.Resources;
 using Microsoft.Practices.ServiceLocation;
+using Scoreoid;
 
 namespace InTwo
 {
@@ -26,6 +27,12 @@ namespace InTwo
         public static SettingsWrapper SettingsWrapper
         {
             get { return ((SettingsWrapper) Current.Resources["Settings"]); }
+        }
+
+        public static player CurrentPlayer
+        {
+            get { return SettingsWrapper.AppSettings.CurrentPlayer; }
+            set { SettingsWrapper.AppSettings.CurrentPlayer = value; }
         }
 
         /// <summary>

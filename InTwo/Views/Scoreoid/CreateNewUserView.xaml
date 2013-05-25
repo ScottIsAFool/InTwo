@@ -41,7 +41,10 @@
                 <cimbalino:ApplicationBarIconButton Text="create user"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding CreateNewUserCommand}"
-                                                    IsEnabled="{Binding SelectedPlayer.username.Length, Converter={StaticResource CountToEnabled}, ConverterParameter=delete}"/>
+                                                    IsEnabled="{Binding CurrentPlayer.username, Converter={StaticResource CanSendOrUpdateConverter}}"/>
+                <cimbalino:ApplicationBarIconButton Text="cancel"
+                                                    IconUri="/Icons/cancel.png"
+                                                    Command="{Binding CancelCreationCommand}"/>
             </cimbalino:ApplicationBarBehavior>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
@@ -65,8 +68,8 @@
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
               Margin="12,0,12,0">
-           
-            <controls:UserDetails Player="{Binding SelectedPlayer}"
+
+            <controls:UserDetails Player="{Binding CurrentPlayer}"
                                   EnterCommandString="CreateNewUserCommand"
                                   Description="Create your new scoreoid user here"
                                   IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"/>

@@ -4,6 +4,7 @@
     {
         public const string NokiaMusicAppId = "_x3lWsCXNPJQnprGCJd3";
         public const string NokiaMusicToken = "WL5DlkicW-mj5lSRzO0etQ";
+        public const string NokiaAdExchangeId = "ScottLovegrove_InTwo_WP";
 
 #if DEBUG
         public const string ScoreoidGameId = "dfe4d56007";
@@ -26,6 +27,7 @@
                 public const string CreateNewUser = "/Views/Scoreoid/CreateNewUserView.xaml";
                 public const string EditUser = "/Views/Scoreoid/EditUserView.xaml";
                 public const string SignIn = "/Views/Scoreoid/SignInView.xaml";
+                public const string UserProfile = "/Views/Scoreoid/UserProfileView.xaml";
             }
 
             public static class Welcome

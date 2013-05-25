@@ -67,7 +67,7 @@
                     <i:Interaction.Behaviors>
                         <behaviours:EnterKeyHandler EnterKeyAction="ExecuteCommand"
                                                     CommandString="SignInCommand"/>
-                        <scottbehaviours:UpdateTextBindingOnPropertyChanged />
+                        <scottbehaviours:UpdatePasswordBindingOnPropertyChanged />
                     </i:Interaction.Behaviors>
                 </PasswordBox>
                 <TextBlock Text="Not registered?"

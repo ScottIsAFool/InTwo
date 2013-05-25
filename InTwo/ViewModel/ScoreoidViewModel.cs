@@ -17,6 +17,8 @@ namespace InTwo.ViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly ScoreoidClient _scoreoidClient;
+
+        private player _previousPlayer;
         /// <summary>
         /// Initializes a new instance of the ScoresViewModel class.
         /// </summary>
@@ -24,18 +26,16 @@ namespace InTwo.ViewModel
         {
             _navigationService = navigation;
             _scoreoidClient = scoreoidClient;
-
-
         }
 
         public string ProgressText { get; set; }
         public bool ProgressIsVisible { get; set; }
 
-        public player SelectedPlayer { get; set; }
-
+        public player CurrentPlayer { get; set; }
+        
         public string Username { get; set; }
         public string Password { get; set; }
-
+        
         #region Commands
 
         #region Page Loaded Commands
@@ -45,7 +45,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                                             {
-                                                SelectedPlayer = new player();
+                                                CurrentPlayer = new player();
                                             });
             }
         }
@@ -57,15 +57,17 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                                                   {
-                                                      if (SelectedPlayer == null
-                                                          || string.IsNullOrEmpty(SelectedPlayer.username)) return;
+                                                      if (CurrentPlayer == null
+                                                          || string.IsNullOrEmpty(CurrentPlayer.username)) return;
 
                                                       try
                                                       {
                                                           ProgressIsVisible = true;
                                                           ProgressText = "Creating user";
 
-                                                          var response = await _scoreoidClient.CreatePlayerAsync(SelectedPlayer);
+                                                          var response = await _scoreoidClient.CreatePlayerAsync(CurrentPlayer);
+
+                                                          App.CurrentPlayer = CurrentPlayer;
 
                                                           MessageBox.Show(response, "Success", MessageBoxButton.OK);
                                                       }
@@ -90,15 +92,17 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                     {
-                        if (SelectedPlayer == null
-                            || string.IsNullOrEmpty(SelectedPlayer.username)) return;
+                        if (CurrentPlayer == null
+                            || string.IsNullOrEmpty(CurrentPlayer.username)) return;
 
                         try
                         {
                             ProgressIsVisible = true;
                             ProgressText = "Creating user";
 
-                            var response = await _scoreoidClient.UpdatePlayerAsync(SelectedPlayer);
+                            var response = await _scoreoidClient.UpdatePlayerAsync(CurrentPlayer);
+
+                            App.CurrentPlayer = CurrentPlayer;
 
                             MessageBox.Show(response, "Success", MessageBoxButton.OK);
                         }
@@ -117,6 +121,18 @@ namespace InTwo.ViewModel
             }
         }
 
+        public RelayCommand EditUserCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                                            {
+                                                CurrentPlayer = App.CurrentPlayer;
+                                                _navigationService.NavigateTo(Constants.Pages.Scoreoid.EditUser);
+                                            });
+            }
+        }
+
         public RelayCommand DeleteUserCommand
         {
             get
@@ -129,7 +145,7 @@ namespace InTwo.ViewModel
 
                                                 try
                                                 {
-                                                    await _scoreoidClient.DeletePlayerAsync(SelectedPlayer);
+                                                    await _scoreoidClient.DeletePlayerAsync(App.SettingsWrapper.AppSettings.CurrentPlayer);
 
                                                     App.SettingsWrapper.AppSettings.CurrentPlayer = null;
 
@@ -156,14 +172,13 @@ namespace InTwo.ViewModel
                         if (string.IsNullOrEmpty(Username)) return;
 
                         ProgressIsVisible = true;
-                        ProgressText = "Logging in...";
+                        ProgressText = "Signing in...";
 
                         try
                         {
                             var response = await _scoreoidClient.GetPlayerAsync(Username, Password);
 
-                            SelectedPlayer = response.items[0];
-
+                            App.CurrentPlayer = response.items[0];
                         }
                         catch (ScoreoidException ex)
                         {
@@ -177,6 +192,19 @@ namespace InTwo.ViewModel
                         ProgressIsVisible = false;
                         ProgressText = string.Empty;
                     });
+            }
+        }
+
+        public RelayCommand CancelCreationCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                                            {
+                                                CurrentPlayer = null;
+                                                if (_navigationService.CanGoBack)
+                                                    _navigationService.GoBack();
+                                            });
             }
         }
 

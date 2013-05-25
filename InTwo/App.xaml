@@ -30,6 +30,7 @@
             <scottConverters:CountToEnabled x:Key="CountToEnabled"/>
 
             <localConverters:CurrentUserConverter x:Key="CurrentUserConverter"/>
+            <localConverters:CanSendOrUpdateConverter x:Key="CanSendOrUpdateConverter"/>
             
             <ResourceDictionary.MergedDictionaries>
 

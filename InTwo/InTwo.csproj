@@ -101,9 +101,11 @@
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CanSendOrUpdateConverter.cs" />
     <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Design\DesignApplicationSettingsService.cs" />
     <Compile Include="Extensions\LinqToVisualTree.cs" />
+    <Compile Include="InneractiveAdLocation.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Model\SettingsWrapper.cs" />
@@ -221,7 +223,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="FodyWeavers.xml" />
+    <Content Include="Icons\cancel.png" />
     <Content Include="Icons\check.png" />
+    <Content Include="Icons\edit.png" />
     <Content Include="Icons\save.png" />
     <Content Include="Images\ScoreoidLogo.png" />
     <Content Include="MVVMLight.Nuget.Readme.txt" />
@@ -253,6 +257,9 @@
     <Reference Include="GalaSoft.MvvmLight.WP8">
       <HintPath>..\packages\MvvmLightLibs.4.1.27.0\lib\WindowsPhone8\GalaSoft.MvvmLight.WP8.dll</HintPath>
     </Reference>
+    <Reference Include="Inneractive.Ad">
+      <HintPath>..\3plib\NAX\Inneractive.Ad.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2012.10.30\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
@@ -279,12 +286,13 @@
       <HintPath>..\packages\PropertyChanged.Fody.1.38.2.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ScoreoidPortable, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ScoreoidPortable, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ScoreoidPortable.1.0.1.0-beta\lib\portable-win+net40+sl40+wp71\ScoreoidPortable.dll</HintPath>
+      <HintPath>..\packages\ScoreoidPortable.1.0.2.0-beta\lib\portable-win+net40+sl40+wp71\ScoreoidPortable.dll</HintPath>
     </Reference>
-    <Reference Include="ScottIsAFool.WindowsPhone">
-      <HintPath>..\packages\ScottIsAFool.WindowsPhone.1.0.14.4\lib\wp8\ScottIsAFool.WindowsPhone.dll</HintPath>
+    <Reference Include="ScottIsAFool.WindowsPhone, Version=1.0.15.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ScottIsAFool.WindowsPhone.1.0.15.2\lib\wp8\ScottIsAFool.WindowsPhone.dll</HintPath>
     </Reference>
     <Reference Include="SharpGIS.GZipWebClient">
       <HintPath>..\packages\SharpGIS.GZipWebClient.1.4.0.0\lib\wp71\SharpGIS.GZipWebClient.dll</HintPath>
