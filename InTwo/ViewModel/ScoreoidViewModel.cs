@@ -98,9 +98,9 @@ namespace InTwo.ViewModel
                             ProgressIsVisible = true;
                             ProgressText = "Creating user";
 
-                            //var response = await _scoreoidClient.CreatePlayerAsync(SelectedPlayer);
+                            var response = await _scoreoidClient.UpdatePlayerAsync(SelectedPlayer);
 
-                            //MessageBox.Show(response, "Success", MessageBoxButton.OK);
+                            MessageBox.Show(response, "Success", MessageBoxButton.OK);
                         }
                         catch (ScoreoidException ex)
                         {
@@ -114,6 +114,36 @@ namespace InTwo.ViewModel
                         ProgressIsVisible = false;
                         ProgressText = string.Empty;
                     });
+            }
+        }
+
+        public RelayCommand DeleteUserCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                                            {
+                                                var result = MessageBox.Show("Are you sure you want to delete your user? Once you do this, there's no going back, I can assure you! If you just want to logout, use the logout button", "Are you sure?", MessageBoxButton.OKCancel);
+
+                                                if (result == MessageBoxResult.Cancel) return;
+
+                                                try
+                                                {
+                                                    await _scoreoidClient.DeletePlayerAsync(SelectedPlayer);
+
+                                                    App.SettingsWrapper.AppSettings.CurrentPlayer = null;
+
+                                                    _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
+                                                }
+                                                catch (ScoreoidException ex)
+                                                {
+
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    
+                                                }
+                                            });
             }
         }
 

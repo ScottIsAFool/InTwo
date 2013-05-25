@@ -14,7 +14,8 @@ namespace InTwo.Model
                 CurrentPlayer = new player
                     {
                         username = "scottisafool",
-                        best_score = "336"
+                        best_score = "336",
+                        rank= "1"
                     };
             }
         }
