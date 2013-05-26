@@ -11,7 +11,8 @@
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
       <Capability Name="ID_CAP_PHONEDIALER" />
       <Capability Name="ID_CAP_IDENTITY_DEVICE" />
-      <Capability Name="ID_CAP_LOCATION"/>
+      <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_CAP_ISV_CAMERA" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="Views/Scoreoid/CreateNewUserView.xaml" />

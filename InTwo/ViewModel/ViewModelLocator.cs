@@ -40,12 +40,24 @@ namespace InTwo.ViewModel
                 // Create design time view services and models DesignApplicationSettingsService
                 if (!SimpleIoc.Default.IsRegistered<IApplicationSettingsService>())
                     SimpleIoc.Default.Register<IApplicationSettingsService, DesignApplicationSettingsService>();
+
+                if(!SimpleIoc.Default.IsRegistered<IPhotoChooserService>())
+                    SimpleIoc.Default.Register<IPhotoChooserService, DesignPhotoChooserService>();
+
+                if (!SimpleIoc.Default.IsRegistered<IAsyncStorageService>())
+                    SimpleIoc.Default.Register<IAsyncStorageService, DesignAsyncStorageService>();
             }
             else
             {
                 // Create run time view services and models
                 if (!SimpleIoc.Default.IsRegistered<IApplicationSettingsService>())
                     SimpleIoc.Default.Register<IApplicationSettingsService, ApplicationSettingsService>();
+
+                if (!SimpleIoc.Default.IsRegistered<IPhotoChooserService>())
+                    SimpleIoc.Default.Register<IPhotoChooserService, PhotoChooserWithCameraService>();
+
+                if(!SimpleIoc.Default.IsRegistered<IAsyncStorageService>())
+                    SimpleIoc.Default.Register<IAsyncStorageService, AsyncStorageService>();
             }
 
             if (!SimpleIoc.Default.IsRegistered<INavigationService>())

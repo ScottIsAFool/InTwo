@@ -5,6 +5,7 @@ using System.Windows;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Microsoft.Phone.Tasks;
 using Scoreoid;
 
 namespace InTwo.ViewModel
@@ -19,14 +20,18 @@ namespace InTwo.ViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly ScoreoidClient _scoreoidClient;
+        private readonly IPhotoChooserService _photoChooserService;
+        private readonly IAsyncStorageService _asyncStorageService;
 
         /// <summary>
         /// Initializes a new instance of the UserProfileViewModel class.
         /// </summary>
-        public UserProfileViewModel(INavigationService navigationService, ScoreoidClient scoreoidClient)
+        public UserProfileViewModel(INavigationService navigationService, ScoreoidClient scoreoidClient, IPhotoChooserService photoChooserService, IAsyncStorageService asyncStorageService)
         {
             _navigationService = navigationService;
             _scoreoidClient = scoreoidClient;
+            _photoChooserService = photoChooserService;
+            _asyncStorageService = asyncStorageService;
 
             if (IsInDesignMode)
             {
@@ -53,7 +58,6 @@ namespace InTwo.ViewModel
                                                 // TODO: check for internet connection
                                                 CurrentPlayer = App.CurrentPlayer;
 
-                                                
                                                 await GetPlayerInformation();
                                             });
             }
@@ -109,6 +113,22 @@ namespace InTwo.ViewModel
 
                     }
                 });
+            }
+        }
+
+        public RelayCommand ChooseUserProfilePictureCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                                                  {
+                                                      var photoResult = await _photoChooserService.ShowAsync(true);
+
+                                                      if (photoResult.TaskResult == TaskResult.OK)
+                                                      {
+                                                          // Save the image to isolated storage
+                                                      }
+                                                  });
             }
         }
         #endregion
