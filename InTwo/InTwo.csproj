@@ -288,9 +288,9 @@
       <HintPath>..\packages\PropertyChanged.Fody.1.38.2.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ScoreoidPortable, Version=1.0.3.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ScoreoidPortable, Version=1.0.3.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ScoreoidPortable.1.0.3.1-beta\lib\portable-win+net40+sl40+wp71\ScoreoidPortable.dll</HintPath>
+      <HintPath>..\packages\ScoreoidPortable.1.0.3.2-beta\lib\portable-win+net40+sl40+wp71\ScoreoidPortable.dll</HintPath>
     </Reference>
     <Reference Include="ScottIsAFool.WindowsPhone, Version=1.0.15.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
