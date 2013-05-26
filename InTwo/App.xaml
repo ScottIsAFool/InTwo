@@ -28,9 +28,11 @@
             <cimbalinoConverters:NegativeBooleanConverter x:Key="NegativeBooleanConverter"/>
 
             <scottConverters:CountToEnabled x:Key="CountToEnabled"/>
+            <scottConverters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
 
             <localConverters:CurrentUserConverter x:Key="CurrentUserConverter"/>
             <localConverters:CanSendOrUpdateConverter x:Key="CanSendOrUpdateConverter"/>
+            <localConverters:ProfilePictureUriConverter x:Key="ProfilePictureUriConverter"/>
 
             <!-- Control Styles -->
             <Style x:Key="EmptyButtonStyle"
