@@ -8,6 +8,8 @@
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                             xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
+                            xmlns:controls="clr-namespace:InTwo.Controls"
+                            xmlns:toolkit="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -49,6 +51,21 @@
                        Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
+
+        <Button Style="{StaticResource EmptyButtonStyle}"
+                toolkit:TiltEffect.IsTiltEnabled="True"
+                Command="{Binding Main.NavigateToPage, Source={StaticResource Locator}}"
+                CommandParameter="/Views/Scoreoid/UserProfileView.xaml"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Top"
+                Margin="0,10,10,0">
+            <controls:ProfilePicture IsClipped="True"
+                                     Height="50"
+                                     Grid.Row="0"
+                                     Visibility="{Binding AppSettings.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}" />
+        </Button>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
