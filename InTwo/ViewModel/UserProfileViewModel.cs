@@ -157,6 +157,21 @@ namespace InTwo.ViewModel
                                                   });
             }
         }
+
+        public RelayCommand LogoutCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                                            {
+                                                App.CurrentPlayer = null;
+
+                                                _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
+
+                                                Messenger.Default.Send(new NotificationMessage(Constants.RefreshCurrentPlayerMsg));
+                                            });
+            }
+        }
         #endregion
 
         private async Task GetPlayerInformation()

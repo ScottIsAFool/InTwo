@@ -66,6 +66,8 @@
                 <cimbalino:ApplicationBarBehavior.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="delete"
                                                       Command="{Binding DeleteUserCommand}" />
+                    <cimbalino:ApplicationBarMenuItem Text="logout"
+                                                      Command="{Binding LogoutCommand}"/>
                 </cimbalino:ApplicationBarBehavior.MenuItems>
             </cimbalino:ApplicationBarBehavior>
         </i:Interaction.Behaviors>
