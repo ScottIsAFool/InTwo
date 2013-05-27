@@ -14,8 +14,7 @@
                             SupportedOrientations="Portrait"
                             Orientation="Portrait"
                             shell:SystemTray.IsVisible="True"
-                            shell:SystemTray.Opacity="0"
-                            DataContext="{Binding Main, Source={StaticResource Locator}}">
+                            shell:SystemTray.Opacity="0">
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>

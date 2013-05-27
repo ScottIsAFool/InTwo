@@ -1,8 +1,14 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using InTwo.Model;
+using Microsoft.Phone.Controls;
+using Newtonsoft.Json;
 using Nokia.Music;
+using Nokia.Music.Types;
 
 namespace InTwo.ViewModel
 {
@@ -22,13 +28,21 @@ namespace InTwo.ViewModel
     {
         private readonly MusicClient _musicClient;
         private readonly IExtendedNavigationService _navigationService;
+        private readonly IAsyncStorageService _asyncStorageService;
+        private readonly IApplicationSettingsService _settingsService;
+
+        private List<Product> _tracks;
+        private bool _hasCheckedForData;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IExtendedNavigationService navigationService, MusicClient musicClient)
+        public MainViewModel(IExtendedNavigationService navigationService, MusicClient musicClient, IAsyncStorageService asyncStorageService, IApplicationSettingsService settingsService)
         {
             _musicClient = musicClient;
             _navigationService = navigationService;
+            _asyncStorageService = asyncStorageService;
+            _settingsService = settingsService;
 
             if (IsInDesignMode)
             {
@@ -37,18 +51,77 @@ namespace InTwo.ViewModel
             else
             {
                 // Code runs "for real"
+            }
+        }
+
+        public string ProgressText { get; set; }
+        public bool ProgressIsVisible { get; set; }
+
+        public List<Genre> Genres { get; set; }
+
+        private async Task<bool> CheckForGameData()
+        {
+            var genres = _settingsService.Get("Genres", default(List<Genre>));
+
+            if (genres == default(List<Genre>)) return false;
+
+            Genres = genres;
+
+            if (!await _asyncStorageService.FileExistsAsync(Constants.GameDataFile)) return false;
+
+            var tracksJson = await _asyncStorageService.ReadAllTextAsync(Constants.GameDataFile);
+
+            try
+            {
+                _tracks = await JsonConvert.DeserializeObjectAsync<List<Product>>(tracksJson);
+
+                return _tracks.Any();
+            }
+            catch
+            {
                 
             }
+
+            return false;
         }
 
         public RelayCommand MainPageLoaded
         {
             get
             {
-                return new RelayCommand(() =>
-                                            {
-                                                
-                                            });
+                return new RelayCommand(async () =>
+                                                  {
+                                                      if (_hasCheckedForData) return;
+
+                                                      var dataExists = await CheckForGameData();
+
+                                                      if (!dataExists)
+                                                      {
+                                                          var message = new CustomMessageBox
+                                                                            {
+                                                                                Caption = "No game data present",
+                                                                                Message = "We can't find any game data saved to your phone. " +
+                                                                                          "This data needs to be downloaded in order for you to play, would you like us to download that now? " +
+                                                                                          "Please note, this doesn't download any music.",
+                                                                                LeftButtonContent = "yes",
+                                                                                RightButtonContent = "no",
+                                                                                IsFullScreen = false
+                                                                            };
+
+                                                          message.Dismissed += (sender, args) =>
+                                                                                   {
+                                                                                       if (args.Result == CustomMessageBoxResult.LeftButton)
+                                                                                       {
+                                                                                           ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+
+                                                                                           _navigationService.NavigateTo(Constants.Pages.DownloadingSongs);
+                                                                                       }
+                                                                                   };
+                                                          message.Show();
+                                                      }
+
+                                                      _hasCheckedForData = true;
+                                                  });
             }
         }
 

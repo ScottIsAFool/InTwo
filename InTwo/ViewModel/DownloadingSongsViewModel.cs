@@ -66,7 +66,7 @@ namespace InTwo.ViewModel
                                                               }
                                                           }
 
-                                                          await _asyncStorageService.WriteAllTextAsync(Constants.GameDataFile, JsonConvert.SerializeObject(tracks));
+                                                          await _asyncStorageService.WriteAllTextAsync(Constants.GameDataFile, await JsonConvert.SerializeObjectAsync(tracks));
 
                                                           _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
                                                       }
