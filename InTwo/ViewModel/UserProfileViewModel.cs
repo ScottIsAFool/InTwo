@@ -135,7 +135,7 @@ namespace InTwo.ViewModel
                                                           // Save the image to isolated storage
                                                           var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:", "");
 
-                                                          if (await _asyncStorageService.DirectoryExistsAsync("ProfilePictures"))
+                                                          if (!await _asyncStorageService.DirectoryExistsAsync("ProfilePictures"))
                                                           {
                                                               await _asyncStorageService.CreateDirectoryAsync("ProfilePictures");
                                                           }

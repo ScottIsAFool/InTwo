@@ -147,6 +147,8 @@ namespace InTwo.ViewModel
                             var response = await _scoreoidClient.GetPlayerAsync(Username, Password);
 
                             App.CurrentPlayer = response.items[0];
+
+                            _navigationService.GoBack();
                         }
                         catch (ScoreoidException ex)
                         {

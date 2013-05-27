@@ -10,6 +10,7 @@
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
                             xmlns:ad="clr-namespace:Inneractive.Nokia.Ad;assembly=Inneractive.Ad"
                             xmlns:controls="clr-namespace:InTwo.Controls"
+                            xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             mc:Ignorable="d"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -49,6 +50,15 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
+        <i:Interaction.Behaviors>
+            <cimbalino:ApplicationBarBehavior Mode="Minimized">
+                <cimbalino:ApplicationBarBehavior.MenuItems>
+                    <cimbalino:ApplicationBarMenuItem Text="log in"
+                                                      Command="{Binding NavigateToPage}"
+                                                      CommandParameter="/Views/Scoreoid/SignInView.xaml"/>
+                </cimbalino:ApplicationBarBehavior.MenuItems>
+            </cimbalino:ApplicationBarBehavior>
+        </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
