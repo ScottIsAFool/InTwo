@@ -1,21 +1,8 @@
-/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:InTwo"
-                           x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-
-  You can also use Blend to do all this with the tool's support.
-  See http://www.galasoft.ch/mvvm
-*/
-
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using InTwo.Design;
+using InTwo.Model;
 using Microsoft.Practices.ServiceLocation;
 using Nokia.Music;
 using Scoreoid;
@@ -60,8 +47,8 @@ namespace InTwo.ViewModel
                     SimpleIoc.Default.Register<IAsyncStorageService, AsyncStorageService>();
             }
 
-            if (!SimpleIoc.Default.IsRegistered<INavigationService>())
-                SimpleIoc.Default.Register<INavigationService, NavigationService>();
+            if (!SimpleIoc.Default.IsRegistered<IExtendedNavigationService>())
+                SimpleIoc.Default.Register<IExtendedNavigationService, ExtendedNavigationService>();
 
             if(!SimpleIoc.Default.IsRegistered<MusicClient>())
                 SimpleIoc.Default.Register(() => new MusicClient(Constants.NokiaMusicAppId));

@@ -7,6 +7,7 @@ using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using InTwo.Model;
 using Microsoft.Phone.Tasks;
 using Scoreoid;
 
@@ -20,7 +21,7 @@ namespace InTwo.ViewModel
     /// </summary>
     public class UserProfileViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
+        private readonly IExtendedNavigationService _navigationService;
         private readonly ScoreoidClient _scoreoidClient;
         private readonly IPhotoChooserService _photoChooserService;
         private readonly IAsyncStorageService _asyncStorageService;
@@ -28,7 +29,7 @@ namespace InTwo.ViewModel
         /// <summary>
         /// Initializes a new instance of the UserProfileViewModel class.
         /// </summary>
-        public UserProfileViewModel(INavigationService navigationService, ScoreoidClient scoreoidClient, IPhotoChooserService photoChooserService, IAsyncStorageService asyncStorageService)
+        public UserProfileViewModel(IExtendedNavigationService navigationService, ScoreoidClient scoreoidClient, IPhotoChooserService photoChooserService, IAsyncStorageService asyncStorageService)
         {
             _navigationService = navigationService;
             _scoreoidClient = scoreoidClient;
@@ -57,7 +58,8 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                                             {
-                                                // TODO: check for internet connection
+                                                if (!_navigationService.IsNetworkAvailable) return;
+
                                                 CurrentPlayer = App.CurrentPlayer;
 
                                                 await GetPlayerInformation();
@@ -97,6 +99,8 @@ namespace InTwo.ViewModel
                     var result = MessageBox.Show("Are you sure you want to delete your user? Once you do this, there's no going back, I can assure you! If you just want to logout, use the logout button", "Are you sure?", MessageBoxButton.OKCancel);
 
                     if (result == MessageBoxResult.Cancel) return;
+
+                    if (!_navigationService.IsNetworkAvailable) return;
 
                     try
                     {
@@ -176,6 +180,8 @@ namespace InTwo.ViewModel
 
         private async Task GetPlayerInformation()
         {
+            if (!_navigationService.IsNetworkAvailable) return;
+
             ProgressIsVisible = true;
             ProgressText = "Getting latest information...";
 

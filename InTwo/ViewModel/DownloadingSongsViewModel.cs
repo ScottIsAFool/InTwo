@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using InTwo.Model;
 using Newtonsoft.Json;
 using Nokia.Music;
 using Nokia.Music.Types;
@@ -17,14 +18,14 @@ namespace InTwo.ViewModel
     /// </summary>
     public class DownloadingSongsViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
+        private readonly IExtendedNavigationService _navigationService;
         private readonly MusicClient _musicClient;
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
         /// <summary>
         /// Initializes a new instance of the DownloadingSongsViewModel class.
         /// </summary>
-        public DownloadingSongsViewModel(INavigationService navigationService, MusicClient musicClient, IAsyncStorageService asyncStorageService, IApplicationSettingsService settingsService)
+        public DownloadingSongsViewModel(IExtendedNavigationService navigationService, MusicClient musicClient, IAsyncStorageService asyncStorageService, IApplicationSettingsService settingsService)
         {
             _navigationService = navigationService;
             _musicClient = musicClient;
@@ -38,7 +39,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                                                   {
-                                                      // TODO: Check for network connectivity
+                                                      if (!_navigationService.IsNetworkAvailable) return;
 
                                                       try
                                                       {

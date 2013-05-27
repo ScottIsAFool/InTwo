@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using InTwo.Model;
 using Scoreoid;
 
 namespace InTwo.ViewModel
@@ -15,14 +15,13 @@ namespace InTwo.ViewModel
     /// </summary>
     public class ScoreoidViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
+        private readonly IExtendedNavigationService _navigationService;
         private readonly ScoreoidClient _scoreoidClient;
 
-        private player _previousPlayer;
         /// <summary>
         /// Initializes a new instance of the ScoresViewModel class.
         /// </summary>
-        public ScoreoidViewModel(INavigationService navigation, ScoreoidClient scoreoidClient)
+        public ScoreoidViewModel(IExtendedNavigationService navigation, ScoreoidClient scoreoidClient)
         {
             _navigationService = navigation;
             _scoreoidClient = scoreoidClient;
@@ -65,6 +64,8 @@ namespace InTwo.ViewModel
                                                       if (CurrentPlayer == null
                                                           || string.IsNullOrEmpty(CurrentPlayer.username)) return;
 
+                                                      if (!_navigationService.IsNetworkAvailable) return;
+
                                                       try
                                                       {
                                                           ProgressIsVisible = true;
@@ -100,6 +101,8 @@ namespace InTwo.ViewModel
                         if (CurrentPlayer == null
                             || string.IsNullOrEmpty(CurrentPlayer.username)) return;
 
+                        if (!_navigationService.IsNetworkAvailable) return;
+
                         try
                         {
                             ProgressIsVisible = true;
@@ -133,6 +136,8 @@ namespace InTwo.ViewModel
                 return new RelayCommand(async () =>
                     {
                         if (string.IsNullOrEmpty(Username)) return;
+
+                        if (!_navigationService.IsNetworkAvailable) return;
 
                         ProgressIsVisible = true;
                         ProgressText = "Signing in...";

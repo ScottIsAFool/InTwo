@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using InTwo.Model;
 using Scoreoid;
 
 namespace InTwo.ViewModel
 {
     public class ScoreBoardViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
+        private readonly IExtendedNavigationService _navigationService;
         private readonly ScoreoidClient _scoreoidClient;
 
         private bool _scoresLoaded;
 
-        public ScoreBoardViewModel(INavigationService navigationService, ScoreoidClient scoreoidClient)
+        public ScoreBoardViewModel(IExtendedNavigationService navigationService, ScoreoidClient scoreoidClient)
         {
             _navigationService = navigationService;
             _scoreoidClient = scoreoidClient;
@@ -81,7 +82,8 @@ namespace InTwo.ViewModel
         {
             if (!_scoresLoaded || isRefresh)
             {
-                // TODO: Check network connection
+                if (!_navigationService.IsNetworkAvailable) return;
+
                 ProgressText = "Getting scores...";
                 ProgressIsVisible = true;
 

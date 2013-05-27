@@ -114,7 +114,9 @@
     <Compile Include="InneractiveAdLocation.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\AppSettings.cs" />
+    <Compile Include="Model\ExtendedNavigationService.cs" />
     <Compile Include="Model\GameData.cs" />
+    <Compile Include="Model\IExtendedNavigationService.cs" />
     <Compile Include="Model\ObservableObject.cs" />
     <Compile Include="Model\SettingsWrapper.cs" />
     <Compile Include="ThemeManager.cs" />

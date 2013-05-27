@@ -1,6 +1,7 @@
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using InTwo.Model;
 using Nokia.Music;
 
 namespace InTwo.ViewModel
@@ -20,11 +21,11 @@ namespace InTwo.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly MusicClient _musicClient;
-        private readonly INavigationService _navigationService;
+        private readonly IExtendedNavigationService _navigationService;
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(INavigationService navigationService, MusicClient musicClient)
+        public MainViewModel(IExtendedNavigationService navigationService, MusicClient musicClient)
         {
             _musicClient = musicClient;
             _navigationService = navigationService;

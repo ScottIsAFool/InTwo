@@ -217,7 +217,7 @@ namespace InTwo
             //    Deployment.Current.Dispatcher.BeginInvoke(() =>
             //    {
             //        var mainFrame = Application.Current.RootVisual as PhoneApplicationFrame;
-            //        var navigation = ServiceLocator.Current.GetInstance<INavigationService>();
+            //        var navigation = ServiceLocator.Current.GetInstance<IExtendedNavigationService>();
             //        mainFrame.Navigate(new Uri("/Views/Welcome/WelcomeView.xaml", UriKind.Relative));
             //    });
             //}
