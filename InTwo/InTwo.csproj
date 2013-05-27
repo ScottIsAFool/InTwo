@@ -114,12 +114,18 @@
     <Compile Include="InneractiveAdLocation.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\AppSettings.cs" />
+    <Compile Include="Model\GameData.cs" />
     <Compile Include="Model\ObservableObject.cs" />
     <Compile Include="Model\SettingsWrapper.cs" />
     <Compile Include="ThemeManager.cs" />
+    <Compile Include="ThicknessAnimationX.cs" />
+    <Compile Include="ViewModel\DownloadingSongsViewModel.cs" />
     <Compile Include="ViewModel\ScoreBoardViewModel.cs" />
     <Compile Include="ViewModel\ScoreoidViewModel.cs" />
     <Compile Include="ViewModel\UserProfileViewModel.cs" />
+    <Compile Include="Views\DownloadingSongsView.xaml.cs">
+      <DependentUpon>DownloadingSongsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -149,6 +155,9 @@
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Welcome\DownloadDataNowView.xaml.cs">
+      <DependentUpon>DownloadDataNowView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Welcome\ScoreoidWelcomeView.xaml.cs">
       <DependentUpon>ScoreoidWelcomeView.xaml</DependentUpon>
     </Compile>
@@ -166,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DownloadingSongsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -194,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Welcome\DownloadDataNowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

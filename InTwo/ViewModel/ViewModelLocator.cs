@@ -73,6 +73,7 @@ namespace InTwo.ViewModel
             SimpleIoc.Default.Register<ScoreoidViewModel>();
             SimpleIoc.Default.Register<ScoreBoardViewModel>();
             SimpleIoc.Default.Register<UserProfileViewModel>();
+            SimpleIoc.Default.Register<DownloadingSongsViewModel>();
         }
 
         public MainViewModel Main
@@ -93,6 +94,11 @@ namespace InTwo.ViewModel
         public UserProfileViewModel UserProfile
         {
             get { return ServiceLocator.Current.GetInstance<UserProfileViewModel>(); }
+        }
+
+        public DownloadingSongsViewModel Downloading
+        {
+            get { return ServiceLocator.Current.GetInstance<DownloadingSongsViewModel>(); }
         }
         
         public static void Cleanup()

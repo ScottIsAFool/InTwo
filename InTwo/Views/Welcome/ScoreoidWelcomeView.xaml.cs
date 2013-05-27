@@ -1,4 +1,6 @@
-﻿using System.Windows.Navigation;
+﻿using System;
+using System.Windows;
+using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 
 namespace InTwo.Views.Welcome
@@ -14,14 +16,9 @@ namespace InTwo.Views.Welcome
             //BuildLocalizedApplicationBar();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        private void NextButton_OnClick(object sender, RoutedEventArgs e)
         {
-            base.OnNavigatedFrom(e);
-
-            if (e.NavigationMode == NavigationMode.New)
-            {
-                App.SettingsWrapper.AppSettings.ShowWelcomeMessage = false;
-            }
+            NavigationService.Navigate(new Uri(Constants.Pages.Welcome.DownloadSongsNow, UriKind.Relative));
         }
     }
 }

@@ -17,6 +17,7 @@
         public const string ClearBackStack = "?clearbackstack=true";
 
         public const string ProfilePictureUri = "isostore:/ProfilePictures/{0}.jpg";
+        public const string GameDataFile = "GameData.json";
         public const string RefreshCurrentPlayerMsg = "RefreshCurrentPlayerMsg";
 
         public static class Pages
@@ -24,6 +25,7 @@
             public const string MainPage = "/Views/MainPage.xaml";
             public const string ScoreBoard = "/Views/ScoreBoardView.xaml";
             public const string Settings = "/Views/SettingsView.xaml";
+            public const string DownloadingSongs = "/Views/DownloadingSongsView.xaml";
 
             public static class Scoreoid
             {
@@ -37,6 +39,7 @@
             {
                 public const string WelcomePage = "/Views/Welcome/WelcomeView.xaml";
                 public const string ScoreoidWelcome = "/Views/Welcome/ScoreoidWelcomeView.xaml";
+                public const string DownloadSongsNow = "/Views/Welcome/DownloadDataNowView.xaml";
             }
         }
     }
