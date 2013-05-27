@@ -49,12 +49,14 @@
         <Grid x:Name="ContentPanel"
               Grid.Row="0"
               Margin="12,0,12,0">
+            <TextBlock Text="Download game data?"
+                       Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </Grid>
         
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1"
                     VerticalAlignment="Bottom"
-                    Background="Gray">
+                    Background="MediumPurple">
             <Button Content="not now"
                     x:Name="NotNowButton"
                     Click="NotNowButton_OnClick"

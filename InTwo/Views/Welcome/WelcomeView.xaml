@@ -44,12 +44,13 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Margin="12,0,12,0">
-
+            <TextBlock Text="Welcome to In Two"
+                       Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </Grid>
 
         <Grid VerticalAlignment="Bottom"
               HorizontalAlignment="Stretch"
-              Background="Gray">
+              Background="MediumPurple">
             <Button Content="next"
                     Width="240"
                     HorizontalAlignment="Right"

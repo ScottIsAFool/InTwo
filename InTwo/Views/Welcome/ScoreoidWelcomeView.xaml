@@ -44,16 +44,17 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Margin="12,0,12,0">
-<TextBlock Text="Scoreoid"/>
+            <TextBlock Text="Keep track of scores"
+                       Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </Grid>
-        
-        <Grid Background="Gray"
+
+        <Grid Background="MediumPurple"
               VerticalAlignment="Bottom">
             <Button Content="next"
                     HorizontalAlignment="Right"
                     Width="240"
                     x:Name="NextButton"
-                    Click="NextButton_OnClick"/>
+                    Click="NextButton_OnClick" />
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
