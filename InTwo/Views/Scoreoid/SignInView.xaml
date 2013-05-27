@@ -44,7 +44,7 @@
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <i:Interaction.Behaviors>
-            <cimbalino:ApplicationBarBehavior BackgroundColor="Purple">
+            <cimbalino:ApplicationBarBehavior BackgroundColor="MediumPurple">
                 <cimbalino:ApplicationBarIconButton Text="sign in"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding SignInCommand}"

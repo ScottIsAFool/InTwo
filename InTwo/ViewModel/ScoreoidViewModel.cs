@@ -147,6 +147,9 @@ namespace InTwo.ViewModel
                             var response = await _scoreoidClient.GetPlayerAsync(Username, Password);
 
                             App.CurrentPlayer = response.items[0];
+                            
+                            ProgressIsVisible = false;
+                            ProgressText = string.Empty;
 
                             _navigationService.GoBack();
                         }
