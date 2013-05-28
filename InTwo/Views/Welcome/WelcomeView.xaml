@@ -61,8 +61,8 @@
               Margin="12,32,12,72">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -71,7 +71,7 @@
                        VerticalAlignment="Top"
                        Grid.Row="0" />
 
-            <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+            <TextBlock Style="{StaticResource PhoneTextTitle3Style}"
                        VerticalAlignment="Center"
                        TextWrapping="Wrap"
                        Grid.Row="2"
@@ -84,9 +84,9 @@
                            Style="{StaticResource PhoneTextNormalStyle}"
                            VerticalAlignment="Bottom" />
                 <Border VerticalAlignment="Bottom"
-                        Background="#B2000000">
-                    <Image Source="/Images/NokiaMusicLogo.png"
-                           Height="90" />
+                        Background="#B2000000"
+                        Height="60">
+                    <Image Source="/Images/NokiaMusicLogo.png"/>
                 </Border>
             </StackPanel>
 

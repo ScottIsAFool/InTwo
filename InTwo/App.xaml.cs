@@ -47,7 +47,7 @@ namespace InTwo
                 Title = title,
                 Message = message,
                 //TextWrapping = TextWrapping.Wrap
-                Margin= new Thickness(0,32,0,0)
+                Margin = new Thickness(0, 32, 0, 0)
             };
 
             if (action != null)
@@ -205,15 +205,16 @@ namespace InTwo
 
         private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs e)
         {
-            if (SettingsWrapper.AppSettings.ShowWelcomeMessage 
+            if (SettingsWrapper.AppSettings.ShowWelcomeMessage
                 && e.NavigationMode == NavigationMode.New
                 && !e.Uri.ToString().Contains("/Welcome/"))
             {
                 e.Cancel = true;
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    var navigation = ServiceLocator.Current.GetInstance<IExtendedNavigationService>();
-                    navigation.NavigateTo(Constants.Pages.Welcome.WelcomePage);
+                    var mainFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+                    mainFrame.Navigate(new Uri(Constants.Pages.Welcome.WelcomePage, UriKind.Relative));
+
                 });
             }
         }
