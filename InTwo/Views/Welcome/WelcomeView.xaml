@@ -7,6 +7,7 @@
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:ignore="http://www.ignore.com"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:superImage="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
                             mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -40,12 +41,40 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
-
-        <!--ContentPanel - place additional content here-->
+        <superImage:SuperImage Stretch="Fill"
+                               Opacity="0.4">
+            <superImage:SuperImage.Sources>
+                <superImage:SuperImageSource Source="/Images/WelcomeBackground-720p.png"
+                                             MinScale="160"
+                                             MaxScale="160"/>
+                <superImage:SuperImageSource Source="/Images/WelcomeBackground-WVGA.png"
+                                             MinScale="100"
+                                             MaxScale="100"
+                                             IsDefault="True"/>
+                <superImage:SuperImageSource Source="/Images/WelcomeBackground-WXGA.png"
+                                             MinScale="150"
+                                             MaxScale="150" />
+            </superImage:SuperImage.Sources>
+        </superImage:SuperImage>
+            <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Margin="12,0,12,72">
             <TextBlock Text="Welcome to In Two"
-                       Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                       Style="{StaticResource PhoneTextExtraLargeStyle}"
+                       VerticalAlignment="Top" />
+
+
+                <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                           VerticalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Text="In Two is a game where you get to test your knowledge of songs in short bursts. How quickly do you recognise a song and then be able to say what that song is? Well that's the aim." />
+                
+                <TextBlock Text="In Two uses music data from Nokia Music, by clicking next you agree to allow the app to use your network connection in order to play the game."
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Bottom"
+                           Style="{StaticResource PhoneTextSmallStyle}"
+                       Margin="12,0,12,6" />
+
         </Grid>
 
         <Grid VerticalAlignment="Bottom"
@@ -55,12 +84,12 @@
                     Width="240"
                     Content="no thanks"
                     x:Name="NoThanksButton"
-                    Click="NoThanksButton_OnClick"/>
+                    Click="NoThanksButton_OnClick" />
             <Button Content="next"
                     Width="240"
                     HorizontalAlignment="Right"
                     x:Name="NextButton"
-                    Click="NextButton_OnClick"/>
+                    Click="NextButton_OnClick" />
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

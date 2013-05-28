@@ -259,6 +259,9 @@
     <Content Include="Icons\refresh.png" />
     <Content Include="Icons\save.png" />
     <Content Include="Images\ScoreoidLogo.png" />
+    <Content Include="Images\WelcomeBackground-720p.png" />
+    <Content Include="Images\WelcomeBackground-WVGA.png" />
+    <Content Include="Images\WelcomeBackground-WXGA.png" />
     <Content Include="MVVMLight.Nuget.Readme.txt" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
@@ -330,6 +333,9 @@
     </Reference>
     <Reference Include="SharpGIS.GZipWebClient">
       <HintPath>..\packages\SharpGIS.GZipWebClient.1.4.0.0\lib\wp71\SharpGIS.GZipWebClient.dll</HintPath>
+    </Reference>
+    <Reference Include="SuperImage">
+      <HintPath>..\..\coding4fun\Experimental\SuperImage\Coding4Fun.Toolkit.Controls.SuperImage\obj\Debug\SuperImage.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.1.3-beta\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
