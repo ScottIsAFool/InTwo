@@ -6,7 +6,6 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
-using GalaSoft.MvvmLight.Ioc;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -189,8 +188,6 @@ namespace InTwo
                 Background = new SolidColorBrush(Colors.Transparent)
             };
 
-            RootFrame.Navigated += CompleteInitializePhoneApplication;
-
             // Handle navigation failures
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 
@@ -215,21 +212,10 @@ namespace InTwo
                 e.Cancel = true;
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    var mainFrame = Application.Current.RootVisual as PhoneApplicationFrame;
                     var navigation = ServiceLocator.Current.GetInstance<IExtendedNavigationService>();
-                    mainFrame.Navigate(new Uri(Constants.Pages.Welcome.WelcomePage, UriKind.Relative));
+                    navigation.NavigateTo(Constants.Pages.Welcome.WelcomePage);
                 });
             }
-        }
-
-        // Do not add any additional code to this method
-        private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
-        {
-            // Set the root visual to allow the application to render
-            
-
-            // Remove this handler since it is no longer needed
-            RootFrame.Navigated -= CompleteInitializePhoneApplication;
         }
 
         private void CheckForResetNavigation(object sender, NavigationEventArgs e)
