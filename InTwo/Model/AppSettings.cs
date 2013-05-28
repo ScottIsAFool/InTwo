@@ -22,7 +22,7 @@ namespace InTwo.Model
             {
                 Messenger.Default.Register<NotificationMessage>(this, m =>
                                                                           {
-                                                                              if (m.Notification.Equals(Constants.RefreshCurrentPlayerMsg))
+                                                                              if (m.Notification.Equals(Constants.Messages.RefreshCurrentPlayerMsg))
                                                                               {
                                                                                   OnPropertyChanged("CurrentPlayer");
                                                                               }

@@ -154,7 +154,7 @@ namespace InTwo.ViewModel
                                                               writeableBitmap.SaveJpeg(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
                                                           }
 
-                                                          Messenger.Default.Send(new NotificationMessage(Constants.RefreshCurrentPlayerMsg));
+                                                          Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
 
                                                           RaisePropertyChanged(() => CurrentPlayer);
                                                       }
@@ -172,7 +172,7 @@ namespace InTwo.ViewModel
 
                                                 _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
 
-                                                Messenger.Default.Send(new NotificationMessage(Constants.RefreshCurrentPlayerMsg));
+                                                Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
                                             });
             }
         }

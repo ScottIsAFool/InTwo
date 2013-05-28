@@ -119,7 +119,6 @@
     <Compile Include="Model\ObservableObject.cs" />
     <Compile Include="Model\SettingsWrapper.cs" />
     <Compile Include="ThemeManager.cs" />
-    <Compile Include="ThicknessAnimationX.cs" />
     <Compile Include="ViewModel\DownloadingSongsViewModel.cs" />
     <Compile Include="ViewModel\ScoreBoardViewModel.cs" />
     <Compile Include="ViewModel\ScoreoidViewModel.cs" />

@@ -18,7 +18,11 @@
 
         public const string ProfilePictureUri = "isostore:/ProfilePictures/{0}.jpg";
         public const string GameDataFile = "GameData.json";
-        public const string RefreshCurrentPlayerMsg = "RefreshCurrentPlayerMsg";
+
+        public static class Messages
+        {
+            public const string RefreshCurrentPlayerMsg = "RefreshCurrentPlayerMsg";
+        }
 
         public static class Pages
         {
