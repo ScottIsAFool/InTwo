@@ -26,7 +26,7 @@ namespace InTwo
 
         public static SettingsWrapper SettingsWrapper
         {
-            get { return ((SettingsWrapper) Current.Resources["Settings"]); }
+            get { return ((SettingsWrapper)Current.Resources["Settings"]); }
         }
 
         public static player CurrentPlayer
@@ -67,10 +67,10 @@ namespace InTwo
             InitializeComponent();
 
             // Phone-specific initialization
-            InitializePhoneApplication();
+            //InitializePhoneApplication();
 
             // Language display initialization
-            InitializeLanguage();
+            //InitializeLanguage();
 
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Magenta);
@@ -101,6 +101,7 @@ namespace InTwo
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            InitializePhoneApplication();
             GetSettings();
         }
 
@@ -119,6 +120,7 @@ namespace InTwo
         {
             if (!e.IsApplicationInstancePreserved)
             {
+                InitializePhoneApplication();
                 GetSettings();
             }
         }
@@ -193,36 +195,40 @@ namespace InTwo
 
             // Handle reset requests for clearing the backstack
             RootFrame.Navigated += CheckForResetNavigation;
-            
+
+            RootFrame.Navigating += RootFrameOnNavigating;
+
+            if (RootVisual != RootFrame)
+                RootVisual = RootFrame;
+
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
         }
 
         private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs e)
         {
-            
+            if (SettingsWrapper.AppSettings.ShowWelcomeMessage 
+                && e.NavigationMode == NavigationMode.New
+                && !e.Uri.ToString().Contains("/Welcome/"))
+            {
+                e.Cancel = true;
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    var mainFrame = Application.Current.RootVisual as PhoneApplicationFrame;
+                    var navigation = ServiceLocator.Current.GetInstance<IExtendedNavigationService>();
+                    mainFrame.Navigate(new Uri(Constants.Pages.Welcome.WelcomePage, UriKind.Relative));
+                });
+            }
         }
 
         // Do not add any additional code to this method
         private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
         {
             // Set the root visual to allow the application to render
-            if (RootVisual != RootFrame)
-                RootVisual = RootFrame;
+            
 
             // Remove this handler since it is no longer needed
             RootFrame.Navigated -= CompleteInitializePhoneApplication;
-
-            //if (SettingsWrapper.AppSettings.ShowWelcomeMessage)
-            //{
-
-            //    Deployment.Current.Dispatcher.BeginInvoke(() =>
-            //    {
-            //        var mainFrame = Application.Current.RootVisual as PhoneApplicationFrame;
-            //        var navigation = ServiceLocator.Current.GetInstance<IExtendedNavigationService>();
-            //        mainFrame.Navigate(new Uri("/Views/Welcome/WelcomeView.xaml", UriKind.Relative));
-            //    });
-            //}
         }
 
         private void CheckForResetNavigation(object sender, NavigationEventArgs e)
