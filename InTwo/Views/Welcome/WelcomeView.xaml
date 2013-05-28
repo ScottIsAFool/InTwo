@@ -42,7 +42,7 @@
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <superImage:SuperImage Stretch="Fill"
-                               Opacity="0.4">
+                               Opacity="0.6">
             <superImage:SuperImage.Sources>
                 <superImage:SuperImageSource Source="/Images/WelcomeBackground-720p.jpg"
                                              MinScale="160"
