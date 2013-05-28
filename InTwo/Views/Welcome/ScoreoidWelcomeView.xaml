@@ -44,8 +44,21 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Margin="12,0,12,0">
+            <Grid.Background>
+                <ImageBrush ImageSource="/Images/ScoreoidLogo.png" Opacity="0.3" Stretch="None">
+                    <ImageBrush.Transform>
+                        <CompositeTransform Rotation="-56.31" TranslateX="-220" TranslateY="350"/>
+                    </ImageBrush.Transform>
+                </ImageBrush>
+            </Grid.Background>
             <TextBlock Text="Keep track of scores"
-                       Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                       Style="{StaticResource PhoneTextExtraLargeStyle}"
+                       VerticalAlignment="Top"/>
+            
+            <TextBlock Text="Using Scoreoid we're able to give you a competitive reason to keep score of your games. Compete against other players and see who has the best ear for songs."
+                       Style="{StaticResource PhoneTextNormalStyle}"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Center"/>
         </Grid>
 
         <Grid Background="MediumPurple"

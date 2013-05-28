@@ -83,7 +83,7 @@
                 VerticalContentAlignment="Top"
                 Grid.Row="0"
                 Visibility="{Binding AppSettings.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
-                Margin="0,10,10,0">
+                Margin="0,24,24,0">
             <controls:ProfilePicture IsClipped="True"
                                      Height="50" />
         </Button>

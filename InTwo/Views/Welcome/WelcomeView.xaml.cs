@@ -19,5 +19,11 @@ namespace InTwo.Views.Welcome
         {
             NavigationService.Navigate(new Uri(Constants.Pages.Welcome.ScoreoidWelcome, UriKind.Relative));
         }
+
+        private void NoThanksButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            // TODO: Add some analytics for this
+            Application.Current.Terminate();
+        }
     }
 }

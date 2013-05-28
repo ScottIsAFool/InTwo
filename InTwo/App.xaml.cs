@@ -154,6 +154,7 @@ namespace InTwo
                 // A navigation has failed; break into the debugger
                 Debugger.Break();
             }
+            SaveSettings();
         }
 
         // Code to execute on Unhandled Exceptions
@@ -164,6 +165,7 @@ namespace InTwo
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+            SaveSettings();
         }
 
         #region Phone application initialization

@@ -43,7 +43,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
-              Margin="12,0,12,0">
+              Margin="12,0,12,72">
             <TextBlock Text="Welcome to In Two"
                        Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </Grid>
@@ -51,6 +51,11 @@
         <Grid VerticalAlignment="Bottom"
               HorizontalAlignment="Stretch"
               Background="MediumPurple">
+            <Button HorizontalAlignment="Left"
+                    Width="240"
+                    Content="no thanks"
+                    x:Name="NoThanksButton"
+                    Click="NoThanksButton_OnClick"/>
             <Button Content="next"
                     Width="240"
                     HorizontalAlignment="Right"
