@@ -39,6 +39,12 @@ namespace InTwo.ViewModel
         
         public string Username { get; set; }
         public string Password { get; set; }
+
+        public bool CanLogIn
+        {
+            //get { return CurrentPlayer != null && CurrentPlayer.username.Length > 0 && !ProgressIsVisible; }
+            get { return true; }
+        }
         
         #region Commands
 
@@ -51,6 +57,16 @@ namespace InTwo.ViewModel
                                             {
                                                 CurrentPlayer = new player();
                                             });
+            }
+        }
+        public RelayCommand EditUserPageLoaded
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                    {
+                        CurrentPlayer = App.CurrentPlayer;
+                    });
             }
         }
         #endregion

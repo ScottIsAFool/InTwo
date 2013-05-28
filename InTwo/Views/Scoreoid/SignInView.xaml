@@ -18,6 +18,11 @@
                             mc:Ignorable="d"
                             shell:SystemTray.IsVisible="True"
                             DataContext="{Binding Scoreoid, Source={StaticResource Locator}}">
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator Text="{Binding ProgressText}"
+                                 IsVisible="{Binding ProgressIsVisible}"
+                                 IsIndeterminate="True"/>
+    </shell:SystemTray.ProgressIndicator>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -48,7 +53,7 @@
                 <cimbalino:ApplicationBarIconButton Text="sign in"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding SignInCommand}"
-                                                    IsEnabled="{Binding Username.Length, Converter={StaticResource CountToEnabled}, ConverterParameter=delete}" />
+                                                    IsEnabled="{Binding CanLogIn}" />
             </cimbalino:ApplicationBarBehavior>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
