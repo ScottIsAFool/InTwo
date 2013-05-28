@@ -46,33 +46,55 @@
             <superImage:SuperImage.Sources>
                 <superImage:SuperImageSource Source="/Images/WelcomeBackground-720p.jpg"
                                              MinScale="160"
-                                             MaxScale="160"/>
+                                             MaxScale="160" />
                 <superImage:SuperImageSource Source="/Images/WelcomeBackground-WVGA.jpg"
                                              MinScale="100"
                                              MaxScale="100"
-                                             IsDefault="True"/>
+                                             IsDefault="True" />
                 <superImage:SuperImageSource Source="/Images/WelcomeBackground-WXGA.jpg"
                                              MinScale="150"
                                              MaxScale="150" />
             </superImage:SuperImage.Sources>
         </superImage:SuperImage>
-            <!--ContentPanel - place additional content here-->
+        <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Margin="12,32,12,72">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
             <TextBlock Text="Welcome to In Two"
                        Style="{StaticResource PhoneTextExtraLargeStyle}"
-                       VerticalAlignment="Top" />
+                       VerticalAlignment="Top"
+                       Grid.Row="0" />
 
+            <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                       VerticalAlignment="Center"
+                       TextWrapping="Wrap"
+                       Grid.Row="2"
+                       Text="In Two is a game where you get to test your knowledge of songs in short bursts. How quickly do you recognise a song and then be able to say what that song is? Well that's the aim." />
 
-                <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
-                           VerticalAlignment="Center"
-                           TextWrapping="Wrap"
-                           Text="In Two is a game where you get to test your knowledge of songs in short bursts. How quickly do you recognise a song and then be able to say what that song is? Well that's the aim." />
-                
-                <TextBlock Text="In Two uses music data from Nokia Music, by clicking next you agree to allow the app to use your network connection in order to play the game."
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Bottom"
-                           Style="{StaticResource PhoneTextSmallStyle}"
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="3"
+                        HorizontalAlignment="Right">
+                <TextBlock Text="powered by"
+                           Style="{StaticResource PhoneTextNormalStyle}"
+                           VerticalAlignment="Bottom" />
+                <Border VerticalAlignment="Bottom"
+                        Background="#B2000000">
+                    <Image Source="/Images/NokiaMusicLogo.png"
+                           Height="90" />
+                </Border>
+            </StackPanel>
+
+            <TextBlock Text="In Two uses music data from Nokia Music, by clicking next you agree to allow the app to use your network connection in order to play the game."
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Bottom"
+                       Grid.Row="4"
+                       Style="{StaticResource PhoneTextSmallStyle}"
                        Margin="12,0,12,6" />
 
         </Grid>

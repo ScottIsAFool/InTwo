@@ -257,6 +257,7 @@
     <Content Include="Icons\edit.png" />
     <Content Include="Icons\refresh.png" />
     <Content Include="Icons\save.png" />
+    <Content Include="Images\NokiaMusicLogo.png" />
     <Content Include="Images\ScoreoidLogo.png" />
     <Content Include="Images\WelcomeBackground-720p.jpg" />
     <Content Include="Images\WelcomeBackground-WVGA.jpg" />
