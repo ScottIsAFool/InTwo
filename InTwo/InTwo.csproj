@@ -334,7 +334,7 @@
       <HintPath>..\packages\SharpGIS.GZipWebClient.1.4.0.0\lib\wp71\SharpGIS.GZipWebClient.dll</HintPath>
     </Reference>
     <Reference Include="SuperImage">
-      <HintPath>..\..\coding4fun\Experimental\SuperImage\Coding4Fun.Toolkit.Controls.SuperImage\obj\Debug\SuperImage.dll</HintPath>
+      <HintPath>..\3plib\SuperImage\SuperImage.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.1.3-beta\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
