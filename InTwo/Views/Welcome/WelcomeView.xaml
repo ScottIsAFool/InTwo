@@ -58,7 +58,7 @@
         </superImage:SuperImage>
             <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
-              Margin="12,0,12,72">
+              Margin="12,32,12,72">
             <TextBlock Text="Welcome to In Two"
                        Style="{StaticResource PhoneTextExtraLargeStyle}"
                        VerticalAlignment="Top" />
