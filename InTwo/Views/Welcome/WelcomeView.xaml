@@ -79,7 +79,7 @@
 
         <Grid VerticalAlignment="Bottom"
               HorizontalAlignment="Stretch"
-              Background="MediumPurple">
+              Background="{StaticResource AppBarBrush}">
             <Button HorizontalAlignment="Left"
                     Width="240"
                     Content="no thanks"

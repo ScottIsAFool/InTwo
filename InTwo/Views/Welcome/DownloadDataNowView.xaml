@@ -56,7 +56,7 @@
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1"
                     VerticalAlignment="Bottom"
-                    Background="MediumPurple">
+                    Background="{StaticResource AppBarBrush}">
             <Button Content="not now"
                     x:Name="NotNowButton"
                     Click="NotNowButton_OnClick"

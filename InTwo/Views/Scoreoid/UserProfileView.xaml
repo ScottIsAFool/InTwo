@@ -57,7 +57,7 @@
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <i:Interaction.Behaviors>
-            <cimbalino:ApplicationBarBehavior BackgroundColor="MediumPurple">
+            <cimbalino:ApplicationBarBehavior BackgroundColor="{StaticResource AppBarColour}">
                 <cimbalino:ApplicationBarIconButton Text="refresh details"
                                                     IconUri="/Icons/refresh.png"
                                                     Command="{Binding RefreshUserCommand}" />

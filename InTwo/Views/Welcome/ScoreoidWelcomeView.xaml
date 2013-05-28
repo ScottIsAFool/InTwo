@@ -61,7 +61,7 @@
                        VerticalAlignment="Center"/>
         </Grid>
 
-        <Grid Background="MediumPurple"
+        <Grid Background="{StaticResource AppBarBrush}"
               VerticalAlignment="Bottom">
             <Button Content="next"
                     HorizontalAlignment="Right"

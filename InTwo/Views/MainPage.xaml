@@ -52,7 +52,7 @@
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
             <cimbalino:ApplicationBarBehavior Mode="Minimized"
-                                              BackgroundColor="MediumPurple">
+                                              BackgroundColor="{StaticResource AppBarColour}">
                 <cimbalino:ApplicationBarBehavior.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="log in"
                                                       Command="{Binding NavigateToPage}"

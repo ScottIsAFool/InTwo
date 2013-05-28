@@ -21,6 +21,8 @@
             <model:SettingsWrapper x:Key="Settings" />
 
             <system:String x:Key="AppName">In Two</system:String>
+            <Color x:Key="AppBarColour">MediumPurple</Color>
+            <SolidColorBrush x:Key="AppBarBrush" Color="{StaticResource AppBarColour}"/>
 
             <!--Converters-->
             <cimbalinoConverters:StringToLowercaseConverter x:Key="StringToLowercaseConverter"/>

@@ -56,7 +56,7 @@
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <i:Interaction.Behaviors>
-            <cimbalino:ApplicationBarBehavior BackgroundColor="MediumPurple">
+            <cimbalino:ApplicationBarBehavior BackgroundColor="{StaticResource AppBarColour}">
                 <cimbalino:ApplicationBarIconButton Text="create user"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding CreateNewUserCommand}"
