@@ -44,14 +44,14 @@
         <superImage:SuperImage Stretch="Fill"
                                Opacity="0.4">
             <superImage:SuperImage.Sources>
-                <superImage:SuperImageSource Source="/Images/WelcomeBackground-720p.png"
+                <superImage:SuperImageSource Source="/Images/WelcomeBackground-720p.jpg"
                                              MinScale="160"
                                              MaxScale="160"/>
-                <superImage:SuperImageSource Source="/Images/WelcomeBackground-WVGA.png"
+                <superImage:SuperImageSource Source="/Images/WelcomeBackground-WVGA.jpg"
                                              MinScale="100"
                                              MaxScale="100"
                                              IsDefault="True"/>
-                <superImage:SuperImageSource Source="/Images/WelcomeBackground-WXGA.png"
+                <superImage:SuperImageSource Source="/Images/WelcomeBackground-WXGA.jpg"
                                              MinScale="150"
                                              MaxScale="150" />
             </superImage:SuperImage.Sources>
