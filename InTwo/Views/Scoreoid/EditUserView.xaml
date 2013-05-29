@@ -27,7 +27,7 @@
     
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding CreateNewUserPageLoaded}" />
+            <command:EventToCommand Command="{Binding EditUserPageLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
