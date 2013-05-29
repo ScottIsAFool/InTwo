@@ -70,7 +70,6 @@ namespace InTwo
             //InitializePhoneApplication();
 
             // Language display initialization
-            //InitializeLanguage();
 
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Magenta);
@@ -198,6 +197,8 @@ namespace InTwo
 
             if (RootVisual != RootFrame)
                 RootVisual = RootFrame;
+
+            InitializeLanguage();
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
