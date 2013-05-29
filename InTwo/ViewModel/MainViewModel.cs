@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,8 +32,11 @@ namespace InTwo.ViewModel
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
 
+        private static Random _random;
+
         private List<Product> _tracks;
         private bool _hasCheckedForData;
+        private const string AllGenres = "All Genres";
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -43,6 +47,8 @@ namespace InTwo.ViewModel
             _navigationService = navigationService;
             _asyncStorageService = asyncStorageService;
             _settingsService = settingsService;
+
+            _random = new Random();
 
             if (IsInDesignMode)
             {
@@ -58,6 +64,8 @@ namespace InTwo.ViewModel
         public bool ProgressIsVisible { get; set; }
 
         public List<Genre> Genres { get; set; }
+        public Genre SelectedGenre { get; set; }
+        public Product GameTrack { get; set; }
 
         private async Task<bool> CheckForGameData()
         {
@@ -65,7 +73,11 @@ namespace InTwo.ViewModel
 
             if (genres == default(List<Genre>)) return false;
 
+            genres.Insert(0, new Genre {Name = AllGenres});
+
             Genres = genres;
+
+            SelectedGenre = Genres[0];
 
             if (!await _asyncStorageService.FileExistsAsync(Constants.GameDataFile)) return false;
 
@@ -83,6 +95,32 @@ namespace InTwo.ViewModel
             }
 
             return false;
+        }
+
+        private async Task SetNextGame()
+        {
+            if (SelectedGenre.Name.Equals(AllGenres))
+            {
+                var randomNumber = GetRandomNumber(0, _tracks.Count);
+
+                GameTrack = _tracks[randomNumber];
+            }
+            else
+            {
+                var genreTracks = _tracks.Where(x => x.Genres.Contains(SelectedGenre))
+                                         .ToList();
+
+                var randomNumber = GetRandomNumber(0, genreTracks.Count);
+
+                GameTrack = genreTracks[randomNumber];
+            }
+        }
+
+        private int GetRandomNumber(int minValue, int maxValue)
+        {
+            var number = (_random.NextDouble()*maxValue) + minValue;
+
+            return (int)Math.Floor(number);
         }
 
         public RelayCommand MainPageLoaded
@@ -122,6 +160,17 @@ namespace InTwo.ViewModel
 
                                                       _hasCheckedForData = true;
                                                   });
+            }
+        }
+
+        public RelayCommand NextGameCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                    {
+                        await SetNextGame();
+                    });
             }
         }
 

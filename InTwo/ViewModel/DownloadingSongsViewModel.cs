@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -56,7 +57,7 @@ namespace InTwo.ViewModel
                                                           _settingsService.Save();
 
                                                           var tracks = new List<Product>();
-                                                          foreach (var genre in genres)
+                                                          foreach (var genre in genres.Where(x => !x.Name.Equals("Comedy")))
                                                           {
                                                               var trackResponse = await _musicClient.GetTopProductsForGenreAsync(genre, Category.Track, 0, 100);
 

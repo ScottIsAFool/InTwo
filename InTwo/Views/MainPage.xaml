@@ -96,6 +96,26 @@
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
               Margin="12,0,12,0">
+            <StackPanel Orientation="Vertical">
+                <toolkit:ListPicker ItemsSource="{Binding Genres}"
+                                    SelectedItem="{Binding SelectedGenre, Mode=TwoWay}"
+                                    SelectionMode="Single">
+                    <toolkit:ListPicker.FullModeItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"
+                                       Style="{StaticResource PhoneTextLargeStyle}"/>
+                        </DataTemplate>
+                    </toolkit:ListPicker.FullModeItemTemplate>
+                    <toolkit:ListPicker.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </toolkit:ListPicker.ItemTemplate>
+                </toolkit:ListPicker>
+                
+                <Button Content="next game"
+                        Command="{Binding NextGameCommand}"/>
+            </StackPanel>
             <!--<ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                               AdType="IaAdType_Banner"
                               ReloadTime="30"
