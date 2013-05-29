@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
@@ -32,9 +33,7 @@ namespace InTwo.ViewModel
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
 
-        private List<Product> _tracks;
         private bool _hasCheckedForData;
-        private const string AllGenres = "All Genres";
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -46,22 +45,13 @@ namespace InTwo.ViewModel
             _asyncStorageService = asyncStorageService;
             _settingsService = settingsService;
             
-            if (IsInDesignMode)
-            {
-                // Code runs in Blend --> create design time data.
-            }
-            else
-            {
-                // Code runs "for real"
-            }
+            
         }
 
         public string ProgressText { get; set; }
         public bool ProgressIsVisible { get; set; }
 
-        public List<Genre> Genres { get; set; }
-        public Genre SelectedGenre { get; set; }
-        public Product GameTrack { get; set; }
+        
 
         private async Task<bool> CheckForGameData()
         {
@@ -69,11 +59,11 @@ namespace InTwo.ViewModel
 
             if (genres == default(List<Genre>)) return false;
 
-            genres.Insert(0, new Genre {Name = AllGenres});
+            genres.Insert(0, new Genre {Name = GameViewModel.AllGenres});
 
-            Genres = genres;
+            Messenger.Default.Send(new NotificationMessage(genres, Constants.Messages.HereAreTheGenresMsg));
 
-            SelectedGenre = Genres[0];
+            
 
             if (!await _asyncStorageService.FileExistsAsync(Constants.GameDataFile)) return false;
 
@@ -81,9 +71,14 @@ namespace InTwo.ViewModel
 
             try
             {
-                _tracks = await JsonConvert.DeserializeObjectAsync<List<Product>>(tracksJson);
+                var tracks = await JsonConvert.DeserializeObjectAsync<List<Product>>(tracksJson);
 
-                return _tracks.Any();
+                if (tracks.Any())
+                {
+                    Messenger.Default.Send(new NotificationMessage(tracks, Constants.Messages.HereAreTheTracksMsg));
+
+                    return true;
+                }
             }
             catch
             {
@@ -92,27 +87,6 @@ namespace InTwo.ViewModel
 
             return false;
         }
-
-        private async Task SetNextGame()
-        {
-            if (SelectedGenre.Name.Equals(AllGenres))
-            {
-                var randomNumber = Utils.GetRandomNumber(0, _tracks.Count);
-
-                GameTrack = _tracks[randomNumber];
-            }
-            else
-            {
-                var genreTracks = _tracks.Where(x => x.Genres.Contains(SelectedGenre))
-                                         .ToList();
-
-                var randomNumber = Utils.GetRandomNumber(0, genreTracks.Count);
-
-                GameTrack = genreTracks[randomNumber];
-            }
-        }
-
-        
 
         public RelayCommand MainPageLoaded
         {
@@ -151,17 +125,6 @@ namespace InTwo.ViewModel
 
                                                       _hasCheckedForData = true;
                                                   });
-            }
-        }
-
-        public RelayCommand NextGameCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                    {
-                        await SetNextGame();
-                    });
             }
         }
 

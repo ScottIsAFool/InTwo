@@ -1,4 +1,7 @@
 ﻿using System;
+using GalaSoft.MvvmLight.Ioc;
+using Nokia.Music;
+using Nokia.Music.Types;
 
 namespace InTwo
 {
@@ -11,6 +14,12 @@ namespace InTwo
             var number = (_random.NextDouble() * maxValue) + minValue;
 
             return (int)Math.Floor(number);
+        }
+
+        public static Uri GetSampleUri(this Product product)
+        {
+            var client = SimpleIoc.Default.GetInstance<MusicClient>();
+            return client.GetTrackSampleUri(product.Id);
         }
     }
 }

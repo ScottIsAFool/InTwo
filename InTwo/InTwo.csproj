@@ -121,11 +121,15 @@
     <Compile Include="ThemeManager.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel\DownloadingSongsViewModel.cs" />
+    <Compile Include="ViewModel\GameViewModel.cs" />
     <Compile Include="ViewModel\ScoreBoardViewModel.cs" />
     <Compile Include="ViewModel\ScoreoidViewModel.cs" />
     <Compile Include="ViewModel\UserProfileViewModel.cs" />
     <Compile Include="Views\DownloadingSongsView.xaml.cs">
       <DependentUpon>DownloadingSongsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GameView.xaml.cs">
+      <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -180,6 +184,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DownloadingSongsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GameView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

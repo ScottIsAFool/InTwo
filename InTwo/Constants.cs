@@ -22,6 +22,8 @@
         public static class Messages
         {
             public const string RefreshCurrentPlayerMsg = "RefreshCurrentPlayerMsg";
+            public const string HereAreTheGenresMsg = "HereAreTheGenresMsg";
+            public const string HereAreTheTracksMsg = "HereAreTheTracksMsg";
         }
 
         public static class Pages

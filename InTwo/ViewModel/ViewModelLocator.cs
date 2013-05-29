@@ -61,6 +61,7 @@ namespace InTwo.ViewModel
             SimpleIoc.Default.Register<ScoreBoardViewModel>();
             SimpleIoc.Default.Register<UserProfileViewModel>();
             SimpleIoc.Default.Register<DownloadingSongsViewModel>();
+            SimpleIoc.Default.Register<GameViewModel>(true);
         }
 
         public MainViewModel Main
@@ -86,6 +87,11 @@ namespace InTwo.ViewModel
         public DownloadingSongsViewModel Downloading
         {
             get { return ServiceLocator.Current.GetInstance<DownloadingSongsViewModel>(); }
+        }
+
+        public GameViewModel Game
+        {
+            get { return ServiceLocator.Current.GetInstance<GameViewModel>(); }
         }
         
         public static void Cleanup()
