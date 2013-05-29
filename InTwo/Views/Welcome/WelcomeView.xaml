@@ -84,7 +84,7 @@
                            Style="{StaticResource PhoneTextNormalStyle}"
                            VerticalAlignment="Bottom" />
                 <Border VerticalAlignment="Bottom"
-                        Background="#B2000000"
+                        Background="Transparent"
                         Height="60">
                     <Image Source="/Images/NokiaMusicLogo.png"/>
                 </Border>
