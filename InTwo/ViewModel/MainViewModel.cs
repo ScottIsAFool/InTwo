@@ -32,8 +32,6 @@ namespace InTwo.ViewModel
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
 
-        private static Random _random;
-
         private List<Product> _tracks;
         private bool _hasCheckedForData;
         private const string AllGenres = "All Genres";
@@ -47,9 +45,7 @@ namespace InTwo.ViewModel
             _navigationService = navigationService;
             _asyncStorageService = asyncStorageService;
             _settingsService = settingsService;
-
-            _random = new Random();
-
+            
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -101,7 +97,7 @@ namespace InTwo.ViewModel
         {
             if (SelectedGenre.Name.Equals(AllGenres))
             {
-                var randomNumber = GetRandomNumber(0, _tracks.Count);
+                var randomNumber = Utils.GetRandomNumber(0, _tracks.Count);
 
                 GameTrack = _tracks[randomNumber];
             }
@@ -110,18 +106,13 @@ namespace InTwo.ViewModel
                 var genreTracks = _tracks.Where(x => x.Genres.Contains(SelectedGenre))
                                          .ToList();
 
-                var randomNumber = GetRandomNumber(0, genreTracks.Count);
+                var randomNumber = Utils.GetRandomNumber(0, genreTracks.Count);
 
                 GameTrack = genreTracks[randomNumber];
             }
         }
 
-        private int GetRandomNumber(int minValue, int maxValue)
-        {
-            var number = (_random.NextDouble()*maxValue) + minValue;
-
-            return (int)Math.Floor(number);
-        }
+        
 
         public RelayCommand MainPageLoaded
         {
