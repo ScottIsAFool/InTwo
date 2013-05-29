@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +8,6 @@ using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
-using Nokia.Music;
 using Nokia.Music.Types;
 
 namespace InTwo.ViewModel
@@ -28,7 +26,6 @@ namespace InTwo.ViewModel
     /// </summary>
     public class MainViewModel : ViewModelBase
     {
-        private readonly MusicClient _musicClient;
         private readonly IExtendedNavigationService _navigationService;
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
@@ -38,20 +35,15 @@ namespace InTwo.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IExtendedNavigationService navigationService, MusicClient musicClient, IAsyncStorageService asyncStorageService, IApplicationSettingsService settingsService)
+        public MainViewModel(IExtendedNavigationService navigationService, IAsyncStorageService asyncStorageService, IApplicationSettingsService settingsService)
         {
-            _musicClient = musicClient;
             _navigationService = navigationService;
             _asyncStorageService = asyncStorageService;
             _settingsService = settingsService;
-            
-            
         }
 
         public string ProgressText { get; set; }
         public bool ProgressIsVisible { get; set; }
-
-        
 
         private async Task<bool> CheckForGameData()
         {
@@ -62,8 +54,6 @@ namespace InTwo.ViewModel
             genres.Insert(0, new Genre {Name = GameViewModel.AllGenres});
 
             Messenger.Default.Send(new NotificationMessage(genres, Constants.Messages.HereAreTheGenresMsg));
-
-            
 
             if (!await _asyncStorageService.FileExistsAsync(Constants.GameDataFile)) return false;
 
