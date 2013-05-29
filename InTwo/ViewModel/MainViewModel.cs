@@ -49,13 +49,19 @@ namespace InTwo.ViewModel
         {
             var genres = _settingsService.Get("Genres", default(List<Genre>));
 
-            if (genres == default(List<Genre>)) return false;
+            if (genres == default(List<Genre>))
+            {
+                return false;
+            }
 
             genres.Insert(0, new Genre {Name = GameViewModel.AllGenres});
 
             Messenger.Default.Send(new NotificationMessage(genres, Constants.Messages.HereAreTheGenresMsg));
 
-            if (!await _asyncStorageService.FileExistsAsync(Constants.GameDataFile)) return false;
+            if (!await _asyncStorageService.FileExistsAsync(Constants.GameDataFile))
+            {
+                return false;
+            }
 
             var tracksJson = await _asyncStorageService.ReadAllTextAsync(Constants.GameDataFile);
 
