@@ -58,9 +58,9 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                    {
-                        await GetAllScoreData(false);
-                    });
+                {
+                    await GetAllScoreData(false);
+                });
             }
         }
 
@@ -69,9 +69,9 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                    {
-                        await GetAllScoreData(true);
-                    });
+                {
+                    await GetAllScoreData(true);
+                });
             }
         }
 

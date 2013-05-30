@@ -86,38 +86,38 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                                                  {
-                                                      if (_hasCheckedForData) return;
+                {
+                    if (_hasCheckedForData) return;
 
-                                                      var dataExists = await CheckForGameData();
+                    var dataExists = await CheckForGameData();
 
-                                                      if (!dataExists)
-                                                      {
-                                                          var message = new CustomMessageBox
-                                                                            {
-                                                                                Caption = "No game data present",
-                                                                                Message = "We can't find any game data saved to your phone. " +
-                                                                                          "This data needs to be downloaded in order for you to play, would you like us to download that now? " +
-                                                                                          "Please note, this doesn't download any music.",
-                                                                                LeftButtonContent = "yes",
-                                                                                RightButtonContent = "no",
-                                                                                IsFullScreen = false
-                                                                            };
+                    if (!dataExists)
+                    {
+                        var message = new CustomMessageBox
+                            {
+                                Caption = "No game data present",
+                                Message = "We can't find any game data saved to your phone. " +
+                                          "This data needs to be downloaded in order for you to play, would you like us to download that now? " +
+                                          "Please note, this doesn't download any music.",
+                                LeftButtonContent = "yes",
+                                RightButtonContent = "no",
+                                IsFullScreen = false
+                            };
 
-                                                          message.Dismissed += (sender, args) =>
-                                                                                   {
-                                                                                       if (args.Result == CustomMessageBoxResult.LeftButton)
-                                                                                       {
-                                                                                           ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+                        message.Dismissed += (sender, args) =>
+                        {
+                            if (args.Result == CustomMessageBoxResult.LeftButton)
+                            {
+                                ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
 
-                                                                                           _navigationService.NavigateTo(Constants.Pages.DownloadingSongs);
-                                                                                       }
-                                                                                   };
-                                                          message.Show();
-                                                      }
+                                _navigationService.NavigateTo(Constants.Pages.DownloadingSongs);
+                            }
+                        };
+                        message.Show();
+                    }
 
-                                                      _hasCheckedForData = true;
-                                                  });
+                    _hasCheckedForData = true;
+                });
             }
         }
 

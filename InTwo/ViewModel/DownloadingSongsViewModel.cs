@@ -39,43 +39,43 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                                                  {
-                                                      if (!_navigationService.IsNetworkAvailable) return;
+                {
+                    if (!_navigationService.IsNetworkAvailable) return;
 
-                                                      try
-                                                      {
-                                                          var genresResponse = await _musicClient.GetGenresAsync();
+                    try
+                    {
+                        var genresResponse = await _musicClient.GetGenresAsync();
 
-                                                          if (genresResponse.Error != null)
-                                                          {
-                                                              // TODO: Display an error
-                                                          }
+                        if (genresResponse.Error != null)
+                        {
+                            // TODO: Display an error
+                        }
 
-                                                          var genres = genresResponse.Result;
+                        var genres = genresResponse.Result;
 
-                                                          _settingsService.Set("Genres", genres);
-                                                          _settingsService.Save();
+                        _settingsService.Set("Genres", genres);
+                        _settingsService.Save();
 
-                                                          var tracks = new List<Product>();
-                                                          foreach (var genre in genres.Where(x => !x.Name.Equals("Comedy")))
-                                                          {
-                                                              var trackResponse = await _musicClient.GetTopProductsForGenreAsync(genre, Category.Track, 0, 100);
+                        var tracks = new List<Product>();
+                        foreach (var genre in genres.Where(x => !x.Name.Equals("Comedy")))
+                        {
+                            var trackResponse = await _musicClient.GetTopProductsForGenreAsync(genre, Category.Track, 0, 100);
 
-                                                              if (trackResponse.Error == null)
-                                                              {
-                                                                  tracks.AddRange(trackResponse.Result);
-                                                              }
-                                                          }
+                            if (trackResponse.Error == null)
+                            {
+                                tracks.AddRange(trackResponse.Result);
+                            }
+                        }
 
-                                                          await _asyncStorageService.WriteAllTextAsync(Constants.GameDataFile, await JsonConvert.SerializeObjectAsync(tracks));
+                        await _asyncStorageService.WriteAllTextAsync(Constants.GameDataFile, await JsonConvert.SerializeObjectAsync(tracks));
 
-                                                          _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
-                                                      }
-                                                      catch (Exception ex)
-                                                      {
-                                                          // TODO: Display an error
-                                                      }
-                                                  });
+                        _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
+                    }
+                    catch (Exception ex)
+                    {
+                        // TODO: Display an error
+                    }
+                });
             }
         }
     }

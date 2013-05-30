@@ -51,9 +51,9 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                                            {
-                                                CurrentPlayer = new player();
-                                            });
+                {
+                    CurrentPlayer = new player();
+                });
             }
         }
         public RelayCommand EditUserPageLoaded
@@ -61,9 +61,9 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                    {
-                        CurrentPlayer = App.CurrentPlayer;
-                    });
+                {
+                    CurrentPlayer = App.CurrentPlayer;
+                });
             }
         }
         #endregion
@@ -73,35 +73,35 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                                                  {
-                                                      if (CurrentPlayer == null
-                                                          || string.IsNullOrEmpty(CurrentPlayer.username)) return;
+                {
+                    if (CurrentPlayer == null
+                        || string.IsNullOrEmpty(CurrentPlayer.username)) return;
 
-                                                      if (!_navigationService.IsNetworkAvailable) return;
+                    if (!_navigationService.IsNetworkAvailable) return;
 
-                                                      try
-                                                      {
-                                                          ProgressIsVisible = true;
-                                                          ProgressText = "Creating user";
+                    try
+                    {
+                        ProgressIsVisible = true;
+                        ProgressText = "Creating user";
 
-                                                          var response = await _scoreoidClient.CreatePlayerAsync(CurrentPlayer);
+                        var response = await _scoreoidClient.CreatePlayerAsync(CurrentPlayer);
 
-                                                          App.CurrentPlayer = CurrentPlayer;
+                        App.CurrentPlayer = CurrentPlayer;
 
-                                                          MessageBox.Show(response, "Success", MessageBoxButton.OK);
-                                                      }
-                                                      catch (ScoreoidException ex)
-                                                      {
-                                                          MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                                                      }
-                                                      catch (Exception ex)
-                                                      {
+                        MessageBox.Show(response, "Success", MessageBoxButton.OK);
+                    }
+                    catch (ScoreoidException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                    }
+                    catch (Exception ex)
+                    {
 
-                                                      }
+                    }
 
-                                                      ProgressIsVisible = false;
-                                                      ProgressText = string.Empty;
-                                                  });
+                    ProgressIsVisible = false;
+                    ProgressText = string.Empty;
+                });
             }
         }
 
@@ -110,35 +110,35 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
+                {
+                    if (CurrentPlayer == null
+                        || string.IsNullOrEmpty(CurrentPlayer.username)) return;
+
+                    if (!_navigationService.IsNetworkAvailable) return;
+
+                    try
                     {
-                        if (CurrentPlayer == null
-                            || string.IsNullOrEmpty(CurrentPlayer.username)) return;
+                        ProgressIsVisible = true;
+                        ProgressText = "Creating user";
 
-                        if (!_navigationService.IsNetworkAvailable) return;
+                        var response = await _scoreoidClient.UpdatePlayerAsync(CurrentPlayer);
 
-                        try
-                        {
-                            ProgressIsVisible = true;
-                            ProgressText = "Creating user";
+                        App.CurrentPlayer = CurrentPlayer;
 
-                            var response = await _scoreoidClient.UpdatePlayerAsync(CurrentPlayer);
+                        MessageBox.Show(response, "Success", MessageBoxButton.OK);
+                    }
+                    catch (ScoreoidException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
+                    }
+                    catch (Exception ex)
+                    {
 
-                            App.CurrentPlayer = CurrentPlayer;
+                    }
 
-                            MessageBox.Show(response, "Success", MessageBoxButton.OK);
-                        }
-                        catch (ScoreoidException ex)
-                        {
-                            MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-
-                        ProgressIsVisible = false;
-                        ProgressText = string.Empty;
-                    });
+                    ProgressIsVisible = false;
+                    ProgressText = string.Empty;
+                });
             }
         }
 
@@ -147,37 +147,37 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
+                {
+                    if (string.IsNullOrEmpty(Username)) return;
+
+                    if (!_navigationService.IsNetworkAvailable) return;
+
+                    ProgressIsVisible = true;
+                    ProgressText = "Signing in...";
+
+                    try
                     {
-                        if (string.IsNullOrEmpty(Username)) return;
+                        var response = await _scoreoidClient.GetPlayerAsync(Username, Password);
 
-                        if (!_navigationService.IsNetworkAvailable) return;
-
-                        ProgressIsVisible = true;
-                        ProgressText = "Signing in...";
-
-                        try
-                        {
-                            var response = await _scoreoidClient.GetPlayerAsync(Username, Password);
-
-                            App.CurrentPlayer = response.items[0];
-                            
-                            ProgressIsVisible = false;
-                            ProgressText = string.Empty;
-
-                            _navigationService.GoBack();
-                        }
-                        catch (ScoreoidException ex)
-                        {
-
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
+                        App.CurrentPlayer = response.items[0];
 
                         ProgressIsVisible = false;
                         ProgressText = string.Empty;
-                    });
+
+                        _navigationService.GoBack();
+                    }
+                    catch (ScoreoidException ex)
+                    {
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                    ProgressIsVisible = false;
+                    ProgressText = string.Empty;
+                });
             }
         }
 
@@ -186,11 +186,11 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                                            {
-                                                CurrentPlayer = null;
-                                                if (_navigationService.CanGoBack)
-                                                    _navigationService.GoBack();
-                                            });
+                {
+                    CurrentPlayer = null;
+                    if (_navigationService.CanGoBack)
+                        _navigationService.GoBack();
+                });
             }
         }
 
