@@ -218,7 +218,7 @@ namespace InTwo.ViewModel
 
                 if (scores.items.Any())
                 {
-                    int totalScore = 0;
+                    var totalScore = 0;
                     foreach (var score in scores.items)
                     {
                         int count;

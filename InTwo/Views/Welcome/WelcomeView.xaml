@@ -85,7 +85,8 @@
                            VerticalAlignment="Bottom" />
                 <Border VerticalAlignment="Bottom"
                         Background="Transparent"
-                        Height="60">
+                        Height="60"
+                        Margin="0,0,0,-6">
                     <Image Source="/Images/NokiaMusicLogo.png"/>
                 </Border>
             </StackPanel>
