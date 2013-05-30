@@ -47,7 +47,7 @@ namespace InTwo
                 Title = title,
                 Message = message,
                 //TextWrapping = TextWrapping.Wrap
-                Margin = new Thickness(0, 32, 0, 0)
+                //Margin = new Thickness(0, 32, 0, 0)
             };
 
             if (action != null)

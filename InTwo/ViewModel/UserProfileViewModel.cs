@@ -56,18 +56,16 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                                            {
-                                                //if (!_navigationService.IsNetworkAvailable) return;
+                {
+                    //if (!_navigationService.IsNetworkAvailable) return;
 
-                                                CurrentPlayer = App.CurrentPlayer;
+                    CurrentPlayer = App.CurrentPlayer;
 
-                                                HasProfilePicture = await CheckForProfilePicture();
-                                                //await GetPlayerInformation();
-                                            });
+                    HasProfilePicture = await CheckForProfilePicture();
+                    //await GetPlayerInformation();
+                });
             }
         }
-
-        
 
         public RelayCommand EditUserCommand
         {
@@ -86,9 +84,9 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                                            {
-                                                await GetPlayerInformation();
-                                            });
+                {
+                    await GetPlayerInformation();
+                });
             }
         }
 
@@ -129,40 +127,40 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                                                  {
-                                                      var photoResult = await _photoChooserService.ShowAsync(true);
+                {
+                    var photoResult = await _photoChooserService.ShowAsync(true);
 
-                                                      if (photoResult.TaskResult == TaskResult.OK && photoResult.ChosenPhoto != null)
-                                                      {
-                                                          // Save the image to isolated storage
-                                                          var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
+                    if (photoResult.TaskResult == TaskResult.OK && photoResult.ChosenPhoto != null)
+                    {
+                        // Save the image to isolated storage
+                        var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
 
-                                                          //if (!await _asyncStorageService.DirectoryExistsAsync("ProfilePictures"))
-                                                          //{
-                                                          //    await _asyncStorageService.CreateDirectoryAsync("ProfilePictures");
-                                                          //}
+                        //if (!await _asyncStorageService.DirectoryExistsAsync("ProfilePictures"))
+                        //{
+                        //    await _asyncStorageService.CreateDirectoryAsync("ProfilePictures");
+                        //}
 
-                                                          if (await _asyncStorageService.FileExistsAsync(fileName))
-                                                          {
-                                                              await _asyncStorageService.DeleteFileAsync(fileName);
-                                                          }
+                        if (await _asyncStorageService.FileExistsAsync(fileName))
+                        {
+                            await _asyncStorageService.DeleteFileAsync(fileName);
+                        }
 
-                                                          using (var file = await _asyncStorageService.CreateFileAsync(fileName))
-                                                          {
-                                                              var bitmap = new BitmapImage();
-                                                              bitmap.SetSource(photoResult.ChosenPhoto);
+                        using (var file = await _asyncStorageService.CreateFileAsync(fileName))
+                        {
+                            var bitmap = new BitmapImage();
+                            bitmap.SetSource(photoResult.ChosenPhoto);
 
-                                                              var writeableBitmap = new WriteableBitmap(bitmap);
-                                                              writeableBitmap.SaveJpeg(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
-                                                          }
+                            var writeableBitmap = new WriteableBitmap(bitmap);
+                            writeableBitmap.SaveJpeg(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
+                        }
 
-                                                          // Tell other UI references to update their profile image
-                                                          Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
+                        // Tell other UI references to update their profile image
+                        Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
 
-                                                          RaisePropertyChanged(() => CurrentPlayer);
-                                                          HasProfilePicture = await CheckForProfilePicture();
-                                                      }
-                                                  });
+                        RaisePropertyChanged(() => CurrentPlayer);
+                        HasProfilePicture = await CheckForProfilePicture();
+                    }
+                });
             }
         }
 
@@ -171,18 +169,18 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(async () =>
-                    {
-                        var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
+                {
+                    var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
 
-                        if (!(await _asyncStorageService.FileExistsAsync(fileName))) return;
+                    if (!(await _asyncStorageService.FileExistsAsync(fileName))) return;
 
-                        await _asyncStorageService.DeleteFileAsync(fileName);
-                            
-                        HasProfilePicture = await CheckForProfilePicture();
-                            
-                        // Tell other UI references to update their profile image
-                        Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
-                    });
+                    await _asyncStorageService.DeleteFileAsync(fileName);
+
+                    HasProfilePicture = await CheckForProfilePicture();
+
+                    // Tell other UI references to update their profile image
+                    Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
+                });
             }
         }
 
@@ -191,13 +189,13 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                                            {
-                                                App.CurrentPlayer = null;
+                {
+                    App.CurrentPlayer = null;
 
-                                                _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
+                    _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
 
-                                                Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
-                                            });
+                    Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
+                });
             }
         }
         #endregion

@@ -125,6 +125,7 @@
     <Compile Include="ViewModel\ScoreBoardViewModel.cs" />
     <Compile Include="ViewModel\ScoreoidViewModel.cs" />
     <Compile Include="ViewModel\UserProfileViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\DownloadingSongsView.xaml.cs">
       <DependentUpon>DownloadingSongsView.xaml</DependentUpon>
     </Compile>
