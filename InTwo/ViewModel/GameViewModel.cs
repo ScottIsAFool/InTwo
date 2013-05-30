@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Nokia.Music.Types;
+using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
 {
@@ -40,17 +40,17 @@ namespace InTwo.ViewModel
         private void WireMessages()
         {
             Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.HereAreTheGenresMsg))
                 {
-                    if (m.Notification.Equals(Constants.Messages.HereAreTheGenresMsg))
-                    {
-                        Genres = (List<Genre>) m.Sender;
-                        SelectedGenre = Genres[0];
-                    }
-                    if(m.Notification.Equals(Constants.Messages.HereAreTheTracksMsg))
-                    {
-                        _tracks = (List<Product>) m.Sender;
-                    }
-                });
+                    Genres = (List<Genre>) m.Sender;
+                    SelectedGenre = Genres[0];
+                }
+                if (m.Notification.Equals(Constants.Messages.HereAreTheTracksMsg))
+                {
+                    _tracks = (List<Product>) m.Sender;
+                }
+            });
         }
 
         public List<Genre> Genres { get; set; }

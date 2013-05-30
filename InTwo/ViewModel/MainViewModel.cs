@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Phone.Toolkit.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
 using Nokia.Music.Types;
+using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
 {
@@ -41,9 +41,6 @@ namespace InTwo.ViewModel
             _asyncStorageService = asyncStorageService;
             _settingsService = settingsService;
         }
-
-        public string ProgressText { get; set; }
-        public bool ProgressIsVisible { get; set; }
 
         private async Task<bool> CheckForGameData()
         {

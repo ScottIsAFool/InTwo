@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cimbalino.Phone.Toolkit.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using InTwo.Model;
 using Newtonsoft.Json;
 using Nokia.Music;
 using Nokia.Music.Types;
+using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
 {

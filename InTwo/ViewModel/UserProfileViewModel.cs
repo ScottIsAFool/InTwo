@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Cimbalino.Phone.Toolkit.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using Microsoft.Phone.Tasks;
 using Scoreoid;
+using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
 {
@@ -43,9 +43,6 @@ namespace InTwo.ViewModel
 
             TotalScore = NumberOfGames = 0;
         }
-
-        public string ProgressText { get; set; }
-        public bool ProgressIsVisible { get; set; }
 
         public player CurrentPlayer { get; set; }
         public int TotalScore { get; set; }
@@ -159,6 +156,7 @@ namespace InTwo.ViewModel
                                                               writeableBitmap.SaveJpeg(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
                                                           }
 
+                                                          // Tell other UI references to update their profile image
                                                           Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
 
                                                           RaisePropertyChanged(() => CurrentPlayer);
@@ -174,14 +172,16 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                     {
-                        var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", ""); 
-                        
-                        if (await _asyncStorageService.FileExistsAsync(fileName))
-                        {
-                            await _asyncStorageService.DeleteFileAsync(fileName);
-                            HasProfilePicture = await CheckForProfilePicture();
-                            Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
-                        }
+                        var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
+
+                        if (!(await _asyncStorageService.FileExistsAsync(fileName))) return;
+
+                        await _asyncStorageService.DeleteFileAsync(fileName);
+                            
+                        HasProfilePicture = await CheckForProfilePicture();
+                            
+                        // Tell other UI references to update their profile image
+                        Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
                     });
             }
         }

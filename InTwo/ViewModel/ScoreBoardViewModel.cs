@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cimbalino.Phone.Toolkit.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using InTwo.Model;
 using Scoreoid;
+using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
 {
@@ -50,10 +50,7 @@ namespace InTwo.ViewModel
 
             }
         }
-
-        public string ProgressText { get; set; }
-        public bool ProgressIsVisible { get; set; }
-
+        
         public List<player> ScoreBoardItems { get; set; }
 
         public RelayCommand ScoreBoardPageLoaded

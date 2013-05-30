@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using InTwo.Model;
 using Scoreoid;
+using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
 {
@@ -31,10 +31,7 @@ namespace InTwo.ViewModel
                 CurrentPlayer = App.CurrentPlayer;
             }
         }
-
-        public string ProgressText { get; set; }
-        public bool ProgressIsVisible { get; set; }
-
+        
         public player CurrentPlayer { get; set; }
         
         public string Username { get; set; }
