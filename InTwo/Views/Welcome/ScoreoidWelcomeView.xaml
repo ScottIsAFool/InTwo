@@ -60,14 +60,21 @@
         <Grid x:Name="ContentPanel"
               Margin="12,32,12,72">
             
-            <TextBlock Text="Keep track of scores"
-                       Style="{StaticResource PhoneTextExtraLargeStyle}"
-                       VerticalAlignment="Top"/>
+            <Image Source="/Images/ScoreoidLogo.png"
+                   Width="420"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   Margin="0,100,0,0" />
             
-            <TextBlock Text="Using Scoreoid we're able to give you a competitive reason to keep score of your games. Compete against other players and see who has the best ear for songs."
-                       Style="{StaticResource PhoneTextNormalStyle}"
-                       TextWrapping="Wrap"
-                       VerticalAlignment="Center"/>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Keep track of scores"
+                           Style="{StaticResource PhoneTextExtraLargeStyle}"
+                           VerticalAlignment="Top" />
+                <TextBlock Text="Using Scoreoid we're able to give you a competitive reason to keep score of your games. Compete against other players and see who has the best ear for songs."
+                           Style="{StaticResource PhoneTextTitle3Style}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
         </Grid>
 
         <Grid Background="{StaticResource AppBarBrush}"
