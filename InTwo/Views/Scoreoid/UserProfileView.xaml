@@ -66,6 +66,9 @@
                                                     IconUri="/Icons/edit.png"
                                                     Command="{Binding EditUserCommand}" />
                 <cimbalino:ApplicationBarBehavior.MenuItems>
+                    <cimbalino:ApplicationBarMenuItem Text="clear profile picture"
+                                                      Command="{Binding ClearProfilePicture}"
+                                                      IsEnabled="{Binding HasProfilePicture}"/>
                     <cimbalino:ApplicationBarMenuItem Text="delete"
                                                       Command="{Binding DeleteUserCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="logout"

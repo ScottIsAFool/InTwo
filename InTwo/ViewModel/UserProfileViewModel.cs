@@ -51,6 +51,8 @@ namespace InTwo.ViewModel
         public int TotalScore { get; set; }
         public int NumberOfGames { get; set; }
 
+        public bool HasProfilePicture { get; set; }
+
         #region Commands
         public RelayCommand UserProfilePageLoaded
         {
@@ -58,14 +60,17 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                                             {
-                                                if (!_navigationService.IsNetworkAvailable) return;
+                                                //if (!_navigationService.IsNetworkAvailable) return;
 
                                                 CurrentPlayer = App.CurrentPlayer;
 
-                                                await GetPlayerInformation();
+                                                HasProfilePicture = await CheckForProfilePicture();
+                                                //await GetPlayerInformation();
                                             });
             }
         }
+
+        
 
         public RelayCommand EditUserCommand
         {
@@ -133,12 +138,12 @@ namespace InTwo.ViewModel
                                                       if (photoResult.TaskResult == TaskResult.OK && photoResult.ChosenPhoto != null)
                                                       {
                                                           // Save the image to isolated storage
-                                                          var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:", "");
+                                                          var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
 
-                                                          if (!await _asyncStorageService.DirectoryExistsAsync("ProfilePictures"))
-                                                          {
-                                                              await _asyncStorageService.CreateDirectoryAsync("ProfilePictures");
-                                                          }
+                                                          //if (!await _asyncStorageService.DirectoryExistsAsync("ProfilePictures"))
+                                                          //{
+                                                          //    await _asyncStorageService.CreateDirectoryAsync("ProfilePictures");
+                                                          //}
 
                                                           if (await _asyncStorageService.FileExistsAsync(fileName))
                                                           {
@@ -157,8 +162,27 @@ namespace InTwo.ViewModel
                                                           Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
 
                                                           RaisePropertyChanged(() => CurrentPlayer);
+                                                          HasProfilePicture = await CheckForProfilePicture();
                                                       }
                                                   });
+            }
+        }
+
+        public RelayCommand ClearProfilePicture
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                    {
+                        var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", ""); 
+                        
+                        if (await _asyncStorageService.FileExistsAsync(fileName))
+                        {
+                            await _asyncStorageService.DeleteFileAsync(fileName);
+                            HasProfilePicture = await CheckForProfilePicture();
+                            Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
+                        }
+                    });
             }
         }
 
@@ -219,6 +243,13 @@ namespace InTwo.ViewModel
 
             ProgressIsVisible = false;
             ProgressText = string.Empty;
+        }
+
+        private async Task<bool> CheckForProfilePicture()
+        {
+            var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
+
+            return await _asyncStorageService.FileExistsAsync(fileName);
         }
     }
 }
