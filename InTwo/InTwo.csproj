@@ -101,10 +101,17 @@
     <Compile Include="Controls\ProfilePicture.xaml.cs">
       <DependentUpon>ProfilePicture.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SecondsPicker.xaml.cs">
-      <DependentUpon>SecondsPicker.xaml</DependentUpon>
+    <Compile Include="Controls\TimeSpanPicker\DataSource\DataSource.cs" />
+    <Compile Include="Controls\TimeSpanPicker\DataSource\SecondTimeSpanDataSource.cs" />
+    <Compile Include="Controls\TimeSpanPicker\DataSource\TimeSpanDataSource.cs" />
+    <Compile Include="Controls\TimeSpanPicker\ITimeSpanPickerPage.cs" />
+    <Compile Include="Controls\TimeSpanPicker\TimeSpanPicker.cs" />
+    <Compile Include="Controls\TimeSpanPicker\TimeSpanPickerBasePage.cs" />
+    <Compile Include="Controls\TimeSpanPicker\TimespanPickerPage.xaml.cs">
+      <DependentUpon>TimespanPickerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SecondsPickerBasePage.cs" />
+    <Compile Include="Controls\TimeSpanPicker\TimeSpanValueChangedEventArgs.cs" />
+    <Compile Include="Controls\TimeSpanPicker\TimeSpanWrapper.cs" />
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
@@ -112,8 +119,6 @@
     <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Converters\ProfilePictureUriConverter.cs" />
     <Compile Include="Converters\UserLoggedInConverter.cs" />
-    <Compile Include="Data\LoopingDataSourceBase.cs" />
-    <Compile Include="Data\NumberOfSecondsDataSource.cs" />
     <Compile Include="Design\DesignApplicationSettingsService.cs" />
     <Compile Include="Design\DesignAsyncStorageService.cs" />
     <Compile Include="Design\DesignPhotoChooserService.cs" />
@@ -187,13 +192,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\SecondsPicker.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Controls\TimeSpanPicker\TimespanPickerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\UserDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DownloadingSongsView.xaml">
       <SubType>Designer</SubType>
