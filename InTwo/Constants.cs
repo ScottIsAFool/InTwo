@@ -16,8 +16,10 @@
         public const string UserAlreadyExists = "A player with that username already exists";
         public const string ClearBackStack = "?clearbackstack=true";
 
-        //public const string ProfilePictureUri = "isostore:/ProfilePictures/{0}.jpg";
-        public const string ProfilePictureUri = "isostore:/{0}.jpg";
+        public const string ProfilePicturesFolder = "ProfilePictures";
+        public static readonly string ProfilePictureUri = "isostore:/" + ProfilePicturesFolder + "/{0}.jpg";
+        public static readonly string ProfilePictureStorageFilePath = ProfilePicturesFolder + "\\{0}.jpg";
+        //public const string ProfilePictureUri = "isostore:/{0}.jpg";
         public const string GameDataFile = "GameData.json";
 
         public static class Messages

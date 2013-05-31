@@ -133,12 +133,12 @@ namespace InTwo.ViewModel
                     if (photoResult.TaskResult == TaskResult.OK && photoResult.ChosenPhoto != null)
                     {
                         // Save the image to isolated storage
-                        var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
+                        var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
 
-                        //if (!await _asyncStorageService.DirectoryExistsAsync("ProfilePictures"))
-                        //{
-                        //    await _asyncStorageService.CreateDirectoryAsync("ProfilePictures");
-                        //}
+                        if (!await _asyncStorageService.DirectoryExistsAsync(Constants.ProfilePicturesFolder))
+                        {
+                            await _asyncStorageService.CreateDirectoryAsync(Constants.ProfilePicturesFolder);
+                        }
 
                         if (await _asyncStorageService.FileExistsAsync(fileName))
                         {
@@ -170,7 +170,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
+                    var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
 
                     if (!(await _asyncStorageService.FileExistsAsync(fileName))) return;
 
@@ -245,7 +245,7 @@ namespace InTwo.ViewModel
 
         private async Task<bool> CheckForProfilePicture()
         {
-            var fileName = string.Format(Constants.ProfilePictureUri, App.CurrentPlayer.username).Replace("isostore:/", "");
+            var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
 
             return await _asyncStorageService.FileExistsAsync(fileName);
         }
