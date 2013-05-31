@@ -21,7 +21,7 @@
                             DataContext="{Binding Downloading, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding DownloadSongsPageLoaded}"/>
+            <command:EventToCommand Command="{Binding DownloadDataCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -126,9 +126,15 @@
                 </StackPanel>
                 <TextBlock Text="Please wait while we download the game data. Please note, this is not downloading the music itself."
                            TextWrapping="Wrap"
-                           Style="{StaticResource PhoneTextNormalStyle}"
+                           Style="{StaticResource PhoneTextTitle3Style}"
                            Margin="12,30,12,0" />
-                <ProgressBar IsIndeterminate="True"/>
+                <ProgressBar IsIndeterminate="True"
+                             Visibility="{Binding ProgressIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Button Content="retry"
+                        HorizontalAlignment="Center"
+                        Command="{Binding DownloadDataCommand}"
+                        Visibility="{Binding RetryIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Width="240"/>
             </StackPanel>
             
         </Grid>

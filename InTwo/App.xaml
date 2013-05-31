@@ -28,6 +28,9 @@
             <cimbalinoConverters:StringToLowercaseConverter x:Key="StringToLowercaseConverter"/>
             <cimbalinoConverters:StringToUppercaseConverter x:Key="StringToUppercaseConverter"/>
             <cimbalinoConverters:NegativeBooleanConverter x:Key="NegativeBooleanConverter"/>
+            <cimbalinoConverters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <cimbalinoConverters:BooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter" 
+                                                              InvertValue="True"/>
 
             <scottConverters:CountToEnabled x:Key="CountToEnabled"/>
             <scottConverters:NullVisibilityConverter x:Key="NullVisibilityConverter"/>
