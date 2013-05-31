@@ -23,7 +23,7 @@ namespace InTwo.Views.Welcome
             NavigationService.Navigate(new Uri(Constants.Pages.DownloadingSongs, UriKind.Relative));
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 

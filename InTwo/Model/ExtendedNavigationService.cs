@@ -14,8 +14,9 @@ namespace InTwo.Model
                 if (!result || NetworkInterface.NetworkInterfaceType == NetworkInterfaceType.None)
                 {
                     Deployment.Current.Dispatcher.BeginInvoke(() => App.ShowMessage("No network connection available"));
+                    return false;
                 }
-                return result;
+                return true;
             }
         }
     }

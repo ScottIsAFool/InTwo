@@ -20,7 +20,7 @@
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
-                <toolkit:SlideTransition Mode="SlideLeftFadeIn" />
+                <toolkit:SlideTransition Mode="SlideRightFadeIn" />
             </toolkit:NavigationInTransition.Backward>
             <toolkit:NavigationInTransition.Forward>
                 <toolkit:TurnstileTransition Mode="ForwardIn" />
@@ -30,7 +30,7 @@
     <toolkit:TransitionService.NavigationOutTransition>
         <toolkit:NavigationOutTransition>
             <toolkit:NavigationOutTransition.Backward>
-                <toolkit:TurnstileTransition Mode="BackwardOut" />
+                <toolkit:SlideTransition Mode="SlideRightFadeOut" />
             </toolkit:NavigationOutTransition.Backward>
             <toolkit:NavigationOutTransition.Forward>
                 <toolkit:SlideTransition Mode="SlideLeftFadeOut" />
