@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using InTwo.Model;
 using Nokia.Music.Types;
 using ScottIsAFool.WindowsPhone.ViewModel;
 
@@ -17,14 +18,16 @@ namespace InTwo.ViewModel
     /// </summary>
     public class GameViewModel : ViewModelBase
     {
+        private readonly IExtendedNavigationService _navigationService;
         public const string AllGenres = "All Genres";
         private List<Product> _tracks;
 
         /// <summary>
         /// Initializes a new instance of the GameViewModel class.
         /// </summary>
-        public GameViewModel()
+        public GameViewModel(IExtendedNavigationService navigationService)
         {
+            _navigationService = navigationService;
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -52,10 +55,20 @@ namespace InTwo.ViewModel
         public List<Genre> Genres { get; set; }
         public Genre SelectedGenre { get; set; }
         public Product GameTrack { get; set; }
-        public Uri TrackSource { get; set; }
+        public Uri AudioUrl { get; set; }
+        public TimeSpan CurrentPosition { get; set; }
 
-        private async Task SetNextGame()
+        private void OnCurrentPositionChanged()
         {
+            // TODO: Check what game they're playing and stop the audio when it hits that limit.
+        }
+
+        public int AppBarIndex { get; set; }
+
+        private void SetNextGame()
+        {
+            if (!_navigationService.IsNetworkAvailable) return;
+
             if (SelectedGenre.Name.Equals(AllGenres))
             {
                 var randomNumber = Utils.GetRandomNumber(0, _tracks.Count);
@@ -71,26 +84,25 @@ namespace InTwo.ViewModel
 
                 GameTrack = genreTracks[randomNumber];
             }
+
+            AudioUrl = GameTrack.GetSampleUri();
         }
 
         public RelayCommand NextGameCommand
         {
             get
             {
-                return new RelayCommand(async () =>
-                {
-                    await SetNextGame();
-                });
+                return new RelayCommand(SetNextGame);
             }
         }
 
-        public RelayCommand StartGameCommand
+        public RelayCommand RepeatAudioCommand
         {
             get
             {
                 return new RelayCommand(() =>
                 {
-                    TrackSource = GameTrack.GetSampleUri();
+                    AudioUrl = GameTrack.GetSampleUri();
                 });
             }
         }
