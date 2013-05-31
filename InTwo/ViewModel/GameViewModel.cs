@@ -31,13 +31,9 @@ namespace InTwo.ViewModel
                 Genres = new List<Genre> {new Genre {Name = AllGenres}};
                 SelectedGenre = Genres[0];
             }
-            else
-            {
-                WireMessages();
-            }
         }
 
-        private void WireMessages()
+        protected override void WireMessages()
         {
             Messenger.Default.Register<NotificationMessage>(this, m =>
             {
