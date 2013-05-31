@@ -7,6 +7,7 @@
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:ignore="http://www.ignore.com"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:superImage="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
                             mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -40,10 +41,21 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <superImage:SuperImage Stretch="Fill"
+                               Opacity="0.6">
+            <superImage:SuperImage.Sources>
+                <superImage:SuperImageSource Source="/Images/DownloadBackground-720p.jpg"
+                                             MinScale="160"
+                                             MaxScale="160" />
+                <superImage:SuperImageSource Source="/Images/DownloadBackground-WVGA.jpg"
+                                             MinScale="100"
+                                             MaxScale="100"
+                                             IsDefault="True" />
+                <superImage:SuperImageSource Source="/Images/DownloadBackground-WXGA.jpg"
+                                             MinScale="150"
+                                             MaxScale="150" />
+            </superImage:SuperImage.Sources>
+        </superImage:SuperImage>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
@@ -108,22 +120,23 @@
                           Margin="31,-35,0,0" />
                 </StackPanel>
             </StackPanel>
-            
+
         </Grid>
-        
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="1"
-                    VerticalAlignment="Bottom"
-                    Background="{StaticResource AppBarBrush}">
+
+        <Grid Grid.Row="1"
+              VerticalAlignment="Bottom"
+              Background="{StaticResource AppBarBrush}">
             <Button Content="not now"
                     x:Name="NotNowButton"
                     Click="NotNowButton_OnClick"
-                    Width="240"/>
+                    Width="240"
+                    HorizontalAlignment="Left"/>
             <Button Content="download data"
                     x:Name="DownloadDataButton"
                     Click="DownloadDataButton_OnClick"
-                    Width="240"/>
-        </StackPanel>
+                    Width="240" 
+                    HorizontalAlignment="Right"/>
+        </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
