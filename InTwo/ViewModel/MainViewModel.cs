@@ -128,5 +128,23 @@ namespace InTwo.ViewModel
                 return new RelayCommand<string>(_navigationService.NavigateTo);
             }
         }
+
+        public RelayCommand LoginLogoutCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (App.CurrentPlayer == null)
+                    {
+                        _navigationService.NavigateTo(Constants.Pages.Scoreoid.SignIn);
+                    }
+                    else
+                    {
+                        App.CurrentPlayer = null;
+                    }
+                });
+            }
+        }
     }
 }

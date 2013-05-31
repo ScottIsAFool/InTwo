@@ -19,7 +19,6 @@
         public const string ProfilePicturesFolder = "ProfilePictures";
         public static readonly string ProfilePictureUri = "isostore:/" + ProfilePicturesFolder + "/{0}.jpg";
         public static readonly string ProfilePictureStorageFilePath = ProfilePicturesFolder + "\\{0}.jpg";
-        //public const string ProfilePictureUri = "isostore:/{0}.jpg";
         public const string GameDataFile = "GameData.json";
 
         public static class Messages
@@ -35,6 +34,7 @@
             public const string ScoreBoard = "/Views/ScoreBoardView.xaml";
             public const string Settings = "/Views/SettingsView.xaml";
             public const string DownloadingSongs = "/Views/DownloadingSongsView.xaml";
+            public const string Game = "/Views/GameView.xaml";
 
             public static class Scoreoid
             {

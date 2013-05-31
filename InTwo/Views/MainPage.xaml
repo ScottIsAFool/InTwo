@@ -10,6 +10,7 @@
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
                             xmlns:controls="clr-namespace:InTwo.Controls"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
+                            xmlns:converters="clr-namespace:InTwo.Converters"
                             mc:Ignorable="d"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -24,6 +25,10 @@
             <command:EventToCommand Command="{Binding MainPageLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
+    <phone:PhoneApplicationPage.Resources>
+        <converters:UserLoggedInConverter x:Key="UserLoggedInConverter"/>
+    </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -54,9 +59,8 @@
             <cimbalino:ApplicationBarBehavior Mode="Minimized"
                                               BackgroundColor="{StaticResource AppBarColour}">
                 <cimbalino:ApplicationBarBehavior.MenuItems>
-                    <cimbalino:ApplicationBarMenuItem Text="log in"
-                                                      Command="{Binding NavigateToPage}"
-                                                      CommandParameter="/Views/Scoreoid/SignInView.xaml"/>
+                    <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
+                                                      Command="{Binding LoginLogoutCommand}"/>
                 </cimbalino:ApplicationBarBehavior.MenuItems>
             </cimbalino:ApplicationBarBehavior>
         </i:Interaction.Behaviors>

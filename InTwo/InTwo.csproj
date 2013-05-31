@@ -107,6 +107,7 @@
     <Compile Include="Converters\CanSendOrUpdateConverter.cs" />
     <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Converters\ProfilePictureUriConverter.cs" />
+    <Compile Include="Converters\UserLoggedInConverter.cs" />
     <Compile Include="Design\DesignApplicationSettingsService.cs" />
     <Compile Include="Design\DesignAsyncStorageService.cs" />
     <Compile Include="Design\DesignPhotoChooserService.cs" />

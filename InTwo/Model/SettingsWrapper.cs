@@ -2,7 +2,7 @@
 
 namespace InTwo.Model
 {
-    public class SettingsWrapper : INotifyPropertyChanged
+    public class SettingsWrapper : ObservableObject
     {
         public SettingsWrapper()
         {
@@ -10,7 +10,5 @@ namespace InTwo.Model
         }
 
         public AppSettings AppSettings { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
