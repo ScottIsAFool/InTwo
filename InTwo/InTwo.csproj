@@ -104,6 +104,7 @@
     <Compile Include="Controls\SecondsPicker.xaml.cs">
       <DependentUpon>SecondsPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SecondsPickerBasePage.cs" />
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
