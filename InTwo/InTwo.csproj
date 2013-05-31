@@ -101,6 +101,9 @@
     <Compile Include="Controls\ProfilePicture.xaml.cs">
       <DependentUpon>ProfilePicture.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SecondsPicker.xaml.cs">
+      <DependentUpon>SecondsPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
@@ -108,6 +111,8 @@
     <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Converters\ProfilePictureUriConverter.cs" />
     <Compile Include="Converters\UserLoggedInConverter.cs" />
+    <Compile Include="Data\LoopingDataSourceBase.cs" />
+    <Compile Include="Data\NumberOfSecondsDataSource.cs" />
     <Compile Include="Design\DesignApplicationSettingsService.cs" />
     <Compile Include="Design\DesignAsyncStorageService.cs" />
     <Compile Include="Design\DesignPhotoChooserService.cs" />
@@ -178,6 +183,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="Controls\ProfilePicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SecondsPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
