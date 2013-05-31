@@ -10,7 +10,10 @@
             }
         }
 
-        protected abstract void WireMessages();
+        public virtual void WireMessages()
+        {
+            
+        }
 
         public bool ProgressIsVisible { get; set; }
         public string ProgressText { get; set; }

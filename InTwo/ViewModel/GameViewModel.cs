@@ -36,7 +36,7 @@ namespace InTwo.ViewModel
             }
         }
 
-        protected override void WireMessages()
+        public override void WireMessages()
         {
             Messenger.Default.Register<NotificationMessage>(this, m =>
             {

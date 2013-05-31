@@ -263,11 +263,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="FodyWeavers.xml" />
+    <Content Include="Icons\appbar.repeat.png" />
     <Content Include="Icons\cancel.png" />
     <Content Include="Icons\check.png" />
     <Content Include="Icons\edit.png" />
     <Content Include="Icons\refresh.png" />
     <Content Include="Icons\save.png" />
+    <Content Include="Icons\transport.play.png" />
     <Content Include="Images\DownloadBackground-720p.jpg" />
     <Content Include="Images\DownloadBackground-WVGA.jpg" />
     <Content Include="Images\DownloadBackground-WXGA.jpg" />
