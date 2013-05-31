@@ -26,6 +26,7 @@
             public const string RefreshCurrentPlayerMsg = "RefreshCurrentPlayerMsg";
             public const string HereAreTheGenresMsg = "HereAreTheGenresMsg";
             public const string HereAreTheTracksMsg = "HereAreTheTracksMsg";
+            public const string ShareScoreMsg = "ShareScoreMsg";
         }
 
         public static class Pages

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using Scoreoid;
 using ScottIsAFool.WindowsPhone.ViewModel;
@@ -45,10 +46,30 @@ namespace InTwo.ViewModel
                             }
                     };
             }
-            else
-            {
+        }
 
-            }
+        public override void WireMessages()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.ShareScoreMsg))
+                {
+                    var type = (ShareType)m.Sender;
+
+                    switch (type)
+                    {
+                        case ShareType.Email:
+
+                            break;
+                            case ShareType.Sms:
+
+                            break;
+                            case ShareType.Social:
+
+                            break;
+                    }
+                }
+            });
         }
         
         public List<player> ScoreBoardItems { get; set; }
@@ -129,6 +150,7 @@ namespace InTwo.ViewModel
             }
             catch (Exception ex)
             {
+                
             }
         }
     }
