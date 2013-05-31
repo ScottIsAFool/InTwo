@@ -102,8 +102,7 @@
               Grid.Row="1"
               Margin="12,0,12,0">
             
-            <timeSpanPicker:TimeSpanPicker Header="Seconds"
-                                           VerticalAlignment="Top"/>
+            <timeSpanPicker:TimeSpanPicker VerticalAlignment="Top"/>
             
             <!--<ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                               AdType="IaAdType_Banner"

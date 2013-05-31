@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:InTwo.Controls.TimeSpanPicker">
+                    xmlns:local="clr-namespace:InTwo.Controls.TimeSpanPicker"
+                    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
 
     <Style TargetType="local:TimeSpanPicker">
@@ -22,15 +23,24 @@
                                         ContentTemplate="{TemplateBinding HeaderTemplate}"
                                         Foreground="{StaticResource PhoneSubtleBrush}"
                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        Margin="12,0,12,-4" />
+                                        Margin="12,0,12,-4"
+                                        DataContext="{TemplateBinding Header}"
+                                        Visibility="{Binding Converter={StaticResource NullVisibilityConverter}}"/>
                         <Button x:Name="ValueButton"
-                                Content="{TemplateBinding ValueString}"
+                                DataContext="{TemplateBinding Value}"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 FontFamily="{TemplateBinding FontFamily}"
                                 Foreground="{TemplateBinding Foreground}"
+                                toolkit:TiltEffect.IsTiltEnabled="True"
                                 Height="72"
-                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                                Style="{StaticResource EmptyButtonStyle}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+                            <Button.Content>
+                                <TextBlock Text="{Binding Seconds}"
+                                           Style="{StaticResource PhoneTextTitle3Style}"/>
+                            </Button.Content>
+                        </Button>
                     </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
