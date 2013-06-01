@@ -57,8 +57,11 @@
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
             <cimbalino:ApplicationBarBehavior BackgroundColor="{StaticResource AppBarColour}"
-                                              Mode="Minimized"
                                               IsMenuEnabled="True">
+                <cimbalino:ApplicationBarIconButton Text="share"
+                                                    IconUri="/Icons/share.png"
+                                                    x:Name="ShareButton"
+                                                    Click="ShareButton_OnClick"/>
                 <cimbalino:ApplicationBarBehavior.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="refresh scores"
                                                       Command="{Binding RefreshScoresCommand}" />

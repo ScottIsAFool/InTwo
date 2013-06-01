@@ -56,16 +56,21 @@ namespace InTwo.ViewModel
                 {
                     var type = (ShareType)m.Sender;
 
+                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! http://bit.ly/InTwo";
+                    string message;
                     switch (type)
                     {
                         case ShareType.Email:
-
+                            message = string.Format(messageTemplate, "In Two");
+                            new EmailComposeService().Show("I've been playing In Two", message);
                             break;
-                            case ShareType.Sms:
-
+                        case ShareType.Sms:
+                            message = string.Format(messageTemplate, "In Two");
+                            new SmsComposeService().Show("", message);
                             break;
-                            case ShareType.Social:
-
+                        case ShareType.Social:
+                            message = string.Format(messageTemplate, "@InTwoApp");
+                            new ShareStatusService().Show(message);
                             break;
                     }
                 }
