@@ -21,13 +21,13 @@ namespace InTwo.ViewModel
     public class DownloadingSongsViewModel : ViewModelBase
     {
         private readonly IExtendedNavigationService _navigationService;
-        private readonly MusicClient _musicClient;
+        private readonly IMusicClient _musicClient;
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
         /// <summary>
         /// Initializes a new instance of the DownloadingSongsViewModel class.
         /// </summary>
-        public DownloadingSongsViewModel(IExtendedNavigationService navigationService, MusicClient musicClient, IAsyncStorageService asyncStorageService, IApplicationSettingsService settingsService)
+        public DownloadingSongsViewModel(IExtendedNavigationService navigationService, IMusicClient musicClient, IAsyncStorageService asyncStorageService, IApplicationSettingsService settingsService)
         {
             _navigationService = navigationService;
             _musicClient = musicClient;

@@ -32,5 +32,6 @@ namespace InTwo.Model
 
         public bool ShowWelcomeMessage { get; set; }
         public player CurrentPlayer { get; set; }
+        public score MostRecentScore { get; set; }
     }
 }

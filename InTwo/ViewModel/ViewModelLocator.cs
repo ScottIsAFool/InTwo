@@ -50,8 +50,8 @@ namespace InTwo.ViewModel
             if (!SimpleIoc.Default.IsRegistered<IExtendedNavigationService>())
                 SimpleIoc.Default.Register<IExtendedNavigationService, ExtendedNavigationService>();
 
-            if(!SimpleIoc.Default.IsRegistered<MusicClient>())
-                SimpleIoc.Default.Register(() => new MusicClient(Constants.NokiaMusicAppId));
+            if(!SimpleIoc.Default.IsRegistered<IMusicClient>())
+                SimpleIoc.Default.Register<IMusicClient>(() => new MusicClient(Constants.NokiaMusicAppId));
 
             if(!SimpleIoc.Default.IsRegistered<ScoreoidClient>())
                 SimpleIoc.Default.Register(()=> new ScoreoidClient(Constants.ScoreoidApiKey, Constants.ScoreoidGameId));
