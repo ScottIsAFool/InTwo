@@ -21,6 +21,13 @@
         public static readonly string ProfilePictureStorageFilePath = ProfilePicturesFolder + "\\{0}.jpg";
         public const string GameDataFile = "GameData.json";
 
+        public static class Scores
+        {
+            public const int CorrectArtist = 50;
+            public const int CorrectSong = 200;
+            public const int CorrectSongAndArtistBonus = 50;
+        }
+
         public static class Messages
         {
             public const string RefreshCurrentPlayerMsg = "RefreshCurrentPlayerMsg";

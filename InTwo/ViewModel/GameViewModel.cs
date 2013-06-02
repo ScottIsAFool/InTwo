@@ -125,7 +125,56 @@ namespace InTwo.ViewModel
 
         private void CalculateAvailableScore()
         {
+            var score = 0;
 
+            if (!string.IsNullOrEmpty(ArtistGuess))
+            {
+                score += Constants.Scores.CorrectArtist;
+            }
+
+            if (!string.IsNullOrEmpty(SongGuess))
+            {
+                score += Constants.Scores.CorrectSong;
+            }
+
+            if (!string.IsNullOrEmpty(SongGuess) && !string.IsNullOrEmpty(ArtistGuess))
+            {
+                score += Constants.Scores.CorrectSongAndArtistBonus;
+            }
+
+            AdjustScoreForGameLength(score);
+
+            MaximumRoundPoints = score;
+        }
+
+        private int AdjustScoreForGameLength(int score)
+        {
+            var seconds = GameLength.Seconds;
+
+            if (seconds <= 5)
+            {
+            }
+            else if (seconds <= 10)
+            {
+                score = (int) Math.Floor(score*0.95);
+            }
+            else if (seconds <= 15)
+            {
+                score = (int) Math.Floor(score*0.9);
+            }
+            else if (seconds <= 20)
+            {
+                score = (int) Math.Floor(score*0.8);
+            }
+            else if (seconds <= 25)
+            {
+                score = (int) Math.Floor(score*0.75);
+            }
+            else if (seconds <= 30)
+            {
+                score = (int) Math.Floor(score*0.5);
+            }
+            return score;
         }
 
         public RelayCommand SubmitGuessCommand
@@ -136,7 +185,7 @@ namespace InTwo.ViewModel
                                         {
                                             if (CheckAnswers())
                                             {
-                                                
+
                                             }
                                         });
             }
