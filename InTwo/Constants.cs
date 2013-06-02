@@ -21,6 +21,8 @@
         public static readonly string ProfilePictureStorageFilePath = ProfilePicturesFolder + "\\{0}.jpg";
         public const string GameDataFile = "GameData.json";
 
+        public const int MaximumNumberOfRounds = 5;
+
         public static class Scores
         {
             public const int CorrectArtist = 50;

@@ -208,6 +208,14 @@ namespace InTwo.ViewModel
         }
 
         #region Commands
+        public RelayCommand GamePageLoaded
+        {
+            get
+            {
+                return new RelayCommand(ResetGameForNewRound);
+            }
+        }
+
         public RelayCommand SubmitGuessCommand
         {
             get
@@ -236,7 +244,7 @@ namespace InTwo.ViewModel
                                                         }
                                                         else
                                                         {
-                                                            
+                                                            // TODO: Submit scores
                                                         }
                                                     }
                                                     else if(args.Result == CustomMessageBoxResult.RightButton)

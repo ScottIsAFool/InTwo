@@ -9,9 +9,10 @@
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
-                            xmlns:coding4fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+                            xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             xmlns:scottbehaviours="clr-namespace:ScottIsAFool.WindowsPhone.Behaviours;assembly=ScottIsAFool.WindowsPhone"
                             xmlns:behaviours="clr-namespace:InTwo.Behaviours"
+                            xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -21,6 +22,17 @@
                             shell:SystemTray.IsVisible="True"
                             shell:SystemTray.Opacity="0"
                             DataContext="{Binding Game, Source={StaticResource Locator}}">
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator Text="{Binding ProgressText}"
+                                 IsVisible="{Binding ProgressIsVisible}"
+                                 IsIndeterminate="True"/>
+    </shell:SystemTray.ProgressIndicator>
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding GamePageLoaded}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -92,7 +104,7 @@
                             </DataTemplate>
                         </toolkit:ListPicker.ItemTemplate>
                     </toolkit:ListPicker>
-                    <coding4fun:TimeSpanPicker Header="Name in..."
+                    <coding4Fun:TimeSpanPicker Header="Name in..."
                                                Value="{Binding GameLength, Mode=TwoWay}"
                                                Width="180"
                                                VerticalAlignment="Bottom"
