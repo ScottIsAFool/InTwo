@@ -25,12 +25,12 @@
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="{Binding ProgressText}"
                                  IsVisible="{Binding ProgressIsVisible}"
-                                 IsIndeterminate="True"/>
+                                 IsIndeterminate="True" />
     </shell:SystemTray.ProgressIndicator>
-    
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding GamePageLoaded}"/>
+            <command:EventToCommand Command="{Binding GamePageLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -109,7 +109,8 @@
                                                Width="180"
                                                VerticalAlignment="Bottom"
                                                Max="00:00:30"
-                                               IsEnabled="{Binding GameLocked, Converter={StaticResource NegativeBooleanConverter}}"/>
+                                               IsEnabled="{Binding GameLocked, Converter={StaticResource NegativeBooleanConverter}}"
+                                               Template="{StaticResource CustomTimeSpanPickerStyle}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -120,36 +121,34 @@
                                          Stretch="UniformToFill"
                                          Margin="12,0"
                                          Source="{Binding ArtistImage}"
-                                         VerticalAlignment="Top"/>
+                                         VerticalAlignment="Top" />
                     <StackPanel Orientation="Vertical"
                                 Width="260">
                         <StackPanel Orientation="Vertical"
                                     Visibility="{Binding CanShowAnswers, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock Text="{Binding GameTrack.Performers, Converter={StaticResource ArrayToStringConverter}}"
-                                       Style="{StaticResource PhoneTextTitle2Style}"
-                                       />
+                                       Style="{StaticResource PhoneTextTitle2Style}" />
                             <TextBlock Text="{Binding GameTrack.Name}"
-                                       Style="{StaticResource PhoneTextSubtleStyle}"
-                                       />
+                                       Style="{StaticResource PhoneTextSubtleStyle}" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical"
                                     Visibility="{Binding CanShowAnswers, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
-                            <toolkit:PhoneTextBox Hint="enter artist guess" 
+                            <toolkit:PhoneTextBox Hint="enter artist guess"
                                                   Text="{Binding ArtistGuess, Mode=TwoWay}">
                                 <i:Interaction.Behaviors>
                                     <behaviours:EnterKeyHandler />
                                     <scottbehaviours:UpdateTextBindingOnPropertyChanged />
                                 </i:Interaction.Behaviors>
                             </toolkit:PhoneTextBox>
-                            <toolkit:PhoneTextBox Hint="enter song guess"/>
+                            <toolkit:PhoneTextBox Hint="enter song guess" />
                         </StackPanel>
                     </StackPanel>
-                    
+
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Maximum points for this round you can have:"
                                Style="{StaticResource PhoneTextTitle2Style}"
-                               TextWrapping="Wrap"/>
+                               TextWrapping="Wrap" />
                     <TextBlock Text="{Binding MaximumRoundPoints}"
                                Style="{StaticResource PhoneTextExtraLargeStyle}"
                                FontSize="100"
