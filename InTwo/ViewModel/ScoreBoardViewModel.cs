@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
-using Nokia.Music;
 using Scoreoid;
 using ScottIsAFool.WindowsPhone.ViewModel;
 
@@ -17,15 +15,13 @@ namespace InTwo.ViewModel
     {
         private readonly IExtendedNavigationService _navigationService;
         private readonly ScoreoidClient _scoreoidClient;
-        private readonly IMusicClient _musicClient;
 
         private bool _scoresLoaded;
 
-        public ScoreBoardViewModel(IExtendedNavigationService navigationService, ScoreoidClient scoreoidClient, IMusicClient musicClient)
+        public ScoreBoardViewModel(IExtendedNavigationService navigationService, ScoreoidClient scoreoidClient)
         {
             _navigationService = navigationService;
             _scoreoidClient = scoreoidClient;
-            _musicClient = musicClient;
 
             if (IsInDesignMode)
             {

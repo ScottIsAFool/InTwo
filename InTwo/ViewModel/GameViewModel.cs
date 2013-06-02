@@ -33,7 +33,16 @@ namespace InTwo.ViewModel
                 // Code runs in Blend --> create design time data.
                 Genres = new List<Genre> {new Genre {Name = AllGenres}};
                 SelectedGenre = Genres[0];
+
+                GameTrack = new Product
+                                {
+                                    Name = "I don't wanna miss a thing",
+                                    Performers = new[] { new Artist { Name = "Aerosmith", Thumb320Uri = new Uri("http://assets.ent.nokia.com/p/d/music_image/320x320/1470.jpg") } }
+                                };
+                ArtistImage = GameTrack.Performers[0].Thumb320Uri;
             }
+
+            GameLength = TimeSpan.FromSeconds(2);
         }
 
         public override void WireMessages()
@@ -56,7 +65,11 @@ namespace InTwo.ViewModel
         public Genre SelectedGenre { get; set; }
         public Product GameTrack { get; set; }
         public Uri AudioUrl { get; set; }
+        public Uri ArtistImage { get; set; }
         public TimeSpan CurrentPosition { get; set; }
+        public TimeSpan GameLength { get; set; }
+
+        public bool CanShowAnswers { get; set; }
 
         private void OnCurrentPositionChanged()
         {

@@ -8,6 +8,8 @@
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
+                            xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
+                            xmlns:coding4fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -48,7 +50,7 @@
                 <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}">
                     <cimbalino:ApplicationBarIconButton Text="play"
                                                         IconUri="/Icons/transport.play.png"
-                                                        Command="{Binding StartGameCommand}" />
+                                                        Command="{Binding NextGameCommand}" />
                     <cimbalino:ApplicationBarIconButton Text="repeat"
                                                         IconUri="/Icons/appbar.repeat.png"
                                                         Command="{Binding RepeatAudioCommand}"
@@ -62,28 +64,61 @@
               Grid.Row="1"
               Margin="12,0,12,0">
             <MediaElement x:Name="GamePlayer"
-                          Position="{Binding CurrentPosition, Mode=TwoWay}" 
+                          Position="{Binding CurrentPosition, Mode=TwoWay}"
                           Source="{Binding AudioUrl}"
-                          AutoPlay="True"/>
+                          AutoPlay="True" />
             <StackPanel Orientation="Vertical">
-                <toolkit:ListPicker ItemsSource="{Binding Genres}"
-                                    SelectedItem="{Binding SelectedGenre, Mode=TwoWay}"
-                                    SelectionMode="Single">
-                    <toolkit:ListPicker.FullModeItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"
-                                       Style="{StaticResource PhoneTextLargeStyle}" />
-                        </DataTemplate>
-                    </toolkit:ListPicker.FullModeItemTemplate>
-                    <toolkit:ListPicker.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </toolkit:ListPicker.ItemTemplate>
-                </toolkit:ListPicker>
+                <StackPanel Orientation="Horizontal">
+                    <toolkit:ListPicker ItemsSource="{Binding Genres}"
+                                        SelectedItem="{Binding SelectedGenre, Mode=TwoWay}"
+                                        SelectionMode="Single"
+                                        Header="Select a genre"
+                                        HorizontalAlignment="Left"
+                                        Width="173">
+                        <toolkit:ListPicker.FullModeItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"
+                                           Style="{StaticResource PhoneTextLargeStyle}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.FullModeItemTemplate>
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
+                    </toolkit:ListPicker>
+                    <coding4fun:TimeSpanPicker Header="Game length"
+                                               Value="{Binding GameLength, Mode=TwoWay}"
+                                               Width="180"
+                                               VerticalAlignment="Bottom"
+                                               Max="00:00:30" />
+                </StackPanel>
 
-                <Button Content="next game"
-                        Command="{Binding NextGameCommand}" />
+                <StackPanel Orientation="Horizontal">
+                    <controls:SuperImage Height="173"
+                                         Width="173"
+                                         PlaceholderImageSource="/Images/ArtistImagePlaceholder.png"
+                                         PlaceholderImageStretch="UniformToFill"
+                                         Stretch="UniformToFill"
+                                         Margin="12,0"
+                                         Source="{Binding ArtistImage}"
+                                         VerticalAlignment="Top"/>
+                    <StackPanel Orientation="Vertical"
+                                Width="260">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding GameTrack.Performers, Converter={StaticResource ArrayToStringConverter}}"
+                                       Style="{StaticResource PhoneTextTitle2Style}"
+                                       />
+                            <TextBlock Text="{Binding GameTrack.Name}"
+                                       Style="{StaticResource PhoneTextSubtleStyle}"
+                                       />
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <toolkit:PhoneTextBox Hint="enter artist guess" />
+                            <toolkit:PhoneTextBox Hint="enter song guess"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </Grid>
     </Grid>

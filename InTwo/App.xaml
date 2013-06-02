@@ -38,6 +38,7 @@
             <localConverters:CurrentUserConverter x:Key="CurrentUserConverter"/>
             <localConverters:CanSendOrUpdateConverter x:Key="CanSendOrUpdateConverter"/>
             <localConverters:ProfilePictureUriConverter x:Key="ProfilePictureUriConverter"/>
+            <localConverters:ArrayToStringConverter x:Key="ArrayToStringConverter"/>
 
             <!-- Control Styles -->
             <Style x:Key="EmptyButtonStyle"

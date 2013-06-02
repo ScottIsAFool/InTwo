@@ -115,9 +115,11 @@
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\ArrayToStringConverter.cs" />
     <Compile Include="Converters\CanSendOrUpdateConverter.cs" />
     <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Converters\ProfilePictureUriConverter.cs" />
+    <Compile Include="Converters\SecondsTextConverter.cs" />
     <Compile Include="Converters\UserLoggedInConverter.cs" />
     <Compile Include="Design\DesignApplicationSettingsService.cs" />
     <Compile Include="Design\DesignAsyncStorageService.cs" />
@@ -291,6 +293,7 @@
     <Content Include="Icons\save.png" />
     <Content Include="Icons\share.png" />
     <Content Include="Icons\transport.play.png" />
+    <Content Include="Images\ArtistImagePlaceholder.png" />
     <Content Include="Images\DownloadBackground-720p.jpg" />
     <Content Include="Images\DownloadBackground-WVGA.jpg" />
     <Content Include="Images\DownloadBackground-WXGA.jpg" />
