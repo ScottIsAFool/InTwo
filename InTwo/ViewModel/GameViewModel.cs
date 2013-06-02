@@ -98,14 +98,12 @@ namespace InTwo.ViewModel
             }
         }
 
-        public int AppBarIndex { get; set; }
+        public int AppBarIndex { get { return GameLocked ? 1 : 0; } }
 
-        private void SetNextGame()
+        private void SetNextRound()
         {
             if (!_navigationService.IsNetworkAvailable) return;
-
-            GameLocked = true;
-
+            
             if (SelectedGenre.Name.Equals(AllGenres))
             {
                 var randomNumber = Utils.GetRandomNumber(0, _tracks.Count);
@@ -130,11 +128,45 @@ namespace InTwo.ViewModel
 
         }
 
-        public RelayCommand NextGameCommand
+        public RelayCommand SubmitGuessCommand
         {
             get
             {
-                return new RelayCommand(SetNextGame);
+                return new RelayCommand(() =>
+                                        {
+                                            if (CheckAnswers())
+                                            {
+                                                
+                                            }
+                                        });
+            }
+        }
+
+        private bool CheckAnswers()
+        {
+
+
+            return false;
+        }
+
+        public RelayCommand StartGameCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                                        {
+                                            GameLocked = true;
+
+                                            SetNextRound();
+                                        });
+            }
+        }
+
+        public RelayCommand NextRoundCommand
+        {
+            get
+            {
+                return new RelayCommand(SetNextRound);
             }
         }
 

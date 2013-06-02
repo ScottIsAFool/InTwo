@@ -52,7 +52,9 @@
                 <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}">
                     <cimbalino:ApplicationBarIconButton Text="play"
                                                         IconUri="/Icons/transport.play.png"
-                                                        Command="{Binding NextGameCommand}" />
+                                                        Command="{Binding NextRoundCommand}" />
+                </cimbalino:ApplicationBar>
+                <cimbalino:ApplicationBar>
                     <cimbalino:ApplicationBarIconButton Text="repeat"
                                                         IconUri="/Icons/appbar.repeat.png"
                                                         Command="{Binding RepeatAudioCommand}"
