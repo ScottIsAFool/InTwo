@@ -10,6 +10,8 @@
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
                             xmlns:coding4fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+                            xmlns:scottbehaviours="clr-namespace:ScottIsAFool.WindowsPhone.Behaviours;assembly=ScottIsAFool.WindowsPhone"
+                            xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -74,7 +76,8 @@
                                         SelectionMode="Single"
                                         Header="Select a genre"
                                         HorizontalAlignment="Left"
-                                        Width="173">
+                                        Width="173"
+                                        IsEnabled="{Binding GameLocked, Converter={StaticResource NegativeBooleanConverter}}">
                         <toolkit:ListPicker.FullModeItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"
@@ -87,11 +90,12 @@
                             </DataTemplate>
                         </toolkit:ListPicker.ItemTemplate>
                     </toolkit:ListPicker>
-                    <coding4fun:TimeSpanPicker Header="Game length"
+                    <coding4fun:TimeSpanPicker Header="Name in..."
                                                Value="{Binding GameLength, Mode=TwoWay}"
                                                Width="180"
                                                VerticalAlignment="Bottom"
-                                               Max="00:00:30" />
+                                               Max="00:00:30"
+                                               IsEnabled="{Binding GameLocked, Converter={StaticResource NegativeBooleanConverter}}"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
@@ -105,7 +109,8 @@
                                          VerticalAlignment="Top"/>
                     <StackPanel Orientation="Vertical"
                                 Width="260">
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical"
+                                    Visibility="{Binding CanShowAnswers, Converter={StaticResource BooleanToVisibilityConverter}}">
                             <TextBlock Text="{Binding GameTrack.Performers, Converter={StaticResource ArrayToStringConverter}}"
                                        Style="{StaticResource PhoneTextTitle2Style}"
                                        />
@@ -113,11 +118,28 @@
                                        Style="{StaticResource PhoneTextSubtleStyle}"
                                        />
                         </StackPanel>
-                        <StackPanel Orientation="Vertical">
-                            <toolkit:PhoneTextBox Hint="enter artist guess" />
+                        <StackPanel Orientation="Vertical"
+                                    Visibility="{Binding CanShowAnswers, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                            <toolkit:PhoneTextBox Hint="enter artist guess" 
+                                                  Text="{Binding ArtistGuess, Mode=TwoWay}">
+                                <i:Interaction.Behaviors>
+                                    <behaviours:EnterKeyHandler />
+                                    <scottbehaviours:UpdateTextBindingOnPropertyChanged />
+                                </i:Interaction.Behaviors>
+                            </toolkit:PhoneTextBox>
                             <toolkit:PhoneTextBox Hint="enter song guess"/>
                         </StackPanel>
                     </StackPanel>
+                    
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Maximum points for this round you can have:"
+                               Style="{StaticResource PhoneTextTitle2Style}"
+                               TextWrapping="Wrap"/>
+                    <TextBlock Text="{Binding MaximumRoundPoints}"
+                               Style="{StaticResource PhoneTextExtraLargeStyle}"
+                               FontSize="100"
+                               FontWeight="Bold" />
                 </StackPanel>
             </StackPanel>
         </Grid>

@@ -34,12 +34,16 @@ namespace InTwo.ViewModel
                 Genres = new List<Genre> {new Genre {Name = AllGenres}};
                 SelectedGenre = Genres[0];
 
+                GameLocked = true;
+
                 GameTrack = new Product
                                 {
                                     Name = "I don't wanna miss a thing",
-                                    Performers = new[] { new Artist { Name = "Aerosmith", Thumb320Uri = new Uri("http://assets.ent.nokia.com/p/d/music_image/320x320/1470.jpg") } }
+                                    Performers = new[] { new Artist { Name = "Aerosmith", Thumb320Uri = new Uri("http://assets.ent.nokia.com/p/d/music_image/320x320/1470.jpg") } },
+                                    Thumb320Uri = new Uri("http://4.musicimg.ovi.com/u/1.0/image/156920531/?w=320&q=90")
                                 };
-                ArtistImage = GameTrack.Performers[0].Thumb320Uri;
+                ArtistImage = GameTrack.Thumb320Uri;
+                MaximumRoundPoints = 300;
             }
 
             GameLength = TimeSpan.FromSeconds(2);
@@ -69,11 +73,29 @@ namespace InTwo.ViewModel
         public TimeSpan CurrentPosition { get; set; }
         public TimeSpan GameLength { get; set; }
 
+        public bool GameLocked { get; set; }
         public bool CanShowAnswers { get; set; }
+        public string ArtistGuess { get; set; }
+        public string SongGuess { get; set; }
+        public int MaximumRoundPoints { get; set; }
+
+        private void OnArtistGuessChange()
+        {
+            CalculateAvailableScore();
+        }
+        
+        private void OnSongGuessChange()
+        {
+            CalculateAvailableScore();
+        }
 
         private void OnCurrentPositionChanged()
         {
             // TODO: Check what game they're playing and stop the audio when it hits that limit.
+            if (CurrentPosition > GameLength)
+            {
+                AudioUrl = null;
+            }
         }
 
         public int AppBarIndex { get; set; }
@@ -81,6 +103,8 @@ namespace InTwo.ViewModel
         private void SetNextGame()
         {
             if (!_navigationService.IsNetworkAvailable) return;
+
+            GameLocked = true;
 
             if (SelectedGenre.Name.Equals(AllGenres))
             {
@@ -99,6 +123,11 @@ namespace InTwo.ViewModel
             }
 
             AudioUrl = GameTrack.GetSampleUri();
+        }
+
+        private void CalculateAvailableScore()
+        {
+
         }
 
         public RelayCommand NextGameCommand
