@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
+using Microsoft.Phone.Controls;
 using Nokia.Music.Types;
 using ScottIsAFool.WindowsPhone.ViewModel;
 
@@ -78,6 +79,13 @@ namespace InTwo.ViewModel
         public string ArtistGuess { get; set; }
         public string SongGuess { get; set; }
         public int MaximumRoundPoints { get; set; }
+        public int RoundPoints { get; set; }
+        public int RoundNumber { get; set; }
+
+        public string AnotherRoundOrNot
+        {
+            get { return RoundNumber < Constants.MaximumNumberOfRounds ? "ready for another?" : "shall we submit your scores now?"; }
+        }
 
         private void OnArtistGuessChange()
         {
@@ -103,6 +111,8 @@ namespace InTwo.ViewModel
         private void SetNextRound()
         {
             if (!_navigationService.IsNetworkAvailable) return;
+
+            ResetGameForNewRound();
             
             if (SelectedGenre.Name.Equals(AllGenres))
             {
@@ -123,6 +133,18 @@ namespace InTwo.ViewModel
             AudioUrl = GameTrack.GetSampleUri();
         }
 
+        private void ResetGameForNewRound()
+        {
+            AudioUrl = ArtistImage = null;
+            CanShowAnswers = false;
+            ArtistGuess = string.Empty;
+            SongGuess = string.Empty;
+            RoundPoints = 0;
+
+            CalculateAvailableScore();
+        }
+
+        #region Scoring methods
         private void CalculateAvailableScore()
         {
             var score = 0;
@@ -176,20 +198,7 @@ namespace InTwo.ViewModel
             }
             return score;
         }
-
-        public RelayCommand SubmitGuessCommand
-        {
-            get
-            {
-                return new RelayCommand(() =>
-                                        {
-                                            if (CheckAnswers())
-                                            {
-
-                                            }
-                                        });
-            }
-        }
+        #endregion
 
         private bool CheckAnswers()
         {
@@ -198,16 +207,60 @@ namespace InTwo.ViewModel
             return false;
         }
 
-        public RelayCommand StartGameCommand
+        #region Commands
+        public RelayCommand SubmitGuessCommand
         {
             get
             {
                 return new RelayCommand(() =>
                                         {
-                                            GameLocked = true;
+                                            if (CheckAnswers())
+                                            {
+                                                var message = new CustomMessageBox
+                                                {
+                                                    Title = "Congratulations!",
+                                                    Message = string.Format("Well done, you score {0} points this round. Right, enough jibba jabba, {1}", RoundPoints, AnotherRoundOrNot),
+                                                    LeftButtonContent = "yes please",
+                                                    RightButtonContent = "nah, I'm good thanks"
+                                                };
 
-                                            SetNextRound();
+                                                message.Dismissed += (sender, args) =>
+                                                {
+                                                    ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+                                                    if (args.Result == CustomMessageBoxResult.LeftButton)
+                                                    {
+                                                        if (AnotherRoundOrNot.Equals("ready for another?"))
+                                                        {
+                                                            RoundNumber++;
+                                                            SetNextRound();
+                                                        }
+                                                        else
+                                                        {
+                                                            
+                                                        }
+                                                    }
+                                                    else if(args.Result == CustomMessageBoxResult.RightButton)
+                                                    {
+                                                        _navigationService.GoBack();
+                                                    }
+                                                };
+
+                                                message.Show();
+                                            }
                                         });
+            }
+        }
+
+        public RelayCommand StartGameCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    GameLocked = true;
+
+                    SetNextRound();
+                });
             }
         }
 
@@ -229,5 +282,6 @@ namespace InTwo.ViewModel
                 });
             }
         }
+        #endregion
     }
 }
