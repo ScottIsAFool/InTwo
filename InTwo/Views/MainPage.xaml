@@ -61,7 +61,7 @@
             <cimbalino:ApplicationBarBehavior Mode="Minimized"
                                               BackgroundColor="{StaticResource AppBarColour}">
                 <cimbalino:ApplicationBarBehavior.MenuItems>
-                    <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
+                    <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
                                                       Command="{Binding LoginLogoutCommand}"/>
                 </cimbalino:ApplicationBarBehavior.MenuItems>
             </cimbalino:ApplicationBarBehavior>
@@ -92,7 +92,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Top"
                 Grid.Row="0"
-                Visibility="{Binding AppSettings.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
+                Visibility="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
                 Margin="0,24,24,0">
             <controls:ProfilePicture IsClipped="True"
                                      Height="50" />

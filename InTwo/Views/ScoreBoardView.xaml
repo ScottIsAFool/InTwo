@@ -92,7 +92,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Top"
                 Grid.Row="0"
-                Visibility="{Binding AppSettings.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
+                Visibility="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
                 Margin="0,24,24,0">
             <controls:ProfilePicture IsClipped="True"
                                      Height="50" />
@@ -124,7 +124,7 @@
                 </phone:LongListSelector.ItemTemplate>
                 <phone:LongListSelector.ListHeader>
                     <Grid Margin="0,0,0,12">
-                        <TextBlock Text="{Binding AppSettings.CurrentPlayer.best_score, Source={StaticResource Settings}, StringFormat='Your current score was \{0\}!!'}"
+                        <TextBlock Text="{Binding AppSettings.PlayerWrapper.best_score, Source={StaticResource Settings}, StringFormat='Your current score was \{0\}!!'}"
                                    Style="{StaticResource PhoneTextTitle2Style}" />
                     </Grid>
                 </phone:LongListSelector.ListHeader>

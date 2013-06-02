@@ -104,9 +104,9 @@ namespace InTwo.ViewModel
 
                     try
                     {
-                        await _scoreoidClient.DeletePlayerAsync(App.SettingsWrapper.AppSettings.CurrentPlayer);
+                        await _scoreoidClient.DeletePlayerAsync(App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer);
 
-                        App.SettingsWrapper.AppSettings.CurrentPlayer = null;
+                        App.SettingsWrapper.AppSettings.PlayerWrapper = null;
 
                         _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
                     }

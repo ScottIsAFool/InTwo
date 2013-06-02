@@ -11,12 +11,12 @@ namespace InTwo.Model
             ShowWelcomeMessage = true;
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                CurrentPlayer = new player
+                PlayerWrapper = new PlayerWrapper(new player
                                     {
                                         username = "scottisafool",
                                         best_score = "336",
                                         rank = "1"
-                                    };
+                                    });
             }
             else
             {
@@ -31,7 +31,7 @@ namespace InTwo.Model
         }
 
         public bool ShowWelcomeMessage { get; set; }
-        public player CurrentPlayer { get; set; }
+        public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
     }
 }

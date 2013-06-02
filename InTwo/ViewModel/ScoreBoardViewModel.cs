@@ -122,11 +122,11 @@ namespace InTwo.ViewModel
         {
             try
             {
-                var items = await _scoreoidClient.GetPlayerAsync(App.SettingsWrapper.AppSettings.CurrentPlayer.username);
+                var items = await _scoreoidClient.GetPlayerAsync(App.CurrentPlayer.username);
 
                 if (items == null || !items.items.Any()) return;
 
-                App.SettingsWrapper.AppSettings.CurrentPlayer = items.items[0];
+                App.CurrentPlayer = items.items[0];
             }
             catch (ScoreoidException ex)
             {

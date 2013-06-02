@@ -16,8 +16,8 @@ namespace InTwo.Converters
 
             if (user == null) return Application.Current.Resources["PhoneForegroundBrush"];
 
-            return (App.SettingsWrapper.AppSettings.CurrentPlayer != null &&
-                    user.username == App.SettingsWrapper.AppSettings.CurrentPlayer.username)
+            return (App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer != null &&
+                    user.username == App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer.username)
                        ? Application.Current.Resources["PhoneAccentBrush"]
                        : Application.Current.Resources["PhoneForegroundBrush"];
         }

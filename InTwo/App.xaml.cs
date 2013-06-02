@@ -30,8 +30,8 @@ namespace InTwo
 
         public static player CurrentPlayer
         {
-            get { return SettingsWrapper.AppSettings.CurrentPlayer; }
-            set { SettingsWrapper.AppSettings.CurrentPlayer = value; }
+            get { return SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer; }
+            set { SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer = value; }
         }
 
         /// <summary>
