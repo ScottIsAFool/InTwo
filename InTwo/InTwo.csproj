@@ -290,6 +290,7 @@
     <Content Include="Icons\cancel.png" />
     <Content Include="Icons\check.png" />
     <Content Include="Icons\edit.png" />
+    <Content Include="Icons\Go.png" />
     <Content Include="Icons\refresh.png" />
     <Content Include="Icons\save.png" />
     <Content Include="Icons\share.png" />

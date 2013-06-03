@@ -87,6 +87,9 @@
                                                         IconUri="/Icons/appbar.repeat.png"
                                                         Command="{Binding RepeatAudioCommand}"
                                                         x:Name="RepeatButton" />
+                    <cimbalino:ApplicationBarIconButton Text="make guess"
+                                                        IconUri="/Icons/Go.png"
+                                                        Command="{Binding SubmitGuessCommand}"/>
                 </cimbalino:ApplicationBar>
             </cimbalino:MultiApplicationBarBehavior>
         </i:Interaction.Behaviors>
