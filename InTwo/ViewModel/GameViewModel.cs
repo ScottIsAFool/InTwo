@@ -201,7 +201,6 @@ namespace InTwo.ViewModel
             {
                 score = (int) Math.Floor(score*0.5);
             }
-            return score;
         }
         #endregion
 
