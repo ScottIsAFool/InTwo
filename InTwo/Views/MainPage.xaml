@@ -106,7 +106,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
-            <Button Content="game" Click="ButtonBase_OnClick"></Button>
+            <Button Content="game"
+                    Command="{Binding GoToGameCommand}"></Button>
             <!--<ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                               AdType="IaAdType_Banner"
                               ReloadTime="30"

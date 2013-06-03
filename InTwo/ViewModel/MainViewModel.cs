@@ -31,6 +31,7 @@ namespace InTwo.ViewModel
         private readonly IApplicationSettingsService _settingsService;
 
         private bool _hasCheckedForData;
+        private bool _dataExists;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -93,36 +94,41 @@ namespace InTwo.ViewModel
                 {
                     if (_hasCheckedForData) return;
 
-                    var dataExists = await CheckForGameData();
+                    _dataExists = await CheckForGameData();
 
-                    if (!dataExists)
+                    if (!_dataExists)
                     {
-                        var message = new CustomMessageBox
-                            {
-                                Caption = "No game data present",
-                                Message = "We can't find any game data saved to your phone. " +
-                                          "This data needs to be downloaded in order for you to play, would you like us to download that now? " +
-                                          "Please note, this doesn't download any music.",
-                                LeftButtonContent = "yes",
-                                RightButtonContent = "no",
-                                IsFullScreen = false
-                            };
-
-                        message.Dismissed += (sender, args) =>
-                        {
-                            if (args.Result == CustomMessageBoxResult.LeftButton)
-                            {
-                                ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
-
-                                _navigationService.NavigateTo(Constants.Pages.DownloadingSongs);
-                            }
-                        };
-                        message.Show();
+                        DisplayGetDataMessage();
                     }
 
                     _hasCheckedForData = true;
                 });
             }
+        }
+
+        private void DisplayGetDataMessage()
+        {
+            var message = new CustomMessageBox
+            {
+                Caption = "No game data present",
+                Message = "We can't find any game data saved to your phone. " +
+                          "This data needs to be downloaded in order for you to play, would you like us to download that now? " +
+                          "Please note, this doesn't download any music.",
+                LeftButtonContent = "yes",
+                RightButtonContent = "no",
+                IsFullScreen = false
+            };
+
+            message.Dismissed += (sender, args) =>
+            {
+                if (args.Result == CustomMessageBoxResult.LeftButton)
+                {
+                    ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+
+                    _navigationService.NavigateTo(Constants.Pages.DownloadingSongs);
+                }
+            };
+            message.Show();
         }
 
         public RelayCommand<string> NavigateToPage
@@ -147,6 +153,22 @@ namespace InTwo.ViewModel
                     {
                         App.CurrentPlayer = null;
                     }
+                });
+            }
+        }
+
+        public RelayCommand GoToGameCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (_hasCheckedForData)
+                    {
+                        _navigationService.NavigateTo(Constants.Pages.Game);
+                        return;
+                    }
+                    DisplayGetDataMessage();
                 });
             }
         }
