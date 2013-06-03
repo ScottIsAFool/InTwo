@@ -202,9 +202,29 @@ namespace InTwo.ViewModel
 
         private bool CheckAnswers()
         {
+            bool artistGuessCorrect;
+            bool songGuessCorrect;
 
+            Utils.SeeIfWeHaveAWinner(GameTrack, ArtistGuess, SongGuess, out artistGuessCorrect, out songGuessCorrect);
 
-            return false;
+            if (artistGuessCorrect)
+            {
+                RoundPoints += Constants.Scores.CorrectArtist;
+            }
+
+            if (songGuessCorrect)
+            {
+                RoundPoints += Constants.Scores.CorrectSong;
+            }
+
+            if (artistGuessCorrect && songGuessCorrect)
+            {
+                RoundPoints += Constants.Scores.CorrectSongAndArtistBonus;
+            }
+
+            AdjustScoreForGameLength(RoundPoints);
+
+            return (artistGuessCorrect || songGuessCorrect);
         }
 
         #region Commands
