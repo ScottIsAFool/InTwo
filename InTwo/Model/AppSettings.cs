@@ -32,6 +32,7 @@ namespace InTwo.Model
 
         public bool ShowWelcomeMessage { get; set; }
         public bool DontShowSpeechGuessprompt { get; set; }
+        public bool DontShowBackExitMessage { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
     }

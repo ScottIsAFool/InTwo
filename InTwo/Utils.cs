@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using GalaSoft.MvvmLight.Ioc;
 using Nokia.Music;
 using Nokia.Music.Types;
@@ -81,6 +84,22 @@ namespace InTwo
                 return true;
             }
             return false;
+        }
+
+        internal static CheckBox CreateDontShowCheckBox(string propertyName)
+        {
+            var cb = new CheckBox { Content = "Don't show this message again" };
+
+            var binding = new Binding
+            {
+                Mode = BindingMode.TwoWay,
+                Path = new PropertyPath(propertyName),
+                Source = App.SettingsWrapper.AppSettings
+            };
+
+            cb.SetBinding(CheckBox.IsCheckedProperty, binding);
+
+            return cb;
         }
     }
 }
