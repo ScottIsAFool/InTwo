@@ -22,7 +22,7 @@ namespace InTwo
 
         internal static Uri GetSampleUri(this Product product)
         {
-            var client = SimpleIoc.Default.GetInstance<MusicClient>();
+            var client = SimpleIoc.Default.GetInstance<IMusicClient>();
             return client.GetTrackSampleUri(product.Id);
         }
 

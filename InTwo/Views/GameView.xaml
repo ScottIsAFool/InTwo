@@ -68,8 +68,7 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
-          Background="Transparent"
-          Margin="0,32,0,0">
+          Background="Transparent">
         <i:Interaction.Behaviors>
             <cimbalino:MultiApplicationBarBehavior SelectedIndex="{Binding AppBarIndex}">
                 <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
@@ -80,10 +79,10 @@
                 </cimbalino:ApplicationBar>
                 <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
                                           x:Name="GameInProgressAppBar">
-                    <cimbalino:ApplicationBarIconButton Text="{Binding IsPlaying,Converter={StaticResource PlayPauseTextConverter}}"
+                    <!--<cimbalino:ApplicationBarIconButton Text="{Binding IsPlaying,Converter={StaticResource PlayPauseTextConverter}}"
                                                         IconUri="{Binding IsPlaying, Converter={StaticResource PlayPauseIconConverter}}"
                                                         x:Name="PlayPauseButton"
-                                                        Click="PlayPauseButton_OnClick"/>
+                                                        Click="PlayPauseButton_OnClick"/>-->
                     <cimbalino:ApplicationBarIconButton Text="repeat"
                                                         IconUri="/Icons/appbar.repeat.png"
                                                         Command="{Binding RepeatAudioCommand}"
@@ -125,7 +124,7 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
-              Margin="12,0,12,0">
+              Margin="12,32,12,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto" />
@@ -133,7 +132,7 @@
             <MediaElement x:Name="GamePlayer"
                           Position="{Binding CurrentPosition, Mode=TwoWay}"
                           Source="{Binding AudioUrl}"
-                          AutoPlay="True" />
+                          AutoPlay="True"  />
             <StackPanel Orientation="Vertical"
                         Grid.Row="0"
                         VerticalAlignment="Top"
@@ -188,14 +187,16 @@
                         <StackPanel Orientation="Vertical"
                                     Visibility="{Binding CanShowAnswers, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                             <toolkit:PhoneTextBox Hint="enter artist guess"
-                                                  Text="{Binding ArtistGuess, Mode=TwoWay}">
+                                                  Text="{Binding ArtistGuess, Mode=TwoWay}"
+                                                  InputScope="Text">
                                 <i:Interaction.Behaviors>
                                     <behaviours:EnterKeyHandler />
                                     <scottbehaviours:UpdateTextBindingOnPropertyChanged />
                                 </i:Interaction.Behaviors>
                             </toolkit:PhoneTextBox>
                             <toolkit:PhoneTextBox Hint="enter song guess"
-                                                  Text="{Binding SongGuess, Mode=TwoWay}">
+                                                  Text="{Binding SongGuess, Mode=TwoWay}"
+                                                  InputScope="Text">
                                 <i:Interaction.Behaviors>
                                     <behaviours:EnterKeyHandler />
                                     <scottbehaviours:UpdateTextBindingOnPropertyChanged />
@@ -228,7 +229,8 @@
                               HorizontalAlignment="Left"
                               VerticalAlignment="Bottom"
                               Grid.Row="1"
-                              Height="80"/>
+                              Height="80"
+                              Margin="0,100,0,0"/>
         </Grid>
     </Grid>
 

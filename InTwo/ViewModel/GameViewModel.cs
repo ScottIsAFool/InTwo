@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Windows.Threading;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Controls;
@@ -24,6 +24,7 @@ namespace InTwo.ViewModel
         private readonly IExtendedNavigationService _navigationService;
         public const string AllGenres = "All Genres";
         private List<Product> _tracks;
+        private readonly DispatcherTimer _gameTimer;
 
         /// <summary>
         /// Initializes a new instance of the GameViewModel class.
@@ -40,16 +41,26 @@ namespace InTwo.ViewModel
                 GameLocked = true;
 
                 GameTrack = new Product
-                                {
-                                    Name = "I don't wanna miss a thing",
-                                    Performers = new[] { new Artist { Name = "Aerosmith", Thumb320Uri = new Uri("http://assets.ent.nokia.com/p/d/music_image/320x320/1470.jpg") } },
-                                    Thumb320Uri = new Uri("http://4.musicimg.ovi.com/u/1.0/image/156920531/?w=320&q=90")
-                                };
+                {
+                    Name = "I don't wanna miss a thing",
+                    Performers = new[] {new Artist {Name = "Aerosmith", Thumb320Uri = new Uri("http://assets.ent.nokia.com/p/d/music_image/320x320/1470.jpg")}},
+                    Thumb320Uri = new Uri("http://4.musicimg.ovi.com/u/1.0/image/156920531/?w=320&q=90")
+                };
                 ArtistImage = GameTrack.Thumb320Uri;
                 MaximumRoundPoints = 300;
             }
+            else
+            {
+                _gameTimer = new DispatcherTimer {Interval = GameLength};
+                _gameTimer.Tick += GameTimerOnTick;
+            }
 
             GameLength = TimeSpan.FromSeconds(2);
+        }
+
+        private void GameTimerOnTick(object sender, EventArgs eventArgs)
+        {
+            AudioUrl = null;
         }
 
         public override void WireMessages()
@@ -68,6 +79,16 @@ namespace InTwo.ViewModel
                 if (m.Notification.Equals(Constants.Messages.IsPlayingMsg))
                 {
                     IsPlaying = (bool) m.Sender;
+
+                    if (_gameTimer.IsEnabled)
+                    {
+                        _gameTimer.Stop();
+                    }
+
+                    if (IsPlaying)
+                    {
+                        _gameTimer.Start();
+                    }
                 }
             });
         }
@@ -77,7 +98,6 @@ namespace InTwo.ViewModel
         public Product GameTrack { get; set; }
         public Uri AudioUrl { get; set; }
         public Uri ArtistImage { get; set; }
-        public TimeSpan CurrentPosition { get; set; }
         public TimeSpan GameLength { get; set; }
         public bool IsPlaying { get; set; }
 
@@ -94,23 +114,19 @@ namespace InTwo.ViewModel
             get { return RoundNumber < Constants.MaximumNumberOfRounds ? "ready for another?" : "shall we submit your scores now?"; }
         }
 
-        private void OnArtistGuessChange()
+        private void OnArtistGuessChanged()
         {
             CalculateAvailableScore();
         }
         
-        private void OnSongGuessChange()
+        private void OnSongGuessChanged()
         {
             CalculateAvailableScore();
         }
 
-        private void OnCurrentPositionChanged()
+        private void OnGameLengthChanged()
         {
-            // TODO: Check what game they're playing and stop the audio when it hits that limit.
-            if (CurrentPosition > GameLength)
-            {
-                AudioUrl = null;
-            }
+            _gameTimer.Interval = GameLength;
         }
 
         public int AppBarIndex { get { return GameLocked ? 1 : 0; } }

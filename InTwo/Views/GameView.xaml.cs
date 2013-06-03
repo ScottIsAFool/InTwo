@@ -19,6 +19,8 @@ namespace InTwo.Views
 
             GamePlayer.CurrentStateChanged += (sender, args) =>
             {
+                if (GamePlayer.CurrentState == MediaElementState.Buffering) return;
+
                 _isPlaying = GamePlayer.CurrentState == MediaElementState.Playing;
                 Messenger.Default.Send(new NotificationMessage(_isPlaying, Constants.Messages.IsPlayingMsg));
             };
