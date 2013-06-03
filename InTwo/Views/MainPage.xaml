@@ -11,8 +11,6 @@
                             xmlns:controls="clr-namespace:InTwo.Controls"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             xmlns:converters="clr-namespace:InTwo.Converters"
-                            xmlns:timeSpanPicker="clr-namespace:InTwo.Controls.TimeSpanPicker"
-                            xmlns:ad="clr-namespace:Inneractive.Nokia.Ad;assembly=Inneractive.Ad"
                             mc:Ignorable="d"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"

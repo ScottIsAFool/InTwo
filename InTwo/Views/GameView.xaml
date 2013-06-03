@@ -14,6 +14,7 @@
                             xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                             xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             xmlns:converters="clr-namespace:Cimbalino.Phone.Toolkit.Converters;assembly=Cimbalino.Phone.Toolkit"
+                            xmlns:ad="clr-namespace:Inneractive.Nokia.Ad;assembly=Inneractive.Ad"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -125,11 +126,17 @@
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
               Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
             <MediaElement x:Name="GamePlayer"
                           Position="{Binding CurrentPosition, Mode=TwoWay}"
                           Source="{Binding AudioUrl}"
                           AutoPlay="True" />
             <StackPanel Orientation="Vertical"
+                        Grid.Row="0"
+                        VerticalAlignment="Top"
                         Visibility="{Binding CanShowAnswers, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <toolkit:ListPicker ItemsSource="{Binding Genres}"
@@ -204,9 +211,18 @@
             </StackPanel>
             
             <StackPanel Orientation="Vertical"
+                        Grid.Row="0"
                         Visibility="{Binding CanShowAnswers, Converter={StaticResource BooleanToVisibilityConverter}}">
                 
             </StackPanel>
+
+            <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
+                              AdType="IaAdType_Banner"
+                              ReloadTime="30"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Bottom"
+                              Grid.Row="1"
+                              Height="80"/>
         </Grid>
     </Grid>
 
