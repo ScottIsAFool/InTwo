@@ -194,7 +194,13 @@
                                     <scottbehaviours:UpdateTextBindingOnPropertyChanged />
                                 </i:Interaction.Behaviors>
                             </toolkit:PhoneTextBox>
-                            <toolkit:PhoneTextBox Hint="enter song guess" />
+                            <toolkit:PhoneTextBox Hint="enter song guess"
+                                                  Text="{Binding SongGuess, Mode=TwoWay}">
+                                <i:Interaction.Behaviors>
+                                    <behaviours:EnterKeyHandler />
+                                    <scottbehaviours:UpdateTextBindingOnPropertyChanged />
+                                </i:Interaction.Behaviors>
+                            </toolkit:PhoneTextBox>
                         </StackPanel>
                     </StackPanel>
 
