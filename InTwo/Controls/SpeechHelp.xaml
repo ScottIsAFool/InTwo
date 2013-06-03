@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="InTwo.Controls.SpeechHelp"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel"
+                    Grid.Row="0"
+                    Margin="0,17,0,28">
+            <TextBlock Text="WHAT DO I SAY THEN?"
+                       Style="{StaticResource PhoneTextNormalStyle}"
+                       Margin="12,0" />
+        </StackPanel>
+        
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Make your guesses by speaking into your phone and make sure you use the following inputs:"
+                           TextWrapping="Wrap"
+                           Style="{StaticResource PhoneTextTitle3Style}"/>
+                <TextBlock Style="{StaticResource PhoneTextTitle3Style}"
+                           Margin="12,12,12,0">
+                    <Run Text="&quot;"/>
+                    <Run Text="Artist is "
+                         Foreground="Red"/>
+                    <Run Text="Aerosmith&quot;"/>
+                </TextBlock>
+                <TextBlock Style="{StaticResource PhoneTextTitle3Style}"
+                           Margin="12,12,12,0">
+                    <Run Text="&quot;" />
+                    <Run Text="Song is "
+                         Foreground="Red" />
+                    <Run Text="Pink&quot;" />
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

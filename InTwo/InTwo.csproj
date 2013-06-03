@@ -101,17 +101,9 @@
     <Compile Include="Controls\ProfilePicture.xaml.cs">
       <DependentUpon>ProfilePicture.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TimeSpanPicker\DataSource\DataSource.cs" />
-    <Compile Include="Controls\TimeSpanPicker\DataSource\SecondTimeSpanDataSource.cs" />
-    <Compile Include="Controls\TimeSpanPicker\DataSource\TimeSpanDataSource.cs" />
-    <Compile Include="Controls\TimeSpanPicker\ITimeSpanPickerPage.cs" />
-    <Compile Include="Controls\TimeSpanPicker\TimeSpanPicker.cs" />
-    <Compile Include="Controls\TimeSpanPicker\TimeSpanPickerBasePage.cs" />
-    <Compile Include="Controls\TimeSpanPicker\TimespanPickerPage.xaml.cs">
-      <DependentUpon>TimespanPickerPage.xaml</DependentUpon>
+    <Compile Include="Controls\SpeechHelp.xaml.cs">
+      <DependentUpon>SpeechHelp.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\TimeSpanPicker\TimeSpanValueChangedEventArgs.cs" />
-    <Compile Include="Controls\TimeSpanPicker\TimeSpanWrapper.cs" />
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
@@ -196,9 +188,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\TimeSpanPicker\TimespanPickerPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Controls\SpeechHelp.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserDetails.xaml">
       <SubType>Designer</SubType>
@@ -286,6 +278,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="FodyWeavers.xml" />
+    <Content Include="Icons\appbar.microphone.png" />
     <Content Include="Icons\appbar.repeat.png" />
     <Content Include="Icons\cancel.png" />
     <Content Include="Icons\check.png" />
@@ -327,11 +320,16 @@
     <Reference Include="AdvancedREI.Net.Http.Compression">
       <HintPath>..\packages\HttpClient.Compression.1.0.3-rc2\lib\portable-net4+sl4+wp7+win8\AdvancedREI.Net.Http.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="Cimbalino.Phone.Toolkit">
-      <HintPath>..\packages\Cimbalino.Phone.Toolkit.2.3.1\lib\wp8\Cimbalino.Phone.Toolkit.dll</HintPath>
+    <Reference Include="Cimbalino.Phone.Toolkit, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cimbalino.Phone.Toolkit.3.0.0-rc2\lib\wp8\Cimbalino.Phone.Toolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Cimbalino.Phone.Toolkit.Camera">
-      <HintPath>..\packages\Cimbalino.Phone.Toolkit.Camera.2.3.1\lib\wp8\Cimbalino.Phone.Toolkit.Camera.dll</HintPath>
+    <Reference Include="Cimbalino.Phone.Toolkit.Background">
+      <HintPath>..\packages\Cimbalino.Phone.Toolkit.Background.3.0.0-rc2\lib\wp8\Cimbalino.Phone.Toolkit.Background.dll</HintPath>
+    </Reference>
+    <Reference Include="Cimbalino.Phone.Toolkit.Camera, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cimbalino.Phone.Toolkit.Camera.3.0.0-rc2\lib\wp8\Cimbalino.Phone.Toolkit.Camera.dll</HintPath>
     </Reference>
     <Reference Include="Coding4Fun.Toolkit.Controls">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.5\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using InTwo.Controls;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Nokia.Music.Types;
@@ -319,6 +320,23 @@ namespace InTwo.ViewModel
                 return new RelayCommand(async () =>
                 {
                     await Launcher.LaunchUriAsync(GameTrack.AppToAppUri);
+                });
+            }
+        }
+
+        public RelayCommand AudioGuessCommnd
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (!App.SettingsWrapper.AppSettings.DontShowSpeechGuessprompt)
+                    {
+                        var message = new CustomMessageBox
+                        {
+                            Content= new SpeechHelp()
+                        };
+                    }
                 });
             }
         }

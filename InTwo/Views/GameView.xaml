@@ -87,6 +87,8 @@
                                                         IconUri="/Icons/appbar.repeat.png"
                                                         Command="{Binding RepeatAudioCommand}"
                                                         x:Name="RepeatButton" />
+                    <cimbalino:ApplicationBarIconButton Text="audio guess"
+                                                        IconUri="/Icons/appbar.microphone.png"/>
                     <cimbalino:ApplicationBarIconButton Text="make guess"
                                                         IconUri="/Icons/Go.png"
                                                         Command="{Binding SubmitGuessCommand}"/>
