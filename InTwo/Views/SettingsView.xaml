@@ -5,6 +5,7 @@
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -13,6 +14,27 @@
                             mc:Ignorable="d"
                             shell:SystemTray.IsVisible="True"
                             shell:SystemTray.Opacity="0">
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn" />
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn" />
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut" />
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut" />
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
@@ -26,9 +48,9 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0"
                     Margin="12,17,0,28">
-            <TextBlock Text="MY APPLICATION"
+            <TextBlock Text="{Binding Source={StaticResource AppName}, Converter={StaticResource StringToUppercaseConverter}}"
                        Style="{StaticResource PhoneTextNormalStyle}" />
-            <TextBlock Text="page name"
+            <TextBlock Text="settings"
                        Margin="9,-7,0,0"
                        Style="{StaticResource PhoneTextTitle1Style}" />
         </StackPanel>
@@ -37,7 +59,19 @@
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
               Margin="12,0,12,0">
-
+            <ScrollViewer DataContext="{Binding AppSettings, Source={StaticResource Settings}}">
+                <StackPanel Orientation="Vertical">
+                    <CheckBox Content="Don't show exit check in game view"
+                              VerticalAlignment="Top"
+                              IsChecked="{Binding DontShowBackExitMessage, Mode=TwoWay}"/>
+                    <CheckBox Content="Don't show speech helper"
+                              VerticalAlignment="Top"
+                              IsChecked="{Binding DontShowSpeechGuessprompt, Mode=TwoWay}" />
+                    <CheckBox Content="Allow In Two to stop your music"
+                              VerticalAlignment="Top"
+                              IsChecked="{Binding AllowStopMusic, Mode=TwoWay}" />
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
 

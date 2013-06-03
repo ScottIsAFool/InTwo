@@ -61,6 +61,11 @@
                 <cimbalino:ApplicationBarBehavior.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
                                                       Command="{Binding LoginLogoutCommand}"/>
+                    <cimbalino:ApplicationBarMenuItem Text="settings"
+                                                      Command="{Binding GoToSettingsCommand}"/>
+                    <cimbalino:ApplicationBarMenuItem Text="about"
+                                                      Command="{Binding NavigateToPage}"
+                                                      CommandParameter="/ylad;component/something.xaml"/>
                 </cimbalino:ApplicationBarBehavior.MenuItems>
             </cimbalino:ApplicationBarBehavior>
         </i:Interaction.Behaviors>

@@ -172,5 +172,16 @@ namespace InTwo.ViewModel
                 });
             }
         }
+
+        public RelayCommand GoToSettingsCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    _navigationService.NavigateTo(Constants.Pages.Settings);
+                });
+            }
+        }
     }
 }
