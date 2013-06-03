@@ -1,4 +1,6 @@
-﻿using System.Windows.Navigation;
+﻿using System;
+using System.Windows;
+using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 
 namespace InTwo.Views
@@ -22,6 +24,11 @@ namespace InTwo.Views
                     NavigationService.RemoveBackEntry();
                 }
             }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri(Constants.Pages.Game, UriKind.Relative));
         }
     }
 }

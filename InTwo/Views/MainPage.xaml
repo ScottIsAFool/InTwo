@@ -92,7 +92,7 @@
                 HorizontalContentAlignment="Left"
                 VerticalContentAlignment="Top"
                 Grid.Row="0"
-                Visibility="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
+                Visibility="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
                 Margin="0,24,24,0">
             <controls:ProfilePicture IsClipped="True"
                                      Height="50" />
@@ -106,13 +106,13 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
-            
-            <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
+            <Button Content="game" Click="ButtonBase_OnClick"></Button>
+            <!--<ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                               AdType="IaAdType_Banner"
                               ReloadTime="30"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Bottom"
-                              Grid.Row="1"/>
+                              Grid.Row="1"/>-->
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

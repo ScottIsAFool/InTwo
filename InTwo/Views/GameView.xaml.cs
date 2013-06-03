@@ -12,6 +12,7 @@ namespace InTwo.Views
     public partial class GameView : PhoneApplicationPage
     {
         private bool _isPlaying;
+
         public GameView()
         {
             InitializeComponent();
@@ -37,30 +38,30 @@ namespace InTwo.Views
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            if (!App.SettingsWrapper.AppSettings.DontShowBackExitMessage)
-            {
-                var message = new CustomMessageBox
-                {
-                    Title = "Are you sure?",
-                    Message = "You just pressed the back key which would exit you from this game, is that what you want to so?",
-                    LeftButtonContent = "Yes, please",
-                    RightButtonContent = "Oops, no",
-                    Content = Utils.CreateDontShowCheckBox("DontShowBackExitMessage")
-                };
-                message.Dismissed += (sender, args) =>
-                {
-                    ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
-                    if (args.Result == CustomMessageBoxResult.RightButton)
-                    {
-                        e.Cancel = true;
-                    }
-                };
+            //if (!App.SettingsWrapper.AppSettings.DontShowBackExitMessage)
+            //{
+            //    var message = new CustomMessageBox
+            //    {
+            //        Title = "Are you sure?",
+            //        Message = "You just pressed the back key which would exit you from this game, is that what you want to so?",
+            //        LeftButtonContent = "Yes, please",
+            //        RightButtonContent = "Oops, no",
+            //        Content = Utils.CreateDontShowCheckBox("DontShowBackExitMessage")
+            //    };
+            //    message.Dismissed += (sender, args) =>
+            //    {
+            //        ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+            //        if (args.Result == CustomMessageBoxResult.RightButton)
+            //        {
+            //            //e.Cancel = true;
+            //        }
+            //    };
 
-                message.Show();
-            }
+            //    message.Show();
+            //}
             base.OnBackKeyPress(e);
         }
 
-        
+
     }
 }

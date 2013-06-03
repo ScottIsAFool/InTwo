@@ -51,7 +51,11 @@ namespace InTwo.ViewModel
                 return false;
             }
 
-            genres.Insert(0, new Genre {Name = GameViewModel.AllGenres});
+            var allGenreCheck = genres.FirstOrDefault(x => x.Name.Equals(GameViewModel.AllGenres));
+            if (allGenreCheck == default(Genre))
+            {
+                genres.Insert(0, new Genre {Name = GameViewModel.AllGenres});
+            }
 
             Messenger.Default.Send(new NotificationMessage(genres, Constants.Messages.HereAreTheGenresMsg));
 

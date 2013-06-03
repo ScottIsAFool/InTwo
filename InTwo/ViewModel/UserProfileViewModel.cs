@@ -245,6 +245,7 @@ namespace InTwo.ViewModel
 
         private async Task<bool> CheckForProfilePicture()
         {
+            if (App.CurrentPlayer == null) return false;
             var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
 
             return await _asyncStorageService.FileExistsAsync(fileName);

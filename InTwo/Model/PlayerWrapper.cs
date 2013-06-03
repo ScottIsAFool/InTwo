@@ -9,6 +9,8 @@ namespace InTwo.Model
             CurrentPlayer = player;
         }
 
+        public PlayerWrapper(){}
+
         public player CurrentPlayer { get; set; }
     }
 }

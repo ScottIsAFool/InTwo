@@ -21,12 +21,13 @@ namespace InTwo.Model
             else
             {
                 Messenger.Default.Register<NotificationMessage>(this, m =>
-                                                                          {
-                                                                              if (m.Notification.Equals(Constants.Messages.RefreshCurrentPlayerMsg))
-                                                                              {
-                                                                                  OnPropertyChanged("CurrentPlayer");
-                                                                              }
-                                                                          });
+                {
+                    if (m.Notification.Equals(Constants.Messages.RefreshCurrentPlayerMsg))
+                    {
+                        OnPropertyChanged("CurrentPlayer");
+                    }
+                });
+                PlayerWrapper = new PlayerWrapper();
             }
         }
 
