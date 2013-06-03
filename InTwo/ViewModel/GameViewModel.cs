@@ -8,6 +8,7 @@ using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Nokia.Music.Types;
 using ScottIsAFool.WindowsPhone.ViewModel;
+using Windows.System;
 
 namespace InTwo.ViewModel
 {
@@ -307,6 +308,17 @@ namespace InTwo.ViewModel
                 return new RelayCommand(() =>
                 {
                     AudioUrl = GameTrack.GetSampleUri();
+                });
+            }
+        }
+
+        public RelayCommand ViewInNokiaMusicCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await Launcher.LaunchUriAsync(GameTrack.AppToAppUri);
                 });
             }
         }
