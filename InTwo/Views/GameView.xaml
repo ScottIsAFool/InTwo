@@ -83,7 +83,8 @@
                           Position="{Binding CurrentPosition, Mode=TwoWay}"
                           Source="{Binding AudioUrl}"
                           AutoPlay="True" />
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical"
+                        Visibility="{Binding CanShowAnswers, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                 <StackPanel Orientation="Horizontal">
                     <toolkit:ListPicker ItemsSource="{Binding Genres}"
                                         SelectedItem="{Binding SelectedGenre, Mode=TwoWay}"
@@ -154,6 +155,11 @@
                                FontSize="100"
                                FontWeight="Bold" />
                 </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical"
+                        Visibility="{Binding CanShowAnswers, Converter={StaticResource BooleanToVisibilityConverter}}">
+                
             </StackPanel>
         </Grid>
     </Grid>
