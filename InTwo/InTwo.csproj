@@ -294,6 +294,8 @@
     <Content Include="Images\DownloadBackground-720p.jpg" />
     <Content Include="Images\DownloadBackground-WVGA.jpg" />
     <Content Include="Images\DownloadBackground-WXGA.jpg" />
+    <Content Include="Images\GameBackground-720p.jpg" />
+    <Content Include="Images\GameBackground-WVGA.jpg" />
     <Content Include="Images\GameBackground-WXGA.jpg" />
     <Content Include="Images\InTwoLogo.png" />
     <Content Include="Images\NokiaMusicLogo.png" />
