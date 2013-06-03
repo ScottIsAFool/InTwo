@@ -36,6 +36,7 @@
             public const string HereAreTheGenresMsg = "HereAreTheGenresMsg";
             public const string HereAreTheTracksMsg = "HereAreTheTracksMsg";
             public const string ShareScoreMsg = "ShareScoreMsg";
+            public const string IsPlayingMsg = "IsPlayingMsg";
         }
 
         public static class Pages

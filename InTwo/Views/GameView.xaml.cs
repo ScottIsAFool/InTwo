@@ -1,20 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+using System.Windows.Media;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
 namespace InTwo.Views
 {
     public partial class GameView : PhoneApplicationPage
     {
+        private bool _isPlaying;
         public GameView()
         {
             InitializeComponent();
+
+            GamePlayer.CurrentStateChanged += (sender, args) =>
+            {
+                _isPlaying = GamePlayer.CurrentState == MediaElementState.Playing;
+                Messenger.Default.Send(new NotificationMessage(_isPlaying, Constants.Messages.IsPlayingMsg));
+            };
+        }
+
+        private void PlayPauseButton_OnClick(object sender, EventArgs e)
+        {
+            if (_isPlaying)
+            {
+                GamePlayer.Pause();
+            }
+            else
+            {
+                GamePlayer.Play();
+            }
         }
     }
 }

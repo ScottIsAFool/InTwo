@@ -13,6 +13,7 @@
                             xmlns:scottbehaviours="clr-namespace:ScottIsAFool.WindowsPhone.Behaviours;assembly=ScottIsAFool.WindowsPhone"
                             xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                             xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+                            xmlns:converters="clr-namespace:Cimbalino.Phone.Toolkit.Converters;assembly=Cimbalino.Phone.Toolkit"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -33,6 +34,15 @@
             <command:EventToCommand Command="{Binding GamePageLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
+    <phone:PhoneApplicationPage.Resources>
+        <converters:BooleanToStringConverter TrueValue="pause"
+                                             FalseValue="play"
+                                             x:Key="PlayPauseTextConverter"/>
+        <converters:BooleanToStringConverter TrueValue="/Icons/transport.pause.png"
+                                             FalseValue="/Icons/transport.play.png"
+                                             x:Key="PlayPauseIconConverter"/>
+    </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -61,12 +71,18 @@
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
             <cimbalino:MultiApplicationBarBehavior SelectedIndex="{Binding AppBarIndex}">
-                <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}">
+                <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
+                                          x:Name="GameNotLockedAppBar">
                     <cimbalino:ApplicationBarIconButton Text="play"
                                                         IconUri="/Icons/transport.play.png"
                                                         Command="{Binding NextRoundCommand}" />
                 </cimbalino:ApplicationBar>
-                <cimbalino:ApplicationBar>
+                <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
+                                          x:Name="GameInProgressAppBar">
+                    <cimbalino:ApplicationBarIconButton Text="{Binding IsPlaying,Converter={StaticResource PlayPauseTextConverter}}"
+                                                        IconUri="{Binding IsPlaying, Converter={StaticResource PlayPauseIconConverter}}"
+                                                        x:Name="PlayPauseButton"
+                                                        Click="PlayPauseButton_OnClick"/>
                     <cimbalino:ApplicationBarIconButton Text="repeat"
                                                         IconUri="/Icons/appbar.repeat.png"
                                                         Command="{Binding RepeatAudioCommand}"

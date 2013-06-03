@@ -293,6 +293,7 @@
     <Content Include="Icons\refresh.png" />
     <Content Include="Icons\save.png" />
     <Content Include="Icons\share.png" />
+    <Content Include="Icons\transport.pause.png" />
     <Content Include="Icons\transport.play.png" />
     <Content Include="Images\ArtistImagePlaceholder.png" />
     <Content Include="Images\DownloadBackground-720p.jpg" />

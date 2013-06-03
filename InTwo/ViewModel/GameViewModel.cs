@@ -63,6 +63,10 @@ namespace InTwo.ViewModel
                 {
                     _tracks = (List<Product>) m.Sender;
                 }
+                if (m.Notification.Equals(Constants.Messages.IsPlayingMsg))
+                {
+                    IsPlaying = (bool) m.Sender;
+                }
             });
         }
 
@@ -73,6 +77,7 @@ namespace InTwo.ViewModel
         public Uri ArtistImage { get; set; }
         public TimeSpan CurrentPosition { get; set; }
         public TimeSpan GameLength { get; set; }
+        public bool IsPlaying { get; set; }
 
         public bool GameLocked { get; set; }
         public bool CanShowAnswers { get; set; }
@@ -169,7 +174,7 @@ namespace InTwo.ViewModel
             MaximumRoundPoints = score;
         }
 
-        private int AdjustScoreForGameLength(int score)
+        private void AdjustScoreForGameLength(int score)
         {
             var seconds = GameLength.Seconds;
 
@@ -241,41 +246,37 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(() =>
-                                        {
-                                            if (CheckAnswers())
-                                            {
-                                                var message = new CustomMessageBox
-                                                {
-                                                    Title = "Congratulations!",
-                                                    Message = string.Format("Well done, you score {0} points this round. Right, enough jibba jabba, {1}", RoundPoints, AnotherRoundOrNot),
-                                                    LeftButtonContent = "yes please",
-                                                    RightButtonContent = "nah, I'm good thanks"
-                                                };
+                {
+                    if (CheckAnswers())
+                    {
+                        var message = new CustomMessageBox
+                            {
+                                Title = "Congratulations!",
+                                Message = string.Format("Well done, you score {0} points this round. Right, enough jibba jabba, {1}", RoundPoints, AnotherRoundOrNot),
+                                LeftButtonContent = "yes please",
+                                RightButtonContent = "nah, not yet"
+                            };
 
-                                                message.Dismissed += (sender, args) =>
-                                                {
-                                                    ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
-                                                    if (args.Result == CustomMessageBoxResult.LeftButton)
-                                                    {
-                                                        if (AnotherRoundOrNot.Equals("ready for another?"))
-                                                        {
-                                                            RoundNumber++;
-                                                            SetNextRound();
-                                                        }
-                                                        else
-                                                        {
-                                                            // TODO: Submit scores
-                                                        }
-                                                    }
-                                                    else if(args.Result == CustomMessageBoxResult.RightButton)
-                                                    {
-                                                        _navigationService.GoBack();
-                                                    }
-                                                };
+                        message.Dismissed += (sender, args) =>
+                        {
+                            ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+                            if (args.Result == CustomMessageBoxResult.LeftButton)
+                            {
+                                if (AnotherRoundOrNot.Equals("ready for another?"))
+                                {
+                                    RoundNumber++;
+                                    SetNextRound();
+                                }
+                                else
+                                {
+                                    // TODO: Submit scores
+                                }
+                            }
+                        };
 
-                                                message.Show();
-                                            }
-                                        });
+                        message.Show();
+                    }
+                });
             }
         }
 
