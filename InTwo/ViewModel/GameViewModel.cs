@@ -61,6 +61,11 @@ namespace InTwo.ViewModel
         private void GameTimerOnTick(object sender, EventArgs eventArgs)
         {
             AudioUrl = null;
+
+            if (_gameTimer.IsEnabled)
+            {
+                _gameTimer.Stop();
+            }
         }
 
         public override void WireMessages()
@@ -350,8 +355,12 @@ namespace InTwo.ViewModel
                     {
                         var message = new CustomMessageBox
                         {
-                            Content= new SpeechHelp()
+                            Content= new SpeechHelp(),
+                            IsFullScreen=true,
+                            LeftButtonContent = "Guess",
+                            RightButtonContent= "Cancel"
                         };
+                        message.Show();
                     }
                 });
             }

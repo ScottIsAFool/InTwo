@@ -75,7 +75,7 @@
                                           x:Name="GameNotLockedAppBar">
                     <cimbalino:ApplicationBarIconButton Text="play"
                                                         IconUri="/Icons/transport.play.png"
-                                                        Command="{Binding NextRoundCommand}" />
+                                                        Command="{Binding StartGameCommand}" />
                 </cimbalino:ApplicationBar>
                 <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
                                           x:Name="GameInProgressAppBar">
@@ -88,7 +88,8 @@
                                                         Command="{Binding RepeatAudioCommand}"
                                                         x:Name="RepeatButton" />
                     <cimbalino:ApplicationBarIconButton Text="audio guess"
-                                                        IconUri="/Icons/appbar.microphone.png"/>
+                                                        IconUri="/Icons/appbar.microphone.png"
+                                                        Command="{Binding AudioGuessCommnd}"/>
                     <cimbalino:ApplicationBarIconButton Text="make guess"
                                                         IconUri="/Icons/Go.png"
                                                         Command="{Binding SubmitGuessCommand}"/>
@@ -130,7 +131,6 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <MediaElement x:Name="GamePlayer"
-                          Position="{Binding CurrentPosition, Mode=TwoWay}"
                           Source="{Binding AudioUrl}"
                           AutoPlay="True"  />
             <StackPanel Orientation="Vertical"
