@@ -204,18 +204,21 @@ namespace InTwo
             phoneApplicationInitialized = true;
         }
 
+        private bool _isFirstPass = true;
+
         private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs e)
         {
             if (SettingsWrapper.AppSettings.ShowWelcomeMessage
                 && e.NavigationMode == NavigationMode.New
-                && !e.Uri.ToString().Contains("/Welcome/"))
+                && !e.Uri.ToString().Contains("/Welcome/")
+                && _isFirstPass)
             {
                 e.Cancel = true;
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     var mainFrame = Application.Current.RootVisual as PhoneApplicationFrame;
                     mainFrame.Navigate(new Uri(Constants.Pages.Welcome.WelcomePage, UriKind.Relative));
-
+                    _isFirstPass = false;
                 });
             }
         }
