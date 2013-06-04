@@ -100,10 +100,6 @@
                                                         IconUri="/Icons/NokiaMusic.png"
                                                         Command="{Binding ViewInNokiaMusicCommand}"/>
                 </cimbalino:ApplicationBar>
-                <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
-                                          x:Name="EndOfGameAppBar">
-                    
-                </cimbalino:ApplicationBar>
             </cimbalino:MultiApplicationBarBehavior>
         </i:Interaction.Behaviors>
 

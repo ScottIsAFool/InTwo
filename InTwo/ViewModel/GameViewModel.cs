@@ -119,6 +119,7 @@ namespace InTwo.ViewModel
             get { return RoundNumber < Constants.MaximumNumberOfRounds ? "ready for another?" : "shall we submit your scores now?"; }
         }
 
+        #region Property Changed Methods
         private void OnArtistGuessChanged()
         {
             CalculateAvailableScore();
@@ -133,8 +134,19 @@ namespace InTwo.ViewModel
         {
             _gameTimer.Interval = GameLength;
         }
+        #endregion
 
-        public int AppBarIndex { get { return GameLocked ? 1 : 0; } }
+        public int AppBarIndex
+        {
+            get
+            {
+                if (GameLocked)
+                {
+                    return CanShowAnswers ? 2 : 1;
+                }
+                return 0;
+            }
+        }
 
         private void SetNextRound()
         {
@@ -254,6 +266,11 @@ namespace InTwo.ViewModel
             return (artistGuessCorrect || songGuessCorrect);
         }
 
+        private void LaunchSpeech()
+        {
+
+        }
+
         #region Commands
         public RelayCommand GamePageLoaded
         {
@@ -355,12 +372,25 @@ namespace InTwo.ViewModel
                     {
                         var message = new CustomMessageBox
                         {
-                            Content= new SpeechHelp(),
-                            IsFullScreen=true,
+                            Content = new SpeechHelp(),
+                            IsFullScreen = true,
                             LeftButtonContent = "Guess",
-                            RightButtonContent= "Cancel"
+                            RightButtonContent = "Cancel"
                         };
+
+                        message.Dismissed += (sender, args) =>
+                        {
+                            if (args.Result == CustomMessageBoxResult.LeftButton)
+                            {
+                                LaunchSpeech();
+                            }
+                        };
+
                         message.Show();
+                    }
+                    else
+                    {
+                        LaunchSpeech();
                     }
                 });
             }

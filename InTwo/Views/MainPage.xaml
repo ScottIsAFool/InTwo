@@ -110,7 +110,8 @@
                 <RowDefinition Height="70"/>
             </Grid.RowDefinitions>
             <Button Content="game"
-                    Command="{Binding GoToGameCommand}"></Button>
+                    Command="{Binding GoToGameCommand}"
+                    VerticalAlignment="Top"/>
             <!--<ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                               AdType="IaAdType_Banner"
                               ReloadTime="30"
