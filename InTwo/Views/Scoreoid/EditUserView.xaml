@@ -10,6 +10,7 @@
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:custom="clr-namespace:InTwo.Behaviours"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -57,12 +58,12 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <cimbalino:ApplicationBarBehavior BackgroundColor="{StaticResource AppBarColour}">
+            <custom:CustomApplicationBarBehaviour BackgroundColor="{StaticResource AppBarColour}">
                 <cimbalino:ApplicationBarIconButton Text="create user"
                                                     IconUri="/Icons/save.png"
                                                     Command="{Binding UpdateUserCommand}"
                                                     IsEnabled="{Binding CurrentPlayer.username, Converter={StaticResource CanSendOrUpdateConverter}}" />
-            </cimbalino:ApplicationBarBehavior>
+            </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

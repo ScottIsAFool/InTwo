@@ -11,6 +11,7 @@
                             xmlns:controls="clr-namespace:InTwo.Controls"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             xmlns:converters="clr-namespace:InTwo.Converters"
+                            xmlns:custom="clr-namespace:InTwo.Behaviours"
                             mc:Ignorable="d"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -56,9 +57,9 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <cimbalino:ApplicationBarBehavior Mode="Minimized"
+            <custom:CustomApplicationBarBehaviour Mode="Minimized"
                                               BackgroundColor="{StaticResource AppBarColour}">
-                <cimbalino:ApplicationBarBehavior.MenuItems>
+                <custom:CustomApplicationBarBehaviour.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
                                                       Command="{Binding LoginLogoutCommand}"/>
                     <cimbalino:ApplicationBarMenuItem Text="settings"
@@ -68,8 +69,8 @@
                     <cimbalino:ApplicationBarMenuItem Text="about"
                                                       Command="{Binding NavigateToPage}"
                                                       CommandParameter="/ylad;component/something.xaml"/>
-                </cimbalino:ApplicationBarBehavior.MenuItems>
-            </cimbalino:ApplicationBarBehavior>
+                </custom:CustomApplicationBarBehaviour.MenuItems>
+            </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

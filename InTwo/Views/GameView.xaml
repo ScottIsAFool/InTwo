@@ -35,14 +35,14 @@
             <command:EventToCommand Command="{Binding GamePageLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <phone:PhoneApplicationPage.Resources>
         <converters:BooleanToStringConverter TrueValue="pause"
                                              FalseValue="play"
-                                             x:Key="PlayPauseTextConverter"/>
+                                             x:Key="PlayPauseTextConverter" />
         <converters:BooleanToStringConverter TrueValue="/Icons/transport.pause.png"
                                              FalseValue="/Icons/transport.play.png"
-                                             x:Key="PlayPauseIconConverter"/>
+                                             x:Key="PlayPauseIconConverter" />
     </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -72,13 +72,13 @@
         <i:Interaction.Behaviors>
             <cimbalino:MultiApplicationBarBehavior SelectedIndex="{Binding AppBarIndex}">
                 <behaviours:CustomApplicationBar BackgroundColor="{StaticResource AppBarColour}"
-                                          Opacity="0.4"
-                                          x:Name="GameNotLockedAppBar">
+                                                 Opacity="0.4"
+                                                 x:Name="GameNotLockedAppBar">
                     <cimbalino:ApplicationBarIconButton Text="play"
                                                         IconUri="/Icons/transport.play.png"
                                                         Command="{Binding StartGameCommand}" />
                 </behaviours:CustomApplicationBar>
-                <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
+                <behaviours:CustomApplicationBar BackgroundColor="{StaticResource AppBarColour}"
                                           x:Name="GameInProgressAppBar">
                     <!--<cimbalino:ApplicationBarIconButton Text="{Binding IsPlaying,Converter={StaticResource PlayPauseTextConverter}}"
                                                         IconUri="{Binding IsPlaying, Converter={StaticResource PlayPauseIconConverter}}"
@@ -90,17 +90,17 @@
                                                         x:Name="RepeatButton" />
                     <cimbalino:ApplicationBarIconButton Text="audio guess"
                                                         IconUri="/Icons/appbar.microphone.png"
-                                                        Command="{Binding AudioGuessCommnd}"/>
+                                                        Command="{Binding AudioGuessCommnd}" />
                     <cimbalino:ApplicationBarIconButton Text="make guess"
                                                         IconUri="/Icons/Go.png"
-                                                        Command="{Binding SubmitGuessCommand}"/>
-                </cimbalino:ApplicationBar>
-                <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
+                                                        Command="{Binding SubmitGuessCommand}" />
+                </behaviours:CustomApplicationBar>
+                <behaviours:CustomApplicationBar BackgroundColor="{StaticResource AppBarColour}"
                                           x:Name="EndOfRoundAppBar">
                     <cimbalino:ApplicationBarIconButton Text="nokia music"
                                                         IconUri="/Icons/NokiaMusic.png"
-                                                        Command="{Binding ViewInNokiaMusicCommand}"/>
-                </cimbalino:ApplicationBar>
+                                                        Command="{Binding ViewInNokiaMusicCommand}" />
+                </behaviours:CustomApplicationBar>
             </cimbalino:MultiApplicationBarBehavior>
         </i:Interaction.Behaviors>
 
@@ -118,18 +118,18 @@
                                            MaxScale="100" />
             </controls:SuperImage.Sources>
         </controls:SuperImage>
-        
+
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
               Margin="12,32,12,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <MediaElement x:Name="GamePlayer"
                           Source="{Binding AudioUrl}"
-                          AutoPlay="True"  />
+                          AutoPlay="True" />
             <StackPanel Orientation="Vertical"
                         Grid.Row="0"
                         VerticalAlignment="Top"
@@ -213,11 +213,11 @@
                                FontWeight="Bold" />
                 </StackPanel>
             </StackPanel>
-            
+
             <StackPanel Orientation="Vertical"
                         Grid.Row="0"
                         Visibility="{Binding CanShowAnswers, Converter={StaticResource BooleanToVisibilityConverter}}">
-                
+
             </StackPanel>
 
             <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
@@ -227,7 +227,7 @@
                               VerticalAlignment="Bottom"
                               Grid.Row="1"
                               Height="80"
-                              Margin="0,100,0,0"/>
+                              Margin="0,100,0,0" />
         </Grid>
     </Grid>
 

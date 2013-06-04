@@ -51,12 +51,12 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <cimbalino:ApplicationBarBehavior BackgroundColor="{StaticResource AppBarColour}">
+            <behaviours:CustomApplicationBarBehaviour BackgroundColor="{StaticResource AppBarColour}">
                 <cimbalino:ApplicationBarIconButton Text="sign in"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding SignInCommand}"
                                                     IsEnabled="{Binding CanLogIn}" />
-            </cimbalino:ApplicationBarBehavior>
+            </behaviours:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

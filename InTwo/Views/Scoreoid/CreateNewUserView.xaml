@@ -10,7 +10,7 @@
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
-                            xmlns:controls="clr-namespace:InTwo.Controls"
+                            xmlns:controls="clr-namespace:InTwo.Controls" xmlns:custom="clr-namespace:InTwo.Behaviours"
                             mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -58,7 +58,7 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <cimbalino:ApplicationBarBehavior BackgroundColor="{StaticResource AppBarColour}">
+            <custom:CustomApplicationBarBehaviour BackgroundColor="{StaticResource AppBarColour}">
                 <cimbalino:ApplicationBarIconButton Text="create user"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding CreateNewUserCommand}"
@@ -66,7 +66,7 @@
                 <cimbalino:ApplicationBarIconButton Text="cancel"
                                                     IconUri="/Icons/cancel.png"
                                                     Command="{Binding CancelCreationCommand}"/>
-            </cimbalino:ApplicationBarBehavior>
+            </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

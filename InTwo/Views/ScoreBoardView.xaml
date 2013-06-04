@@ -10,6 +10,7 @@
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             xmlns:controls="clr-namespace:InTwo.Controls"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:custom="clr-namespace:InTwo.Behaviours"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -56,17 +57,17 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <cimbalino:ApplicationBarBehavior BackgroundColor="{StaticResource AppBarColour}"
+            <custom:CustomApplicationBarBehaviour BackgroundColor="{StaticResource AppBarColour}"
                                               IsMenuEnabled="True">
                 <cimbalino:ApplicationBarIconButton Text="share"
                                                     IconUri="/Icons/share.png"
                                                     x:Name="ShareButton"
                                                     Click="ShareButton_OnClick"/>
-                <cimbalino:ApplicationBarBehavior.MenuItems>
+                <custom:CustomApplicationBarBehaviour.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="refresh scores"
                                                       Command="{Binding RefreshScoresCommand}" />
-                </cimbalino:ApplicationBarBehavior.MenuItems>
-            </cimbalino:ApplicationBarBehavior>
+                </custom:CustomApplicationBarBehaviour.MenuItems>
+            </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

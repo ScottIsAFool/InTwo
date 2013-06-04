@@ -9,4 +9,12 @@ namespace InTwo.Behaviours
             Opacity = 0.4;
         }
     }
+
+    public class CustomApplicationBarBehaviour : ApplicationBarBehavior
+    {
+        public CustomApplicationBarBehaviour()
+        {
+            Opacity = 0.4;
+        }
+    }
 }
