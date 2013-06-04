@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections.ObjectModel;
+using Coding4Fun.Toolkit.Controls;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using Scoreoid;
 
@@ -38,4 +40,6 @@ namespace InTwo.Model
         public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
     }
+
+    public class SuperImageSourceCollection : ObservableCollection<SuperImageSource>{}
 }

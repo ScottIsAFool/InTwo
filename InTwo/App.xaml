@@ -11,6 +11,7 @@
              xmlns:localConverters="clr-namespace:InTwo.Converters"
              xmlns:Converters="clr-namespace:Coding4Fun.Toolkit.Controls.Converters;assembly=Coding4Fun.Toolkit.Controls"
              xmlns:Controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+             xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
              x:Class="InTwo.App"
              mc:Ignorable="d">
 
@@ -26,7 +27,7 @@
             <Color x:Key="AppBarColour">Black</Color>
             <SolidColorBrush x:Key="AppBarBrush"
                              Color="{StaticResource AppBarColour}"
-                             Opacity="0.4"/>
+                             Opacity="0.4" />
 
             <!--Converters-->
             <cimbalinoConverters:StringToLowercaseConverter x:Key="StringToLowercaseConverter" />
@@ -43,7 +44,7 @@
             <localConverters:CanSendOrUpdateConverter x:Key="CanSendOrUpdateConverter" />
             <localConverters:ProfilePictureUriConverter x:Key="ProfilePictureUriConverter" />
             <localConverters:ArrayToStringConverter x:Key="ArrayToStringConverter" />
-            <localConverters:SecondsTextConverter x:Key="SecondsTextConverter"/>
+            <localConverters:SecondsTextConverter x:Key="SecondsTextConverter" />
 
             <!-- Control Styles -->
             <Style x:Key="EmptyButtonStyle"
@@ -90,6 +91,29 @@
                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
                 </StackPanel>
             </ControlTemplate>
+
+            <Style TargetType="controls:SuperImage"
+                   x:Key="AppBackground">
+                <Setter Property="Opacity"
+                        Value="0.5"/>
+                <Setter Property="Stretch"
+                        Value="UniformToFill"/>
+                <Setter Property="Sources">
+                    <Setter.Value>
+                        <model:SuperImageSourceCollection>
+                            <controls:SuperImageSource Source="/Images/AppBackground-WXGA.jpg"
+                                                       MinScale="150"
+                                                       MaxScale="150" />
+                            <controls:SuperImageSource Source="/Images/AppBackground-720p.jpg"
+                                                       MinScale="160"
+                                                       MaxScale="160" />
+                            <controls:SuperImageSource Source="/Images/AppBackground-WVGA.jpg"
+                                                       MinScale="100"
+                                                       MaxScale="100" />
+                        </model:SuperImageSourceCollection>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 

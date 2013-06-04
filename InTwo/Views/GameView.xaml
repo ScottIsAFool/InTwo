@@ -104,20 +104,7 @@
             </cimbalino:MultiApplicationBarBehavior>
         </i:Interaction.Behaviors>
 
-        <controls:SuperImage Stretch="UniformToFill"
-                             Opacity="0.5">
-            <controls:SuperImage.Sources>
-                <controls:SuperImageSource Source="/Images/GameBackground-WXGA.jpg"
-                                           MinScale="150"
-                                           MaxScale="150" />
-                <controls:SuperImageSource Source="/Images/GameBackground-720p.jpg"
-                                           MinScale="160"
-                                           MaxScale="160" />
-                <controls:SuperImageSource Source="/Images/GameBackground-WVGA.jpg"
-                                           MinScale="100"
-                                           MaxScale="100" />
-            </controls:SuperImage.Sources>
-        </controls:SuperImage>
+        <controls:SuperImage Style="{StaticResource AppBackground}"/>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"

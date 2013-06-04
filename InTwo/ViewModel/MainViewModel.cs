@@ -182,7 +182,7 @@ namespace InTwo.ViewModel
             }
         }
 
-        public RelayCommand RemoveAdsCommsand
+        public RelayCommand RemoveAdsCommand
         {
             get
             {

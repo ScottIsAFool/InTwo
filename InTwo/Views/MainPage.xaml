@@ -12,6 +12,7 @@
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                             xmlns:converters="clr-namespace:InTwo.Converters"
                             xmlns:custom="clr-namespace:InTwo.Behaviours"
+                            xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
                             mc:Ignorable="d"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -26,9 +27,9 @@
             <command:EventToCommand Command="{Binding MainPageLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <phone:PhoneApplicationPage.Resources>
-        <converters:UserLoggedInConverter x:Key="UserLoggedInConverter"/>
+        <converters:UserLoggedInConverter x:Key="UserLoggedInConverter" />
     </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -54,75 +55,77 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
-          Background="Transparent"
-          Margin="0,32,0,0">
+          Background="Transparent">
         <i:Interaction.Behaviors>
             <custom:CustomApplicationBarBehaviour Mode="Minimized"
-                                              BackgroundColor="{StaticResource AppBarColour}">
+                                                  BackgroundColor="{StaticResource AppBarColour}">
                 <custom:CustomApplicationBarBehaviour.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
-                                                      Command="{Binding LoginLogoutCommand}"/>
+                                                      Command="{Binding LoginLogoutCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="settings"
-                                                      Command="{Binding GoToSettingsCommand}"/>
+                                                      Command="{Binding GoToSettingsCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="remove ads"
-                                                      Command="{Binding RemoveAdsCommand}"/>
+                                                      Command="{Binding RemoveAdsCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="about"
                                                       Command="{Binding NavigateToPage}"
-                                                      CommandParameter="/ylad;component/something.xaml"/>
+                                                      CommandParameter="/ylad;component/something.xaml" />
                 </custom:CustomApplicationBarBehaviour.MenuItems>
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel"
-                    Grid.Row="0"
-                    Margin="12,17,0,28">
-            <TextBlock Text="{Binding Source={StaticResource AppName}, Converter={StaticResource StringToUppercaseConverter}}"
-                       Style="{StaticResource PhoneTextNormalStyle}"
-                       Margin="12,0" />
-            <TextBlock Text="page name"
-                       Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}" />
-        </StackPanel>
-
-        <Button Style="{StaticResource EmptyButtonStyle}"
-                toolkit:TiltEffect.IsTiltEnabled="True"
-                Command="{Binding NavigateToPage}"
-                CommandParameter="/Views/Scoreoid/UserProfileView.xaml"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Left"
-                VerticalContentAlignment="Top"
-                Grid.Row="0"
-                Visibility="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
-                Margin="0,24,24,0">
-            <controls:ProfilePicture IsClipped="True"
-                                     Height="50" />
-        </Button>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel"
-              Grid.Row="1"
-              Margin="12,0,12,0">
+        
+        <coding4Fun:SuperImage Style="{StaticResource AppBackground}" />
+        
+        <Grid Margin="0,32,0,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button Content="game"
-                    Command="{Binding GoToGameCommand}"
-                    VerticalAlignment="Top"/>
-            <!--<ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
+            <!--TitlePanel contains the name of the application and page title-->
+            <StackPanel x:Name="TitlePanel"
+                        Grid.Row="0"
+                        Margin="12,17,0,28">
+                <TextBlock Text="{Binding Source={StaticResource AppName}, Converter={StaticResource StringToUppercaseConverter}}"
+                           Style="{StaticResource PhoneTextNormalStyle}"
+                           Margin="12,0" />
+                <TextBlock Text="page name"
+                           Margin="9,-7,0,0"
+                           Style="{StaticResource PhoneTextTitle1Style}" />
+            </StackPanel>
+
+            <Button Style="{StaticResource EmptyButtonStyle}"
+                    toolkit:TiltEffect.IsTiltEnabled="True"
+                    Command="{Binding NavigateToPage}"
+                    CommandParameter="/Views/Scoreoid/UserProfileView.xaml"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Top"
+                    Grid.Row="0"
+                    Visibility="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
+                    Margin="0,24,24,0">
+                <controls:ProfilePicture IsClipped="True"
+                                         Height="50" />
+            </Button>
+
+            <!--ContentPanel - place additional content here-->
+            <Grid x:Name="ContentPanel"
+                  Grid.Row="1"
+                  Margin="12,0,12,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="70" />
+                </Grid.RowDefinitions>
+                <Button Content="game"
+                        Command="{Binding GoToGameCommand}"
+                        VerticalAlignment="Top" />
+                <!--<ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                               AdType="IaAdType_Banner"
                               ReloadTime="30"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Bottom"
                               Grid.Row="1"/>-->
+            </Grid>
         </Grid>
-
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
             account for the System Tray. Set this to 0 (or remove the margin altogether)
