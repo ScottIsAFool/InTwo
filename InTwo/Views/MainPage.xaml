@@ -13,6 +13,7 @@
                             xmlns:converters="clr-namespace:InTwo.Converters"
                             xmlns:custom="clr-namespace:InTwo.Behaviours"
                             xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
+                            xmlns:ad="clr-namespace:Inneractive.Nokia.Ad;assembly=Inneractive.Ad"
                             mc:Ignorable="d"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -114,17 +115,17 @@
                   Margin="12,0,12,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="70" />
+                    <RowDefinition Height="80" />
                 </Grid.RowDefinitions>
                 <Button Content="game"
                         Command="{Binding GoToGameCommand}"
                         VerticalAlignment="Top" />
-                <!--<ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
+                <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                               AdType="IaAdType_Banner"
                               ReloadTime="30"
                               HorizontalAlignment="Left"
                               VerticalAlignment="Bottom"
-                              Grid.Row="1"/>-->
+                              Grid.Row="1"/>
             </Grid>
         </Grid>
         <!--Uncomment to see an alignment grid to help ensure your controls are

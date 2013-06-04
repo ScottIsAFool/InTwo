@@ -27,8 +27,8 @@
             <Color x:Key="AppBarColour">Black</Color>
             <SolidColorBrush x:Key="AppBarBrush"
                              Color="{StaticResource AppBarColour}"
-                             Opacity="0.4" />
-
+                             Opacity="0.6" />
+            
             <!--Converters-->
             <cimbalinoConverters:StringToLowercaseConverter x:Key="StringToLowercaseConverter" />
             <cimbalinoConverters:StringToUppercaseConverter x:Key="StringToUppercaseConverter" />
@@ -68,7 +68,6 @@
                 </Setter>
             </Style>
 
-            <!--WindowsPhone8-->
             <Converters:SolidColorBrushToColorConverter x:Key="BrushToBrush" />
             <SolidColorBrush x:Key="DefaultSubtleBrush"
                              Color="{Binding Converter={StaticResource BrushToBrush}, Source={StaticResource PhoneSubtleBrush}}" />
