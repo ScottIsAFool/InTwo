@@ -96,6 +96,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviours\CustomApplicationBar.cs" />
     <Compile Include="Behaviours\EnterKeyBehaviour.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controls\ProfilePicture.xaml.cs">

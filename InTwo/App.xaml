@@ -23,7 +23,7 @@
             <model:SettingsWrapper x:Key="Settings" />
 
             <system:String x:Key="AppName">In Two</system:String>
-            <Color x:Key="AppBarColour">Purple</Color>
+            <Color x:Key="AppBarColour">Black</Color>
             <SolidColorBrush x:Key="AppBarBrush"
                              Color="{StaticResource AppBarColour}" />
 

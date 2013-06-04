@@ -12,5 +12,7 @@ namespace InTwo.Model
         public PlayerWrapper(){}
 
         public player CurrentPlayer { get; set; }
+        public int NumberOfGames { get; set; }
+        public int TotalScore { get; set; }
     }
 }

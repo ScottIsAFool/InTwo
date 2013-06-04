@@ -71,12 +71,13 @@
           Background="Transparent">
         <i:Interaction.Behaviors>
             <cimbalino:MultiApplicationBarBehavior SelectedIndex="{Binding AppBarIndex}">
-                <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
+                <behaviours:CustomApplicationBar BackgroundColor="{StaticResource AppBarColour}"
+                                          Opacity="0.4"
                                           x:Name="GameNotLockedAppBar">
                     <cimbalino:ApplicationBarIconButton Text="play"
                                                         IconUri="/Icons/transport.play.png"
                                                         Command="{Binding StartGameCommand}" />
-                </cimbalino:ApplicationBar>
+                </behaviours:CustomApplicationBar>
                 <cimbalino:ApplicationBar BackgroundColor="{StaticResource AppBarColour}"
                                           x:Name="GameInProgressAppBar">
                     <!--<cimbalino:ApplicationBarIconButton Text="{Binding IsPlaying,Converter={StaticResource PlayPauseTextConverter}}"
