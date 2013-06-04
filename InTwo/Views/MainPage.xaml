@@ -63,6 +63,8 @@
                                                       Command="{Binding LoginLogoutCommand}"/>
                     <cimbalino:ApplicationBarMenuItem Text="settings"
                                                       Command="{Binding GoToSettingsCommand}"/>
+                    <cimbalino:ApplicationBarMenuItem Text="remove ads"
+                                                      Command="{Binding RemoveAdsCommand}"/>
                     <cimbalino:ApplicationBarMenuItem Text="about"
                                                       Command="{Binding NavigateToPage}"
                                                       CommandParameter="/ylad;component/something.xaml"/>

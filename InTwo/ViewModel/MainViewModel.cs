@@ -86,6 +86,32 @@ namespace InTwo.ViewModel
             return false;
         }
 
+        private void DisplayGetDataMessage()
+        {
+            var message = new CustomMessageBox
+            {
+                Caption = "No game data present",
+                Message = "We can't find any game data saved to your phone. " +
+                          "This data needs to be downloaded in order for you to play, would you like us to download that now? " +
+                          "Please note, this doesn't download any music.",
+                LeftButtonContent = "yes",
+                RightButtonContent = "no",
+                IsFullScreen = false
+            };
+
+            message.Dismissed += (sender, args) =>
+            {
+                if (args.Result == CustomMessageBoxResult.LeftButton)
+                {
+                    ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+
+                    _navigationService.NavigateTo(Constants.Pages.DownloadingSongs);
+                }
+            };
+            message.Show();
+        }
+
+        #region Commands
         public RelayCommand MainPageLoaded
         {
             get
@@ -104,31 +130,6 @@ namespace InTwo.ViewModel
                     _hasCheckedForData = true;
                 });
             }
-        }
-
-        private void DisplayGetDataMessage()
-        {
-            var message = new CustomMessageBox
-            {
-                Caption = "No game data present",
-                Message = "We can't find any game data saved to your phone. " +
-                          "This data needs to be downloaded in order for you to play, would you like us to download that now? " +
-                          "Please note, this doesn't download any music.",
-                LeftButtonContent = "yes",
-                RightButtonContent = "no",
-                IsFullScreen = false
-            };
-
-            message.Dismissed += (sender, args) =>
-            {
-                if (args.Result == CustomMessageBoxResult.LeftButton)
-                {
-                    ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
-
-                    _navigationService.NavigateTo(Constants.Pages.DownloadingSongs);
-                }
-            };
-            message.Show();
         }
 
         public RelayCommand<string> NavigateToPage
@@ -163,7 +164,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    if (_hasCheckedForData)
+                    if (_dataExists)
                     {
                         _navigationService.NavigateTo(Constants.Pages.Game);
                         return;
@@ -177,11 +178,20 @@ namespace InTwo.ViewModel
         {
             get
             {
+                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.Settings));
+            }
+        }
+
+        public RelayCommand RemoveAdsCommsand
+        {
+            get
+            {
                 return new RelayCommand(() =>
                 {
-                    _navigationService.NavigateTo(Constants.Pages.Settings);
+                    // TODO: In-App purchase
                 });
             }
         }
+        #endregion
     }
 }
