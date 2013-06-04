@@ -35,6 +35,8 @@ namespace InTwo.ViewModel
         public GameViewModel(IExtendedNavigationService navigationService)
         {
             _navigationService = navigationService;
+
+            
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -54,11 +56,11 @@ namespace InTwo.ViewModel
             }
             else
             {
-                _gameTimer = new DispatcherTimer {Interval = GameLength};
+                GameLength = TimeSpan.FromSeconds(2);
+                _gameTimer = new DispatcherTimer { Interval = GameLength };
                 _gameTimer.Tick += GameTimerOnTick;
             }
 
-            GameLength = TimeSpan.FromSeconds(2);
         }
 
         private void GameTimerOnTick(object sender, EventArgs eventArgs)
