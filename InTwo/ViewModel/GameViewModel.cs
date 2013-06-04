@@ -56,8 +56,11 @@ namespace InTwo.ViewModel
             }
             else
             {
+                _gameTimer = new DispatcherTimer();
+                
                 GameLength = TimeSpan.FromSeconds(2);
-                _gameTimer = new DispatcherTimer { Interval = GameLength };
+
+                _gameTimer.Interval = GameLength;
                 _gameTimer.Tick += GameTimerOnTick;
             }
 
@@ -281,7 +284,18 @@ namespace InTwo.ViewModel
             var result = await speechRecognizer.RecognizeWithUIAsync();
             if (result.ResultStatus == SpeechRecognitionUIStatus.Succeeded)
             {
+                var text = result.RecognitionResult.Text;
                 //MessageBox.Show(result.RecognitionResult.Text);
+                if (text.ToLower().StartsWith("artist is"))
+                {
+                    text = text.Replace("Artist is", "").Replace("artist is", "");
+                    ArtistGuess = text;
+                }
+                else if (text.ToLower().StartsWith("song is"))
+                {
+                    text = text.Replace("song is", "").Replace("Song is", "");
+                    SongGuess = text;
+                }
             }
         }
 

@@ -74,7 +74,20 @@
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
         
-        <coding4Fun:SuperImage Style="{StaticResource AppBackground}" />
+        <coding4Fun:SuperImage Stretch="UniformToFill"
+                               Opacity="0.5">
+            <coding4Fun:SuperImage.Sources>
+                <coding4Fun:SuperImageSource Source="/Images/AppBackground-WXGA.jpg"
+                                           MinScale="150"
+                                           MaxScale="150" />
+                <coding4Fun:SuperImageSource Source="/Images/AppBackground-720p.jpg"
+                                           MinScale="160"
+                                           MaxScale="160" />
+                <coding4Fun:SuperImageSource Source="/Images/AppBackground-WVGA.jpg"
+                                           MinScale="100"
+                                           MaxScale="100" />
+            </coding4Fun:SuperImage.Sources>
+        </coding4Fun:SuperImage>
         
         <Grid Margin="0,32,0,0">
             <Grid.RowDefinitions>
