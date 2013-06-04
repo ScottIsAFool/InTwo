@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -9,6 +11,7 @@ using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Nokia.Music.Types;
 using ScottIsAFool.WindowsPhone.ViewModel;
+using Windows.Phone.Speech.Recognition;
 using Windows.System;
 
 namespace InTwo.ViewModel
@@ -266,9 +269,18 @@ namespace InTwo.ViewModel
             return (artistGuessCorrect || songGuessCorrect);
         }
 
-        private void LaunchSpeech()
+        private async Task LaunchSpeech()
         {
-
+            var speechRecognizer = new SpeechRecognizerUI();
+            speechRecognizer.Settings.ExampleText = "Artist is Aerosmith";
+            speechRecognizer.Settings.ListenText = "Make your guess";
+            speechRecognizer.Settings.ReadoutEnabled = false;
+            speechRecognizer.Settings.ShowConfirmation = false;
+            var result = await speechRecognizer.RecognizeWithUIAsync();
+            if (result.ResultStatus == SpeechRecognitionUIStatus.Succeeded)
+            {
+                //MessageBox.Show(result.RecognitionResult.Text);
+            }
         }
 
         #region Commands
@@ -366,7 +378,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
                     if (!App.SettingsWrapper.AppSettings.DontShowSpeechGuessprompt)
                     {
@@ -378,11 +390,11 @@ namespace InTwo.ViewModel
                             RightButtonContent = "Cancel"
                         };
 
-                        message.Dismissed += (sender, args) =>
+                        message.Dismissed += async (sender, args) =>
                         {
                             if (args.Result == CustomMessageBoxResult.LeftButton)
                             {
-                                LaunchSpeech();
+                                await LaunchSpeech();
                             }
                         };
 
@@ -390,7 +402,7 @@ namespace InTwo.ViewModel
                     }
                     else
                     {
-                        LaunchSpeech();
+                        await LaunchSpeech();
                     }
                 });
             }
