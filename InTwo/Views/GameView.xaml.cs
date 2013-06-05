@@ -26,9 +26,9 @@ namespace InTwo.Views
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
             base.OnBackKeyPress(e);
-            e.Cancel = true;
             if (!App.SettingsWrapper.AppSettings.DontShowBackExitMessage)
             {
+                e.Cancel = true;
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     var message = new CustomMessageBox
@@ -50,7 +50,6 @@ namespace InTwo.Views
 
                     message.Show();
                 });
-
             }
         }
     }

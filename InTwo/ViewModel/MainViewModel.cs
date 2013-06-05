@@ -168,14 +168,15 @@ namespace InTwo.ViewModel
                 {
                     await Task.Run(() =>
                     {
+#if !DEBUG
                         if (!_navigationService.IsNetworkAvailable) return;
-
+#endif
                         if (_dataExists)
                         {
                             Deployment.Current.Dispatcher.BeginInvoke(()=>_navigationService.NavigateTo(Constants.Pages.Game));
                             return;
                         }
-                        DisplayGetDataMessage();
+                        Deployment.Current.Dispatcher.BeginInvoke(() => DisplayGetDataMessage());
                     });
                 });
             }
