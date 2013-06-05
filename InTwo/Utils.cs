@@ -113,16 +113,16 @@ namespace InTwo
             {
                 var asyncService = SimpleIoc.Default.GetInstance<IAsyncStorageService>();
 
-                if (await asyncService.FileExistsAsync(Constants.Tiles.WideTileFile))
+                if (await asyncService.FileExistsAsync(file))
                 {
-                    await asyncService.DeleteFileAsync(Constants.Tiles.WideTileFile);
+                    await asyncService.DeleteFileAsync(file);
                 }
 
                 var tileBitmap = new WriteableBitmap(width, height);
                 tileBitmap.Render(tile, null);
                 tileBitmap.Invalidate();
 
-                using (var fileStream = await asyncService.CreateFileAsync(Constants.Tiles.WideTileFile))
+                using (var fileStream = await asyncService.CreateFileAsync(file))
                 {
                     var encoder = new PngEncoder();
                     var image = tileBitmap.ToImage();

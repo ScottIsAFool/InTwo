@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 
 namespace InTwo.Controls
 {
@@ -82,7 +84,7 @@ namespace InTwo.Controls
         {
             return await Utils.SaveTile(this, 336, 336, Constants.Tiles.NormalTileFile);
         }
-
+        
         public enum TileTypes
         {
             Wide,
