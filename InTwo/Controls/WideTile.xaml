@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="InTwo.Controls.WideTile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             FontFamily="{StaticResource PhoneFontFamilyNormal}"
+             FontSize="{StaticResource PhoneFontSizeNormal}"
+             Foreground="{StaticResource PhoneForegroundBrush}"
+             Height="336"
+             Width="691">
+
+    <Grid x:Name="LayoutRoot">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="{Binding BestScoreText, StringFormat='Best score: \{0\}'}"
+                       Style="{StaticResource PhoneTextExtraLargeStyle}"
+                       FontSize="95" />
+            <TextBlock Text="{Binding GenreText, StringFormat='Genre: \{0\}'}"
+                       Style="{StaticResource PhoneTextExtraLargeStyle}"
+                       FontSize="95" />
+        </StackPanel>
+    </Grid>
+</UserControl>

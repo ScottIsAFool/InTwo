@@ -30,6 +30,13 @@
             public const int CorrectSongAndArtistBonus = 50;
         }
 
+        public static class Tiles
+        {
+            private const string WideTileFileName = "InTwoWideTile.png";
+            public const string WideTileFile = "Shared\\ShellContent\\" + WideTileFileName;
+            public const string WideTileIsoUri = "isostore:/Shared/ShellContent/" + WideTileFileName;
+        }
+
         public static class Messages
         {
             public const string RefreshCurrentPlayerMsg = "RefreshCurrentPlayerMsg";
