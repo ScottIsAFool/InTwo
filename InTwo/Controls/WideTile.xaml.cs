@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using ImageTools;
 using ImageTools.IO.Png;
 
 namespace InTwo.Controls
@@ -43,24 +44,32 @@ namespace InTwo.Controls
 
         public async Task<bool> SaveWideTile()
         {
-            var asyncService = SimpleIoc.Default.GetInstance<IAsyncStorageService>();
-
-            if (await asyncService.FileExistsAsync(Constants.Tiles.WideTileFile))
+            try
             {
-                await asyncService.DeleteFileAsync(Constants.Tiles.WideTileFile);
+                var asyncService = SimpleIoc.Default.GetInstance<IAsyncStorageService>();
+
+                if (await asyncService.FileExistsAsync(Constants.Tiles.WideTileFile))
+                {
+                    await asyncService.DeleteFileAsync(Constants.Tiles.WideTileFile);
+                }
+
+                var tileBitmap = new WriteableBitmap(691, 336);
+                tileBitmap.Render(this, null);
+                tileBitmap.Invalidate();
+
+                using (var file = await asyncService.CreateFileAsync(Constants.Tiles.WideTileFile))
+                {
+                    var encoder = new PngEncoder();
+                    var image = tileBitmap.ToImage();
+                    encoder.Encode(image, file);
+                }
+
+                return true;
             }
-
-            var tileBitmap = new WriteableBitmap(691, 336);
-            tileBitmap.Render(this, null);
-            tileBitmap.Invalidate();
-
-            using (var file = await asyncService.CreateFileAsync(Constants.Tiles.WideTileFile))
+            catch
             {
-                var encoder = new PngEncoder();
-                encoder.Encode(tileBitmap, file);
-                //tileBitmap.SavePng(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
+                
             }
-
             return false;
         }
     }
