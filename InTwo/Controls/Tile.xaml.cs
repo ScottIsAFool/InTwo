@@ -7,7 +7,7 @@ namespace InTwo.Controls
 {
     public partial class Tile : UserControl
     {
-        public Tile()
+        public Tile(string score, string genre, TileTypes tileTypes)
         {
             InitializeComponent();
 
@@ -17,6 +17,12 @@ namespace InTwo.Controls
             {
                 BestScoreText = "3368";
                 TileType = TileTypes.Normal;
+            }
+            else
+            {
+                BestScoreText = score;
+                GenreText = genre;
+                TileType = tileTypes;
             }
         }
 

@@ -131,6 +131,7 @@
     <Compile Include="Model\SettingsWrapper.cs" />
     <Compile Include="Model\ShareType.cs" />
     <Compile Include="ThemeManager.cs" />
+    <Compile Include="TileService.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel\DownloadingSongsViewModel.cs" />
     <Compile Include="ViewModel\GameViewModel.cs" />
