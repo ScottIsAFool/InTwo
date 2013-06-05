@@ -43,6 +43,8 @@
                          Foreground="Red" />
                     <Run Text="Pink&quot;" />
                 </TextBlock>
+                <CheckBox Content="Don't show this message again"
+                          IsChecked="{Binding AppSettings.DontShowSpeechGuessprompt, Source={StaticResource Settings}}"/>
             </StackPanel>
         </Grid>
     </Grid>
