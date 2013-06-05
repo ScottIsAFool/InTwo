@@ -91,6 +91,9 @@
                     <cimbalino:ApplicationBarIconButton Text="audio guess"
                                                         IconUri="/Icons/appbar.microphone.png"
                                                         Command="{Binding AudioGuessCommnd}" />
+                    <cimbalino:ApplicationBarIconButton IconUri="/Icons/cancel.png"
+                                                        Text="give up"
+                                                        Command="{Binding GiveUpCommand}"/>
                     <cimbalino:ApplicationBarIconButton Text="make guess"
                                                         IconUri="/Icons/Go.png"
                                                         Command="{Binding SubmitGuessCommand}" />

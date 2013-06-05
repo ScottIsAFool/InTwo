@@ -354,6 +354,22 @@ namespace InTwo.ViewModel
             }
         }
 
+        public RelayCommand GiveUpCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    var result = MessageBox.Show("Really? You're giving up? Are you sure?", "Really?", MessageBoxButton.OKCancel);
+
+                    if (result == MessageBoxResult.OK)
+                    {
+                        CanShowAnswers = true;
+                    }
+                });
+            }
+        }
+
         public RelayCommand StartGameCommand
         {
             get
