@@ -162,14 +162,19 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
-                    if (_dataExists)
+                    await Task.Run(() =>
                     {
-                        _navigationService.NavigateTo(Constants.Pages.Game);
-                        return;
-                    }
-                    DisplayGetDataMessage();
+                        if (!_navigationService.IsNetworkAvailable) return;
+
+                        if (_dataExists)
+                        {
+                            _navigationService.NavigateTo(Constants.Pages.Game);
+                            return;
+                        }
+                        DisplayGetDataMessage();
+                    });
                 });
             }
         }
