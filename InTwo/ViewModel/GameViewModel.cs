@@ -324,12 +324,12 @@ namespace InTwo.ViewModel
                     if (CheckAnswers())
                     {
                         var message = new CustomMessageBox
-                            {
-                                Title = "Congratulations!",
-                                Message = string.Format("Well done, you score {0} points this round. Right, enough jibba jabba, {1}", RoundPoints, AnotherRoundOrNot),
-                                LeftButtonContent = "yes please",
-                                RightButtonContent = "nah, not yet"
-                            };
+                        {
+                            Title = "Congratulations!",
+                            Message = string.Format("Well done, you scored {0} points this round. Right, enough jibba jabba, {1}", RoundPoints, AnotherRoundOrNot),
+                            LeftButtonContent = "yes please",
+                            RightButtonContent = "nah, not yet"
+                        };
 
                         message.Dismissed += (sender, args) =>
                         {
@@ -349,6 +349,10 @@ namespace InTwo.ViewModel
                         };
 
                         message.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ouch, sorry, whatever you're doing to those answers, it isn't right. Keep trying though.", "D'oh", MessageBoxButton.OK);
                     }
                 });
             }

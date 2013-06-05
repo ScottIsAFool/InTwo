@@ -118,7 +118,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    if (_hasCheckedForData) return;
+                    if (_hasCheckedForData && _dataExists) return;
 
                     _dataExists = await CheckForGameData();
 
@@ -190,6 +190,14 @@ namespace InTwo.ViewModel
                 {
                     // TODO: In-App purchase
                 });
+            }
+        }
+
+        public RelayCommand RefreshGameDataCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.DownloadingSongs));
             }
         }
         #endregion

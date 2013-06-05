@@ -25,44 +25,33 @@ namespace InTwo.Views
                 Messenger.Default.Send(new NotificationMessage(_isPlaying, Constants.Messages.IsPlayingMsg));
             };
         }
+        
+        //protected override void OnBackKeyPress(CancelEventArgs e)
+        //{
+        //    e.Cancel = true;
+        //    if (!App.SettingsWrapper.AppSettings.DontShowBackExitMessage)
+        //    {
+        //        var message = new CustomMessageBox
+        //        {
+        //            Title = "Are you sure?",
+        //            Message = "You just pressed the back key which would exit you from this game, is that what you want to so?",
+        //            LeftButtonContent = "Yes, please",
+        //            RightButtonContent = "Oops, no",
+        //            Content = Utils.CreateDontShowCheckBox("DontShowBackExitMessage")
+        //        };
+        //        message.Dismissed += (sender, args) =>
+        //        {
+        //            ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+        //            if (args.Result == CustomMessageBoxResult.RightButton)
+        //            {
+        //                //e.Cancel = true;
+        //            }
+        //        };
 
-        private void PlayPauseButton_OnClick(object sender, EventArgs e)
-        {
-            if (_isPlaying)
-            {
-                GamePlayer.Pause();
-            }
-            else
-            {
-                GamePlayer.Play();
-            }
-        }
-
-        protected override void OnBackKeyPress(CancelEventArgs e)
-        {
-            //if (!App.SettingsWrapper.AppSettings.DontShowBackExitMessage)
-            //{
-            //    var message = new CustomMessageBox
-            //    {
-            //        Title = "Are you sure?",
-            //        Message = "You just pressed the back key which would exit you from this game, is that what you want to so?",
-            //        LeftButtonContent = "Yes, please",
-            //        RightButtonContent = "Oops, no",
-            //        Content = Utils.CreateDontShowCheckBox("DontShowBackExitMessage")
-            //    };
-            //    message.Dismissed += (sender, args) =>
-            //    {
-            //        ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
-            //        if (args.Result == CustomMessageBoxResult.RightButton)
-            //        {
-            //            //e.Cancel = true;
-            //        }
-            //    };
-
-            //    message.Show();
-            //}
-            base.OnBackKeyPress(e);
-        }
+        //        message.Show();
+        //    }
+        //    base.OnBackKeyPress(e);
+        //}
 
 
     }

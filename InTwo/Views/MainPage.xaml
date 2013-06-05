@@ -65,6 +65,8 @@
                                                       Command="{Binding LoginLogoutCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="settings"
                                                       Command="{Binding GoToSettingsCommand}" />
+                    <cimbalino:ApplicationBarMenuItem Text="refresh game data"
+                                                      Command="{Binding RefreshGameDataCommand}"/>
                     <cimbalino:ApplicationBarMenuItem Text="remove ads"
                                                       Command="{Binding RemoveAdsCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="about"

@@ -36,15 +36,6 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <phone:PhoneApplicationPage.Resources>
-        <converters:BooleanToStringConverter TrueValue="pause"
-                                             FalseValue="play"
-                                             x:Key="PlayPauseTextConverter" />
-        <converters:BooleanToStringConverter TrueValue="/Icons/transport.pause.png"
-                                             FalseValue="/Icons/transport.play.png"
-                                             x:Key="PlayPauseIconConverter" />
-    </phone:PhoneApplicationPage.Resources>
-
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
@@ -80,10 +71,6 @@
                 </behaviours:CustomApplicationBar>
                 <behaviours:CustomApplicationBar BackgroundColor="{StaticResource AppBarColour}"
                                           x:Name="GameInProgressAppBar">
-                    <!--<cimbalino:ApplicationBarIconButton Text="{Binding IsPlaying,Converter={StaticResource PlayPauseTextConverter}}"
-                                                        IconUri="{Binding IsPlaying, Converter={StaticResource PlayPauseIconConverter}}"
-                                                        x:Name="PlayPauseButton"
-                                                        Click="PlayPauseButton_OnClick"/>-->
                     <cimbalino:ApplicationBarIconButton Text="repeat"
                                                         IconUri="/Icons/appbar.repeat.png"
                                                         Command="{Binding RepeatAudioCommand}"
