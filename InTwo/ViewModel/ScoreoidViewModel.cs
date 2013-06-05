@@ -32,6 +32,17 @@ namespace InTwo.ViewModel
                 CurrentPlayer = App.CurrentPlayer;
             }
         }
+
+        public override void WireMessages()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, async m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.SubmitScoreMsg))
+                {
+                    var score = (score) m.Sender;
+                }
+            });
+        }
         
         public player CurrentPlayer { get; set; }
         

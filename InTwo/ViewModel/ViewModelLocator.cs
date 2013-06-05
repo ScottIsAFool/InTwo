@@ -57,7 +57,7 @@ namespace InTwo.ViewModel
                 SimpleIoc.Default.Register(()=> new ScoreoidClient(Constants.ScoreoidApiKey, Constants.ScoreoidGameId));
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<ScoreoidViewModel>();
+            SimpleIoc.Default.Register<ScoreoidViewModel>(true);
             SimpleIoc.Default.Register<ScoreBoardViewModel>();
             SimpleIoc.Default.Register<UserProfileViewModel>(true);
             SimpleIoc.Default.Register<DownloadingSongsViewModel>();

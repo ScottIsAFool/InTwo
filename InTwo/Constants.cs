@@ -51,6 +51,7 @@
             public const string ShareScoreMsg = "ShareScoreMsg";
             public const string IsPlayingMsg = "IsPlayingMsg";
             public const string RefreshCurrentPlayerInfoMsg = "RefreshCurrentPlayerInfoMsg";
+            public const string SubmitScoreMsg = "SubmitScoreMsg";
         }
 
         public static class Pages

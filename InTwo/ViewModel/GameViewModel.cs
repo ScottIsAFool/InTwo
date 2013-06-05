@@ -10,6 +10,7 @@ using InTwo.Controls;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Nokia.Music.Types;
+using Scoreoid;
 using ScottIsAFool.WindowsPhone.ViewModel;
 using Windows.Phone.Speech.Recognition;
 using Windows.System;
@@ -278,8 +279,6 @@ namespace InTwo.ViewModel
             var speechRecognizer = new SpeechRecognizerUI();
             speechRecognizer.Settings.ExampleText = "Artist is Aerosmith";
             speechRecognizer.Settings.ListenText = "Make your guess";
-            //speechRecognizer.Settings.ReadoutEnabled = false;
-            //speechRecognizer.Settings.ShowConfirmation = false;
             
             var result = await speechRecognizer.RecognizeWithUIAsync();
             
@@ -331,7 +330,7 @@ namespace InTwo.ViewModel
                             RightButtonContent = "nah, not yet"
                         };
 
-                        message.Dismissed += (sender, args) =>
+                        message.Dismissed += async (sender, args) =>
                         {
                             ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
                             if (args.Result == CustomMessageBoxResult.LeftButton)
@@ -344,6 +343,15 @@ namespace InTwo.ViewModel
                                 else
                                 {
                                     // TODO: Submit scores
+                                    var score = new score
+                                    {
+                                        created = DateTime.Now.ToString(),
+                                        difficulty = SelectedGenre.Name,
+                                        platform = "WP8",
+                                        value = RoundPoints.ToString()
+                                    };
+
+                                    Messenger.Default.Send(new NotificationMessage(score, Constants.Messages.SubmitScoreMsg));
                                 }
                             }
                         };
