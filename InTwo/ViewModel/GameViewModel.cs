@@ -35,7 +35,6 @@ namespace InTwo.ViewModel
         public GameViewModel(IExtendedNavigationService navigationService)
         {
             _navigationService = navigationService;
-
             
             if (IsInDesignMode)
             {
@@ -279,24 +278,32 @@ namespace InTwo.ViewModel
             var speechRecognizer = new SpeechRecognizerUI();
             speechRecognizer.Settings.ExampleText = "Artist is Aerosmith";
             speechRecognizer.Settings.ListenText = "Make your guess";
-            speechRecognizer.Settings.ReadoutEnabled = false;
-            speechRecognizer.Settings.ShowConfirmation = false;
+            //speechRecognizer.Settings.ReadoutEnabled = false;
+            //speechRecognizer.Settings.ShowConfirmation = false;
+            
             var result = await speechRecognizer.RecognizeWithUIAsync();
+            
             if (result.ResultStatus == SpeechRecognitionUIStatus.Succeeded)
             {
                 var text = result.RecognitionResult.Text;
-                //MessageBox.Show(result.RecognitionResult.Text);
+
                 if (text.ToLower().StartsWith("artist is"))
                 {
-                    text = text.Replace("Artist is", "").Replace("artist is", "");
+                    text = text.Replace("Artist is", "").Replace("artist is", "").Replace(".", " ").Trim();
                     ArtistGuess = text;
                 }
                 else if (text.ToLower().StartsWith("song is"))
                 {
-                    text = text.Replace("song is", "").Replace("Song is", "");
+                    text = text.Replace("song is", "").Replace("Song is", "").Replace(".", " ").Trim();
                     SongGuess = text;
                 }
             }
+        }
+
+        private void StartNewGame()
+        {
+            GameLocked = false;
+            ResetGameForNewRound();
         }
 
         #region Commands
@@ -304,7 +311,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(ResetGameForNewRound);
+                return new RelayCommand(StartNewGame);
             }
         }
 
