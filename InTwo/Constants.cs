@@ -33,8 +33,14 @@
         public static class Tiles
         {
             private const string WideTileFileName = "InTwoWideTile.png";
-            public const string WideTileFile = "Shared\\ShellContent\\" + WideTileFileName;
-            public const string WideTileIsoUri = "isostore:/Shared/ShellContent/" + WideTileFileName;
+            private const string NormalTileFileName = "InTwoNormalTile.png";
+            private const string SharedFolderPath = "Shared\\ShellContent\\";
+            private const string SharedFolderIsoPath = "isostore:/Shared/ShellContent/";
+            public const string WideTileFile = SharedFolderPath + WideTileFileName;
+            public const string WideTileIsoUri = SharedFolderIsoPath + WideTileFileName;
+
+            public const string NormalTileFile = SharedFolderPath + NormalTileFileName;
+            public const string NormalTileIsoUri = SharedFolderIsoPath + NormalTileFileName;
         }
 
         public static class Messages

@@ -108,8 +108,8 @@
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\WideTile.xaml.cs">
-      <DependentUpon>WideTile.xaml</DependentUpon>
+    <Compile Include="Controls\Tile.xaml.cs">
+      <DependentUpon>Tile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ArrayToStringConverter.cs" />
     <Compile Include="Converters\CanSendOrUpdateConverter.cs" />
@@ -200,7 +200,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Controls\WideTile.xaml">
+    <Page Include="Controls\Tile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

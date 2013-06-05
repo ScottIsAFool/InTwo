@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
+using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
+using ImageTools;
+using ImageTools.IO.Png;
 using Nokia.Music;
 using Nokia.Music.Types;
 
@@ -100,6 +105,37 @@ namespace InTwo
             cb.SetBinding(CheckBox.IsCheckedProperty, binding);
 
             return cb;
+        }
+
+        public static async Task<bool> SaveTile(UIElement tile, int height, int width, string file)
+        {
+            try
+            {
+                var asyncService = SimpleIoc.Default.GetInstance<IAsyncStorageService>();
+
+                if (await asyncService.FileExistsAsync(Constants.Tiles.WideTileFile))
+                {
+                    await asyncService.DeleteFileAsync(Constants.Tiles.WideTileFile);
+                }
+
+                var tileBitmap = new WriteableBitmap(width, height);
+                tileBitmap.Render(tile, null);
+                tileBitmap.Invalidate();
+
+                using (var fileStream = await asyncService.CreateFileAsync(Constants.Tiles.WideTileFile))
+                {
+                    var encoder = new PngEncoder();
+                    var image = tileBitmap.ToImage();
+                    encoder.Encode(image, fileStream);
+                }
+
+                return true;
+            }
+            catch
+            {
+
+            }
+            return false;
         }
     }
 }
