@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using Scoreoid;
 using ScottIsAFool.WindowsPhone.ViewModel;
@@ -82,7 +83,7 @@ namespace InTwo.ViewModel
                     try
                     {
                         ProgressIsVisible = true;
-                        ProgressText = "Creating user";
+                        ProgressText = "Creating user...";
 
                         var response = await _scoreoidClient.CreatePlayerAsync(CurrentPlayer);
 
@@ -119,7 +120,7 @@ namespace InTwo.ViewModel
                     try
                     {
                         ProgressIsVisible = true;
-                        ProgressText = "Creating user";
+                        ProgressText = "Updating user...";
 
                         var response = await _scoreoidClient.UpdatePlayerAsync(CurrentPlayer);
 
@@ -163,6 +164,8 @@ namespace InTwo.ViewModel
 
                         ProgressIsVisible = false;
                         ProgressText = string.Empty;
+
+                        Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerInfoMsg));
 
                         _navigationService.GoBack();
                     }

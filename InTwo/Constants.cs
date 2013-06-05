@@ -50,6 +50,7 @@
             public const string HereAreTheTracksMsg = "HereAreTheTracksMsg";
             public const string ShareScoreMsg = "ShareScoreMsg";
             public const string IsPlayingMsg = "IsPlayingMsg";
+            public const string RefreshCurrentPlayerInfoMsg = "RefreshCurrentPlayerInfoMsg";
         }
 
         public static class Pages

@@ -19,8 +19,8 @@ namespace InTwo
 
         public async void UpdatePrimaryTile()
         {
-            var score = App.CurrentPlayer.best_score;
-            var genre = App.CurrentPlayer.last_level;
+            var score = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScore;
+            var genre = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScoreGenre;
 
             // Create wide tile image
             var wideTileCreated = await new Tile(score, genre, Tile.TileTypes.Wide).SaveWideTile();

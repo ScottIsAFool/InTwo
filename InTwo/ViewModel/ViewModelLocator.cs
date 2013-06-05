@@ -59,7 +59,7 @@ namespace InTwo.ViewModel
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ScoreoidViewModel>();
             SimpleIoc.Default.Register<ScoreBoardViewModel>();
-            SimpleIoc.Default.Register<UserProfileViewModel>();
+            SimpleIoc.Default.Register<UserProfileViewModel>(true);
             SimpleIoc.Default.Register<DownloadingSongsViewModel>();
             SimpleIoc.Default.Register<GameViewModel>(true);
         }

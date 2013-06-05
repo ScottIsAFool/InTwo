@@ -132,7 +132,7 @@ namespace InTwo.ViewModel
                     _hasCheckedForData = true;
 
                     if (App.CurrentPlayer != null)
-                        TileService.Current.UpdatePrimaryTile();
+                        Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerInfoMsg));
                 });
             }
         }

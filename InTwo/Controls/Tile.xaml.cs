@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Ioc;
 
 namespace InTwo.Controls
 {

@@ -43,6 +43,21 @@ namespace InTwo.ViewModel
 
             TotalScore = NumberOfGames = 0;
         }
+        
+        public override void WireMessages()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, async m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.RefreshCurrentPlayerInfoMsg))
+                {
+                    if (_navigationService.IsNetworkAvailableSilent) return;
+
+                    await GetPlayerInformation();
+
+                    TileService.Current.UpdatePrimaryTile();
+                }
+            });
+        }
 
         public player CurrentPlayer { get; set; }
         public int TotalScore { get; set; }
@@ -85,7 +100,15 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    if (!_navigationService.IsNetworkAvailable) return;
+
+                    ProgressIsVisible = true;
+                    ProgressText = "Getting latest information...";
+
                     await GetPlayerInformation();
+
+                    ProgressIsVisible = false;
+                    ProgressText = string.Empty;
                 });
             }
         }
@@ -195,6 +218,8 @@ namespace InTwo.ViewModel
                     _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
 
                     Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
+
+                    TileService.Current.ClearTile();
                 });
             }
         }
@@ -202,11 +227,6 @@ namespace InTwo.ViewModel
 
         private async Task GetPlayerInformation()
         {
-            if (!_navigationService.IsNetworkAvailable) return;
-
-            ProgressIsVisible = true;
-            ProgressText = "Getting latest information...";
-
             try
             {
                 var items = await _scoreoidClient.GetPlayerAsync(CurrentPlayer.username);
@@ -215,6 +235,8 @@ namespace InTwo.ViewModel
                 var scores = await _scoreoidClient.GetPlayerScores(CurrentPlayer.username);
 
                 NumberOfGames = scores.items.Any() ? scores.items.Length : 0;
+
+                CurrentPlayer.boost = NumberOfGames.ToString();
 
                 if (scores.items.Any())
                 {
@@ -226,8 +248,15 @@ namespace InTwo.ViewModel
                         {
                             totalScore += count;
                         }
+
+                        if (score.ToString() == CurrentPlayer.best_score)
+                        {
+                            CurrentPlayer.last_level = score.difficulty;
+                        }
                     }
                     TotalScore = totalScore;
+
+                    CurrentPlayer.bonus = TotalScore.ToString();
                 }
             }
             catch (ScoreoidException ex)
@@ -238,9 +267,6 @@ namespace InTwo.ViewModel
             {
                 
             }
-
-            ProgressIsVisible = false;
-            ProgressText = string.Empty;
         }
 
         private async Task<bool> CheckForProfilePicture()
