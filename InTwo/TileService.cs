@@ -9,7 +9,7 @@ namespace InTwo
 {
     public class TileService
     {
-        private static readonly IShellTileService ShellTileService = new ShellTileWithAddService();
+        private static readonly IShellTileService ShellTileService = new ShellTileWithCreateService();
 
         private static TileService _current;
         public static TileService Current

@@ -65,6 +65,9 @@
               Margin="12,0,12,0">
             <ScrollViewer DataContext="{Binding AppSettings, Source={StaticResource Settings}}">
                 <StackPanel Orientation="Vertical">
+                    <TextBlock Text="PROMPTS"
+                               Style="{StaticResource PhoneTextTitle2Style}"
+                               FontWeight="ExtraBold"/>
                     <CheckBox Content="Don't show exit check in game view"
                               VerticalAlignment="Top"
                               IsChecked="{Binding DontShowBackExitMessage, Mode=TwoWay}"/>
