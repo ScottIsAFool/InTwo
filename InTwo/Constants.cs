@@ -41,6 +41,9 @@
 
             public const string NormalTileFile = SharedFolderPath + NormalTileFileName;
             public const string NormalTileIsoUri = SharedFolderIsoPath + NormalTileFileName;
+            public const string UserProfileIsoUriFormat = SharedFolderIsoPath + "{0}.jpg";
+            public const string AppNormalTile = "/Assets/Tiles/FlipCycleTileMedium.png";
+            public const string AppWideTile = "/Assets/Tiles/FlipCycleTileLarge.png";
         }
 
         public static class Messages

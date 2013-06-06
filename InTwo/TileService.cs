@@ -55,7 +55,9 @@ namespace InTwo
             {
                 BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileIsoUri, UriKind.Relative) : null,
                 WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileIsoUri) : null,
-                BackTitle = showUsername ? App.CurrentPlayer.username : string.Empty
+                BackTitle = showUsername ? App.CurrentPlayer.username : string.Empty,
+                BackgroundImage = App.CurrentPlayer != null && App.SettingsWrapper.AppSettings.UseProfilePictureInTile
+                ? new Uri(string.Format(Constants.Tiles.UserProfileIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute) : new Uri(Constants.Tiles.AppNormalTile, UriKind.Relative) 
             };
 
             return shell;

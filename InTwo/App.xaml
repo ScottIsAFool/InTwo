@@ -46,6 +46,8 @@
             <localConverters:ProfilePictureUriConverter x:Key="ProfilePictureUriConverter" />
             <localConverters:ArrayToStringConverter x:Key="ArrayToStringConverter" />
             <localConverters:SecondsTextConverter x:Key="SecondsTextConverter" />
+            <localConverters:NullBooleanConverter x:Key="NullBooleanConverter"
+                                                  Inverted="True"/>
 
             <!-- Control Styles -->
             <Style x:Key="EmptyButtonStyle"
