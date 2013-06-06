@@ -12,6 +12,7 @@
              xmlns:Converters="clr-namespace:Coding4Fun.Toolkit.Controls.Converters;assembly=Coding4Fun.Toolkit.Controls"
              xmlns:Controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
              xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
+             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
              x:Class="InTwo.App"
              mc:Ignorable="d">
 
@@ -28,7 +29,7 @@
             <SolidColorBrush x:Key="AppBarBrush"
                              Color="{StaticResource AppBarColour}"
                              Opacity="0.6" />
-            
+
             <!--Converters-->
             <cimbalinoConverters:StringToLowercaseConverter x:Key="StringToLowercaseConverter" />
             <cimbalinoConverters:StringToUppercaseConverter x:Key="StringToUppercaseConverter" />
@@ -78,25 +79,26 @@
                                     ContentTemplate="{TemplateBinding HeaderTemplate}"
                                     Foreground="{StaticResource DefaultSubtleBrush}"
                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    Margin="12,0,12,-4" />
+                                    Margin="12,12,12,-4" />
                     <Button x:Name="ValueButton"
                             DataContext="{TemplateBinding Value}"
                             Content="{Binding Seconds, Converter={StaticResource SecondsTextConverter}}"
                             Background="{TemplateBinding Background}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderThickness="0"
                             FontFamily="{TemplateBinding FontFamily}"
                             Foreground="{TemplateBinding Foreground}"
                             Height="76"
-                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" />
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            Margin="-9,0,0,0"/>
                 </StackPanel>
             </ControlTemplate>
 
             <Style TargetType="controls:SuperImage"
                    x:Key="AppBackground">
                 <Setter Property="Opacity"
-                        Value="0.5"/>
+                        Value="0.5" />
                 <Setter Property="Stretch"
-                        Value="UniformToFill"/>
+                        Value="UniformToFill" />
                 <Setter Property="Sources">
                     <Setter.Value>
                         <model:SuperImageSourceCollection>
@@ -113,6 +115,60 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <ControlTemplate x:Key="GameViewListPickerStyle"
+                             TargetType="toolkit:ListPicker">
+                <StackPanel>
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroup x:Name="PickerStates">
+                            <VisualState x:Name="Normal" />
+                            <VisualState x:Name="Highlighted">
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserControl"
+                                                                   Storyboard.TargetProperty="Foreground"
+                                                                   Duration="0">
+                                        <DiscreteObjectKeyFrame Value="{StaticResource PhoneTextBoxForegroundBrush}"
+                                                                KeyTime="0" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <Storyboard>
+                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetName="UserControl"
+                                                                   Storyboard.TargetProperty="Foreground"
+                                                                   Duration="0">
+                                        <DiscreteObjectKeyFrame Value="{StaticResource PhoneDisabledBrush}"
+                                                                KeyTime="0" />
+                                    </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateManager.VisualStateGroups>
+                    <ContentControl Content="{TemplateBinding Header}"
+                                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                    Foreground="{StaticResource PhoneSubtleBrush}"
+                                    FontSize="{StaticResource PhoneFontSizeNormal}"
+                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    Margin="0 0 0 8" />
+                    <Grid>
+                        <UserControl x:Name="UserControl"
+                                     Foreground="{TemplateBinding Foreground}">
+                            <StackPanel>
+                                <TextBlock x:Name="MultipleSelectionModeSummary"
+                                           Margin="8 8 0 8" />
+                                <Canvas x:Name="ItemsPresenterHost"
+                                        MinHeight="46">
+                                    <ItemsPresenter x:Name="ItemsPresenter"
+                                                    Margin="-9,0,0,0">
+                                        <ItemsPresenter.RenderTransform>
+                                            <TranslateTransform x:Name="ItemsPresenterTranslateTransform" />
+                                        </ItemsPresenter.RenderTransform>
+                                    </ItemsPresenter>
+                                </Canvas>
+                            </StackPanel>
+                        </UserControl>
+                    </Grid>
+                </StackPanel>
+            </ControlTemplate>
         </ResourceDictionary>
     </Application.Resources>
 

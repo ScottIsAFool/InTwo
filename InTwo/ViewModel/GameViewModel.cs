@@ -40,7 +40,7 @@ namespace InTwo.ViewModel
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
-                Genres = new List<Genre> {new Genre {Name = AllGenres}};
+                Genres = new List<Genre> {new Genre {Name = "Gock"}};
                 SelectedGenre = Genres[0];
 
                 GameLocked = true;

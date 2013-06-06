@@ -135,7 +135,8 @@
                                         Header="Select a genre"
                                         HorizontalAlignment="Left"
                                         Width="173"
-                                        IsEnabled="{Binding GameLocked, Converter={StaticResource NegativeBooleanConverter}}">
+                                        IsEnabled="{Binding GameLocked, Converter={StaticResource NegativeBooleanConverter}}"
+                                        Template="{StaticResource GameViewListPickerStyle}">
                         <toolkit:ListPicker.FullModeItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}"
