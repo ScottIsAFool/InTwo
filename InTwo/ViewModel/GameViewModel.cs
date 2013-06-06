@@ -128,6 +128,18 @@ namespace InTwo.ViewModel
             get { return RoundNumber < Constants.MaximumNumberOfRounds ? "ready for another?" : "shall we submit your scores now?"; }
         }
 
+        public int AppBarIndex
+        {
+            get
+            {
+                if (GameLocked)
+                {
+                    return CanShowAnswers ? 2 : 1;
+                }
+                return 0;
+            }
+        }
+
         #region Property Changed Methods
         private void OnArtistGuessChanged()
         {
@@ -145,17 +157,60 @@ namespace InTwo.ViewModel
         }
         #endregion
 
-        public int AppBarIndex
+        #region Scoring methods
+        private void CalculateAvailableScore()
         {
-            get
+            var score = 0;
+
+            if (!string.IsNullOrEmpty(ArtistGuess))
             {
-                if (GameLocked)
-                {
-                    return CanShowAnswers ? 2 : 1;
-                }
-                return 0;
+                score += Constants.Scores.CorrectArtist;
+            }
+
+            if (!string.IsNullOrEmpty(SongGuess))
+            {
+                score += Constants.Scores.CorrectSong;
+            }
+
+            if (!string.IsNullOrEmpty(SongGuess) && !string.IsNullOrEmpty(ArtistGuess))
+            {
+                score += Constants.Scores.CorrectSongAndArtistBonus;
+            }
+
+            AdjustScoreForGameLength(score);
+
+            MaximumRoundPoints = score;
+        }
+
+        private void AdjustScoreForGameLength(int score)
+        {
+            var seconds = GameLength.Seconds;
+
+            if (seconds <= 5)
+            {
+            }
+            else if (seconds <= 10)
+            {
+                score = (int)Math.Floor(score * 0.95);
+            }
+            else if (seconds <= 15)
+            {
+                score = (int)Math.Floor(score * 0.9);
+            }
+            else if (seconds <= 20)
+            {
+                score = (int)Math.Floor(score * 0.8);
+            }
+            else if (seconds <= 25)
+            {
+                score = (int)Math.Floor(score * 0.75);
+            }
+            else if (seconds <= 30)
+            {
+                score = (int)Math.Floor(score * 0.5);
             }
         }
+        #endregion
 
         private void SetNextRound()
         {
@@ -192,61 +247,6 @@ namespace InTwo.ViewModel
 
             CalculateAvailableScore();
         }
-
-        #region Scoring methods
-        private void CalculateAvailableScore()
-        {
-            var score = 0;
-
-            if (!string.IsNullOrEmpty(ArtistGuess))
-            {
-                score += Constants.Scores.CorrectArtist;
-            }
-
-            if (!string.IsNullOrEmpty(SongGuess))
-            {
-                score += Constants.Scores.CorrectSong;
-            }
-
-            if (!string.IsNullOrEmpty(SongGuess) && !string.IsNullOrEmpty(ArtistGuess))
-            {
-                score += Constants.Scores.CorrectSongAndArtistBonus;
-            }
-
-            AdjustScoreForGameLength(score);
-
-            MaximumRoundPoints = score;
-        }
-
-        private void AdjustScoreForGameLength(int score)
-        {
-            var seconds = GameLength.Seconds;
-
-            if (seconds <= 5)
-            {
-            }
-            else if (seconds <= 10)
-            {
-                score = (int) Math.Floor(score*0.95);
-            }
-            else if (seconds <= 15)
-            {
-                score = (int) Math.Floor(score*0.9);
-            }
-            else if (seconds <= 20)
-            {
-                score = (int) Math.Floor(score*0.8);
-            }
-            else if (seconds <= 25)
-            {
-                score = (int) Math.Floor(score*0.75);
-            }
-            else if (seconds <= 30)
-            {
-                score = (int) Math.Floor(score*0.5);
-            }
-        }
-        #endregion
 
         private bool CheckAnswers()
         {
@@ -306,6 +306,50 @@ namespace InTwo.ViewModel
             ResetGameForNewRound();
         }
 
+        private bool musicIsPlaying;
+        private void CheckIfMusicPlayingAndCanStopIt()
+        {
+            if (musicIsPlaying)
+            {
+                if (App.SettingsWrapper.AppSettings.AllowStopMusic)
+                {
+                    StopMusic();
+                }
+                else
+                {
+                    var message = new CustomMessageBox
+                    {
+                        Title = "stop music?",
+                        Message = "We've noticed you're already listening to some music, mind if we stop it so you can play the game?",
+                        LeftButtonContent = "go ahead",
+                        RightButtonContent = "no thanks",
+                        Content = Utils.CreateDontShowCheckBox("DontShowAllowStopMusicMessage")
+                    };
+
+                    message.Dismissed += (sender, args) =>
+                    {
+                        if (args.Result == CustomMessageBoxResult.LeftButton)
+                        {
+                            StopMusic();
+                            StartNewGame();
+                        }
+                    };
+                    message.Show();
+                }
+            }
+            else
+            {
+                StartNewGame();
+            }
+            
+            // TODO: Check whether music is actually playing or not   
+        }
+
+        private void StopMusic()
+        {
+            
+        }
+
         private async void SubmitScore()
         {
             SetProgressBar("Submitting score...");
@@ -360,7 +404,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(StartNewGame);
+                return new RelayCommand(CheckIfMusicPlayingAndCanStopIt);
             }
         }
 
