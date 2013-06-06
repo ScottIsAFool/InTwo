@@ -42,6 +42,9 @@
             public const string NormalTileFile = SharedFolderPath + NormalTileFileName;
             public const string NormalTileIsoUri = SharedFolderIsoPath + NormalTileFileName;
             public const string UserProfileIsoUriFormat = SharedFolderIsoPath + "{0}.jpg";
+            public const string UserProfileFileFormat = SharedFolderPath + "{0}.jpg";
+            public const string UserProfileWideIsoUriFormat = SharedFolderIsoPath + "{0}-Wide.jpg";
+            public const string UserProfileWideFileFormat = SharedFolderPath + "{0}-Wide.jpg";
             public const string AppNormalTile = "/Assets/Tiles/FlipCycleTileMedium.png";
             public const string AppWideTile = "/Assets/Tiles/FlipCycleTileLarge.png";
         }
@@ -55,6 +58,7 @@
             public const string IsPlayingMsg = "IsPlayingMsg";
             public const string RefreshCurrentPlayerInfoMsg = "RefreshCurrentPlayerInfoMsg";
             public const string SubmitScoreMsg = "SubmitScoreMsg";
+            public const string UpdatePrimaryTileMsg = "UpdatePrimaryTileMsg";
         }
 
         public static class Pages

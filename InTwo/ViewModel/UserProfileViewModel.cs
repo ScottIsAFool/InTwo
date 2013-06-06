@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
@@ -54,7 +57,7 @@ namespace InTwo.ViewModel
 
                     await GetPlayerInformation();
 
-                    TileService.Current.UpdatePrimaryTile();
+                    Messenger.Default.Send(new NotificationMessage(Constants.Messages.UpdatePrimaryTileMsg));
                 }
             });
         }
@@ -175,7 +178,10 @@ namespace InTwo.ViewModel
 
                             var writeableBitmap = new WriteableBitmap(bitmap);
                             writeableBitmap.SaveJpeg(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
+
+                            await CreateTileImages(bitmap);
                         }
+
 
                         // Tell other UI references to update their profile image
                         Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
@@ -186,7 +192,7 @@ namespace InTwo.ViewModel
                 });
             }
         }
-
+        
         public RelayCommand ClearProfilePicture
         {
             get
@@ -275,6 +281,54 @@ namespace InTwo.ViewModel
             var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
 
             return await _asyncStorageService.FileExistsAsync(fileName);
+        }
+        
+        private async Task CreateTileImages(ImageSource image)
+        {
+            var normalFileName = string.Format(Constants.Tiles.UserProfileFileFormat, CurrentPlayer.username);
+            var wideFileName = string.Format(Constants.Tiles.UserProfileWideFileFormat, CurrentPlayer.username);
+
+            if (await _asyncStorageService.FileExistsAsync(normalFileName))
+            {
+                await _asyncStorageService.DeleteFileAsync(normalFileName);
+            }
+
+            if (await _asyncStorageService.FileExistsAsync(wideFileName))
+            {
+                await _asyncStorageService.DeleteFileAsync(wideFileName);
+            }
+
+            var normalTile = CreateProfileTileImages(image, 336, 336);
+
+            var wideTile = CreateProfileTileImages(image, 336, 691);
+
+            await Utils.SaveTile(normalTile, 336, 336, normalFileName);
+
+            await Utils.SaveTile(wideTile, 336, 691, wideFileName);
+
+            Messenger.Default.Send(new NotificationMessage(Constants.Messages.UpdatePrimaryTileMsg));
+        }
+
+        private static UIElement CreateProfileTileImages(ImageSource theImage, int height, int width)
+        {
+            var grid = new Grid
+            {
+                Height = height,
+                Width = width
+            };
+
+            var image = new Image
+            {
+                Source = theImage,
+                Stretch = Stretch.Fill,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Top,
+                Width = width,
+                Height = height
+            };
+            grid.Children.Add(image);
+
+            return grid;
         }
     }
 }

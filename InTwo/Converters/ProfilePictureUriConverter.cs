@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
+using InTwo.Model;
 using Scoreoid;
 
 namespace InTwo.Converters

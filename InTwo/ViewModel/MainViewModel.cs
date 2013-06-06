@@ -45,6 +45,17 @@ namespace InTwo.ViewModel
             _settingsService = settingsService;
         }
 
+        public override void WireMessages()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.UpdatePrimaryTileMsg))
+                {
+                    TileService.Current.UpdatePrimaryTile();
+                }
+            });
+        }
+
         private async Task<bool> CheckForGameData()
         {
             var genres = _settingsService.Get("Genres", default(List<Genre>));
