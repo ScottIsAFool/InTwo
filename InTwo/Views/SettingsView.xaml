@@ -66,8 +66,7 @@
             <ScrollViewer DataContext="{Binding AppSettings, Source={StaticResource Settings}}">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="PROMPTS"
-                               Style="{StaticResource PhoneTextTitle2Style}"
-                               FontWeight="ExtraBold"/>
+                               Style="{StaticResource HeaderStyle}"/>
                     <CheckBox Content="Don't show exit check in game view"
                               VerticalAlignment="Top"
                               IsChecked="{Binding DontShowBackExitMessage, Mode=TwoWay}"/>
@@ -77,6 +76,9 @@
                     <CheckBox Content="Allow In Two to stop your music"
                               VerticalAlignment="Top"
                               IsChecked="{Binding AllowStopMusic, Mode=TwoWay}" />
+                    <TextBlock Text="LIVE TILE"
+                               Style="{StaticResource HeaderStyle}" />
+                    <CheckBox Content="Use profile picture (if set) for tile front"></CheckBox>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
