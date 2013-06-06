@@ -96,11 +96,11 @@
                     <cimbalino:ApplicationBarIconButton Text="next round"
                                                         IconUri="/Icons/next.png"
                                                         Command="{Binding NextRoundCommand}"
-                                                        IsVisible="{Binding IsLastRound, Converter={StaticResource NegativeBooleanConverter}}"/>
+                                                        IsVisible="{Binding IsLastRound, Converter={StaticResource NegativeBooleanConverter}}" />
                     <cimbalino:ApplicationBarIconButton Text="submit score"
                                                         IconUri="/Icons/appbar.upload.png"
                                                         Command="{Binding SubmitScoreCommand}"
-                                                        IsVisible="{Binding IsLastRound}"/>
+                                                        IsVisible="{Binding IsLastRound}" />
                 </behaviours:CustomApplicationBar>
             </cimbalino:MultiApplicationBarBehavior>
         </i:Interaction.Behaviors>
