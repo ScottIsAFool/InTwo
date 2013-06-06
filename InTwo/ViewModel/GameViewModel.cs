@@ -419,6 +419,7 @@ namespace InTwo.ViewModel
                 {
                     if (CheckAnswers())
                     {
+                        CanShowAnswers = true;
                         var message = new CustomMessageBox
                         {
                             Title = "Congratulations!",
