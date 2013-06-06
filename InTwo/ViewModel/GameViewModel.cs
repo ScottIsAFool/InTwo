@@ -314,7 +314,6 @@ namespace InTwo.ViewModel
 
             var score = new score
             {
-                created = DateTime.Now.ToString(),
                 difficulty = SelectedGenre.Name,
                 platform = "WP8",
                 value = RoundPoints.ToString()

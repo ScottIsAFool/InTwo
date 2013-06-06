@@ -14,6 +14,7 @@
                             xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                             xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             xmlns:ad="clr-namespace:Inneractive.Nokia.Ad;assembly=Inneractive.Ad"
+                            xmlns:converters="clr-namespace:InTwo.Converters"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -34,6 +35,12 @@
             <command:EventToCommand Command="{Binding GamePageLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    
+    <phone:PhoneApplicationPage.Resources>
+        <converters:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter"
+                                              TrueValue="0.6"
+                                              FalseValue="1"/>
+    </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -111,7 +118,9 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
-              Margin="12,32,12,0">
+              Margin="12,32,12,0"
+              IsHitTestVisible="{Binding SubmittingScore, Converter={StaticResource NegativeBooleanConverter}}"
+              Opacity="{Binding SubmittingScore, Converter={StaticResource BooleanToOpacityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -121,8 +130,7 @@
                           AutoPlay="True" />
             <StackPanel Orientation="Vertical"
                         Grid.Row="0"
-                        VerticalAlignment="Top"
-                        Visibility="{Binding CanShowAnswers, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                        VerticalAlignment="Top">
                 <StackPanel Orientation="Horizontal">
                     <toolkit:ListPicker ItemsSource="{Binding Genres}"
                                         SelectedItem="{Binding SelectedGenre, Mode=TwoWay}"
@@ -201,12 +209,6 @@
                                FontSize="100"
                                FontWeight="Bold" />
                 </StackPanel>
-            </StackPanel>
-
-            <StackPanel Orientation="Vertical"
-                        Grid.Row="0"
-                        Visibility="{Binding CanShowAnswers, Converter={StaticResource BooleanToVisibilityConverter}}">
-
             </StackPanel>
 
             <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
