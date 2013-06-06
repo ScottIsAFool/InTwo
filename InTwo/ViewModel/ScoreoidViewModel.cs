@@ -53,7 +53,7 @@ namespace InTwo.ViewModel
         {
             try
             {
-                await _scoreoidClient.CreateScoreAsync(App.CurrentPlayer.username, int.Parse(score.value));
+                await _scoreoidClient.CreateScoreAsync(App.CurrentPlayer.username, score);
 
                 return true;
             }
