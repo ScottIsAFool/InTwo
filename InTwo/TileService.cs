@@ -23,12 +23,14 @@ namespace InTwo
             var genre = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScoreGenre;
 
             // Create wide tile image
-            var wideTileCreated = await new Tile(score, genre, Tile.TileTypes.Wide).SaveWideTile();
+            //var wideTileCreated = await new Tile(score, genre, Tile.TileTypes.Wide).SaveWideTile();
 
-            // Create normal tile image
-            var normalTileCreated = await new Tile(score, genre, Tile.TileTypes.Normal).SaveNormalTile();
+            //// Create normal tile image
+            //var normalTileCreated = await new Tile(score, genre, Tile.TileTypes.Normal).SaveNormalTile();
 
-            var shellData = await CreateTileData(wideTileCreated, normalTileCreated, true);
+            //var shellData = await CreateTileData(wideTileCreated, normalTileCreated, true);
+
+            var shellData = await CreateTileData(false, false, true);
 
             UpdateTile(shellData);
         }
