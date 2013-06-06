@@ -305,6 +305,53 @@ namespace InTwo.ViewModel
             ResetGameForNewRound();
         }
 
+        private async void SubmitScore()
+        {
+            SetProgressBar("Submitting score...");
+
+            var score = new score
+            {
+                created = DateTime.Now.ToString(),
+                difficulty = SelectedGenre.Name,
+                platform = "WP8",
+                value = RoundPoints.ToString()
+            };
+
+            Messenger.Default.Send(new NotificationMessageAction<bool>(score, Constants.Messages.SubmitScoreMsg, success =>
+            {
+                if (success)
+                {
+                    _navigationService.NavigateTo(Constants.Pages.ScoreBoard);
+                }
+                else
+                {
+                    DisplayRetryPrompt();
+                }
+
+                SetProgressBar();
+            }));
+        }
+
+        private void DisplayRetryPrompt()
+        {
+            var message = new CustomMessageBox
+            {
+                Message = "There was a problem trying to upload your score to scoreoid.",
+                Title = "Issues",
+                LeftButtonContent = "try again",
+                RightButtonContent = "cancel"
+            };
+            message.Dismissed += (sender, args) =>
+            {
+                ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+                if (args.Result == CustomMessageBoxResult.LeftButton)
+                {
+                    SubmitScore();
+                }
+            };
+            message.Show();
+        }
+
         #region Commands
         public RelayCommand GamePageLoaded
         {
@@ -342,25 +389,7 @@ namespace InTwo.ViewModel
                                 }
                                 else
                                 {
-                                    SetProgressBar("Submitting score...");
-
-                                    var score = new score
-                                    {
-                                        created = DateTime.Now.ToString(),
-                                        difficulty = SelectedGenre.Name,
-                                        platform = "WP8",
-                                        value = RoundPoints.ToString()
-                                    };
-
-                                    Messenger.Default.Send(new NotificationMessageAction<bool>(score, Constants.Messages.SubmitScoreMsg, success =>
-                                    {
-                                        if (success)
-                                        {
-                                            
-                                        }
-
-                                        SetProgressBar();
-                                    }));
+                                    SubmitScore();
                                 }
                             }
                         };

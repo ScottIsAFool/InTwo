@@ -36,18 +36,20 @@ namespace InTwo.ViewModel
 
         public override void WireMessages()
         {
-            Messenger.Default.Register<NotificationMessage>(this, async m =>
+            Messenger.Default.Register<NotificationMessageAction<bool>>(this, async m =>
             {
                 if (m.Notification.Equals(Constants.Messages.SubmitScoreMsg))
                 {
                     var score = (score) m.Sender;
 
-                    await SubmitScore(score);
+                    var result = await SubmitScore(score);
+
+                    m.Execute(result);
                 }
             });
         }
 
-        private async Task SubmitScore(score score)
+        private async Task<bool> SubmitScore(score score)
         {
             
         }

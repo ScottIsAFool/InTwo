@@ -15,10 +15,16 @@
             
         }
 
-        public void SetProgressBar(string text = "", bool isVisible = true)
+        public void SetProgressBar(string text)
         {
-            ProgressIsVisible = isVisible;
+            ProgressIsVisible = true;
             ProgressText = text;
+        }
+
+        public void SetProgressBar()
+        {
+            ProgressIsVisible = false;
+            ProgressText = string.Empty;
         }
 
         public bool ProgressIsVisible { get; set; }
