@@ -28,7 +28,7 @@ namespace InTwo
             // Create normal tile image
             var normalTileCreated = await new Tile(score, genre, Tile.TileTypes.Normal).SaveNormalTile();
 
-            var shellData = CreateTileData(wideTileCreated, normalTileCreated, true);
+            var shellData = await CreateTileData(wideTileCreated, normalTileCreated, true);
 
             UpdateTile(shellData);
         }
@@ -40,27 +40,41 @@ namespace InTwo
             primaryTile.Update(shellData);
         }
 
-        public void ClearTile()
+        public async void ClearTile()
         {
-            var shellData = CreateTileData(false, false, false);
+            var shellData = await CreateTileData(false, false, false);
 
             UpdateTile(shellData);
 
             DeleteTileImages();
         }
 
-        private static ShellTileServiceFlipTileData CreateTileData(bool wideTileCreated, bool normalTileCreated, bool showUsername)
+        private static async Task<ShellTileServiceFlipTileData> CreateTileData(bool wideTileCreated, bool normalTileCreated, bool showUsername)
         {
+            var useProfilePicture = await ShouldUseUserProfilePicture();
             var shell = new ShellTileServiceFlipTileData
             {
-                BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileIsoUri, UriKind.Relative) : null,
-                WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileIsoUri) : null,
+                BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileIsoUri, UriKind.RelativeOrAbsolute) : null,
+                WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileIsoUri, UriKind.RelativeOrAbsolute) : null,
                 BackTitle = showUsername ? App.CurrentPlayer.username : string.Empty,
-                BackgroundImage = App.CurrentPlayer != null && App.SettingsWrapper.AppSettings.UseProfilePictureInTile
-                ? new Uri(string.Format(Constants.Tiles.UserProfileIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute) : new Uri(Constants.Tiles.AppNormalTile, UriKind.Relative) 
+                BackgroundImage = useProfilePicture
+                                      ? new Uri(string.Format(Constants.Tiles.UserProfileIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute)
+                                      : new Uri(Constants.Tiles.AppNormalTile, UriKind.Relative),
+                WideBackgroundImage = useProfilePicture
+                                          ? new Uri(string.Format(Constants.Tiles.UserProfileWideIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute)
+                                          : new Uri(Constants.Tiles.AppWideTile, UriKind.Relative),
+                Title = useProfilePicture ? "In Two" : string.Empty
             };
 
             return shell;
+        }
+
+        private static async Task<bool> ShouldUseUserProfilePicture()
+        {
+            var asyncService = SimpleIoc.Default.GetInstance<IAsyncStorageService>();
+            return App.CurrentPlayer != null 
+                && App.SettingsWrapper.AppSettings.UseProfilePictureInTile 
+                && await asyncService.FileExistsAsync(string.Format(Constants.Tiles.UserProfileFileFormat, App.CurrentPlayer.username));
         }
 
         private static async void DeleteTileImages()

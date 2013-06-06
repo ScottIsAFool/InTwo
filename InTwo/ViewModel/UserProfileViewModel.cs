@@ -53,7 +53,9 @@ namespace InTwo.ViewModel
             {
                 if (m.Notification.Equals(Constants.Messages.RefreshCurrentPlayerInfoMsg))
                 {
-                    if (_navigationService.IsNetworkAvailableSilent) return;
+                    if (!_navigationService.IsNetworkAvailableSilent) return;
+
+                    CurrentPlayer = App.CurrentPlayer;
 
                     await GetPlayerInformation();
 
@@ -107,6 +109,8 @@ namespace InTwo.ViewModel
 
                     ProgressIsVisible = true;
                     ProgressText = "Getting latest information...";
+
+                    CurrentPlayer = App.CurrentPlayer;
 
                     await GetPlayerInformation();
 

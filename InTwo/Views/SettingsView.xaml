@@ -77,7 +77,7 @@
                     <TextBlock Text="LIVE TILE"
                                Style="{StaticResource HeaderStyle}" />
                     <CheckBox Content="Use profile picture (if set) for tile front"
-                              IsChecked="{Binding UseProfilePictureInTile}"
+                              IsChecked="{Binding UseProfilePictureInTile, Mode=TwoWay}"
                               IsEnabled="{Binding PlayerWrapper.CurrentPlayer, Converter={StaticResource NullBooleanConverter}}"/>
                 </StackPanel>
             </ScrollViewer>
