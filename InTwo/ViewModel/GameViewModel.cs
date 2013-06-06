@@ -43,7 +43,7 @@ namespace InTwo.ViewModel
                 Genres = new List<Genre> {new Genre {Name = "Gock"}};
                 SelectedGenre = Genres[0];
 
-                GameLocked = true;
+                GameLocked = false;
 
                 GameTrack = new Product
                 {
@@ -51,7 +51,6 @@ namespace InTwo.ViewModel
                     Performers = new[] {new Artist {Name = "Aerosmith", Thumb320Uri = new Uri("http://assets.ent.nokia.com/p/d/music_image/320x320/1470.jpg")}},
                     Thumb320Uri = new Uri("http://4.musicimg.ovi.com/u/1.0/image/156920531/?w=320&q=90")
                 };
-                ArtistImage = GameTrack.Thumb320Uri;
                 MaximumRoundPoints = 300;
             }
             else
@@ -110,7 +109,7 @@ namespace InTwo.ViewModel
         public Genre SelectedGenre { get; set; }
         public Product GameTrack { get; set; }
         public Uri AudioUrl { get; set; }
-        public Uri ArtistImage { get; set; }
+        public Uri ArtistImage { get { return CanShowAnswers ? GameTrack.Thumb320Uri : null; } }
         public TimeSpan GameLength { get; set; }
         public bool IsPlaying { get; set; }
 
@@ -239,7 +238,7 @@ namespace InTwo.ViewModel
 
         private void ResetGameForNewRound()
         {
-            AudioUrl = ArtistImage = null;
+            AudioUrl = null;
             CanShowAnswers = false;
             ArtistGuess = string.Empty;
             SongGuess = string.Empty;
