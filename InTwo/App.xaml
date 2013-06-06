@@ -70,17 +70,14 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-            <!--<TextBlock Text="PROMPTS"
-                       Style="{StaticResource PhoneTextTitle2Style}"
-                       FontWeight="ExtraBold"
-                       FontFamily="" />-->
             
             <Style TargetType="TextBlock"
                    BasedOn="{StaticResource PhoneTextTitle2Style}"
                    x:Key="HeaderStyle">
                 <Setter Property="FontFamily"
                         Value="Segoe WP Black"/>
+                <Setter Property="Foreground"
+                        Value="{StaticResource PhoneAccentBrush}"/>
             </Style>
 
             <Converters:SolidColorBrushToColorConverter x:Key="BrushToBrush" />
