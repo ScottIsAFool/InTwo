@@ -127,6 +127,11 @@ namespace InTwo.ViewModel
             get { return RoundNumber < Constants.MaximumNumberOfRounds ? "ready for another?" : "shall we submit your scores now?"; }
         }
 
+        public bool IsLastRound
+        {
+            get { return RoundPoints == Constants.MaximumNumberOfRounds; }
+        }
+
         public int AppBarIndex
         {
             get
@@ -544,6 +549,14 @@ namespace InTwo.ViewModel
                         await LaunchSpeech();
                     }
                 });
+            }
+        }
+
+        public RelayCommand SubmitScoreCommand
+        {
+            get
+            {
+                return new RelayCommand(SubmitScore);
             }
         }
         #endregion

@@ -290,10 +290,12 @@
     <Content Include="FodyWeavers.xml" />
     <Content Include="Icons\appbar.microphone.png" />
     <Content Include="Icons\appbar.repeat.png" />
+    <Content Include="Icons\appbar.upload.png" />
     <Content Include="Icons\cancel.png" />
     <Content Include="Icons\check.png" />
     <Content Include="Icons\edit.png" />
     <Content Include="Icons\Go.png" />
+    <Content Include="Icons\next.png" />
     <Content Include="Icons\NokiaMusic.png" />
     <Content Include="Icons\refresh.png" />
     <Content Include="Icons\save.png" />
