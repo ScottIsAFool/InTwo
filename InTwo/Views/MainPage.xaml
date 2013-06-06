@@ -58,15 +58,14 @@
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
         <i:Interaction.Behaviors>
-            <custom:CustomApplicationBarBehaviour Mode="Minimized"
-                                                  BackgroundColor="{StaticResource AppBarColour}">
+            <custom:CustomApplicationBarBehaviour Mode="Minimized">
                 <custom:CustomApplicationBarBehaviour.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
                                                       Command="{Binding LoginLogoutCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="settings"
                                                       Command="{Binding GoToSettingsCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="refresh game data"
-                                                      Command="{Binding RefreshGameDataCommand}"/>
+                                                      Command="{Binding RefreshGameDataCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="remove ads"
                                                       Command="{Binding RemoveAdsCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="about"
@@ -75,22 +74,22 @@
                 </custom:CustomApplicationBarBehaviour.MenuItems>
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
-        
+
         <coding4Fun:SuperImage Stretch="UniformToFill"
                                Opacity="0.5">
             <coding4Fun:SuperImage.Sources>
                 <coding4Fun:SuperImageSource Source="/Images/AppBackground-WXGA.jpg"
-                                           MinScale="150"
-                                           MaxScale="150" />
+                                             MinScale="150"
+                                             MaxScale="150" />
                 <coding4Fun:SuperImageSource Source="/Images/AppBackground-720p.jpg"
-                                           MinScale="160"
-                                           MaxScale="160" />
+                                             MinScale="160"
+                                             MaxScale="160" />
                 <coding4Fun:SuperImageSource Source="/Images/AppBackground-WVGA.jpg"
-                                           MinScale="100"
-                                           MaxScale="100" />
+                                             MinScale="100"
+                                             MaxScale="100" />
             </coding4Fun:SuperImage.Sources>
         </coding4Fun:SuperImage>
-        
+
         <Grid Margin="0,32,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -106,7 +105,7 @@
                 <Image Source="/Images/InTwoSmallLogo.png"
                        Height="20"
                        HorizontalAlignment="Left"
-                       Margin="12,0"/>
+                       Margin="12,0" />
             </StackPanel>
 
             <Button Style="{StaticResource EmptyButtonStyle}"
@@ -128,16 +127,16 @@
             <Grid x:Name="ContentPanel"
                   Grid.Row="1"
                   Margin="12,0,12,0">
-                
+
                 <Button Content="game"
                         Command="{Binding GoToGameCommand}"
                         VerticalAlignment="Top" />
                 <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
-                              AdType="IaAdType_Banner"
-                              ReloadTime="30"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Bottom"
-                                  Margin="0,0,0,30"/>
+                                  AdType="IaAdType_Banner"
+                                  ReloadTime="30"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Bottom"
+                                  Margin="0,0,0,30" />
             </Grid>
         </Grid>
         <!--Uncomment to see an alignment grid to help ensure your controls are
@@ -146,7 +145,7 @@
             if the System Tray is hidden.
 
             Before shipping remove this XAML and the image itself.-->
-        
+
     </Grid>
 
 </phone:PhoneApplicationPage>

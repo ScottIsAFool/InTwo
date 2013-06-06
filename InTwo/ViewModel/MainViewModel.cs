@@ -120,6 +120,11 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    if (!App.SettingsWrapper.AppSettings.DontShowAllowStopMusicMessage)
+                    {
+                        DisplayStopAudioMessage();
+                    }
+
                     if (_hasCheckedForData && _dataExists) return;
 
                     _dataExists = await CheckForGameData();
@@ -135,6 +140,22 @@ namespace InTwo.ViewModel
                         Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerInfoMsg));
                 });
             }
+        }
+
+        private void DisplayStopAudioMessage()
+        {
+            var message = new CustomMessageBox
+            {
+                Title = "Stop music",
+                Message = "If you already have music playing, do we have your permission to stop your music in order to play the game?\n\nThis can be changed in the app settings.",
+                LeftButtonContent = "yes",
+                RightButtonContent = "no",
+                Content = Utils.CreateDontShowCheckBox("DontShowAllowStopMusicMessage")
+            };
+
+            message.Dismissed += (sender, args) => App.SettingsWrapper.AppSettings.AllowStopMusic = args.Result == CustomMessageBoxResult.LeftButton;
+
+            message.Show();
         }
 
         public RelayCommand<string> NavigateToPage
