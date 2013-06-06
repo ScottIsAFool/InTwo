@@ -121,6 +121,7 @@ namespace InTwo.ViewModel
         public int MaximumRoundPoints { get; set; }
         public int RoundPoints { get; set; }
         public int RoundNumber { get; set; }
+        public bool SubmittingScore { get; set; }
 
         public string AnotherRoundOrNot
         {
@@ -309,6 +310,8 @@ namespace InTwo.ViewModel
         {
             SetProgressBar("Submitting score...");
 
+            SubmittingScore = true;
+
             var score = new score
             {
                 created = DateTime.Now.ToString(),
@@ -319,16 +322,17 @@ namespace InTwo.ViewModel
 
             Messenger.Default.Send(new NotificationMessageAction<bool>(score, Constants.Messages.SubmitScoreMsg, success =>
             {
+                SetProgressBar();
+
                 if (success)
                 {
+                    SubmittingScore = false;
                     _navigationService.NavigateTo(Constants.Pages.ScoreBoard);
                 }
                 else
                 {
                     DisplayRetryPrompt();
                 }
-
-                SetProgressBar();
             }));
         }
 

@@ -51,7 +51,21 @@ namespace InTwo.ViewModel
 
         private async Task<bool> SubmitScore(score score)
         {
-            
+            try
+            {
+                await _scoreoidClient.CreateScoreAsync(App.CurrentPlayer.username, int.Parse(score.value));
+
+                return true;
+            }
+            catch (ScoreoidException)
+            {
+
+            }
+            catch (Exception)
+            {
+                
+            }
+            return false;
         }
 
         public player CurrentPlayer { get; set; }
