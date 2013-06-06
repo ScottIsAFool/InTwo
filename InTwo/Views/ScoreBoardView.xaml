@@ -57,7 +57,7 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <custom:CustomApplicationBarBehaviour BackgroundColor="{StaticResource AppBarColour}"
+            <custom:CustomApplicationBarBehaviour 
                                               IsMenuEnabled="True">
                 <cimbalino:ApplicationBarIconButton Text="share"
                                                     IconUri="/Icons/share.png"

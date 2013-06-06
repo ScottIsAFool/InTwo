@@ -1,4 +1,5 @@
-﻿using Cimbalino.Phone.Toolkit.Behaviors;
+﻿using System.Windows.Media;
+using Cimbalino.Phone.Toolkit.Behaviors;
 
 namespace InTwo.Behaviours
 {
@@ -7,6 +8,7 @@ namespace InTwo.Behaviours
         public CustomApplicationBar()
         {
             Opacity = 0.4;
+            BackgroundColor = (Color) App.Current.Resources["AppBarColour"];
         }
     }
 
@@ -15,6 +17,7 @@ namespace InTwo.Behaviours
         public CustomApplicationBarBehaviour()
         {
             Opacity = 0.4;
+            BackgroundColor = (Color)App.Current.Resources["AppBarColour"];
         }
     }
 }

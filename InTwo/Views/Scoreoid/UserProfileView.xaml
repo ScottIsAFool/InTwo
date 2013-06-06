@@ -59,7 +59,7 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <custom:CustomApplicationBarBehaviour BackgroundColor="{StaticResource AppBarColour}">
+            <custom:CustomApplicationBarBehaviour >
                 <cimbalino:ApplicationBarIconButton Text="refresh details"
                                                     IconUri="/Icons/refresh.png"
                                                     Command="{Binding RefreshUserCommand}" />

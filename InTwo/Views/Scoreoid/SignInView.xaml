@@ -51,7 +51,7 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <behaviours:CustomApplicationBarBehaviour BackgroundColor="{StaticResource AppBarColour}">
+            <behaviours:CustomApplicationBarBehaviour >
                 <cimbalino:ApplicationBarIconButton Text="sign in"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding SignInCommand}"

@@ -58,7 +58,7 @@
           Background="Transparent"
           Margin="0,32,0,0">
         <i:Interaction.Behaviors>
-            <custom:CustomApplicationBarBehaviour BackgroundColor="{StaticResource AppBarColour}">
+            <custom:CustomApplicationBarBehaviour >
                 <cimbalino:ApplicationBarIconButton Text="create user"
                                                     IconUri="/Icons/save.png"
                                                     Command="{Binding UpdateUserCommand}"
