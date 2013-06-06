@@ -342,7 +342,8 @@ namespace InTwo.ViewModel
                                 }
                                 else
                                 {
-                                    // TODO: Submit scores
+                                    SetProgressBar("Submitting score...");
+
                                     var score = new score
                                     {
                                         created = DateTime.Now.ToString(),
@@ -351,7 +352,15 @@ namespace InTwo.ViewModel
                                         value = RoundPoints.ToString()
                                     };
 
-                                    Messenger.Default.Send(new NotificationMessage(score, Constants.Messages.SubmitScoreMsg));
+                                    Messenger.Default.Send(new NotificationMessageAction<bool>(score, Constants.Messages.SubmitScoreMsg, success =>
+                                    {
+                                        if (success)
+                                        {
+                                            
+                                        }
+
+                                        SetProgressBar();
+                                    }));
                                 }
                             }
                         };

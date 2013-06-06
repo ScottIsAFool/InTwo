@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -40,10 +41,17 @@ namespace InTwo.ViewModel
                 if (m.Notification.Equals(Constants.Messages.SubmitScoreMsg))
                 {
                     var score = (score) m.Sender;
+
+                    await SubmitScore(score);
                 }
             });
         }
-        
+
+        private async Task SubmitScore(score score)
+        {
+            
+        }
+
         public player CurrentPlayer { get; set; }
         
         public string Username { get; set; }
