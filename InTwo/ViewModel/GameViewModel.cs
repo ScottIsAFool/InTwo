@@ -306,10 +306,9 @@ namespace InTwo.ViewModel
             ResetGameForNewRound();
         }
 
-        private bool musicIsPlaying;
         private void CheckIfMusicPlayingAndCanStopIt()
         {
-            if (musicIsPlaying)
+            if (IsMusicPlaying())
             {
                 if (App.SettingsWrapper.AppSettings.AllowStopMusic)
                 {
@@ -341,8 +340,12 @@ namespace InTwo.ViewModel
             {
                 StartNewGame();
             }
-            
+        }
+
+        private bool IsMusicPlaying()
+        {
             // TODO: Check whether music is actually playing or not   
+            return false;
         }
 
         private void StopMusic()
