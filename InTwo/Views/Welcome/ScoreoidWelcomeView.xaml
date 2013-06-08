@@ -64,7 +64,7 @@
                    Width="420"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Top"
-                   Margin="0,100,0,0" />
+                   Margin="0,140,0,0" />
             
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Center">
