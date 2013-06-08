@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using System.Windows.Controls;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
+using Nokia.Music.Types;
 
 namespace InTwo.Views
 {
@@ -15,6 +9,12 @@ namespace InTwo.Views
         public SettingsView()
         {
             InitializeComponent();
+        }
+
+        private void ListPicker_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedGenre = ((ListPicker) sender).SelectedItem as Genre;
+            App.SettingsWrapper.AppSettings.DefaultGenre = selectedGenre;
         }
     }
 }

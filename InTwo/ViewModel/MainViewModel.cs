@@ -45,6 +45,8 @@ namespace InTwo.ViewModel
             _settingsService = settingsService;
         }
 
+        public List<Genre> Genres { get; set; }
+
         public override void WireMessages()
         {
             Messenger.Default.Register<NotificationMessage>(this, m =>
@@ -70,6 +72,16 @@ namespace InTwo.ViewModel
             {
                 genres.Insert(0, new Genre {Name = GameViewModel.AllGenres});
             }
+
+            var comedyGenreCheck = genres.FirstOrDefault(x => x.Name.Equals("Comedy"));
+            if (comedyGenreCheck != default(Genre))
+            {
+                genres.Remove(comedyGenreCheck);
+            }
+
+            Genres = genres;
+
+            App.SettingsWrapper.AppSettings.DefaultGenre = Genres.FirstOrDefault(x => x.Name.Equals(App.SettingsWrapper.AppSettings.DefaultGenre.Name));
 
             Messenger.Default.Send(new NotificationMessage(genres, Constants.Messages.HereAreTheGenresMsg));
 

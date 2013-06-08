@@ -1,7 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
+using InTwo.ViewModel;
+using Nokia.Music.Types;
 using Scoreoid;
 
 namespace InTwo.Model
@@ -31,6 +34,8 @@ namespace InTwo.Model
                 });
                 PlayerWrapper = new PlayerWrapper();
             }
+            DefaultGameLength = TimeSpan.FromSeconds(2);
+            DefaultGenre = new Genre {Name = GameViewModel.AllGenres};
         }
 
         public bool ShowWelcomeMessage { get; set; }
@@ -40,6 +45,8 @@ namespace InTwo.Model
         public bool AllowStopMusic { get; set; }
         public bool UseProfilePictureInTile { get; set; }
         public bool UseTransparentTileBackground { get; set; }
+        public TimeSpan DefaultGameLength { get; set; }
+        public Genre DefaultGenre { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
 

@@ -7,6 +7,7 @@
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
                             xmlns:converters="clr-namespace:InTwo.Converters"
+                            xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -244,6 +245,28 @@
               Margin="12,0,12,0">
             <ScrollViewer DataContext="{Binding AppSettings, Source={StaticResource Settings}}">
                 <StackPanel Orientation="Vertical">
+                    <TextBlock Text="GAME DEFAULTS"
+                               Style="{StaticResource HeaderStyle}" />
+                    <controls:TimeSpanPicker Template="{StaticResource CustomTimeSpanPickerStyle}"
+                                             Header="Default time to guess:"
+                                             Value="{Binding DefaultGameLength, Mode=TwoWay}"
+                                             Max="00:00:30"/>
+                    <toolkit:ListPicker ItemsSource="{Binding Main.Genres, Source={StaticResource Locator}}"
+                                        Header="Default genre:"
+                                        SelectionChanged="ListPicker_OnSelectionChanged"
+                                        SelectionMode="Single">
+                        <toolkit:ListPicker.FullModeItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"
+                                           Style="{StaticResource PhoneTextLargeStyle}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.FullModeItemTemplate>
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
+                    </toolkit:ListPicker>
                     <TextBlock Text="PROMPTS"
                                Style="{StaticResource HeaderStyle}" />
                     <CheckBox Content="Don't show exit check in game view"

@@ -33,7 +33,7 @@ namespace InTwo.ViewModel
         private List<Product> _tracks;
         private readonly DispatcherTimer _gameTimer;
 
-        private bool alreadyAskedAboutMusic;
+        private bool _alreadyAskedAboutMusic;
 
         /// <summary>
         /// Initializes a new instance of the GameViewModel class.
@@ -321,7 +321,7 @@ namespace InTwo.ViewModel
         {
             if (IsMusicPlaying())
             {
-                if (App.SettingsWrapper.AppSettings.AllowStopMusic || alreadyAskedAboutMusic)
+                if (App.SettingsWrapper.AppSettings.AllowStopMusic || _alreadyAskedAboutMusic)
                 {
                     StopMusic();
                 }
@@ -340,7 +340,7 @@ namespace InTwo.ViewModel
                     {
                         if (args.Result == CustomMessageBoxResult.LeftButton)
                         {
-                            alreadyAskedAboutMusic = true;
+                            _alreadyAskedAboutMusic = true;
                             StopMusic();
                             StartNewGame();
                         }
@@ -420,7 +420,12 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(CheckIfMusicPlayingAndCanStopIt);
+                return new RelayCommand(() =>
+                {
+                    GameLength = App.SettingsWrapper.AppSettings.DefaultGameLength;
+                    SelectedGenre = App.SettingsWrapper.AppSettings.DefaultGenre;
+                    CheckIfMusicPlayingAndCanStopIt();
+                });
             }
         }
 
