@@ -18,9 +18,8 @@
   <!-- The App element allows you to override the values that are extracted from the WMAppManifest.xml file automatically -->
   <!-- The AdditionalNotes attribute has no equivalent in the WMAppManifest.xml; you can only define its content here -->
   <!-- Explicitly set any of the attributes to an empty string to remove it (including its label) from the dialog -->
-  <App Author="[Your name here]"
-       Publisher="[Publisher]"       
-       AdditionalNotes="[Fill in additional info here]" />
+  <App Author="ScottIsAFool"
+       Publisher="ScottLovegrove" />
   <Items>
     <!-- Create a MainItem entry to configure the front page -->
     <!-- The Titel attribute defines the title of the pivot item -->
@@ -40,12 +39,15 @@
         <!-- By using different protocols like http or mailto you can invoke the respective applications -->
         <!-- The Label attribute defines an additional label placed in front of the hyperlink -->
         <!-- Use this to provide contact/support details for your app -->
-        <Link NavigateUri="http://www.example.com"
+        <!--<Link NavigateUri="http://www.example.com"
               Content="http://www.example.com"
-              Label="Web:" />
-        <Link NavigateUri="mailto:support@example.com"
-              Content="support@example.com"
+              Label="Web:" />-->
+        <Link NavigateUri="mailto:intwoapp@outlook.com"
+              Content="intwoapp@outlook.com"
               Label="Support:" />
+        <Link NavigateUri="http://twitter.com/InTwoApp"
+              Content="@InTwoApp"
+              Label="Twitter:"/>
       </Links>
     </MainItem>
     <!-- For each additional pivot item, add a separate Item entry. Ideas for items are: license, tutorial or help, version history, show room for other apps from you etc. -->
@@ -54,8 +56,8 @@
     <!-- Supported types are "text" and "xaml", where text is nicely formatted automatically, and XAML is handled by the built-in XamlReader -->
     <Item Title="history"
           Type="text">
-      1.0.0.0
-      This is the initial public version.      
+      0.0.0.x
+      This is the beta version.      
     </Item>
   </Items>
 </About>
