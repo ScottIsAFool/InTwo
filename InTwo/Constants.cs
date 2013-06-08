@@ -58,6 +58,7 @@
             public const string RefreshCurrentPlayerInfoMsg = "RefreshCurrentPlayerInfoMsg";
             public const string SubmitScoreMsg = "SubmitScoreMsg";
             public const string UpdatePrimaryTileMsg = "UpdatePrimaryTileMsg";
+            public const string RequestScoreMsg = "RequestScoreMsg";
         }
 
         public static class Pages

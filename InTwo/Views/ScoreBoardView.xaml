@@ -127,7 +127,7 @@
                 </phone:LongListSelector.ItemTemplate>
                 <phone:LongListSelector.ListHeader>
                     <Grid Margin="0,0,0,12">
-                        <TextBlock Text="{Binding AppSettings.PlayerWrapper.best_score, Source={StaticResource Settings}, StringFormat='Your current score was \{0\}!!'}"
+                        <TextBlock Text="{Binding MostRecentScore, StringFormat='Your current score was \{0\}!!'}"
                                    Style="{StaticResource PhoneTextTitle2Style}" />
                     </Grid>
                 </phone:LongListSelector.ListHeader>

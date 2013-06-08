@@ -26,24 +26,25 @@ namespace InTwo.ViewModel
             if (IsInDesignMode)
             {
                 ScoreBoardItems = new List<player>
+                {
+                    new player
                     {
-                        new player
-                            {
-                                first_name = "Scott",
-                                last_name = "Lovegrove",
-                                username = "scottisafool",
-                                best_score = "336",
-                                rank = "1"
-                            },
-                        new player
-                            {
-                                first_name = "Mel",
-                                last_name = "Sheppard",
-                                username = "msheppard27",
-                                best_score = "335",
-                                rank = "2",
-                            }
-                    };
+                        first_name = "Scott",
+                        last_name = "Lovegrove",
+                        username = "scottisafool",
+                        best_score = "336",
+                        rank = "1"
+                    },
+                    new player
+                    {
+                        first_name = "Mel",
+                        last_name = "Sheppard",
+                        username = "msheppard27",
+                        best_score = "335",
+                        rank = "2",
+                    }
+                };
+                MostRecentScore = 336;
             }
         }
 
@@ -77,6 +78,7 @@ namespace InTwo.ViewModel
         }
         
         public List<player> ScoreBoardItems { get; set; }
+        public int MostRecentScore { get; set; }
 
         public RelayCommand ScoreBoardPageLoaded
         {
@@ -84,6 +86,11 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    Messenger.Default.Send(new NotificationMessageAction<int>(Constants.Messages.RequestScoreMsg, score =>
+                    {
+                        MostRecentScore = score;
+                    }
+                ));
                     await GetAllScoreData(false);
                 });
             }
