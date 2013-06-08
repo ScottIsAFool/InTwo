@@ -531,6 +531,12 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                 {
+                    if (GameLength.Seconds == 0)
+                    {
+                        MessageBox.Show("Really? You think you can do it in 0 seconds? Well, as good as you think you are, you have to select at least 1 second. Sorry.", "Sorry", MessageBoxButton.OK);
+                        return;
+                    }
+
                     CheckIfMusicPlayingAndCanStopIt();
 
                     GameLocked = true;

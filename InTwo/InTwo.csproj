@@ -192,6 +192,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Content Include="Content\About\AboutStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Content>
     <Page Include="Controls\ProfilePicture.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -286,6 +290,7 @@
     <Content Include="Assets\Tiles\TransparentFlipCycleTileLarge.png" />
     <Content Include="Assets\Tiles\TransparentFlipCycleTileMedium.png" />
     <Content Include="Assets\Tiles\TransparentFlipCycleTileSmall.png" />
+    <Content Include="Content\About\Data.xml" />
     <Content Include="FodyWeavers.xml" />
     <Content Include="Icons\appbar.microphone.png" />
     <Content Include="Icons\appbar.repeat.png" />
@@ -437,6 +442,9 @@
     </Reference>
     <Reference Include="WriteableBitmapExWinPhoneXnaDependant">
       <HintPath>..\packages\WriteableBitmapEx.1.0.7.0\lib\WindowsPhone8\WriteableBitmapExWinPhoneXnaDependant.dll</HintPath>
+    </Reference>
+    <Reference Include="YourLastAboutDialog">
+      <HintPath>..\packages\YLAD.2.1.0\lib\windowsphone8\YourLastAboutDialog.dll</HintPath>
     </Reference>
     <Reference Include="Zlib.Portable">
       <HintPath>..\packages\Zlib.Portable.1.9.2\lib\portable-net4+sl4+wp71+win8\Zlib.Portable.dll</HintPath>
