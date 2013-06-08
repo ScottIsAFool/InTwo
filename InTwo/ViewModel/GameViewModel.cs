@@ -361,12 +361,12 @@ namespace InTwo.ViewModel
             return musicPlaying;
         }
 
-        private void StopMusic()
+        private static void StopMusic()
         {
             MediaPlayer.Pause();
         }
 
-        private async void SubmitScore()
+        private void SubmitScore()
         {
             SetProgressBar("Submitting score...");
 
