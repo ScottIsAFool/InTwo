@@ -112,6 +112,7 @@
       <DependentUpon>Tile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ArrayToStringConverter.cs" />
+    <Compile Include="Converters\BooleanToObjectConverter.cs" />
     <Compile Include="Converters\BooleanToOpacityConverter.cs" />
     <Compile Include="Converters\CanSendOrUpdateConverter.cs" />
     <Compile Include="Converters\CurrentUserConverter.cs" />

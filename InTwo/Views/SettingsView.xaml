@@ -6,6 +6,7 @@
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:converters="clr-namespace:InTwo.Converters"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -186,6 +187,13 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <converters:BooleanToObjectConverter x:Key="SubtleBrushConverter"
+                                             TrueValue="{StaticResource PhoneTextSubtleStyle}"
+                                             FalseValue="{StaticResource PhoneTextNormalStyle}"/>
+        <converters:BooleanToObjectConverter x:Key="OpacityConverter"
+                                             TrueValue="0.7"
+                                             FalseValue="1"/>
     </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -254,11 +262,12 @@
                               IsEnabled="{Binding PlayerWrapper.CurrentPlayer, Converter={StaticResource NullBooleanConverter}}" />
 
                     <TextBlock Text="Which style tile would you like?"
-                               Style="{StaticResource PhoneTextNormalStyle}"/>
+                               Style="{Binding UseProfilePictureInTile, Converter={StaticResource SubtleBrushConverter}}"/>
                     <StackPanel Orientation="Horizontal">
                         <RadioButton IsChecked="{Binding UseTransparentTileBackground, Mode=TwoWay, Converter={StaticResource NegativeBooleanConverter}}"
                                      Style="{StaticResource RadioSelectionTemplate}"
-                                     IsEnabled="{Binding UseProfilePictureInTile, Converter={StaticResource NegativeBooleanConverter}}">
+                                     IsEnabled="{Binding UseProfilePictureInTile, Converter={StaticResource NegativeBooleanConverter}}"
+                                     Opacity="{Binding UseProfilePictureInTile, Converter={StaticResource OpacityConverter}}">
                             <Image Height="173"
                                    Width="173"
                                    Source="/Assets/Tiles/FlipCycleTileMedium.png" />
@@ -266,7 +275,8 @@
                         <RadioButton Style="{StaticResource RadioSelectionTemplate}"
                                      HorizontalContentAlignment="Left"
                                      IsChecked="{Binding UseTransparentTileBackground}"
-                                     IsEnabled="{Binding UseProfilePictureInTile, Converter={StaticResource NegativeBooleanConverter}}">
+                                     IsEnabled="{Binding UseProfilePictureInTile, Converter={StaticResource NegativeBooleanConverter}}"
+                                     Opacity="{Binding UseProfilePictureInTile, Converter={StaticResource OpacityConverter}}">
                             <Border Height="173"
                                     Width="173"
                                     Background="{StaticResource PhoneAccentBrush}">
