@@ -39,6 +39,7 @@ namespace InTwo.Model
         public bool DontShowAllowStopMusicMessage { get; set; }
         public bool AllowStopMusic { get; set; }
         public bool UseProfilePictureInTile { get; set; }
+        public bool UseTransparentTileBackground { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
     }
