@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Media;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
@@ -51,6 +52,7 @@ namespace InTwo.Model
         public Genre DefaultGenre { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
+        public Color UsersAccentBrush { get; set; }
 
         private void OnDefaultGameLengthChanged()
         {

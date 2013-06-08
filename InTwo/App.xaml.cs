@@ -71,6 +71,8 @@ namespace InTwo
 
             // Language display initialization
 
+            SettingsWrapper.AppSettings.UsersAccentBrush = (Color) Current.Resources["PhoneAccentColor"];
+
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Magenta);
 

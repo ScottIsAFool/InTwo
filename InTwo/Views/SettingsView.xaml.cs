@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using System.Windows.Media;
 using Microsoft.Phone.Controls;
 using Nokia.Music.Types;
 

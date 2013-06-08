@@ -20,16 +20,19 @@ namespace InTwo
 
         public async void UpdatePrimaryTile()
         {
-            var score = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScore;
-            var genre = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScoreGenre;
+            if (App.CurrentPlayer != null)
+            {
+                var score = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScore;
+                var genre = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScoreGenre;
 
-            // Create wide tile image
-            //var wideTileCreated = await new Tile(score, genre, Tile.TileTypes.Wide).SaveWideTile();
+                // Create wide tile image
+                //var wideTileCreated = await new Tile(score, genre, Tile.TileTypes.Wide).SaveWideTile();
 
-            //// Create normal tile image
-            //var normalTileCreated = await new Tile(score, genre, Tile.TileTypes.Normal).SaveNormalTile();
+                //// Create normal tile image
+                //var normalTileCreated = await new Tile(score, genre, Tile.TileTypes.Normal).SaveNormalTile();
 
-            //var shellData = await CreateTileData(wideTileCreated, normalTileCreated, true);
+                //var shellData = await CreateTileData(wideTileCreated, normalTileCreated, true);
+            }
 
             var shellData = await CreateTileData(false, false, true);
 
@@ -60,7 +63,7 @@ namespace InTwo
             {
                 BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileIsoUri, UriKind.RelativeOrAbsolute) : null,
                 WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileIsoUri, UriKind.RelativeOrAbsolute) : null,
-                BackTitle = showUsername ? App.CurrentPlayer.username : string.Empty,
+                BackTitle = (showUsername && App.CurrentPlayer != null) ? App.CurrentPlayer.username : string.Empty,
                 BackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Medium),
                 WideBackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Large),
                 SmallBackgroundImage = CreateFrontTileImageUrl(false, TileSize.Small),
