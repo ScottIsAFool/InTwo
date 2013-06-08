@@ -489,6 +489,7 @@ namespace InTwo.ViewModel
                     if (result == MessageBoxResult.OK)
                     {
                         RoundNumber++;
+                        AudioUrl = null;
                         CanShowAnswers = true;
                     }
                 });
