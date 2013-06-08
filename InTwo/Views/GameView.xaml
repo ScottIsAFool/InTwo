@@ -188,7 +188,8 @@
                                     Visibility="{Binding CanShowAnswers, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                             <toolkit:PhoneTextBox Hint="enter artist guess"
                                                   Text="{Binding ArtistGuess, Mode=TwoWay}"
-                                                  InputScope="Text">
+                                                  InputScope="Text"
+                                                  IsEnabled="{Binding GameLocked}">
                                 <i:Interaction.Behaviors>
                                     <behaviours:EnterKeyHandler />
                                     <scottbehaviours:UpdateTextBindingOnPropertyChanged />
@@ -196,7 +197,8 @@
                             </toolkit:PhoneTextBox>
                             <toolkit:PhoneTextBox Hint="enter song guess"
                                                   Text="{Binding SongGuess, Mode=TwoWay}"
-                                                  InputScope="Text">
+                                                  InputScope="Text"
+                                                  IsEnabled="{Binding GameLocked}">
                                 <i:Interaction.Behaviors>
                                     <behaviours:EnterKeyHandler />
                                     <scottbehaviours:UpdateTextBindingOnPropertyChanged />

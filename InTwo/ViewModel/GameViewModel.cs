@@ -134,7 +134,7 @@ namespace InTwo.ViewModel
 
         public bool IsLastRound
         {
-            get { return RoundPoints == Constants.MaximumNumberOfRounds; }
+            get { return RoundNumber == Constants.MaximumNumberOfRounds; }
         }
 
         public int AppBarIndex
@@ -186,12 +186,10 @@ namespace InTwo.ViewModel
                 score += Constants.Scores.CorrectSongAndArtistBonus;
             }
 
-            AdjustScoreForGameLength(score);
-
-            MaximumRoundPoints = score;
+            MaximumRoundPoints = AdjustScoreForGameLength(score); 
         }
 
-        private void AdjustScoreForGameLength(int score)
+        private int AdjustScoreForGameLength(int score)
         {
             var seconds = GameLength.Seconds;
 
@@ -218,6 +216,8 @@ namespace InTwo.ViewModel
             {
                 score = (int)Math.Floor(score * 0.5);
             }
+
+            return score;
         }
         #endregion
 
@@ -264,22 +264,24 @@ namespace InTwo.ViewModel
 
             Utils.SeeIfWeHaveAWinner(GameTrack, ArtistGuess, SongGuess, out artistGuessCorrect, out songGuessCorrect);
 
+            var score = 0;
+
             if (artistGuessCorrect)
             {
-                RoundPoints += Constants.Scores.CorrectArtist;
+                score += Constants.Scores.CorrectArtist;
             }
 
             if (songGuessCorrect)
             {
-                RoundPoints += Constants.Scores.CorrectSong;
+                score += Constants.Scores.CorrectSong;
             }
 
             if (artistGuessCorrect && songGuessCorrect)
             {
-                RoundPoints += Constants.Scores.CorrectSongAndArtistBonus;
+                score += Constants.Scores.CorrectSongAndArtistBonus;
             }
 
-            AdjustScoreForGameLength(RoundPoints);
+            RoundPoints = AdjustScoreForGameLength(score);
 
             return (artistGuessCorrect || songGuessCorrect);
         }
@@ -476,6 +478,7 @@ namespace InTwo.ViewModel
 
                     if (result == MessageBoxResult.OK)
                     {
+                        RoundNumber++;
                         CanShowAnswers = true;
                     }
                 });
