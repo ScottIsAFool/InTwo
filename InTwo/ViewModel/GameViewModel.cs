@@ -109,7 +109,7 @@ namespace InTwo.ViewModel
         public Genre SelectedGenre { get; set; }
         public Product GameTrack { get; set; }
         public Uri AudioUrl { get; set; }
-        public Uri ArtistImage { get { return CanShowAnswers ? GameTrack.Thumb320Uri : null; } }
+        public Uri ArtistImage { get { return CanShowAnswers ? GameTrack.Thumb320Uri : new Uri("/Images/ArtistImagePlaceholder.png", UriKind.Relative); } }
         public TimeSpan GameLength { get; set; }
         public bool IsPlaying { get; set; }
 
