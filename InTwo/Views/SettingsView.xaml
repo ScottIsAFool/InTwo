@@ -278,6 +278,9 @@
                     <CheckBox Content="Allow In Two to stop your music"
                               VerticalAlignment="Top"
                               IsChecked="{Binding AllowStopMusic, Mode=TwoWay}" />
+                    <CheckBox Content="Don't prompt to sign in"
+                              VerticalAlignment="Top"
+                              IsChecked="{Binding DontShowNotSignedInMessage, Mode=TwoWay}"/>
                     <TextBlock Text="TILE"
                                Style="{StaticResource HeaderStyle}" />
                     <CheckBox Content="Use profile picture (if set) for tile front"

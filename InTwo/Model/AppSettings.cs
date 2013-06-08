@@ -42,6 +42,7 @@ namespace InTwo.Model
         public bool DontShowSpeechGuessprompt { get; set; }
         public bool DontShowBackExitMessage { get; set; }
         public bool DontShowAllowStopMusicMessage { get; set; }
+        public bool DontShowNotSignedInMessage { get; set; }
         public bool AllowStopMusic { get; set; }
         public bool UseProfilePictureInTile { get; set; }
         public bool UseTransparentTileBackground { get; set; }

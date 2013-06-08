@@ -373,6 +373,35 @@ namespace InTwo.ViewModel
 
         private void SubmitScore()
         {
+            if (App.CurrentPlayer == null)
+            {
+                var message = new CustomMessageBox
+                {
+                    Title = "Not logged in",
+                    Message = "You need to be logged in in order to submit your score. You can just play for fun, of course, but let's not be anti-social.",
+                    LeftButtonContent = "sign in",
+                    RightButtonContent= "just carry on",
+                    Content = Utils.CreateDontShowCheckBox("DontShowNotSignedInMessage")
+                };
+
+                message.Dismissed += (sender, args) =>
+                {
+                    ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
+                    if (args.Result == CustomMessageBoxResult.LeftButton)
+                    {
+                        
+                    }
+                };
+                message.Show();
+            }
+            else
+            {
+                ActuallySubmitTheScore();
+            }
+        }
+
+        private void ActuallySubmitTheScore()
+        {
             SetProgressBar("Submitting score...");
 
             SubmittingScore = true;
