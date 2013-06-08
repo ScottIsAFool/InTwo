@@ -50,7 +50,7 @@ namespace InTwo
 
             if (!string.IsNullOrEmpty(songGuess))
             {
-                CheckWords(gameTrack, songGuess, ref artistGuessCorrect);
+                CheckWords(gameTrack, songGuess, ref songGuessCorrect);
             }
         }
 

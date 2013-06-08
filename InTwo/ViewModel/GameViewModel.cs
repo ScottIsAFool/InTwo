@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -243,6 +244,9 @@ namespace InTwo.ViewModel
                 GameTrack = genreTracks[randomNumber];
             }
 
+            Debug.WriteLine("Artist: {0}", GameTrack.Performers[0].Name);
+            Debug.WriteLine("Track: {0}", GameTrack.Name);
+
             AudioUrl = GameTrack.GetSampleUri();
         }
 
@@ -253,6 +257,7 @@ namespace InTwo.ViewModel
             ArtistGuess = string.Empty;
             SongGuess = string.Empty;
             RoundPoints = 0;
+            RoundNumber = 0;
 
             CalculateAvailableScore();
         }
