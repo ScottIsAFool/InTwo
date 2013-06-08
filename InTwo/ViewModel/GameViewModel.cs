@@ -9,11 +9,14 @@ using GalaSoft.MvvmLight.Messaging;
 using InTwo.Controls;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
+using Microsoft.Xna.Framework.Media;
 using Nokia.Music.Types;
 using Scoreoid;
 using ScottIsAFool.WindowsPhone.ViewModel;
 using Windows.Phone.Speech.Recognition;
 using Windows.System;
+using Artist = Nokia.Music.Types.Artist;
+using Genre = Nokia.Music.Types.Genre;
 
 namespace InTwo.ViewModel
 {
@@ -29,6 +32,8 @@ namespace InTwo.ViewModel
         public const string AllGenres = "All Genres";
         private List<Product> _tracks;
         private readonly DispatcherTimer _gameTimer;
+
+        private bool alreadyAskedAboutMusic;
 
         /// <summary>
         /// Initializes a new instance of the GameViewModel class.
@@ -314,7 +319,7 @@ namespace InTwo.ViewModel
         {
             if (IsMusicPlaying())
             {
-                if (App.SettingsWrapper.AppSettings.AllowStopMusic)
+                if (App.SettingsWrapper.AppSettings.AllowStopMusic || alreadyAskedAboutMusic)
                 {
                     StopMusic();
                 }
@@ -333,6 +338,7 @@ namespace InTwo.ViewModel
                     {
                         if (args.Result == CustomMessageBoxResult.LeftButton)
                         {
+                            alreadyAskedAboutMusic = true;
                             StopMusic();
                             StartNewGame();
                         }
@@ -346,15 +352,16 @@ namespace InTwo.ViewModel
             }
         }
 
-        private bool IsMusicPlaying()
+        private static bool IsMusicPlaying()
         {
-            // TODO: Check whether music is actually playing or not   
-            return false;
+            var musicPlaying = !MediaPlayer.GameHasControl;
+
+            return musicPlaying;
         }
 
         private void StopMusic()
         {
-            
+            MediaPlayer.Pause();
         }
 
         private async void SubmitScore()
@@ -481,6 +488,8 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                 {
+                    CheckIfMusicPlayingAndCanStopIt();
+
                     GameLocked = true;
 
                     SetNextRound();
