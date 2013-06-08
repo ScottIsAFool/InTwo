@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using InTwo.Controls;
+using Microsoft.Phone.Controls;
 
 namespace InTwo
 {
@@ -54,21 +55,39 @@ namespace InTwo
         private static async Task<ShellTileServiceFlipTileData> CreateTileData(bool wideTileCreated, bool normalTileCreated, bool showUsername)
         {
             var useProfilePicture = await ShouldUseUserProfilePicture();
+
             var shell = new ShellTileServiceFlipTileData
             {
                 BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileIsoUri, UriKind.RelativeOrAbsolute) : null,
                 WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileIsoUri, UriKind.RelativeOrAbsolute) : null,
                 BackTitle = showUsername ? App.CurrentPlayer.username : string.Empty,
-                BackgroundImage = useProfilePicture
-                                      ? new Uri(string.Format(Constants.Tiles.UserProfileIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute)
-                                      : new Uri(Constants.Tiles.AppNormalTile, UriKind.Relative),
-                WideBackgroundImage = useProfilePicture
-                                          ? new Uri(string.Format(Constants.Tiles.UserProfileWideIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute)
-                                          : new Uri(Constants.Tiles.AppWideTile, UriKind.Relative),
+                BackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Medium),
+                WideBackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Large),
+                SmallBackgroundImage = CreateFrontTileImageUrl(false, TileSize.Small),
                 Title = useProfilePicture ? "In Two" : string.Empty
             };
 
             return shell;
+        }
+
+        private static Uri CreateFrontTileImageUrl(bool useProfilePicture, TileSize tileSize)
+        {
+            if (useProfilePicture)
+            {
+                switch (tileSize)
+                {
+                    case TileSize.Large:
+                        return new Uri(string.Format(Constants.Tiles.UserProfileWideIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute);
+                    case TileSize.Medium:
+                        return new Uri(string.Format(Constants.Tiles.UserProfileIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute);
+                    default:
+                        return null;
+                }
+            }
+            
+            var transparentText = App.SettingsWrapper.AppSettings.UseTransparentTileBackground ? "Transparent" : string.Empty;
+                
+            return new Uri(string.Format(Constants.Tiles.AppTileFormat, transparentText, tileSize), UriKind.Relative);
         }
 
         private static async Task<bool> ShouldUseUserProfilePicture()
@@ -93,5 +112,7 @@ namespace InTwo
                 await asyncService.DeleteFileAsync(Constants.Tiles.WideTileFile);
             }
         }
+
+        
     }
 }

@@ -45,8 +45,7 @@
             public const string UserProfileFileFormat = SharedFolderPath + "{0}.jpg";
             public const string UserProfileWideIsoUriFormat = SharedFolderIsoPath + "{0}-Wide.jpg";
             public const string UserProfileWideFileFormat = SharedFolderPath + "{0}-Wide.jpg";
-            public const string AppNormalTile = "/Assets/Tiles/FlipCycleTileMedium.png";
-            public const string AppWideTile = "/Assets/Tiles/FlipCycleTileLarge.png";
+            public const string AppTileFormat = "/Assets/Tiles/{0}FlipCycleTile{1}.png";
         }
 
         public static class Messages

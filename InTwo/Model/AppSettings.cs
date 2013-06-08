@@ -42,6 +42,21 @@ namespace InTwo.Model
         public bool UseTransparentTileBackground { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
+
+        private void OnUseProfilePictureInTileChanged()
+        {
+            UpdateTile();
+        }
+
+        private void OnUseTransparentTileBackgroundChanged()
+        {
+            UpdateTile();
+        }
+
+        private static void UpdateTile()
+        {
+            Messenger.Default.Send(new NotificationMessage(Constants.Messages.UpdatePrimaryTileMsg));
+        }
     }
 
     public class SuperImageSourceCollection : ObservableCollection<SuperImageSource>{}
