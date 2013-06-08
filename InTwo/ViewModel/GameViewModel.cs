@@ -389,7 +389,7 @@ namespace InTwo.ViewModel
                     ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
                     if (args.Result == CustomMessageBoxResult.LeftButton)
                     {
-                        
+                        _navigationService.NavigateTo(Constants.Pages.Scoreoid.SignIn);
                     }
                 };
                 message.Show();

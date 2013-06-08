@@ -70,7 +70,7 @@
                                                       Command="{Binding RemoveAdsCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="about"
                                                       Command="{Binding NavigateToPage}"
-                                                      CommandParameter="/ylad;component/something.xaml" />
+                                                      CommandParameter="/YourLastAboutDialog;component/AboutPage.xaml" />
                 </custom:CustomApplicationBarBehaviour.MenuItems>
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>

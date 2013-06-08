@@ -120,11 +120,13 @@ namespace InTwo.ViewModel
                         ProgressIsVisible = true;
                         ProgressText = "Creating user...";
 
-                        var response = await _scoreoidClient.CreatePlayerAsync(CurrentPlayer);
+                        await _scoreoidClient.CreatePlayerAsync(CurrentPlayer);
 
                         App.CurrentPlayer = CurrentPlayer;
 
-                        MessageBox.Show(response, "Success", MessageBoxButton.OK);
+                        MessageBox.Show("Player created successfully, you can now sign in with this username.", "Success", MessageBoxButton.OK);
+
+                        _navigationService.GoBack();
                     }
                     catch (ScoreoidException ex)
                     {

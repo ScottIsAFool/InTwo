@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Messaging;
+using InTwo.ViewModel;
 using Microsoft.Phone.Controls;
 
 namespace InTwo.Views
@@ -50,6 +52,15 @@ namespace InTwo.Views
 
                     message.Show();
                 });
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                ((GameViewModel)DataContext).SubmitScoreCommand.Execute(null);
             }
         }
     }
