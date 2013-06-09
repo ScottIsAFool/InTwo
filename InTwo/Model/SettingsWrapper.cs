@@ -10,5 +10,6 @@ namespace InTwo.Model
         }
 
         public AppSettings AppSettings { get; set; }
+        public bool HasRemovedAds { get; set; }
     }
 }

@@ -115,9 +115,11 @@ namespace InTwo
         {
             var settingsService = ServiceLocator.Current.GetInstance<IApplicationSettingsService>();
 
-            var appSettings = settingsService.Get("AppSettings", new AppSettings());
+            var appSettings = settingsService.Get(Constants.Settings.AppSettings, new AppSettings());
+            var hasRemovedAds = settingsService.Get(Constants.Settings.HasRemovedAds, false);
 
             SettingsWrapper.AppSettings = appSettings;
+            SettingsWrapper.HasRemovedAds = hasRemovedAds;
         }
 
         private static void SetFlurry()
@@ -150,7 +152,7 @@ namespace InTwo
         {
             var settingsService = ServiceLocator.Current.GetInstance<IApplicationSettingsService>();
 
-            settingsService.Set("AppSettings", SettingsWrapper.AppSettings);
+            settingsService.Set(Constants.Settings.AppSettings, SettingsWrapper.AppSettings);
 
             settingsService.Save();
         }

@@ -23,6 +23,8 @@
         public static readonly string ProfilePictureStorageFilePath = ProfilePicturesFolder + "\\{0}.jpg";
         public const string GameDataFile = "GameData.json";
 
+        public const string RemoveAdsProduct = "RemoveAds";
+
         public const int MaximumNumberOfRounds = 5;
 
         public static class Scores
@@ -71,6 +73,7 @@
             public const string Settings = ViewsPath + "SettingsView.xaml";
             public const string DownloadingSongs = ViewsPath + "DownloadingSongsView.xaml";
             public const string Game = ViewsPath + "GameView.xaml";
+            public const string Removeads = ViewsPath + "RemoveAdsView.xaml";
 
             public static class Scoreoid
             {
@@ -89,6 +92,12 @@
                 public const string DownloadSongsNow = WelcomePath + "DownloadDataNowView.xaml";
                 public const string StopMusic = WelcomePath + "StopMusicView.xaml";
             }
+        }
+
+        public static class Settings
+        {
+            public const string HasRemovedAds = "HasRemovedAds";
+            public const string AppSettings = "AppSettings";
         }
     }
 }

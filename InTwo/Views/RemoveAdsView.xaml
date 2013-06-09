@@ -1,20 +1,19 @@
-﻿<phone:PhoneApplicationPage x:Class="InTwo.Views.MainPage"
+﻿<phone:PhoneApplicationPage x:Class="InTwo.Views.RemoveAdsView"
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                            xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
-                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:ignore="http://www.ignore.com"
                             xmlns:controls="clr-namespace:InTwo.Controls"
-                            xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
-                            xmlns:converters="clr-namespace:InTwo.Converters"
-                            xmlns:custom="clr-namespace:InTwo.Behaviours"
                             xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
-                            xmlns:ad="clr-namespace:Inneractive.Nokia.Ad;assembly=Inneractive.Ad"
-                            mc:Ignorable="d"
+                            xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                            xmlns:custom="clr-namespace:InTwo.Behaviours"
+                            xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
+                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                            xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
+                            mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -22,24 +21,20 @@
                             Orientation="Portrait"
                             shell:SystemTray.IsVisible="True"
                             shell:SystemTray.Opacity="0"
-                            DataContext="{Binding Main, Source={StaticResource Locator}}">
+                            DataContext="{Binding RemoveAds, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding MainPageLoaded}" />
+            <command:EventToCommand Command="{Binding RemoveAdsPageLoaded}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
-
-    <phone:PhoneApplicationPage.Resources>
-        <converters:UserLoggedInConverter x:Key="UserLoggedInConverter" />
-    </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
-                <toolkit:SlideTransition Mode="SlideRightFadeOut" />
+                <toolkit:TurnstileTransition Mode="BackwardIn" />
             </toolkit:NavigationInTransition.Backward>
             <toolkit:NavigationInTransition.Forward>
-                <toolkit:SlideTransition Mode="SlideLeftFadeIn" />
+                <toolkit:TurnstileTransition Mode="ForwardIn" />
             </toolkit:NavigationInTransition.Forward>
         </toolkit:NavigationInTransition>
     </toolkit:TransitionService.NavigationInTransition>
@@ -57,25 +52,13 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
+
         <i:Interaction.Behaviors>
-            <custom:CustomApplicationBarBehaviour Mode="Minimized">
-                <custom:CustomApplicationBarBehaviour.MenuItems>
-                    <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
-                                                      Command="{Binding LoginLogoutCommand}" />
-                    <cimbalino:ApplicationBarMenuItem Text="settings"
-                                                      Command="{Binding GoToSettingsCommand}" />
-                    <cimbalino:ApplicationBarMenuItem Text="refresh game data"
-                                                      Command="{Binding RefreshGameDataCommand}" />
-                    <cimbalino:ApplicationBarMenuItem Text="remove ads"
-                                                      Command="{Binding RemoveAdsCommand}"
-                                                      IsVisible="{Binding HasRemovedAds, Source={StaticResource Settings}}"/>
-                    <cimbalino:ApplicationBarMenuItem Text="about"
-                                                      Command="{Binding NavigateToPage}"
-                                                      CommandParameter="/YourLastAboutDialog;component/AboutPage.xaml" />
-                </custom:CustomApplicationBarBehaviour.MenuItems>
+            <custom:CustomApplicationBarBehaviour>
+                <cimbalino:ApplicationBarIconButton></cimbalino:ApplicationBarIconButton>
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
-
+        
         <coding4Fun:SuperImage Stretch="UniformToFill"
                                Opacity="0.5">
             <coding4Fun:SuperImage.Sources>
@@ -104,37 +87,28 @@
                        Height="20"
                        HorizontalAlignment="Left"
                        Margin="12,0" />
+                <TextBlock Text="remove ads"
+                           Margin="9,-7,0,0"
+                           Style="{StaticResource PhoneTextTitle1Style}" />
             </StackPanel>
-
-            <Button Style="{StaticResource EmptyButtonStyle}"
-                    toolkit:TiltEffect.IsTiltEnabled="True"
-                    Command="{Binding NavigateToPage}"
-                    CommandParameter="/Views/Scoreoid/UserProfileView.xaml"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    HorizontalContentAlignment="Left"
-                    VerticalContentAlignment="Top"
-                    Grid.Row="0"
-                    Visibility="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
-                    Margin="0,24,24,0">
-                <controls:ProfilePicture IsClipped="True"
-                                         Height="50" />
-            </Button>
 
             <!--ContentPanel - place additional content here-->
             <Grid x:Name="ContentPanel"
                   Grid.Row="1"
                   Margin="12,0,12,0">
-
-                <Button Content="game"
-                        Command="{Binding GoToGameCommand}"
-                        VerticalAlignment="Top" />
-                <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
-                                  AdType="IaAdType_Banner"
-                                  ReloadTime="30"
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Bottom"
-                                  Margin="0,0,0,30" />
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Thanks for considering to remove the ads, it means I'll get to buy a chocolate bar, but more importantly it means that encouragement is given to continue developing this app."
+                               VerticalAlignment="Top"
+                               TextWrapping="Wrap"
+                               Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBlock Text="Well, either that or you really dislike ads!"
+                               Style="{StaticResource PhoneTextNormalStyle}"
+                               Margin="12"/>
+                    <TextBlock Text="Click the purchase button below to remove the ads."
+                               TextWrapping="Wrap"
+                               Style="{StaticResource PhoneTextNormalStyle}"
+                               Margin="12" />
+                </StackPanel>
             </Grid>
         </Grid>
         <!--Uncomment to see an alignment grid to help ensure your controls are
