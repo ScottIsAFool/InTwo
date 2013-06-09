@@ -11,6 +11,7 @@
                             xmlns:controls="clr-namespace:InTwo.Controls"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
                             xmlns:custom="clr-namespace:InTwo.Behaviours"
+                            xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -73,6 +74,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+
+        <coding4Fun:SuperImage Style="{StaticResource AppBackground}"
+                               Sources="{Binding Source={StaticResource BackgroundImageSource}}" />
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0"

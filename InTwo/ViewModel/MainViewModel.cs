@@ -48,10 +48,6 @@ namespace InTwo.ViewModel
             _settingsService = settingsService;
             _logger = LogManagerFactory.DefaultLogManager.GetLogger<MainViewModel>();
 
-            if (!IsInDesignMode)
-            {
-                _logger.Info("In MainViewModel I am");
-            }
         }
 
         public List<Genre> Genres { get; set; }

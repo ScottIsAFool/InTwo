@@ -7,7 +7,7 @@
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:ignore="http://www.ignore.com"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-                            xmlns:superImage="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
+                            xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -41,21 +41,21 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
-        <superImage:SuperImage Stretch="Fill"
+        <coding4Fun:SuperImage Stretch="Fill"
                                Opacity="0.6">
-            <superImage:SuperImage.Sources>
-                <superImage:SuperImageSource Source="/Images/ScoreoidBackground-720p.jpg"
+            <coding4Fun:SuperImage.Sources>
+                <coding4Fun:SuperImageSource Source="/Images/ScoreoidBackground-720p.jpg"
                                              MinScale="160"
                                              MaxScale="160" />
-                <superImage:SuperImageSource Source="/Images/ScoreoidBackground-WVGA.jpg"
+                <coding4Fun:SuperImageSource Source="/Images/ScoreoidBackground-WVGA.jpg"
                                              MinScale="100"
                                              MaxScale="100"
                                              IsDefault="True" />
-                <superImage:SuperImageSource Source="/Images/ScoreoidBackground-WXGA.jpg"
+                <coding4Fun:SuperImageSource Source="/Images/ScoreoidBackground-WXGA.jpg"
                                              MinScale="150"
                                              MaxScale="150" />
-            </superImage:SuperImage.Sources>
-        </superImage:SuperImage>
+            </coding4Fun:SuperImage.Sources>
+        </coding4Fun:SuperImage>
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Margin="12,32,12,72">

@@ -16,7 +16,7 @@
              d:DesignWidth="480">
 
     <Grid x:Name="LayoutRoot"
-          Background="{StaticResource PhoneBackgroundBrush}"
+          Background="Transparent"
           DataContext="{Binding ElementName=Myself}">
         <ScrollViewer>
             <StackPanel Orientation="Vertical">

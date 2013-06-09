@@ -13,6 +13,7 @@
                             xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             xmlns:localControls="clr-namespace:InTwo.Controls"
                             xmlns:custom="clr-namespace:InTwo.Behaviours"
+                            xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -56,10 +57,9 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
-          Background="Transparent"
-          Margin="0,32,0,0">
+          Background="Transparent">
         <i:Interaction.Behaviors>
-            <custom:CustomApplicationBarBehaviour >
+            <custom:CustomApplicationBarBehaviour>
                 <cimbalino:ApplicationBarIconButton Text="refresh details"
                                                     IconUri="/Icons/refresh.png"
                                                     Command="{Binding RefreshUserCommand}" />
@@ -69,65 +69,71 @@
                 <custom:CustomApplicationBarBehaviour.MenuItems>
                     <cimbalino:ApplicationBarMenuItem Text="clear profile picture"
                                                       Command="{Binding ClearProfilePicture}"
-                                                      IsEnabled="{Binding HasProfilePicture}"/>
+                                                      IsEnabled="{Binding HasProfilePicture}" />
                     <cimbalino:ApplicationBarMenuItem Text="delete"
                                                       Command="{Binding DeleteUserCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="logout"
-                                                      Command="{Binding LogoutCommand}"/>
+                                                      Command="{Binding LogoutCommand}" />
                 </custom:CustomApplicationBarBehaviour.MenuItems>
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel"
-                    Grid.Row="0"
-                    Margin="12,17,0,28">
-            <Image Source="/Images/InTwoSmallLogo.png"
-                   Height="20"
-                   HorizontalAlignment="Left"
-                   Margin="12,0" />
-            <TextBlock Text="user profile"
-                       Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}" />
-        </StackPanel>
+        <coding4Fun:SuperImage Style="{StaticResource AppBackground}"
+                               Sources="{Binding Source={StaticResource BackgroundImageSource}}" />
+        
+        <Grid Margin="0,32,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel"
-              Grid.Row="1"
-              Margin="12,0,12,0">
-            <ScrollViewer Margin="12,0,0,0">
-                <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Top"
-                                HorizontalAlignment="Left"
-                                Margin="0,0,0,24">
-                        <Button Style="{StaticResource EmptyButtonStyle}"
-                                toolkit:TiltEffect.IsTiltEnabled="True"
-                                Command="{Binding ChooseUserProfilePictureCommand}">
-                            <localControls:ProfilePicture />
-                        </Button>
-                        <TextBlock Text="{Binding CurrentPlayer.username}"
-                                   Style="{StaticResource PhoneTextLargeStyle}" />
+            <!--TitlePanel contains the name of the application and page title-->
+            <StackPanel x:Name="TitlePanel"
+                        Grid.Row="0"
+                        Margin="12,17,0,28">
+                <Image Source="/Images/InTwoSmallLogo.png"
+                       Height="20"
+                       HorizontalAlignment="Left"
+                       Margin="12,0" />
+                <TextBlock Text="user profile"
+                           Margin="9,-7,0,0"
+                           Style="{StaticResource PhoneTextTitle1Style}" />
+            </StackPanel>
+
+            <!--ContentPanel - place additional content here-->
+            <Grid x:Name="ContentPanel"
+                  Grid.Row="1"
+                  Margin="12,0,12,0">
+                <ScrollViewer Margin="12,0,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Margin="0,0,0,24">
+                            <Button Style="{StaticResource EmptyButtonStyle}"
+                                    toolkit:TiltEffect.IsTiltEnabled="True"
+                                    Command="{Binding ChooseUserProfilePictureCommand}">
+                                <localControls:ProfilePicture />
+                            </Button>
+                            <TextBlock Text="{Binding CurrentPlayer.username}"
+                                       Style="{StaticResource PhoneTextLargeStyle}" />
+                        </StackPanel>
+
+                        <controls:HeaderAndDetail HeaderText="best score"
+                                                  DetailText="{Binding CurrentPlayer.best_score}"
+                                                  Margin="-12,0,0,0" />
+                        <controls:HeaderAndDetail HeaderText="current rank"
+                                                  DetailText="{Binding CurrentPlayer.rank}"
+                                                  Margin="-12,0,0,0" />
+                        <controls:HeaderAndDetail HeaderText="total points"
+                                                  DetailText="{Binding TotalScore}"
+                                                  Margin="-12,0,0,0" />
+                        <controls:HeaderAndDetail HeaderText="number of games"
+                                                  DetailText="{Binding NumberOfGames}"
+                                                  Margin="-12,0,0,0" />
                     </StackPanel>
-
-                    <controls:HeaderAndDetail HeaderText="best score"
-                                              DetailText="{Binding CurrentPlayer.best_score}"
-                                              Margin="-12,0,0,0" />
-                    <controls:HeaderAndDetail HeaderText="current rank"
-                                              DetailText="{Binding CurrentPlayer.rank}"
-                                              Margin="-12,0,0,0" />
-                    <controls:HeaderAndDetail HeaderText="total points"
-                                              DetailText="{Binding TotalScore}"
-                                              Margin="-12,0,0,0" />
-                    <controls:HeaderAndDetail HeaderText="number of games"
-                                              DetailText="{Binding NumberOfGames}"
-                                              Margin="-12,0,0,0" />
-                </StackPanel>
-            </ScrollViewer>
+                </ScrollViewer>
+            </Grid>
         </Grid>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are

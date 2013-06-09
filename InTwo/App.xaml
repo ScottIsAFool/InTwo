@@ -9,9 +9,8 @@
              xmlns:cimbalinoConverters="clr-namespace:Cimbalino.Phone.Toolkit.Converters;assembly=Cimbalino.Phone.Toolkit"
              xmlns:scottConverters="clr-namespace:ScottIsAFool.WindowsPhone.Converters;assembly=ScottIsAFool.WindowsPhone"
              xmlns:localConverters="clr-namespace:InTwo.Converters"
-             xmlns:Converters="clr-namespace:Coding4Fun.Toolkit.Controls.Converters;assembly=Coding4Fun.Toolkit.Controls"
-             xmlns:Controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
-             xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
+             xmlns:converters="clr-namespace:Coding4Fun.Toolkit.Controls.Converters;assembly=Coding4Fun.Toolkit.Controls"
+             xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
              xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
              x:Class="InTwo.App"
              mc:Ignorable="d">
@@ -80,11 +79,11 @@
                         Value="{StaticResource PhoneAccentBrush}" />
             </Style>
 
-            <Converters:SolidColorBrushToColorConverter x:Key="BrushToBrush" />
+            <converters:SolidColorBrushToColorConverter x:Key="BrushToBrush" />
             <SolidColorBrush x:Key="DefaultSubtleBrush"
                              Color="{Binding Converter={StaticResource BrushToBrush}, Source={StaticResource PhoneSubtleBrush}}" />
             <ControlTemplate x:Key="CustomTimeSpanPickerStyle"
-                             TargetType="Controls:TimeSpanPicker">
+                             TargetType="coding4Fun:TimeSpanPicker">
                 <StackPanel>
                     <ContentControl Content="{TemplateBinding Header}"
                                     ContentTemplate="{TemplateBinding HeaderTemplate}"
@@ -104,28 +103,24 @@
                 </StackPanel>
             </ControlTemplate>
 
-            <Style TargetType="controls:SuperImage"
+            <Style TargetType="coding4Fun:SuperImage"
                    x:Key="AppBackground">
                 <Setter Property="Opacity"
                         Value="0.5" />
                 <Setter Property="Stretch"
                         Value="UniformToFill" />
-                <Setter Property="Sources">
-                    <Setter.Value>
-                        <model:SuperImageSourceCollection>
-                            <controls:SuperImageSource Source="/Images/AppBackground-WXGA.jpg"
-                                                       MinScale="150"
-                                                       MaxScale="150" />
-                            <controls:SuperImageSource Source="/Images/AppBackground-720p.jpg"
-                                                       MinScale="160"
-                                                       MaxScale="160" />
-                            <controls:SuperImageSource Source="/Images/AppBackground-WVGA.jpg"
-                                                       MinScale="100"
-                                                       MaxScale="100" />
-                        </model:SuperImageSourceCollection>
-                    </Setter.Value>
-                </Setter>
             </Style>
+            <model:SuperImageSourceCollection x:Key="BackgroundImageSource">
+                <coding4Fun:SuperImageSource Source="/Images/AppBackground-WXGA.jpg"
+                                             MinScale="150"
+                                             MaxScale="150" />
+                <coding4Fun:SuperImageSource Source="/Images/AppBackground-720p.jpg"
+                                             MinScale="160"
+                                             MaxScale="160" />
+                <coding4Fun:SuperImageSource Source="/Images/AppBackground-WVGA.jpg"
+                                             MinScale="100"
+                                             MaxScale="100" />
+            </model:SuperImageSourceCollection>
             <ControlTemplate x:Key="GameViewListPickerStyle"
                              TargetType="toolkit:ListPicker">
                 <StackPanel>

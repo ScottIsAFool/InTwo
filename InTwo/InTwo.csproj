@@ -462,9 +462,6 @@
     <Reference Include="SharpGIS.GZipWebClient">
       <HintPath>..\packages\SharpGIS.GZipWebClient.1.4.0.0\lib\wp71\SharpGIS.GZipWebClient.dll</HintPath>
     </Reference>
-    <Reference Include="SuperImage">
-      <HintPath>..\3plib\SuperImage\SuperImage.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http">
       <HintPath>..\packages\Microsoft.Net.Http.2.1.10\lib\sl4-windowsphone71\System.Net.Http.dll</HintPath>
     </Reference>

@@ -10,6 +10,7 @@
                             xmlns:scottbehaviours="clr-namespace:ScottIsAFool.WindowsPhone.Behaviours;assembly=ScottIsAFool.WindowsPhone"
                             xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                             xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
+                            xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
                             Foreground="{StaticResource PhoneForegroundBrush}"
@@ -22,7 +23,7 @@
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="{Binding ProgressText}"
                                  IsVisible="{Binding ProgressIsVisible}"
-                                 IsIndeterminate="True"/>
+                                 IsIndeterminate="True" />
     </shell:SystemTray.ProgressIndicator>
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -48,76 +49,82 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
-          Background="Transparent"
-          Margin="0,32,0,0">
+          Background="Transparent">
+
         <i:Interaction.Behaviors>
-            <behaviours:CustomApplicationBarBehaviour >
+            <behaviours:CustomApplicationBarBehaviour>
                 <cimbalino:ApplicationBarIconButton Text="sign in"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding SignInCommand}"
                                                     IsEnabled="{Binding CanLogIn}" />
             </behaviours:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0"
-                    Margin="12,17,0,28">
-            <Image Source="/Images/InTwoSmallLogo.png"
-                   Height="20"
-                   HorizontalAlignment="Left"
-                   Margin="12,0" />
-            <TextBlock Text="login"
-                       Margin="9,-7,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}" />
-        </StackPanel>
+        <coding4Fun:SuperImage Style="{StaticResource AppBackground}"
+                               Sources="{Binding Source={StaticResource BackgroundImageSource}}" />
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel"
-              Grid.Row="1"
-              Margin="12,0,12,0">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Please sign in using your Scoreoid username."
-                           Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBlock Text="username:"
-                           Style="{StaticResource PhoneTextSubtleStyle}" />
-                <toolkit:PhoneTextBox Hint="enter your username"
-                                      Text="{Binding Username, Mode=TwoWay}">
-                    <i:Interaction.Behaviors>
-                        <behaviours:EnterKeyHandler />
-                        <scottbehaviours:UpdateTextBindingOnPropertyChanged />
-                    </i:Interaction.Behaviors>
-                </toolkit:PhoneTextBox>
-                <TextBlock Text="password:"
-                           Style="{StaticResource PhoneTextSubtleStyle}"/>
-                <PasswordBox Password="{Binding Password, Mode=TwoWay}">
-                    <i:Interaction.Behaviors>
-                        <behaviours:EnterKeyHandler EnterKeyAction="ExecuteCommand"
-                                                    CommandString="SignInCommand"/>
-                        <scottbehaviours:UpdatePasswordBindingOnPropertyChanged />
-                    </i:Interaction.Behaviors>
-                </PasswordBox>
-                <TextBlock Text="Not registered?"
-                           Style="{StaticResource PhoneTextNormalStyle}"/>
-                <HyperlinkButton Content="Create new user"
-                                 HorizontalContentAlignment="Left"
-                                 Foreground="{StaticResource PhoneAccentBrush}"
-                                 NavigateUri="/Views/Scoreoid/CreateNewUserView.xaml"/>
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,24,12,0"
-                            HorizontalAlignment="Right">
-                    <TextBlock Text="powered by"
-                               Style="{StaticResource PhoneTextSmallStyle}"
-                               Foreground="{StaticResource PhoneForegroundBrush}"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Top" />
-                    <Image Source="/Images/ScoreoidLogo.png"
-                           Height="50" />
-                </StackPanel>
+        <Grid Margin="0,32,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--TitlePanel contains the name of the application and page title-->
+            <StackPanel Grid.Row="0"
+                        Margin="12,17,0,28">
+                <Image Source="/Images/InTwoSmallLogo.png"
+                       Height="20"
+                       HorizontalAlignment="Left"
+                       Margin="12,0" />
+                <TextBlock Text="login"
+                           Margin="9,-7,0,0"
+                           Style="{StaticResource PhoneTextTitle1Style}" />
             </StackPanel>
+
+            <!--ContentPanel - place additional content here-->
+            <Grid x:Name="ContentPanel"
+                  Grid.Row="1"
+                  Margin="12,0,12,0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Please sign in using your Scoreoid username."
+                               Style="{StaticResource PhoneTextNormalStyle}" />
+                    <TextBlock Text="username:"
+                               Style="{StaticResource PhoneTextSubtleStyle}" />
+                    <toolkit:PhoneTextBox Hint="enter your username"
+                                          Text="{Binding Username, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviours:EnterKeyHandler />
+                            <scottbehaviours:UpdateTextBindingOnPropertyChanged />
+                        </i:Interaction.Behaviors>
+                    </toolkit:PhoneTextBox>
+                    <TextBlock Text="password:"
+                               Style="{StaticResource PhoneTextSubtleStyle}" />
+                    <PasswordBox Password="{Binding Password, Mode=TwoWay}">
+                        <i:Interaction.Behaviors>
+                            <behaviours:EnterKeyHandler EnterKeyAction="ExecuteCommand"
+                                                        CommandString="SignInCommand" />
+                            <scottbehaviours:UpdatePasswordBindingOnPropertyChanged />
+                        </i:Interaction.Behaviors>
+                    </PasswordBox>
+                    <TextBlock Text="Not registered?"
+                               Style="{StaticResource PhoneTextNormalStyle}" />
+                    <HyperlinkButton Content="Create new user"
+                                     HorizontalContentAlignment="Left"
+                                     Foreground="{StaticResource PhoneAccentBrush}"
+                                     NavigateUri="/Views/Scoreoid/CreateNewUserView.xaml" />
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,24,12,0"
+                                HorizontalAlignment="Right">
+                        <TextBlock Text="powered by"
+                                   Style="{StaticResource PhoneTextSmallStyle}"
+                                   Foreground="{StaticResource PhoneForegroundBrush}"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top" />
+                        <Image Source="/Images/ScoreoidLogo.png"
+                               Height="50" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 

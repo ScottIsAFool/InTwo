@@ -9,7 +9,7 @@
                             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
                             xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-                            xmlns:superImage="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=SuperImage"
+                            xmlns:coding4fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             mc:Ignorable="d ignore"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
                             FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -50,21 +50,21 @@
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
 
-        <superImage:SuperImage Stretch="Fill"
+        <coding4fun:SuperImage Stretch="Fill"
                                Opacity="0.6">
-            <superImage:SuperImage.Sources>
-                <superImage:SuperImageSource Source="/Images/DownloadBackground-720p.jpg"
+            <coding4fun:SuperImage.Sources>
+                <coding4fun:SuperImageSource Source="/Images/DownloadBackground-720p.jpg"
                                              MinScale="160"
                                              MaxScale="160" />
-                <superImage:SuperImageSource Source="/Images/DownloadBackground-WVGA.jpg"
+                <coding4fun:SuperImageSource Source="/Images/DownloadBackground-WVGA.jpg"
                                              MinScale="100"
                                              MaxScale="100"
                                              IsDefault="True" />
-                <superImage:SuperImageSource Source="/Images/DownloadBackground-WXGA.jpg"
+                <coding4fun:SuperImageSource Source="/Images/DownloadBackground-WXGA.jpg"
                                              MinScale="150"
                                              MaxScale="150" />
-            </superImage:SuperImage.Sources>
-        </superImage:SuperImage>
+            </coding4fun:SuperImage.Sources>
+        </coding4fun:SuperImage>
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
               Grid.Row="1"
