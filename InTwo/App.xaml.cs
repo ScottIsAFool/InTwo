@@ -104,6 +104,7 @@ namespace InTwo
         {
             InitializePhoneApplication();
             GetSettings();
+            SetFlurry();
         }
 
         private static void GetSettings()
@@ -115,6 +116,13 @@ namespace InTwo
             SettingsWrapper.AppSettings = appSettings;
         }
 
+        private static void SetFlurry()
+        {
+            FlurryWP8SDK.Api.StartSession(Constants.FlurryKey);
+            var version = new ApplicationManifestService().GetApplicationManifest().App.Version;
+            FlurryWP8SDK.Api.SetVersion(version);
+        }
+
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
@@ -124,6 +132,7 @@ namespace InTwo
                 InitializePhoneApplication();
                 GetSettings();
             }
+            SetFlurry();
         }
 
         // Code to execute when the application is deactivated (sent to background)
@@ -157,6 +166,8 @@ namespace InTwo
                 // A navigation has failed; break into the debugger
                 Debugger.Break();
             }
+            FlurryWP8SDK.Api.LogError("NavigationFailed: " + e.Uri, e.Exception);
+
             SaveSettings();
         }
 
@@ -168,6 +179,9 @@ namespace InTwo
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+
+            FlurryWP8SDK.Api.LogError("UnhandledException", e.ExceptionObject);
+
             SaveSettings();
         }
 

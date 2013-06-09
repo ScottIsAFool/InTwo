@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Controls;
@@ -301,15 +302,18 @@ namespace InTwo.ViewModel
             
             if (result.ResultStatus == SpeechRecognitionUIStatus.Succeeded)
             {
+                FlurryWP8SDK.Api.LogEvent("VoiceCommandUsedArtist");
                 var text = result.RecognitionResult.Text;
 
                 if (text.ToLower().StartsWith("artist is"))
                 {
+                    FlurryWP8SDK.Api.LogEvent("VoiceCommandUsedArtist");
                     text = text.Replace("Artist is", "").Replace("artist is", "").Replace(".", " ").Trim();
                     ArtistGuess = text;
                 }
                 else if (text.ToLower().StartsWith("song is"))
                 {
+                    FlurryWP8SDK.Api.LogEvent("VoiceCommandUsedSong");
                     text = text.Replace("song is", "").Replace("Song is", "").Replace(".", " ").Trim();
                     SongGuess = text;
                 }
@@ -517,6 +521,8 @@ namespace InTwo.ViewModel
 
                     if (result == MessageBoxResult.OK)
                     {
+                        FlurryWP8SDK.Api.LogEvent("GivenUp");
+
                         RoundNumber++;
                         AudioUrl = null;
                         CanShowAnswers = true;
@@ -540,6 +546,8 @@ namespace InTwo.ViewModel
                     CheckIfMusicPlayingAndCanStopIt();
 
                     GameLocked = true;
+
+                    FlurryWP8SDK.Api.LogEvent("GameStarted", new List<Parameter> {new Parameter("GameLength", GameLength.Seconds.ToString()), new Parameter("GameGenre", SelectedGenre.Name)});
 
                     SetNextRound();
                 });
@@ -571,6 +579,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    FlurryWP8SDK.Api.LogEvent("NokiaMusicLaunched");
                     await Launcher.LaunchUriAsync(GameTrack.AppToAppUri);
                 });
             }
