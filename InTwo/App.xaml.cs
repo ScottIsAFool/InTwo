@@ -7,8 +7,6 @@ using System.Windows.Navigation;
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
 using InTwo.Model;
-using MetroLog;
-using MetroLog.Targets;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using InTwo.Resources;
@@ -74,7 +72,7 @@ namespace InTwo
 
             // Language display initialization
 
-            SettingsWrapper.AppSettings.UsersAccentBrush = (Color) Current.Resources["PhoneAccentColor"];
+            SettingsWrapper.UsersAccentBrush = new SolidColorBrush(((Color) Current.Resources["PhoneAccentColor"]));
 
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Magenta);

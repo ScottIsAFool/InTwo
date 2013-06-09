@@ -43,8 +43,7 @@ namespace InTwo.Model
         public Genre DefaultGenre { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
-        public Color UsersAccentBrush { get; set; }
-
+        
         private void OnDefaultGameLengthChanged()
         {
             if (DefaultGameLength.Seconds == 0)
