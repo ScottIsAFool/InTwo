@@ -32,7 +32,7 @@ namespace InTwo.ViewModel
         private readonly IExtendedNavigationService _navigationService;
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
-        //private readonly ILogger _logger;
+        private readonly ILogger _logger;
 
         private bool _hasCheckedForData;
         private bool _dataExists;
@@ -45,11 +45,11 @@ namespace InTwo.ViewModel
             _navigationService = navigationService;
             _asyncStorageService = asyncStorageService;
             _settingsService = settingsService;
-            //_logger = LogManagerFactory.DefaultLogManager.GetLogger<MainViewModel>();
+            _logger = LogManagerFactory.DefaultLogManager.GetLogger<MainViewModel>();
 
             if (!IsInDesignMode)
             {
-                //_logger.Info("In MainViewModel");
+                _logger.Info("In MainViewModel");
             }
         }
 
