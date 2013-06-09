@@ -21,7 +21,7 @@
                 <toolkit:SlideTransition Mode="SlideRightFadeIn" />
             </toolkit:NavigationInTransition.Backward>
             <toolkit:NavigationInTransition.Forward>
-                <toolkit:TurnstileTransition Mode="ForwardIn" />
+                <toolkit:SlideTransition Mode="SlideLeftFadeIn" />
             </toolkit:NavigationInTransition.Forward>
         </toolkit:NavigationInTransition>
     </toolkit:TransitionService.NavigationInTransition>
