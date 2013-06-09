@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Media;
-using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.ViewModel;
@@ -78,6 +76,4 @@ namespace InTwo.Model
             Messenger.Default.Send(new NotificationMessage(Constants.Messages.UpdatePrimaryTileMsg));
         }
     }
-
-    public class SuperImageSourceCollection : ObservableCollection<SuperImageSource>{}
 }

@@ -133,6 +133,7 @@
     <Compile Include="Model\PlayerWrapper.cs" />
     <Compile Include="Model\SettingsWrapper.cs" />
     <Compile Include="Model\ShareType.cs" />
+    <Compile Include="Model\SuperImageSourceCollection.cs" />
     <Compile Include="ThemeManager.cs" />
     <Compile Include="TileService.cs" />
     <Compile Include="Utils.cs" />
