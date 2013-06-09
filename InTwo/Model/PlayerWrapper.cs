@@ -1,4 +1,6 @@
-﻿using Scoreoid;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
+using Scoreoid;
 
 namespace InTwo.Model
 {
@@ -9,7 +11,19 @@ namespace InTwo.Model
             CurrentPlayer = player;
         }
 
-        public PlayerWrapper(){}
+        public PlayerWrapper()
+        {
+            if (!ViewModelBase.IsInDesignModeStatic)
+            {
+                Messenger.Default.Register<NotificationMessage>(this, m =>
+                {
+                    if (m.Notification.Equals(Constants.Messages.RefreshCurrentPlayerMsg))
+                    {
+                        OnPropertyChanged("CurrentPlayer");
+                    }
+                });
+            }
+        }
 
         public player CurrentPlayer { get; set; }
         public int NumberOfGames { get { return !string.IsNullOrEmpty(CurrentPlayer.boost) ? int.Parse(CurrentPlayer.boost) : 0; } }
