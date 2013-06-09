@@ -7,6 +7,8 @@ using System.Windows.Navigation;
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
 using InTwo.Model;
+using MetroLog;
+using MetroLog.Targets;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using InTwo.Resources;
@@ -75,6 +77,8 @@ namespace InTwo
 
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Magenta);
+
+            //LogManagerFactory.DefaultConfiguration.AddTarget(LogLevel.Trace, LogLevel.Fatal, new DebugTarget());
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)

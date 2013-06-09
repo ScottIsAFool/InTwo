@@ -77,12 +77,9 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    //if (!_navigationService.IsNetworkAvailable) return;
-
                     CurrentPlayer = App.CurrentPlayer;
 
                     HasProfilePicture = await CheckForProfilePicture();
-                    //await GetPlayerInformation();
                 });
             }
         }
@@ -186,6 +183,7 @@ namespace InTwo.ViewModel
                             await CreateTileImages(bitmap);
                         }
 
+                        FlurryWP8SDK.Api.LogEvent("UserPhotoCreated");
 
                         // Tell other UI references to update their profile image
                         Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
