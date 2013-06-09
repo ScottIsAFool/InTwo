@@ -65,25 +65,29 @@
 
         public static class Pages
         {
-            public const string MainPage = "/Views/MainPage.xaml";
-            public const string ScoreBoard = "/Views/ScoreBoardView.xaml";
-            public const string Settings = "/Views/SettingsView.xaml";
-            public const string DownloadingSongs = "/Views/DownloadingSongsView.xaml";
-            public const string Game = "/Views/GameView.xaml";
+            private const string ViewsPath = "/Views/";
+            public const string MainPage = ViewsPath + "MainPage.xaml";
+            public const string ScoreBoard = ViewsPath + "ScoreBoardView.xaml";
+            public const string Settings = ViewsPath + "SettingsView.xaml";
+            public const string DownloadingSongs = ViewsPath + "DownloadingSongsView.xaml";
+            public const string Game = ViewsPath + "GameView.xaml";
 
             public static class Scoreoid
             {
-                public const string CreateNewUser = "/Views/Scoreoid/CreateNewUserView.xaml";
-                public const string EditUser = "/Views/Scoreoid/EditUserView.xaml";
-                public const string SignIn = "/Views/Scoreoid/SignInView.xaml";
-                public const string UserProfile = "/Views/Scoreoid/UserProfileView.xaml";
+                private const string ScoreoidPath = ViewsPath + "Scoreoid/";
+                public const string CreateNewUser = ScoreoidPath + "CreateNewUserView.xaml";
+                public const string EditUser = ScoreoidPath + "EditUserView.xaml";
+                public const string SignIn = ScoreoidPath + "SignInView.xaml";
+                public const string UserProfile = ScoreoidPath + "UserProfileView.xaml";
             }
 
             public static class Welcome
             {
-                public const string WelcomePage = "/Views/Welcome/WelcomeView.xaml";
-                public const string ScoreoidWelcome = "/Views/Welcome/ScoreoidWelcomeView.xaml";
-                public const string DownloadSongsNow = "/Views/Welcome/DownloadDataNowView.xaml";
+                private const string WelcomePath = ViewsPath + "Welcome/";
+                public const string WelcomePage = WelcomePath + "WelcomeView.xaml";
+                public const string ScoreoidWelcome = WelcomePath + "ScoreoidWelcomeView.xaml";
+                public const string DownloadSongsNow = WelcomePath + "DownloadDataNowView.xaml";
+                public const string StopMusic = WelcomePath + "StopMusicView.xaml";
             }
         }
     }
