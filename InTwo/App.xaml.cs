@@ -79,7 +79,7 @@ namespace InTwo
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Magenta);
 
-            //LogManagerFactory.DefaultConfiguration.AddTarget(LogLevel.Trace, LogLevel.Fatal, new DebugTarget());
+            //LogManagerFactory.DefaultConfiguration.AddTarget(LogLevel.Trace, LogLevel.Fatal, new Wp8FileStreamingTarget{RetainDays = 10});
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)

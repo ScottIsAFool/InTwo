@@ -7,6 +7,7 @@ using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
+using MetroLog;
 using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
 using Nokia.Music.Types;
@@ -31,6 +32,7 @@ namespace InTwo.ViewModel
         private readonly IExtendedNavigationService _navigationService;
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
+        //private readonly ILogger _logger;
 
         private bool _hasCheckedForData;
         private bool _dataExists;
@@ -43,6 +45,12 @@ namespace InTwo.ViewModel
             _navigationService = navigationService;
             _asyncStorageService = asyncStorageService;
             _settingsService = settingsService;
+            //_logger = LogManagerFactory.DefaultLogManager.GetLogger<MainViewModel>();
+
+            if (!IsInDesignMode)
+            {
+                //_logger.Info("In MainViewModel");
+            }
         }
 
         public List<Genre> Genres { get; set; }
@@ -233,7 +241,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.Settings));
+                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.SettingsView));
             }
         }
 

@@ -70,10 +70,11 @@
             private const string ViewsPath = "/Views/";
             public const string MainPage = ViewsPath + "MainPage.xaml";
             public const string ScoreBoard = ViewsPath + "ScoreBoardView.xaml";
-            public const string Settings = ViewsPath + "SettingsView.xaml";
+            public const string SettingsView = ViewsPath + "SettingsView.xaml";
             public const string DownloadingSongs = ViewsPath + "DownloadingSongsView.xaml";
             public const string Game = ViewsPath + "GameView.xaml";
             public const string Removeads = ViewsPath + "RemoveAdsView.xaml";
+            public const string HowToPlay = ViewsPath + "HowToPlayView.xaml";
 
             public static class Scoreoid
             {

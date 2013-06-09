@@ -30,7 +30,12 @@ namespace InTwo.ViewModel
 
             if (IsInDesignMode)
             {
-                CurrentPlayer = App.CurrentPlayer;
+                CurrentPlayer = new player
+                {
+                    username = "scottisafool",
+                    best_score = "336",
+                    rank = "1"
+                };
             }
         }
 
