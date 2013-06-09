@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
 namespace InTwo.Views.Welcome
 {
@@ -15,6 +9,19 @@ namespace InTwo.Views.Welcome
         public StopMusicView()
         {
             InitializeComponent();
+        }
+
+        private void NoThanksButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri(Constants.Pages.Welcome.DownloadSongsNow, UriKind.Relative));
+        }
+
+        private void YesButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            App.SettingsWrapper.AppSettings.DontShowAllowStopMusicMessage = true;
+            App.SettingsWrapper.AppSettings.AllowStopMusic = true;
+
+            NavigationService.Navigate(new Uri(Constants.Pages.Welcome.DownloadSongsNow, UriKind.Relative));
         }
     }
 }

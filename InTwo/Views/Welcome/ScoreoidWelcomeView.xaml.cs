@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 
 namespace InTwo.Views.Welcome
@@ -18,7 +17,7 @@ namespace InTwo.Views.Welcome
 
         private void NextButton_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri(Constants.Pages.Welcome.DownloadSongsNow, UriKind.Relative));
+            NavigationService.Navigate(new Uri(Constants.Pages.Welcome.StopMusic, UriKind.Relative));
         }
     }
 }
