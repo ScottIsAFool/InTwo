@@ -366,6 +366,10 @@
     <Reference Include="AdvancedREI.Net.Http.Compression">
       <HintPath>..\packages\HttpClient.Compression.1.1.0\lib\portable-net4+sl4+wp7+win8\AdvancedREI.Net.Http.Compression.dll</HintPath>
     </Reference>
+    <Reference Include="Anotar.MetroLog">
+      <HintPath>..\packages\Anotar.MetroLog.Fody.1.8.0.0\Lib\portable-net45+wp8+win8\Anotar.MetroLog.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Cimbalino.Phone.Toolkit, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Cimbalino.Phone.Toolkit.3.0.0\lib\wp8\Cimbalino.Phone.Toolkit.dll</HintPath>

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
+using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
