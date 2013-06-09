@@ -60,14 +60,15 @@
         <i:Interaction.Behaviors>
             <custom:CustomApplicationBarBehaviour Mode="Minimized">
                 <custom:CustomApplicationBarBehaviour.MenuItems>
-                    <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
+                    <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
                                                       Command="{Binding LoginLogoutCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="settings"
                                                       Command="{Binding GoToSettingsCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="refresh game data"
                                                       Command="{Binding RefreshGameDataCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="remove ads"
-                                                      Command="{Binding RemoveAdsCommand}" />
+                                                      Command="{Binding RemoveAdsCommand}"
+                                                      IsVisible="False"/>
                     <cimbalino:ApplicationBarMenuItem Text="about"
                                                       Command="{Binding NavigateToPage}"
                                                       CommandParameter="/YourLastAboutDialog;component/AboutPage.xaml" />

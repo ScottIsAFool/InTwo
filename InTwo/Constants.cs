@@ -8,8 +8,10 @@
 
 #if DEBUG
         public const string ScoreoidGameId = "dfe4d56007"; // In Two Test
+        public const string FlurryKey = "ZBJ6ZF4WY9KJB8ZJ5JJG";
 #else
         public const string ScoreoidGameId = "edb21044df"; // In Two Production
+        public const string FlurryKey = "V3CFQN2K9QXBK6QPPF3H";
 #endif
         public const string ScoreoidApiKey = "1fb20791da97e2395364b19595aace22d727de60";
         public const string UserCreatedSuccessfully = "The player has been created";
