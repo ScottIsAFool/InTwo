@@ -18,17 +18,13 @@ namespace InTwo.ViewModel
     public class RemoveAdsViewModel : ViewModelBase
     {
         private readonly IExtendedNavigationService _navigationService;
-        private readonly IApplicationSettingsService _settingsService;
-
-        private ProductListing _productInfo;
-
+        
         /// <summary>
         /// Initializes a new instance of the RemoveAdsViewModel class.
         /// </summary>
-        public RemoveAdsViewModel(IExtendedNavigationService navigationService, IApplicationSettingsService settingsService)
+        public RemoveAdsViewModel(IExtendedNavigationService navigationService)
         {
             _navigationService = navigationService;
-            _settingsService = settingsService;
         }
 
         #region Commands
@@ -42,10 +38,32 @@ namespace InTwo.ViewModel
                     if (licence.IsActive)
                     {
                         MessageBox.Show("You've already purchased this, you lucky dog.", "Nice!", MessageBoxButton.OK);
-                        _settingsService.Set(Constants.Settings.HasRemovedAds, true);
-                        _settingsService.Save();
+                        App.SettingsWrapper.HasRemovedAds = true;
 
                         _navigationService.GoBack();
+                    }
+                });
+            }
+        }
+
+        public RelayCommand RemoveAdsCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    try
+                    {
+                        await CurrentApp.RequestProductPurchaseAsync(Constants.RemoveAdsProduct, false);
+
+                        MessageBox.Show("Thank you for letting me buy a chocolate bar. Ads are now gone!", "Nice!", MessageBoxButton.OK);
+                        App.SettingsWrapper.HasRemovedAds = true;
+
+                        _navigationService.GoBack();
+                    }
+                    catch
+                    {
+                        
                     }
                 });
             }

@@ -14,6 +14,7 @@ using Microsoft.Phone.Shell;
 using InTwo.Resources;
 using Microsoft.Practices.ServiceLocation;
 using Scoreoid;
+using Windows.ApplicationModel.Store;
 
 namespace InTwo
 {
@@ -116,7 +117,7 @@ namespace InTwo
             var settingsService = ServiceLocator.Current.GetInstance<IApplicationSettingsService>();
 
             var appSettings = settingsService.Get(Constants.Settings.AppSettings, new AppSettings());
-            var hasRemovedAds = settingsService.Get(Constants.Settings.HasRemovedAds, false);
+            var hasRemovedAds = CurrentApp.LicenseInformation.ProductLicenses[Constants.RemoveAdsProduct].IsActive;
 
             SettingsWrapper.AppSettings = appSettings;
             SettingsWrapper.HasRemovedAds = hasRemovedAds;

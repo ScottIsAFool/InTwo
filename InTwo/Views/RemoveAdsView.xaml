@@ -55,7 +55,9 @@
 
         <i:Interaction.Behaviors>
             <custom:CustomApplicationBarBehaviour>
-                <cimbalino:ApplicationBarIconButton></cimbalino:ApplicationBarIconButton>
+                <cimbalino:ApplicationBarIconButton Text="purchase"
+                                                    IconUri="/Icons/appbar.currency.dollar.png"
+                                                    Command="{Binding RemoveAdsCommand}"/>
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
         

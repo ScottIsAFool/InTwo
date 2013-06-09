@@ -68,7 +68,7 @@
                                                       Command="{Binding RefreshGameDataCommand}" />
                     <cimbalino:ApplicationBarMenuItem Text="remove ads"
                                                       Command="{Binding RemoveAdsCommand}"
-                                                      IsVisible="{Binding HasRemovedAds, Source={StaticResource Settings}}"/>
+                                                      IsVisible="{Binding HasRemovedAds, Source={StaticResource Settings}, Converter={StaticResource NegativeBooleanConverter}}"/>
                     <cimbalino:ApplicationBarMenuItem Text="about"
                                                       Command="{Binding NavigateToPage}"
                                                       CommandParameter="/YourLastAboutDialog;component/AboutPage.xaml" />
@@ -134,6 +134,7 @@
                                   ReloadTime="30"
                                   HorizontalAlignment="Left"
                                   VerticalAlignment="Bottom"
+                                  Visibility="{Binding HasRemovedAds, Source={StaticResource Settings}, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
                                   Margin="0,0,0,30" />
             </Grid>
         </Grid>

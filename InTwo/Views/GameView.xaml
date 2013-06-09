@@ -226,6 +226,7 @@
                               VerticalAlignment="Bottom"
                               Grid.Row="1"
                               Height="80"
+                              Visibility="{Binding HasRemovedAds, Source={StaticResource Settings}, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
                               Margin="0,100,0,0" />
         </Grid>
     </Grid>

@@ -138,6 +138,7 @@
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel\DownloadingSongsViewModel.cs" />
     <Compile Include="ViewModel\GameViewModel.cs" />
+    <Compile Include="ViewModel\RemoveAdsViewModel.cs" />
     <Compile Include="ViewModel\ScoreBoardViewModel.cs" />
     <Compile Include="ViewModel\ScoreoidViewModel.cs" />
     <Compile Include="ViewModel\UserProfileViewModel.cs" />
@@ -159,6 +160,9 @@
     </Compile>
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\RemoveAdsView.xaml.cs">
+      <DependentUpon>RemoveAdsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ScoreBoardView.xaml.cs">
       <DependentUpon>ScoreBoardView.xaml</DependentUpon>
     </Compile>
@@ -231,6 +235,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RemoveAdsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ScoreBoardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -299,6 +307,7 @@
     <Content Include="Assets\Tiles\TransparentFlipCycleTileSmall.png" />
     <Content Include="Content\About\Data.xml" />
     <Content Include="FodyWeavers.xml" />
+    <Content Include="Icons\appbar.currency.dollar.png" />
     <Content Include="Icons\appbar.microphone.png" />
     <Content Include="Icons\appbar.repeat.png" />
     <Content Include="Icons\appbar.upload.png" />

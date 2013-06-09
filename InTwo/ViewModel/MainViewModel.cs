@@ -241,10 +241,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
-                {
-                    // TODO: In-App purchase
-                });
+                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.Removeads));
             }
         }
 
