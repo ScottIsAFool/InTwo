@@ -141,8 +141,23 @@
                                    Style="{StaticResource PhoneTextTitle3Style}"
                                    Visibility="{Binding AppSettings.MostRecentScore, Source={StaticResource Settings}, Converter={StaticResource InvertedNullVisibilityConverter}}"/>
                         <StackPanel Orientation="Vertical"
-                                    Visibility="{Binding AppSettings.MostRecentScore, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}">
-                            
+                                    DataContext="{Binding AppSettings.MostRecentScore, Source={StaticResource Settings}}"
+                                    Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource NullVisibilityConverter}}">
+                            <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
+                                <Run Text="Last game played on "/>
+                                <Run Text="{Binding created}"
+                                     Foreground="{StaticResource PhoneAccentBrush}"/>
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
+                                <Run Text="Genre played was " />
+                                <Run Text="{Binding difficulty}"
+                                     Foreground="{StaticResource PhoneAccentBrush}" />
+                            </TextBlock>
+                            <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
+                                <Run Text="And you scored " />
+                                <Run Text="{Binding value}"
+                                     Foreground="{StaticResource PhoneAccentBrush}" />
+                            </TextBlock>
                         </StackPanel>
                     </Grid>
 

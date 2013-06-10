@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
@@ -16,11 +17,18 @@ namespace InTwo.Model
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 PlayerWrapper = new PlayerWrapper(new player
-                                    {
-                                        username = "scottisafool",
-                                        best_score = "336",
-                                        rank = "1"
-                                    });
+                {
+                    username = "scottisafool",
+                    best_score = "336",
+                    rank = "1"
+                });
+
+                MostRecentScore = new score
+                {
+                    created = DateTime.Now.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
+                    difficulty = "Rock",
+                    value = "666"
+                };
             }
             else
             {
