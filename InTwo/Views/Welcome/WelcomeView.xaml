@@ -78,7 +78,7 @@
                 <TextBlock Style="{StaticResource PhoneTextTitle3Style}"
                            VerticalAlignment="Top"
                            TextWrapping="Wrap"
-                           Text="In Two is a game where you get to test your knowledge of songs in short bursts. How quickly do you recognise a song and then be able to say what that song is? Well that's the aim." />
+                           Text="In Two is a game where you get to test your knowledge of songs in short bursts. How quickly can you recognise a song and then be able to say what that song is? Well that's the aim." />
             </StackPanel>
 
             <StackPanel Orientation="Vertical"
