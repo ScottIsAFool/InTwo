@@ -60,7 +60,7 @@ namespace InTwo.Views
             base.OnNavigatedTo(e);
             if (e.NavigationMode == NavigationMode.Back)
             {
-                ((GameViewModel)DataContext).SubmitScoreCommand.Execute(null);
+                ((GameViewModel)DataContext).DoINeedToSubmitScores();
             }
         }
     }

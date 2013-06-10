@@ -462,6 +462,14 @@ namespace InTwo.ViewModel
             message.Show();
         }
 
+        public void DoINeedToSubmitScores()
+        {
+            if (IsLastRound)
+            {
+                SubmitScore();
+            }
+        }
+
         #region Commands
         public RelayCommand GamePageLoaded
         {
