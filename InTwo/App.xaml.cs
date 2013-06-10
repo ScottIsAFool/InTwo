@@ -75,7 +75,7 @@ namespace InTwo
             SettingsWrapper.UsersAccentBrush = new SolidColorBrush(((Color)Current.Resources["PhoneAccentColor"]));
 
             ThemeManager.ToDarkTheme();
-            ThemeManager.SetAccentColor(AccentColor.Magenta);
+            ThemeManager.SetAccentColor(AccentColor.Green);
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)

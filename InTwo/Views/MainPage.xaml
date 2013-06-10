@@ -123,11 +123,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
-                <!--<Button Content="game"
-                        Command="{Binding GoToGameCommand}"
-                        VerticalAlignment="Top"
-                        IsEnabled="{Binding DataExists}"/>-->
+                
                 <Button Style="{StaticResource EmptyButtonStyle}"
                         Height="200"
                         Width="200"
