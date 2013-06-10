@@ -60,6 +60,10 @@ namespace InTwo.ViewModel
             {
                 await _scoreoidClient.CreateScoreAsync(App.CurrentPlayer.username, score);
 
+                App.SettingsWrapper.AppSettings.MostRecentScore = score;
+
+                Messenger.Default.Send(new NotificationMessage(Constants.Messages.ForceSettingsSaveMsg));
+
                 return true;
             }
             catch (ScoreoidException)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -421,7 +422,8 @@ namespace InTwo.ViewModel
             {
                 difficulty = SelectedGenre.Name,
                 platform = "WP8",
-                value = RoundPoints.ToString()
+                value = RoundPoints.ToString(CultureInfo.InvariantCulture),
+                created = DateTime.Now.ToString(CultureInfo.CurrentUICulture.DateTimeFormat)
             };
 
             Messenger.Default.Send(new NotificationMessageAction<bool>(score, Constants.Messages.SubmitScoreMsg, success =>

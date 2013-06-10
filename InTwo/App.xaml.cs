@@ -6,6 +6,7 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
+using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -97,6 +98,18 @@ namespace InTwo
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+            WireMessages();
+        }
+
+        private void WireMessages()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.ForceSettingsSaveMsg))
+                {
+                    SaveSettings();
+                }
+            });
         }
 
         // Code to execute when the application is launching (eg, from Start)

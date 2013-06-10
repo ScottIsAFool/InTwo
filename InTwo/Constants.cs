@@ -63,6 +63,7 @@
             public const string SubmitScoreMsg = "SubmitScoreMsg";
             public const string UpdatePrimaryTileMsg = "UpdatePrimaryTileMsg";
             public const string RequestScoreMsg = "RequestScoreMsg";
+            public const string ForceSettingsSaveMsg = "ForceSettingsSaveMsg";
         }
 
         public static class Pages
