@@ -39,6 +39,8 @@
 
             <scottConverters:CountToEnabled x:Key="CountToEnabled" />
             <scottConverters:NullVisibilityConverter x:Key="NullVisibilityConverter" />
+            <scottConverters:NullVisibilityConverter x:Key="InvertedNullVisibilityConverter"
+                                                     Inverted="True"/>
 
             <localConverters:CurrentUserConverter x:Key="CurrentUserConverter" />
             <localConverters:CanSendOrUpdateConverter x:Key="CanSendOrUpdateConverter" />

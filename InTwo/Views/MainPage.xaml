@@ -123,37 +123,63 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="3*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Welcome to In Two, tap the big green button below to get started"
+                               TextWrapping="Wrap"
+                               Style="{StaticResource PhoneTextTitle3Style}"
+                               VerticalAlignment="Top" />
+
+                    <Grid VerticalAlignment="Center"
+                          Grid.Row="1">
+                        <TextBlock Text="No recent games played"
+                                   Style="{StaticResource PhoneTextTitle3Style}"
+                                   Visibility="{Binding AppSettings.MostRecentScore, Source={StaticResource Settings}, Converter={StaticResource InvertedNullVisibilityConverter}}"/>
+                        <StackPanel Orientation="Vertical"
+                                    Visibility="{Binding AppSettings.MostRecentScore, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}">
+                            
+                        </StackPanel>
+                    </Grid>
+
+                    <Button Style="{StaticResource EmptyButtonStyle}"
+                            Height="200"
+                            Width="200"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            toolkit:TiltEffect.IsTiltEnabled="True"
+                            IsEnabled="{Binding DataExists}"
+                            Command="{Binding GoToGameCommand}"
+                            Margin="12"
+                            Grid.Row="2">
+                        <Border Background="Black">
+                            <Border.Clip>
+                                <EllipseGeometry Center="100,100"
+                                                 RadiusX="100"
+                                                 RadiusY="100" />
+                            </Border.Clip>
+                            <Grid Opacity="{Binding DataExists, Converter={StaticResource ButtonOpacityConverter}}">
+                                <Ellipse Fill="{StaticResource PhoneAccentBrush}"
+                                         Height="200"
+                                         Width="200" />
+                                <Path x:Name="MusicNote2"
+                                      Width="60"
+                                      Height="69"
+                                      Stretch="Fill"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Fill="{StaticResource PhoneForegroundBrush}"
+                                      Data="F1 M 26.9167,47.5L 28.5,47.6496L 28.5,23.75L 53.8333,19L 53.8333,47.5C 53.8333,50.1234 50.9978,52.25 47.5,52.25C 44.0022,52.25 41.1667,50.1234 41.1667,47.5C 41.1667,44.8766 44.0022,42.75 47.5,42.75C 48.0467,42.75 48.5773,42.802 49.0833,42.8997L 49.0833,24.6406L 33.25,27.6094L 33.25,52.25C 33.25,54.8734 30.4145,57 26.9167,57C 23.4189,57 20.5833,54.8734 20.5833,52.25C 20.5833,49.6266 23.4189,47.5 26.9167,47.5 Z "
+                                      UseLayoutRounding="False" />
+                            </Grid>
+                        </Border>
+                    </Button>
+                </Grid>
                 
-                <Button Style="{StaticResource EmptyButtonStyle}"
-                        Height="200"
-                        Width="200"
-                        VerticalAlignment="Bottom"
-                        HorizontalAlignment="Right"
-                        toolkit:TiltEffect.IsTiltEnabled="True"
-                        IsEnabled="{Binding DataExists}"
-                        Command="{Binding GoToGameCommand}">
-                    <Border Background="Black">
-                        <Border.Clip>
-                            <EllipseGeometry Center="100,100"
-                                             RadiusX="100"
-                                             RadiusY="100"/>
-                        </Border.Clip>
-                        <Grid Opacity="{Binding DataExists, Converter={StaticResource ButtonOpacityConverter}}">
-                            <Ellipse Fill="{StaticResource PhoneAccentBrush}"
-                                     Height="200"
-                                     Width="200" />
-                            <Path x:Name="MusicNote2"
-                                  Width="60"
-                                  Height="69"
-                                  Stretch="Fill"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"
-                                  Fill="{StaticResource PhoneForegroundBrush}"
-                                  Data="F1 M 26.9167,47.5L 28.5,47.6496L 28.5,23.75L 53.8333,19L 53.8333,47.5C 53.8333,50.1234 50.9978,52.25 47.5,52.25C 44.0022,52.25 41.1667,50.1234 41.1667,47.5C 41.1667,44.8766 44.0022,42.75 47.5,42.75C 48.0467,42.75 48.5773,42.802 49.0833,42.8997L 49.0833,24.6406L 33.25,27.6094L 33.25,52.25C 33.25,54.8734 30.4145,57 26.9167,57C 23.4189,57 20.5833,54.8734 20.5833,52.25C 20.5833,49.6266 23.4189,47.5 26.9167,47.5 Z "
-                                  UseLayoutRounding="False" />
-                        </Grid>
-                    </Border>
-                </Button>
                 <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                                   AdType="IaAdType_Banner"
                                   ReloadTime="30"
