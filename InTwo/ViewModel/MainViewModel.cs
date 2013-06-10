@@ -242,7 +242,7 @@ namespace InTwo.ViewModel
             }
         }
 
-        public RelayCommand RemoveAdsCommand
+        public RelayCommand GoToRemoveAdsCommand
         {
             get
             {
@@ -258,7 +258,7 @@ namespace InTwo.ViewModel
             }
         }
 
-        public RelayCommand HowToPlayCommand
+        public RelayCommand GoToHowToPlayCommand
         {
             get
             {

@@ -55,24 +55,6 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
           Background="Transparent">
-        <i:Interaction.Behaviors>
-            <custom:CustomApplicationBarBehaviour Mode="Minimized">
-                <custom:CustomApplicationBarBehaviour.MenuItems>
-                    <cimbalino:ApplicationBarMenuItem Text="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource UserLoggedInConverter}}"
-                                                      Command="{Binding LoginLogoutCommand}" />
-                    <cimbalino:ApplicationBarMenuItem Text="settings"
-                                                      Command="{Binding GoToSettingsCommand}" />
-                    <cimbalino:ApplicationBarMenuItem Text="refresh game data"
-                                                      Command="{Binding RefreshGameDataCommand}" />
-                    <cimbalino:ApplicationBarMenuItem Text="remove ads"
-                                                      Command="{Binding RemoveAdsCommand}"
-                                                      IsVisible="{Binding HasRemovedAds, Source={StaticResource Settings}, Converter={StaticResource NegativeBooleanConverter}}" />
-                    <cimbalino:ApplicationBarMenuItem Text="about"
-                                                      Command="{Binding NavigateToPage}"
-                                                      CommandParameter="/YourLastAboutDialog;component/AboutPage.xaml" />
-                </custom:CustomApplicationBarBehaviour.MenuItems>
-            </custom:CustomApplicationBarBehaviour>
-        </i:Interaction.Behaviors>
 
         <coding4Fun:SuperImage Style="{StaticResource AppBackground}"
                                Sources="{Binding Source={StaticResource BackgroundImageSource}}" />
