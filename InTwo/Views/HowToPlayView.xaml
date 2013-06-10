@@ -66,7 +66,28 @@
             <Grid x:Name="ContentPanel"
                   Grid.Row="1"
                   Margin="12,0,12,0">
-                
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="After tapping the big green button and going to the game page, you can select your game options. These are the genre you want to play your game in, and how quickly you think you can name that tune."
+                               TextWrapping="Wrap"
+                               Style="{StaticResource PhoneTextTitle3Style}" />
+                    <Border Background="Black"
+                            Height="99"
+                            Width="350"
+                            HorizontalAlignment="Left"
+                            Margin="12">
+                        <Image Source="/Images/HowTo/SelectGameTypes.png"
+                               Height="99"
+                               HorizontalAlignment="Left"
+                               Margin="6" />
+                    </Border>
+                    <TextBlock Text="Once you're happy with that, tap the play button and begin your game. If you need to listen to the bit of music again, tap the repeat button."
+                               TextWrapping="Wrap"
+                               Style="{StaticResource PhoneTextTitle3Style}"/>
+                    <TextBlock Text="If you don't want to type your answers, tap the audio guess button and speak your answer."
+                               TextWrapping="Wrap"
+                               Style="{StaticResource PhoneTextTitle3Style}"
+                               Margin="12,6"/>
+                </StackPanel>
             </Grid>
         </Grid>
 

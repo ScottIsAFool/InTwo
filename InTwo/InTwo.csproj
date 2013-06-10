@@ -337,6 +337,7 @@
     <Content Include="Images\AppBackground-720p.jpg" />
     <Content Include="Images\AppBackground-WVGA.jpg" />
     <Content Include="Images\AppBackground-WXGA.jpg" />
+    <Content Include="Images\HowTo\SelectGameTypes.png" />
     <Content Include="Images\InTwoLogo.png" />
     <Content Include="Images\InTwoSmallLogo.png" />
     <Content Include="Images\NokiaMusicLogo.png" />
