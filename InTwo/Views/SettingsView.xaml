@@ -15,7 +15,8 @@
                             Orientation="Portrait"
                             mc:Ignorable="d"
                             shell:SystemTray.IsVisible="True"
-                            shell:SystemTray.Opacity="0">
+                            shell:SystemTray.Opacity="0"
+                            toolkit:TiltEffect.IsTiltEnabled="True">
     <phone:PhoneApplicationPage.Resources>
         <Style x:Key="PhoneButtonBase"
                TargetType="ButtonBase">

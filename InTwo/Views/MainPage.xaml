@@ -69,6 +69,8 @@
                     <cimbalino:ApplicationBarMenuItem Text="remove ads"
                                                       Command="{Binding RemoveAdsCommand}"
                                                       IsVisible="{Binding HasRemovedAds, Source={StaticResource Settings}, Converter={StaticResource NegativeBooleanConverter}}"/>
+                    <cimbalino:ApplicationBarMenuItem Text="how to play"
+                                                      Command="{Binding HowToPlayCommand}"/>
                     <cimbalino:ApplicationBarMenuItem Text="about"
                                                       Command="{Binding NavigateToPage}"
                                                       CommandParameter="/YourLastAboutDialog;component/AboutPage.xaml" />

@@ -257,6 +257,14 @@ namespace InTwo.ViewModel
                 return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.DownloadingSongs));
             }
         }
+
+        public RelayCommand HowToPlayCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.HowToPlay));
+            }
+        }
         #endregion
     }
 }
