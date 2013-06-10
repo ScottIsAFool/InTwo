@@ -18,10 +18,12 @@
     <!--Application Resources-->
     <Application.Resources>
         <ResourceDictionary>
+            <model:SettingsWrapper x:Key="Settings" />
+            
             <vm:ViewModelLocator x:Key="Locator"
                                  d:IsDataSource="True" />
 
-            <model:SettingsWrapper x:Key="Settings" />
+            
 
             <system:String x:Key="AppName">In Two</system:String>
             <Color x:Key="AppBarColour">Black</Color>

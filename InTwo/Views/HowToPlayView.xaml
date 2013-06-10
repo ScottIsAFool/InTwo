@@ -5,12 +5,7 @@
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-                            xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
                             xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-                            xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
-                            xmlns:converters="clr-namespace:InTwo.Converters"
-                            xmlns:custom="clr-namespace:InTwo.Behaviours"
                             xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
                             mc:Ignorable="d"
                             FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -19,17 +14,7 @@
                             SupportedOrientations="Portrait"
                             Orientation="Portrait"
                             shell:SystemTray.IsVisible="True"
-                            shell:SystemTray.Opacity="0"
-                            DataContext="{Binding Main, Source={StaticResource Locator}}">
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding MainPageLoaded}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
-
-    <phone:PhoneApplicationPage.Resources>
-        <converters:UserLoggedInConverter x:Key="UserLoggedInConverter" />
-    </phone:PhoneApplicationPage.Resources>
+                            shell:SystemTray.Opacity="0">
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>

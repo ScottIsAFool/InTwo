@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using MetroLog;
@@ -91,6 +92,8 @@ namespace InTwo.ViewModel
             Genres = genres;
 
             App.SettingsWrapper.AppSettings.DefaultGenre = Genres.FirstOrDefault(x => x.Name.Equals(App.SettingsWrapper.AppSettings.DefaultGenre.Name));
+
+            if (SimpleIoc.Default.GetInstance<GameViewModel>() == null) return false;
 
             Messenger.Default.Send(new NotificationMessage(genres, Constants.Messages.HereAreTheGenresMsg));
 

@@ -69,6 +69,9 @@ namespace InTwo.ViewModel
 
                 _gameTimer.Interval = GameLength;
                 _gameTimer.Tick += GameTimerOnTick;
+
+                GameLength = App.SettingsWrapper.AppSettings.DefaultGameLength;
+                SelectedGenre = App.SettingsWrapper.AppSettings.DefaultGenre;
             }
         }
 
@@ -475,12 +478,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
-                {
-                    GameLength = App.SettingsWrapper.AppSettings.DefaultGameLength;
-                    SelectedGenre = App.SettingsWrapper.AppSettings.DefaultGenre;
-                    CheckIfMusicPlayingAndCanStopIt();
-                });
+                return new RelayCommand(CheckIfMusicPlayingAndCanStopIt);
             }
         }
 

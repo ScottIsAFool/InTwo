@@ -61,7 +61,7 @@ namespace InTwo.ViewModel
             SimpleIoc.Default.Register<ScoreBoardViewModel>();
             SimpleIoc.Default.Register<UserProfileViewModel>(true);
             SimpleIoc.Default.Register<DownloadingSongsViewModel>();
-            SimpleIoc.Default.Register<GameViewModel>(true);
+            SimpleIoc.Default.Register<GameViewModel>();
             SimpleIoc.Default.Register<RemoveAdsViewModel>();
         }
 
