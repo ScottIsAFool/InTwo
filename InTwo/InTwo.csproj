@@ -368,7 +368,7 @@
       <HintPath>..\packages\HttpClient.Compression.1.1.0\lib\portable-net4+sl4+wp7+win8\AdvancedREI.Net.Http.Compression.dll</HintPath>
     </Reference>
     <Reference Include="Anotar.MetroLog">
-      <HintPath>..\packages\Anotar.MetroLog.Fody.1.8.0.0\Lib\portable-net45+wp8+win8\Anotar.MetroLog.dll</HintPath>
+      <HintPath>..\packages\Anotar.MetroLog.Fody.1.8.1.0\Lib\portable-net45+wp8+win8\Anotar.MetroLog.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Cimbalino.Phone.Toolkit, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -440,16 +440,17 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.5.0.5\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\portable-net45+wp80+win8\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Nokia.Music.Wp8">
-      <HintPath>..\packages\NokiaMusic.2.2.0\lib\windowsphone8\Nokia.Music.Wp8.dll</HintPath>
+    <Reference Include="Nokia.Music.Wp8, Version=2.2.0.642, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NokiaMusic.2.3.0\lib\windowsphone8\Nokia.Music.Wp8.dll</HintPath>
     </Reference>
     <Reference Include="PhoneCodeContractsAssemblies">
       <HintPath>..\packages\ImageTools.0.3.1\lib\sl3-wp\PhoneCodeContractsAssemblies.dll</HintPath>
     </Reference>
     <Reference Include="PropertyChanged">
-      <HintPath>..\packages\PropertyChanged.Fody.1.38.2.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
+      <HintPath>..\packages\PropertyChanged.Fody.1.38.5.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="ScoreoidPortable, Version=1.0.3.3, Culture=neutral, processorArchitecture=MSIL">
@@ -500,6 +501,6 @@
   -->
   <ProjectExtensions />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.5\tools\Microsoft.Bcl.Build.targets" />
   <Import Project="Fody.targets" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.7\tools\Microsoft.Bcl.Build.targets" />
 </Project>
