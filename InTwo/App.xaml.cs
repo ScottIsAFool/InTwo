@@ -177,16 +177,16 @@ namespace InTwo
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
+            e.Handled = true;
+
             // I'm not logging the Nokia Ad Exchange's shitty exceptions
-            if (e.ExceptionObject.StackTrace.ToLower().Contains("Inneractive.Ad.InneractiveAdControl")) return;
+            if (e.ExceptionObject.StackTrace.Contains("Inneractive.Ad.InneractiveAdControl")) return;
 
             if (Debugger.IsAttached)
             {
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
-
-            e.Handled = true;
 
             FlurryWP8SDK.Api.LogError("UnhandledException", e.ExceptionObject);
 
