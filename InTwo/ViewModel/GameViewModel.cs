@@ -109,6 +109,14 @@ namespace InTwo.ViewModel
                     }
                 }
             });
+
+            Messenger.Default.Register<NotificationMessageAction<int>>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.RequestScoreMsg))
+                {
+                    m.Execute(RoundPoints);
+                }
+            });
         }
 
         public List<Genre> Genres { get; set; }
