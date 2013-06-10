@@ -72,7 +72,7 @@ namespace InTwo
 
             // Language display initialization
 
-            SettingsWrapper.UsersAccentBrush = new SolidColorBrush(((Color) Current.Resources["PhoneAccentColor"]));
+            SettingsWrapper.UsersAccentBrush = new SolidColorBrush(((Color)Current.Resources["PhoneAccentColor"]));
 
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Magenta);
@@ -182,6 +182,8 @@ namespace InTwo
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+
+            e.Handled = true;
 
             FlurryWP8SDK.Api.LogError("UnhandledException", e.ExceptionObject);
 
