@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace InTwo.Model
 {
@@ -13,10 +12,5 @@ namespace InTwo.Model
         public AppSettings AppSettings { get; set; }
         public bool HasRemovedAds { get; set; }
         public SolidColorBrush UsersAccentBrush { get; set; }
-
-        public void OnUsersAccentBrushChanged()
-        {
-            var s = "";
-        }
     }
 }

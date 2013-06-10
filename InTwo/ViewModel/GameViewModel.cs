@@ -69,7 +69,6 @@ namespace InTwo.ViewModel
                 _gameTimer.Interval = GameLength;
                 _gameTimer.Tick += GameTimerOnTick;
             }
-
         }
 
         private void GameTimerOnTick(object sender, EventArgs eventArgs)

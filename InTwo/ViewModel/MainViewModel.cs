@@ -36,7 +36,6 @@ namespace InTwo.ViewModel
         private readonly ILogger _logger;
 
         private bool _hasCheckedForData;
-        private bool _dataExists;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -51,6 +50,7 @@ namespace InTwo.ViewModel
         }
 
         public List<Genre> Genres { get; set; }
+        public bool DataExists { get; set; }
 
         public override void WireMessages()
         {
@@ -153,11 +153,11 @@ namespace InTwo.ViewModel
                         DisplayStopAudioMessage();
                     }
 
-                    if (_hasCheckedForData && _dataExists) return;
+                    if (_hasCheckedForData && DataExists) return;
 
-                    _dataExists = await CheckForGameData();
+                    DataExists = await CheckForGameData();
 
-                    if (!_dataExists)
+                    if (!DataExists)
                     {
                         DisplayGetDataMessage();
                     }
@@ -223,7 +223,7 @@ namespace InTwo.ViewModel
 #if !DEBUG
                         if (!_navigationService.IsNetworkAvailable) return;
 #endif
-                        if (_dataExists)
+                        if (DataExists)
                         {
                             Deployment.Current.Dispatcher.BeginInvoke(()=>_navigationService.NavigateTo(Constants.Pages.Game));
                             return;

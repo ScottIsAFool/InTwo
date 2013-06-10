@@ -90,6 +90,9 @@
                        Height="20"
                        HorizontalAlignment="Left"
                        Margin="12,0" />
+                <TextBlock Text="how to play"
+                           Margin="9,-7,0,0"
+                           Style="{StaticResource PhoneTextTitle1Style}" />
             </StackPanel>
 
             <!--ContentPanel - place additional content here-->

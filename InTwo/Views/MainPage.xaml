@@ -116,7 +116,8 @@
 
                 <Button Content="game"
                         Command="{Binding GoToGameCommand}"
-                        VerticalAlignment="Top" />
+                        VerticalAlignment="Top"
+                        IsEnabled="{Binding DataExists}"/>
                 <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
                                   AdType="IaAdType_Banner"
                                   ReloadTime="30"
