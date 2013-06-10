@@ -26,7 +26,7 @@ namespace InTwo.Model
                 MostRecentScore = new score
                 {
                     created = DateTime.Now.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
-                    difficulty = "Rock",
+                    data = "Rock",
                     value = "666"
                 };
             }

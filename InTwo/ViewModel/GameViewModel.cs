@@ -423,7 +423,7 @@ namespace InTwo.ViewModel
 
             var score = new score
             {
-                difficulty = SelectedGenre.Name,
+                data = SelectedGenre.Name,
                 platform = "WP8",
                 value = RoundPoints.ToString(CultureInfo.InvariantCulture),
                 created = DateTime.Now.ToString(CultureInfo.CurrentUICulture.DateTimeFormat)

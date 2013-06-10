@@ -150,7 +150,7 @@
                             </TextBlock>
                             <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
                                 <Run Text="Genre played was " />
-                                <Run Text="{Binding difficulty}"
+                                <Run Text="{Binding data}"
                                      Foreground="{StaticResource PhoneAccentBrush}" />
                             </TextBlock>
                             <TextBlock Style="{StaticResource PhoneTextTitle3Style}">

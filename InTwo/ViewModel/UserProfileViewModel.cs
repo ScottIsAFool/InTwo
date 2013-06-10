@@ -264,7 +264,7 @@ namespace InTwo.ViewModel
 
                         if (score.ToString() == CurrentPlayer.best_score)
                         {
-                            CurrentPlayer.last_level = score.difficulty;
+                            CurrentPlayer.last_level = score.data;
                         }
                     }
                     TotalScore = totalScore;
