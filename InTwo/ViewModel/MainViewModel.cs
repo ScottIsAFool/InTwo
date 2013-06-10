@@ -47,6 +47,10 @@ namespace InTwo.ViewModel
             _settingsService = settingsService;
             _logger = LogManagerFactory.DefaultLogManager.GetLogger<MainViewModel>();
 
+            if (IsInDesignMode)
+            {
+                DataExists = true;
+            }
         }
 
         public List<Genre> Genres { get; set; }
@@ -228,7 +232,7 @@ namespace InTwo.ViewModel
                             Deployment.Current.Dispatcher.BeginInvoke(()=>_navigationService.NavigateTo(Constants.Pages.Game));
                             return;
                         }
-                        Deployment.Current.Dispatcher.BeginInvoke(() => DisplayGetDataMessage());
+                        Deployment.Current.Dispatcher.BeginInvoke(DisplayGetDataMessage);
                     });
                 });
             }
