@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="InTwo.Controls.PoweredBy"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="800" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneBackgroundBrush}">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="This app has been made awesome (and possible) thanks to two main elements."
+                       TextWrapping="Wrap"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="GAME DATA"
+                       Style="{StaticResource HeaderStyle}"
+                       Margin="12,12,12,0"/>
+            <TextBlock Text="Powered by"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <Image Source="/Images/NokiaMusicLogo.png"
+                   Height="100"
+                   HorizontalAlignment="Left"
+                   Margin="-4,0,0,0"/>
+            <TextBlock Text="Find out more of the music you love at"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <HyperlinkButton Content="Nokia Music"
+                             HorizontalContentAlignment="Left"
+                             x:Name="NokiaMusicLink"
+                             Click="NokiaMusicLink_OnClick"/>
+            <TextBlock Text="SCORE DATA"
+                       Style="{StaticResource HeaderStyle}"
+                       Margin="12,12,12,0" />
+            <TextBlock Text="Powered by"
+                       Style="{StaticResource PhoneTextNormalStyle}" />
+            <Image Source="/Images/ScoreoidLogo.png"
+                   Height="100"
+                   HorizontalAlignment="Left"
+                   Margin="12,6"/>
+            <TextBlock Text="Find out more about scoreoid on their"
+                       Style="{StaticResource PhoneTextNormalStyle}"/>
+            <HyperlinkButton Content="website"
+                             HorizontalContentAlignment="Left"
+                             x:Name="ScoreoidLink"
+                             Click="ScoreoidLink_OnClick"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

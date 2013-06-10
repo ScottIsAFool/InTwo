@@ -2,7 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:System="clr-namespace:System;assembly=mscorlib"
                     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-                    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone">
+                    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
 
     <!-- About Page -->
     <Style x:Key="AboutPageStyle"
@@ -23,7 +24,7 @@
              1.) A reference to the Microsoft.Phone.Controls.Toolkit assembly from the toolkit
              2.) A namespace declaration to this ResourceDictionary: xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit
              3.) Replace the normal PhoneApplicationFrame with a TransitionFrame in App.xaml.cs -->
-        <!--<Setter Property="toolkit:TransitionService.NavigationInTransition">
+        <Setter Property="toolkit:TransitionService.NavigationInTransition">
             <Setter.Value>
                 <toolkit:NavigationInTransition>
                     <toolkit:NavigationInTransition.Backward>
@@ -46,7 +47,7 @@
                     </toolkit:NavigationOutTransition.Forward>
                 </toolkit:NavigationOutTransition>
             </Setter.Value>
-        </Setter>-->
+        </Setter>
     </Style>
     
     <!-- Pivot control and items -->
@@ -76,7 +77,7 @@
            TargetType="TextBlock"
            BasedOn="{StaticResource PhoneTextExtraLargeStyle}">
         <Setter Property="Foreground"
-                Value="{StaticResource PhoneAccentColor}" />
+                Value="Green" />
     </Style>
 
     <Style x:Key="AboutTextSubTitleStyle"
@@ -93,7 +94,7 @@
            TargetType="TextBlock"
            BasedOn="{StaticResource PhoneTextNormalStyle}">
         <Setter Property="Foreground"
-                Value="{StaticResource PhoneAccentColor}" />
+                Value="Green" />
         <Setter Property="FontWeight"
                 Value="Bold" />
     </Style>
@@ -101,7 +102,7 @@
     <Style x:Key="AboutHyperlinkButtonStyle"
            TargetType="HyperlinkButton">
         <Setter Property="Foreground"
-                Value="{StaticResource PhoneAccentColor}" />
+                Value="Green" />
     </Style>
 
     <!-- The style used for the buttons (e.g. the review button) -->
