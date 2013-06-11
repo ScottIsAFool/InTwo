@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using InTwo.Model;
@@ -43,6 +44,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    Log.Info("Downloading game data");
                     await DownloadData();
                 });
             }
@@ -67,6 +69,7 @@ namespace InTwo.ViewModel
 
                 if (genresResponse.Error != null || (genresResponse.Result == null))
                 {
+                    Log.ErrorException("Error getting genres", genresResponse.Error);
                     // TODO: Display an error
                     RetryIsVisible = true;
                     ProgressIsVisible = false;
@@ -78,6 +81,8 @@ namespace InTwo.ViewModel
 
                 _settingsService.Set("Genres", genres);
                 _settingsService.Save();
+
+                Log.Info("Genres saved");
 
                 var tracks = new List<Product>();
                 foreach (var genre in genres.Where(x => !x.Name.Equals("Comedy")))
@@ -92,11 +97,13 @@ namespace InTwo.ViewModel
 
                 await _asyncStorageService.WriteAllTextAsync(Constants.GameDataFile, await JsonConvert.SerializeObjectAsync(tracks));
 
+                Log.Info("Tracks written to IsolatedStorage");
+
                 _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
             }
             catch (Exception ex)
             {
-                // TODO: Display an error
+                Log.ErrorException("Error download data", ex);
             }
 
             ProgressIsVisible = false;

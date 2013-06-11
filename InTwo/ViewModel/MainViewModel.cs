@@ -155,6 +155,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    Log.Info("MainPage Loaded");
                     if (!App.SettingsWrapper.AppSettings.DontShowAllowStopMusicMessage)
                     {
                         DisplayStopAudioMessage();
@@ -162,17 +163,22 @@ namespace InTwo.ViewModel
 
                     if (_hasCheckedForData && DataExists) return;
 
+                    Log.Info("Checking for data");
                     DataExists = await CheckForGameData();
 
                     if (!DataExists)
                     {
+                        Log.Info("Data not acquired, prompting for download");
                         DisplayGetDataMessage();
                     }
 
                     _hasCheckedForData = true;
 
                     if (App.CurrentPlayer != null)
+                    {
+                        Log.Info("Player exists, requesting latest data");
                         Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerInfoMsg));
+                    }
                 });
             }
         }
@@ -197,7 +203,11 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand<string>(_navigationService.NavigateTo);
+                return new RelayCommand<string>(link =>
+                {
+                    Log.Info("Navigating to " + link);
+                    _navigationService.NavigateTo(link);
+                });
             }
         }
 
@@ -209,6 +219,7 @@ namespace InTwo.ViewModel
                 {
                     if (App.CurrentPlayer == null)
                     {
+                        Log.Info("Navigating to + ");
                         _navigationService.NavigateTo(Constants.Pages.Scoreoid.SignIn);
                     }
                     else

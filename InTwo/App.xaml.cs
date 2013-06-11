@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Messaging;
@@ -17,7 +18,7 @@ using Windows.ApplicationModel.Store;
 
 namespace InTwo
 {
-    public partial class App : Application
+    public partial class App
     {
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -82,7 +83,7 @@ namespace InTwo
             if (Debugger.IsAttached)
             {
                 // Display the current frame rate counters.
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -116,6 +117,7 @@ namespace InTwo
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            Log.Info("Application launching");
             InitializePhoneApplication();
             GetSettings();
             SetFlurry();
@@ -143,6 +145,7 @@ namespace InTwo
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            Log.Info("Application activated");
             if (!e.IsApplicationInstancePreserved)
             {
                 InitializePhoneApplication();
@@ -155,6 +158,7 @@ namespace InTwo
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            Log.Info("Application deactivated");
             SaveSettings();
         }
 
@@ -171,6 +175,7 @@ namespace InTwo
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+            Log.Info("Application closing");
             SaveSettings();
         }
 
@@ -183,6 +188,8 @@ namespace InTwo
                 Debugger.Break();
             }
             FlurryWP8SDK.Api.LogError("NavigationFailed: " + e.Uri, e.Exception);
+
+            Log.FatalException("NavigationFailed: " + e.Uri, e.Exception);
 
             SaveSettings();
         }
@@ -203,18 +210,20 @@ namespace InTwo
 
             FlurryWP8SDK.Api.LogError("UnhandledException", e.ExceptionObject);
 
+            Log.FatalException("UnhandledException", e.ExceptionObject);
+
             SaveSettings();
         }
 
         #region Phone application initialization
 
         // Avoid double-initialization
-        private bool phoneApplicationInitialized = false;
+        private bool _phoneApplicationInitialized;
 
         // Do not add any additional code to this method
         private void InitializePhoneApplication()
         {
-            if (phoneApplicationInitialized)
+            if (_phoneApplicationInitialized)
                 return;
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
@@ -238,7 +247,7 @@ namespace InTwo
             InitializeLanguage();
 
             // Ensure we don't initialize again
-            phoneApplicationInitialized = true;
+            _phoneApplicationInitialized = true;
         }
 
         private bool _isFirstPass = true;
@@ -250,6 +259,7 @@ namespace InTwo
                 && !e.Uri.ToString().Contains("/Welcome/")
                 && _isFirstPass)
             {
+                Log.Info("Showing first welcome screens");
                 e.Cancel = true;
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
