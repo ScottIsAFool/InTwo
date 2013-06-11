@@ -125,6 +125,7 @@
                                              MinScale="100"
                                              MaxScale="100" />
             </model:SuperImageSourceCollection>
+            
             <ControlTemplate x:Key="GameViewListPickerStyle"
                              TargetType="toolkit:ListPicker">
                 <StackPanel>
