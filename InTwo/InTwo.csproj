@@ -391,8 +391,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Cimbalino.Phone.Toolkit.Camera.3.0.0\lib\wp8\Cimbalino.Phone.Toolkit.Camera.dll</HintPath>
     </Reference>
-    <Reference Include="Coding4Fun.Toolkit.Controls">
-      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.5\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    <Reference Include="Coding4Fun.Toolkit.Controls, Version=2.0.6.0, Culture=neutral, PublicKeyToken=c5fd7b72b1a17ce4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.0.6\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
     <Reference Include="FlurryWP8SDK">
       <HintPath>..\3plib\Flurry\FlurryWP8SDK.dll</HintPath>
