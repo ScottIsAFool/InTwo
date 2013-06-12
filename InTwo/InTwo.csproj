@@ -127,7 +127,6 @@
     <Compile Include="Design\DesignAsyncStorageService.cs" />
     <Compile Include="Design\DesignPhotoChooserService.cs" />
     <Compile Include="Extensions\LinqToVisualTree.cs" />
-    <Compile Include="InneractiveAdLocation.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Model\ExtendedNavigationService.cs" />

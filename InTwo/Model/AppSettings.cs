@@ -58,6 +58,18 @@ namespace InTwo.Model
                 MessageBox.Show("Really? You think you can do it in 0 seconds? Well, as good as you think you are, you have to select at least 1 second. Sorry.", "Sorry", MessageBoxButton.OK);
                 DefaultGameLength = TimeSpan.FromSeconds(2);
             }
+
+            AlertTheGameViewModel();
+        }
+
+        private void OnDefaultGenreChanged()
+        {
+            AlertTheGameViewModel();
+        }
+
+        private void AlertTheGameViewModel()
+        {
+            Messenger.Default.Send(new NotificationMessage(Constants.Messages.UpdateTheDefaultsManMsg));
         }
 
         private void OnUseProfilePictureInTileChanged()
