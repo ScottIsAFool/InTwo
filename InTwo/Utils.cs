@@ -83,7 +83,7 @@ namespace InTwo
                 }
             });
 
-            if (numberOfCorrectWords > (splitWords.Count * 0.9))
+            if (numberOfCorrectWords > (splitWords.Count * 0.6))
             {
                 guessCorrect = true;
                 return true;
