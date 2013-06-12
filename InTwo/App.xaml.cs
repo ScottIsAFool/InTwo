@@ -9,6 +9,7 @@ using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
+using InTwo.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using InTwo.Resources;
@@ -238,6 +239,8 @@ namespace InTwo
 
             // Handle reset requests for clearing the backstack
             RootFrame.Navigated += CheckForResetNavigation;
+
+            RootFrame.UriMapper = new InTwoUriMapper();
 
             RootFrame.Navigating += RootFrameOnNavigating;
 
