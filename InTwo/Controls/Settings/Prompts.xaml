@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="InTwo.Controls.Settings.Prompts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             FontFamily="{StaticResource PhoneFontFamilyNormal}"
+             FontSize="{StaticResource PhoneFontSizeNormal}"
+             Foreground="{StaticResource PhoneForegroundBrush}"
+             d:DesignHeight="480"
+             d:DesignWidth="480">
+
+    <Grid x:Name="LayoutRoot"
+          Background="Transparent"
+          DataContext="{Binding AppSettings, Source={StaticResource Settings}}">
+        <StackPanel Orientation="Vertical">
+            <CheckBox Content="Don't show exit check in game view"
+                      VerticalAlignment="Top"
+                      IsChecked="{Binding DontShowBackExitMessage, Mode=TwoWay}" />
+            <CheckBox Content="Don't show speech helper"
+                      VerticalAlignment="Top"
+                      IsChecked="{Binding DontShowSpeechGuessprompt, Mode=TwoWay}" />
+            <CheckBox Content="Allow In Two to stop your music"
+                      VerticalAlignment="Top"
+                      IsChecked="{Binding AllowStopMusic, Mode=TwoWay}" />
+            <CheckBox Content="Don't prompt to sign in"
+                      VerticalAlignment="Top"
+                      IsChecked="{Binding DontShowNotSignedInMessage, Mode=TwoWay}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

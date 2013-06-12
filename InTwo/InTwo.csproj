@@ -105,6 +105,15 @@
     <Compile Include="Controls\ProfilePicture.xaml.cs">
       <DependentUpon>ProfilePicture.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Settings\GameDefaults.xaml.cs">
+      <DependentUpon>GameDefaults.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Settings\Prompts.xaml.cs">
+      <DependentUpon>Prompts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Settings\Tiles.xaml.cs">
+      <DependentUpon>Tiles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SpeechHelp.xaml.cs">
       <DependentUpon>SpeechHelp.xaml</DependentUpon>
     </Compile>
@@ -118,6 +127,7 @@
     <Compile Include="Converters\BooleanToObjectConverter.cs" />
     <Compile Include="Converters\BooleanToOpacityConverter.cs" />
     <Compile Include="Converters\CanSendOrUpdateConverter.cs" />
+    <Compile Include="Converters\ContentConverter.cs" />
     <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Converters\NullBooleanConverter.cs" />
     <Compile Include="Converters\ProfilePictureUriConverter.cs" />
@@ -127,6 +137,7 @@
     <Compile Include="Design\DesignAsyncStorageService.cs" />
     <Compile Include="Design\DesignPhotoChooserService.cs" />
     <Compile Include="Extensions\LinqToVisualTree.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="InneractiveAdLocation.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\AppSettings.cs" />
@@ -145,6 +156,7 @@
     <Compile Include="ViewModel\RemoveAdsViewModel.cs" />
     <Compile Include="ViewModel\ScoreBoardViewModel.cs" />
     <Compile Include="ViewModel\ScoreoidViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\UserProfileViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\DownloadingSongsView.xaml.cs">
@@ -215,6 +227,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProfilePicture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings\GameDefaults.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings\Prompts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings\Tiles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
