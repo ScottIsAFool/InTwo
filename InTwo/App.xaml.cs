@@ -77,6 +77,7 @@ namespace InTwo
 
             SettingsWrapper.UsersAccentBrush = new SolidColorBrush(((Color)Current.Resources["PhoneAccentColor"]));
 
+            ThemeManager.OverrideOptions = ThemeManagerOverrideOptions.SystemTrayAndApplicationBars;
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Green);
 
