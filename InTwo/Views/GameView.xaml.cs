@@ -63,5 +63,14 @@ namespace InTwo.Views
                 ((GameViewModel)DataContext).DoINeedToSubmitScores();
             }
         }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                Messenger.Default.Send(new NotificationMessage(Constants.Messages.NewGameMsg));
+            }
+        }
     }
 }

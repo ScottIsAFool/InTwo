@@ -243,7 +243,14 @@ namespace InTwo.ViewModel
 #endif
                         if (DataExists)
                         {
-                            Deployment.Current.Dispatcher.BeginInvoke(()=>_navigationService.NavigateTo(Constants.Pages.Game));
+                            Deployment.Current.Dispatcher.BeginInvoke(() =>
+                            {
+                                if (SimpleIoc.Default.GetInstance<GameViewModel>() == null) return;
+
+                                Messenger.Default.Send(new NotificationMessage(Constants.Messages.NewGameMsg));
+
+                                _navigationService.NavigateTo(Constants.Pages.Game);
+                            });
                             return;
                         }
                         Deployment.Current.Dispatcher.BeginInvoke(DisplayGetDataMessage);

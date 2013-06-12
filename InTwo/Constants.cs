@@ -64,6 +64,7 @@
             public const string UpdatePrimaryTileMsg = "UpdatePrimaryTileMsg";
             public const string RequestScoreMsg = "RequestScoreMsg";
             public const string ForceSettingsSaveMsg = "ForceSettingsSaveMsg";
+            public const string NewGameMsg = "ResetGameMsg";
         }
 
         public static class Pages

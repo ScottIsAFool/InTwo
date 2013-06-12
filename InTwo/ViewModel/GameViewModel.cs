@@ -112,6 +112,10 @@ namespace InTwo.ViewModel
                         _gameTimer.Start();
                     }
                 }
+                if (m.Notification.Equals(Constants.Messages.NewGameMsg))
+                {
+                    StartNewGame();
+                }
             });
 
             Messenger.Default.Register<NotificationMessageAction<int>>(this, m =>
@@ -367,10 +371,6 @@ namespace InTwo.ViewModel
                     };
                     message.Show();
                 }
-            }
-            else
-            {
-                StartNewGame();
             }
         }
 
