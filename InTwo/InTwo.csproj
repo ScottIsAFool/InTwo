@@ -127,7 +127,6 @@
     <Compile Include="Converters\BooleanToObjectConverter.cs" />
     <Compile Include="Converters\BooleanToOpacityConverter.cs" />
     <Compile Include="Converters\CanSendOrUpdateConverter.cs" />
-    <Compile Include="Converters\ContentConverter.cs" />
     <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Converters\NullBooleanConverter.cs" />
     <Compile Include="Converters\ProfilePictureUriConverter.cs" />
