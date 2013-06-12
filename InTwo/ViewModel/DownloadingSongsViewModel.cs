@@ -50,6 +50,12 @@ namespace InTwo.ViewModel
             }
         }
 
+        private void NavigateTo(string link)
+        {
+            Log.Info("Navigating to " + link);
+            _navigationService.NavigateTo(link);
+        }
+
         private async Task DownloadData()
         {
             if (!_navigationService.IsNetworkAvailable)
@@ -99,7 +105,7 @@ namespace InTwo.ViewModel
 
                 Log.Info("Tracks written to IsolatedStorage");
 
-                _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
+                NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
             }
             catch (Exception ex)
             {

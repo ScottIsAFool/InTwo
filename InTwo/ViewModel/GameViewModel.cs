@@ -413,7 +413,7 @@ namespace InTwo.ViewModel
                     ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
                     if (args.Result == CustomMessageBoxResult.LeftButton)
                     {
-                        _navigationService.NavigateTo(Constants.Pages.Scoreoid.SignIn);
+                        NavigateTo(Constants.Pages.Scoreoid.SignIn);
                     }
                 };
                 message.Show();
@@ -422,6 +422,12 @@ namespace InTwo.ViewModel
             {
                 ActuallySubmitTheScore();
             }
+        }
+
+        private void NavigateTo(string link)
+        {
+            Log.Info("Navigating to " + link);
+            _navigationService.NavigateTo(link);
         }
 
         private void ActuallySubmitTheScore()
@@ -445,7 +451,7 @@ namespace InTwo.ViewModel
                 if (success)
                 {
                     SubmittingScore = false;
-                    _navigationService.NavigateTo(Constants.Pages.ScoreBoard);
+                    NavigateTo(Constants.Pages.ScoreBoard);
                 }
                 else
                 {

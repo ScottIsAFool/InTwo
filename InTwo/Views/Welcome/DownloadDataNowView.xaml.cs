@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
+using Anotar.MetroLog;
 
 namespace InTwo.Views.Welcome
 {
-    public partial class DownloadDataNowView : PhoneApplicationPage
+    public partial class DownloadDataNowView
     {
         // Constructor
         public DownloadDataNowView()
@@ -15,12 +15,12 @@ namespace InTwo.Views.Welcome
 
         private void NotNowButton_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri(Constants.Pages.MainPage + Constants.ClearBackStack, UriKind.Relative));
+            Navigate(new Uri(Constants.Pages.MainPage + Constants.ClearBackStack, UriKind.Relative));
         }
 
         private void DownloadDataButton_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri(Constants.Pages.DownloadingSongs, UriKind.Relative));
+            Navigate(new Uri(Constants.Pages.DownloadingSongs, UriKind.Relative));
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -31,6 +31,12 @@ namespace InTwo.Views.Welcome
             {
                 App.SettingsWrapper.AppSettings.ShowWelcomeMessage = false;
             }
+        }
+
+        private void Navigate(Uri link)
+        {
+            Log.Info("Navigating to " + link);
+            NavigationService.Navigate(link);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Anotar.MetroLog;
 using Microsoft.Phone.Controls;
 
 namespace InTwo.Views.Welcome
@@ -17,13 +18,19 @@ namespace InTwo.Views.Welcome
 
         private void NextButton_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri(Constants.Pages.Welcome.ScoreoidWelcome, UriKind.Relative));
+            Navigate(new Uri(Constants.Pages.Welcome.ScoreoidWelcome, UriKind.Relative));
         }
 
         private void NoThanksButton_OnClick(object sender, RoutedEventArgs e)
         {
-            // TODO: Add some analytics for this
+            FlurryWP8SDK.Api.LogEvent("TermsDeclined");
             Application.Current.Terminate();
+        }
+
+        private void Navigate(Uri link)
+        {
+            Log.Info("Navigating to " + link);
+            NavigationService.Navigate(link);
         }
     }
 }

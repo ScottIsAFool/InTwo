@@ -25,10 +25,5 @@ namespace InTwo.Views
                 }
             }
         }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri(Constants.Pages.Game, UriKind.Relative));
-        }
     }
 }

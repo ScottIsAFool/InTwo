@@ -325,7 +325,9 @@
     <Content Include="Assets\Tiles\TransparentFlipCycleTileLarge.png" />
     <Content Include="Assets\Tiles\TransparentFlipCycleTileMedium.png" />
     <Content Include="Assets\Tiles\TransparentFlipCycleTileSmall.png" />
-    <Content Include="Content\About\Data.xml" />
+    <Content Include="Content\About\Data.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="FodyWeavers.xml" />
     <Content Include="Icons\appbar.currency.dollar.png" />
     <Content Include="Icons\appbar.microphone.png" />

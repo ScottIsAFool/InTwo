@@ -142,10 +142,16 @@ namespace InTwo.ViewModel
                 {
                     ((CustomMessageBox)sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
 
-                    _navigationService.NavigateTo(Constants.Pages.DownloadingSongs);
+                    NavigateTo(Constants.Pages.DownloadingSongs);
                 }
             };
             message.Show();
+        }
+
+        private void NavigateTo(string link)
+        {
+            Log.Info("Navigating to " + link);
+            _navigationService.NavigateTo(link);
         }
 
         #region Commands
@@ -203,11 +209,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand<string>(link =>
-                {
-                    Log.Info("Navigating to " + link);
-                    _navigationService.NavigateTo(link);
-                });
+                return new RelayCommand<string>(NavigateTo);
             }
         }
 
@@ -219,8 +221,7 @@ namespace InTwo.ViewModel
                 {
                     if (App.CurrentPlayer == null)
                     {
-                        Log.Info("Navigating to + ");
-                        _navigationService.NavigateTo(Constants.Pages.Scoreoid.SignIn);
+                        NavigateTo(Constants.Pages.Scoreoid.SignIn);
                     }
                     else
                     {
@@ -249,7 +250,7 @@ namespace InTwo.ViewModel
 
                                 Messenger.Default.Send(new NotificationMessage(Constants.Messages.NewGameMsg));
 
-                                _navigationService.NavigateTo(Constants.Pages.Game);
+                                NavigateTo(Constants.Pages.Game);
                             });
                             return;
                         }
@@ -263,7 +264,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.SettingsView));
+                return new RelayCommand(() => NavigateTo(Constants.Pages.SettingsView));
             }
         }
 
@@ -271,7 +272,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.Removeads));
+                return new RelayCommand(() => NavigateTo(Constants.Pages.Removeads));
             }
         }
 
@@ -279,7 +280,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.DownloadingSongs));
+                return new RelayCommand(() => NavigateTo(Constants.Pages.DownloadingSongs));
             }
         }
 
@@ -287,7 +288,7 @@ namespace InTwo.ViewModel
         {
             get
             {
-                return new RelayCommand(() => _navigationService.NavigateTo(Constants.Pages.HowToPlay));
+                return new RelayCommand(() => NavigateTo(Constants.Pages.HowToPlay));
             }
         }
         #endregion

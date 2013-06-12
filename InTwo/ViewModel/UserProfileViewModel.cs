@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -75,6 +76,12 @@ namespace InTwo.ViewModel
 
         public bool HasProfilePicture { get; set; }
 
+        private void NavigateTo(string link)
+        {
+            Log.Info("Navigating to " + link);
+            _navigationService.NavigateTo(link);
+        }
+
         #region Commands
         public RelayCommand UserProfilePageLoaded
         {
@@ -96,7 +103,7 @@ namespace InTwo.ViewModel
                 return new RelayCommand(() =>
                 {
                     CurrentPlayer = App.CurrentPlayer;
-                    _navigationService.NavigateTo(Constants.Pages.Scoreoid.EditUser);
+                    NavigateTo(Constants.Pages.Scoreoid.EditUser);
                 });
             }
         }
@@ -140,7 +147,7 @@ namespace InTwo.ViewModel
 
                         App.SettingsWrapper.AppSettings.PlayerWrapper = null;
 
-                        _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
+                        NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
                     }
                     catch (ScoreoidException ex)
                     {
@@ -228,7 +235,7 @@ namespace InTwo.ViewModel
                 {
                     App.CurrentPlayer = null;
 
-                    _navigationService.NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
+                    NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
 
                     Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
 

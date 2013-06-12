@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using Anotar.MetroLog;
 using Microsoft.Phone.Controls;
 
 namespace InTwo.Views.Welcome
@@ -13,7 +14,7 @@ namespace InTwo.Views.Welcome
 
         private void NoThanksButton_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new Uri(Constants.Pages.Welcome.DownloadSongsNow, UriKind.Relative));
+            Navigate(new Uri(Constants.Pages.Welcome.DownloadSongsNow, UriKind.Relative));
         }
 
         private void YesButton_OnClick(object sender, RoutedEventArgs e)
@@ -21,7 +22,13 @@ namespace InTwo.Views.Welcome
             App.SettingsWrapper.AppSettings.DontShowAllowStopMusicMessage = true;
             App.SettingsWrapper.AppSettings.AllowStopMusic = true;
 
-            NavigationService.Navigate(new Uri(Constants.Pages.Welcome.DownloadSongsNow, UriKind.Relative));
+            Navigate(new Uri(Constants.Pages.Welcome.DownloadSongsNow, UriKind.Relative));
+        }
+
+        private void Navigate(Uri link)
+        {
+            Log.Info("Navigating to " + link);
+            NavigationService.Navigate(link);
         }
     }
 }
