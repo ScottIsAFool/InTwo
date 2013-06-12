@@ -2,7 +2,7 @@
 
 namespace InTwo.Views.Scoreoid
 {
-    public partial class SignInView : PhoneApplicationPage
+    public partial class SignInView 
     {
         public SignInView()
         {

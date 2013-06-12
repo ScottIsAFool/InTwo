@@ -2,7 +2,7 @@
 
 namespace InTwo.Views
 {
-    public partial class DownloadingSongsView : PhoneApplicationPage
+    public partial class DownloadingSongsView 
     {
         // Constructor
         public DownloadingSongsView()

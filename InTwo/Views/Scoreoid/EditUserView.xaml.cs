@@ -10,7 +10,7 @@ using Microsoft.Phone.Shell;
 
 namespace InTwo.Views.Scoreoid
 {
-    public partial class EditUserView : PhoneApplicationPage
+    public partial class EditUserView 
     {
         public EditUserView()
         {

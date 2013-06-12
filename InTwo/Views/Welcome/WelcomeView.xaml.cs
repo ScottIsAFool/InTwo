@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Windows;
 using Anotar.MetroLog;
-using Microsoft.Phone.Controls;
 
 namespace InTwo.Views.Welcome
 {
-    public partial class WelcomeView : PhoneApplicationPage
+    public partial class WelcomeView 
     {
         // Constructor
         public WelcomeView()

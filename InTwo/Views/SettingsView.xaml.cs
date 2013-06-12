@@ -5,7 +5,7 @@ using Nokia.Music.Types;
 
 namespace InTwo.Views
 {
-    public partial class SettingsView : PhoneApplicationPage
+    public partial class SettingsView 
     {
         public SettingsView()
         {

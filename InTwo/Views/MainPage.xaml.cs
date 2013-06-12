@@ -5,7 +5,7 @@ using Microsoft.Phone.Controls;
 
 namespace InTwo.Views
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPage 
     {
         // Constructor
         public MainPage()

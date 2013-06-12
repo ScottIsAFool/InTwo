@@ -2,7 +2,7 @@
 
 namespace InTwo.Views
 {
-    public partial class RemoveAdsView : PhoneApplicationPage
+    public partial class RemoveAdsView 
     {
         // Constructor
         public RemoveAdsView()

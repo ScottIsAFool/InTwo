@@ -5,7 +5,7 @@ using Microsoft.Phone.Controls;
 
 namespace InTwo.Views.Welcome
 {
-    public partial class StopMusicView : PhoneApplicationPage
+    public partial class StopMusicView 
     {
         public StopMusicView()
         {

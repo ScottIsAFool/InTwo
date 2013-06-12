@@ -8,7 +8,7 @@ using Microsoft.Phone.Controls;
 
 namespace InTwo.Views
 {
-    public partial class GameView : PhoneApplicationPage
+    public partial class GameView 
     {
         private bool _isPlaying;
 

@@ -6,7 +6,7 @@ using Microsoft.Phone.Controls;
 
 namespace InTwo.Views
 {
-    public partial class ScoreBoardView : PhoneApplicationPage
+    public partial class ScoreBoardView 
     {
         public ScoreBoardView()
         {

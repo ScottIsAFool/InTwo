@@ -2,7 +2,7 @@
 
 namespace InTwo.Views
 {
-    public partial class HowToPlayView : PhoneApplicationPage
+    public partial class HowToPlayView 
     {
         // Constructor
         public HowToPlayView()

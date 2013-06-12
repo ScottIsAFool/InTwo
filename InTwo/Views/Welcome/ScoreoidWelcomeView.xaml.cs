@@ -4,7 +4,7 @@ using Microsoft.Phone.Controls;
 
 namespace InTwo.Views.Welcome
 {
-    public partial class ScoreoidWelcomeView : PhoneApplicationPage
+    public partial class ScoreoidWelcomeView 
     {
         // Constructor
         public ScoreoidWelcomeView()
