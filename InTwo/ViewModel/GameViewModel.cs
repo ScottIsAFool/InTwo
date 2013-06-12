@@ -70,8 +70,7 @@ namespace InTwo.ViewModel
                 _gameTimer.Interval = GameLength;
                 _gameTimer.Tick += GameTimerOnTick;
 
-                GameLength = App.SettingsWrapper.AppSettings.DefaultGameLength;
-                SelectedGenre = App.SettingsWrapper.AppSettings.DefaultGenre;
+                GetDefaults();
             }
         }
 
@@ -116,6 +115,10 @@ namespace InTwo.ViewModel
                 {
                     StartNewGame();
                 }
+                if (m.Notification.Equals(Constants.Messages.UpdateTheDefaultsManMsg))
+                {
+                    GetDefaults();
+                }
             });
 
             Messenger.Default.Register<NotificationMessageAction<int>>(this, m =>
@@ -125,6 +128,12 @@ namespace InTwo.ViewModel
                     m.Execute(RoundPoints);
                 }
             });
+        }
+
+        private void GetDefaults()
+        {
+            GameLength = App.SettingsWrapper.AppSettings.DefaultGameLength;
+            SelectedGenre = App.SettingsWrapper.AppSettings.DefaultGenre;
         }
 
         public List<Genre> Genres { get; set; }

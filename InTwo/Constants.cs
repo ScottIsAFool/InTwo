@@ -65,6 +65,7 @@
             public const string RequestScoreMsg = "RequestScoreMsg";
             public const string ForceSettingsSaveMsg = "ForceSettingsSaveMsg";
             public const string NewGameMsg = "ResetGameMsg";
+            public const string UpdateTheDefaultsManMsg = "UpdateTheDefaultsManMsg";
         }
 
         public static class Pages
