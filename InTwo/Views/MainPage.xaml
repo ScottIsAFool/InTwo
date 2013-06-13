@@ -127,7 +127,7 @@
                 <Grid Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="3*" />
                     </Grid.RowDefinitions>
                     <TextBlock Text="Welcome to In Two, tap the big green button below to get started"

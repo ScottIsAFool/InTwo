@@ -81,17 +81,17 @@
                     <TextBlock Text="CORRECT ANSWERS"
                                Style="{StaticResource HeaderStyle}" />
                     <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
-                        <Run Text="Correct artist - " />
+                        <Run Text="Correct artist: " />
                         <Run Text="50"
                              FontSize="{StaticResource PhoneFontSizeLarge}" />
                     </TextBlock>
                     <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
-                        <Run Text="Correct song - " />
+                        <Run Text="Correct song: " />
                         <Run Text="200"
                              FontSize="{StaticResource PhoneFontSizeLarge}" />
                     </TextBlock>
                     <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
-                        <Run Text="Bonus for correct artist and song - " />
+                        <Run Text="Bonus for correct artist and song: " />
                         <Run Text="50"
                              FontSize="{StaticResource PhoneFontSizeLarge}" />
                     </TextBlock>

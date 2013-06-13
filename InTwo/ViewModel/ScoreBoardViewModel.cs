@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
+using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
@@ -58,6 +61,11 @@ namespace InTwo.ViewModel
 
                     var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! http://bit.ly/InTwo";
                     string message;
+
+                    Log.Info("Sharing score via {0}", type);
+
+                    FlurryWP8SDK.Api.LogEvent("SharedScore", new List<Parameter> {new Parameter("ShareType", type.ToString())});
+
                     switch (type)
                     {
                         case ShareType.Email:
@@ -86,6 +94,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    Log.Info("ScoreBoardPageLoaded");
                     Messenger.Default.Send(new NotificationMessageAction<int>(Constants.Messages.RequestScoreMsg, score =>
                     {
                         MostRecentScore = score;
@@ -102,6 +111,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    Log.Info("Refreshing scores");
                     await GetAllScoreData(true);
                 });
             }
@@ -129,6 +139,12 @@ namespace InTwo.ViewModel
         {
             try
             {
+                if (App.CurrentPlayer == null)
+                {
+                    return;
+                }
+
+                Log.Info("Getting all scores for user [{0}].", App.CurrentPlayer.username);
                 var items = await _scoreoidClient.GetPlayerAsync(App.CurrentPlayer.username);
 
                 if (items == null || !items.items.Any()) return;
@@ -137,19 +153,21 @@ namespace InTwo.ViewModel
             }
             catch (ScoreoidException ex)
             {
-
+                Log.Info("No scores for user [{0}]", App.CurrentPlayer.username);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
             catch (Exception ex)
             {
-
+                Log.FatalException("UpdateUserScores", ex);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
         }
 
         private async Task GetScores()
         {
-
             try
             {
+                Log.Info("Getting scores");
                 var scoresResult = await _scoreoidClient.GetBestScoresAsync();
 
                 ScoreBoardItems = scoresResult.items.ToList();
@@ -158,10 +176,13 @@ namespace InTwo.ViewModel
             }
             catch (ScoreoidException ex)
             {
+                Log.Info("No scores to get");
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
             catch (Exception ex)
             {
-                
+                Log.FatalException("GetScores", ex);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
         }
     }

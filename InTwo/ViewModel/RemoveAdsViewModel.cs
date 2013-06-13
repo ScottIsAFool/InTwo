@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -54,7 +55,10 @@ namespace InTwo.ViewModel
                 {
                     try
                     {
+                        Log.Info("Purchase enquiry");
                         await CurrentApp.RequestProductPurchaseAsync(Constants.RemoveAdsProduct, false);
+
+                        Log.Info("PURCHASED!! GET IN!!");
 
                         MessageBox.Show("Thank you for letting me buy a chocolate bar. Ads are now gone!", "Nice!", MessageBoxButton.OK);
                         App.SettingsWrapper.HasRemovedAds = true;
@@ -63,7 +67,7 @@ namespace InTwo.ViewModel
                     }
                     catch
                     {
-                        
+                        Log.Info("User most likely cancelled purchased");
                     }
                 });
             }
