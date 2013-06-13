@@ -44,7 +44,7 @@
         <coding4Fun:SuperImage Style="{StaticResource AppBackground}"
                                Sources="{Binding Source={StaticResource BackgroundImageSource}}" />
 
-        <phone:Pivot>
+        <phone:Pivot Margin="0,32,0,0">
             <phone:Pivot.Title>
                 <Image Source="/Images/InTwoSmallLogo.png"
                        Height="20"
