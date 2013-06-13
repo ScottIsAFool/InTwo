@@ -89,6 +89,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    Log.Info("USerProfilePageLoaded");
                     CurrentPlayer = App.CurrentPlayer;
 
                     HasProfilePicture = await CheckForProfilePicture();
@@ -102,6 +103,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                 {
+                    Log.Info("Editing player details");
                     CurrentPlayer = App.CurrentPlayer;
                     NavigateTo(Constants.Pages.Scoreoid.EditUser);
                 });
@@ -118,6 +120,8 @@ namespace InTwo.ViewModel
 
                     ProgressIsVisible = true;
                     ProgressText = "Getting latest information...";
+
+                    Log.Info("Refreshing player details");
 
                     CurrentPlayer = App.CurrentPlayer;
 
@@ -143,6 +147,7 @@ namespace InTwo.ViewModel
 
                     try
                     {
+                        Log.Info("Deleting user");
                         await _scoreoidClient.DeletePlayerAsync(App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer);
 
                         App.SettingsWrapper.AppSettings.PlayerWrapper = null;
@@ -151,11 +156,13 @@ namespace InTwo.ViewModel
                     }
                     catch (ScoreoidException ex)
                     {
-
+                        MessageBox.Show("There was sadly an error deleting you, a sign you shouldn't go?", "Error", MessageBoxButton.OK);
+                        Log.InfoException("Error deleting the user.", ex);
                     }
                     catch (Exception ex)
                     {
-
+                        Log.FatalException("DeleteUserCommand", ex);
+                        MessageBox.Show("There was sadly an error deleting you, a sign you shouldn't go?", "Error", MessageBoxButton.OK);
                     }
                 });
             }
@@ -167,6 +174,8 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    Log.Info("Choosing a new profile picture");
+
                     var photoResult = await _photoChooserService.ShowAsync(true);
 
                     if (photoResult.TaskResult == TaskResult.OK && photoResult.ChosenPhoto != null)
@@ -213,6 +222,8 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    Log.Info("Clearing profile picture");
+
                     var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
 
                     if (!(await _asyncStorageService.FileExistsAsync(fileName))) return;
@@ -233,6 +244,7 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                 {
+                    Log.Info("Signing out.");
                     App.CurrentPlayer = null;
 
                     NavigateTo(Constants.Pages.MainPage + Constants.ClearBackStack);
@@ -249,8 +261,12 @@ namespace InTwo.ViewModel
         {
             try
             {
+                Log.Info("Getting all player's details for user [{0}]", CurrentPlayer.username);
+
                 var items = await _scoreoidClient.GetPlayerAsync(CurrentPlayer.username);
                 CurrentPlayer = items.items[0];
+
+                Log.Info("Getting all player's scores for user [{0}]", CurrentPlayer.username);
 
                 var scores = await _scoreoidClient.GetPlayerScores(CurrentPlayer.username);
 
@@ -281,11 +297,11 @@ namespace InTwo.ViewModel
             }
             catch (ScoreoidException ex)
             {
-
+                Log.InfoException("Error getting user details", ex);
             }
             catch (Exception ex)
             {
-                
+                Log.FatalException("GetPlayerInformation", ex);
             }
         }
 
@@ -299,6 +315,8 @@ namespace InTwo.ViewModel
         
         private async Task CreateTileImages(ImageSource image)
         {
+            Log.Info("Creating tile images from user profile images");
+
             var normalFileName = string.Format(Constants.Tiles.UserProfileFileFormat, CurrentPlayer.username);
             var wideFileName = string.Format(Constants.Tiles.UserProfileWideFileFormat, CurrentPlayer.username);
 
