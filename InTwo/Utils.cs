@@ -5,10 +5,13 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using ImageTools;
 using ImageTools.IO.Png;
+using InTwo.Model;
+using InTwo.ViewModel;
 using Nokia.Music;
 using Nokia.Music.Types;
 

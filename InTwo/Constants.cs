@@ -102,6 +102,7 @@
         {
             public const string HasRemovedAds = "HasRemovedAds";
             public const string AppSettings = "AppSettings";
+            public const string GameState = "GameState";
         }
     }
 }

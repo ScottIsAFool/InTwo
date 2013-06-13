@@ -7,9 +7,11 @@ using System.Windows.Navigation;
 using Anotar.MetroLog;
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using InTwo.Navigation;
+using InTwo.ViewModel;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using InTwo.Resources;
@@ -257,7 +259,7 @@ namespace InTwo
         private bool _isFirstPass = true;
         private bool _isFromReset;
 
-        private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs e)
+        private async void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs e)
         {
             if (SettingsWrapper.AppSettings.ShowWelcomeMessage
                 && e.NavigationMode == NavigationMode.New
@@ -282,17 +284,23 @@ namespace InTwo
             else if (e.NavigationMode == NavigationMode.Reset)
             {
                 Log.Info("Entering app via Fast App Resume");
+
+                if (e.Uri.ToString().Equals(Constants.Pages.Game))
+                {
+                    SimpleIoc.Default.GetInstance<GameViewModel>().RestoreGameState();
+                }
+
                 _isFromReset = true;
             }
             else if (e.NavigationMode == NavigationMode.New
-                     && e.Uri.ToString() == Constants.Pages.MainPage
+                     && e.Uri.ToString().Equals(Constants.Pages.MainPage)
                      && _isFromReset)
             {
                 e.Cancel = true;
             }
         }
 
-        private void Navigate(Uri link)
+        private static void Navigate(Uri link)
         {
             Log.Info("Navigating to: {0}", link);
             RootFrame.Navigate(link);

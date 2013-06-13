@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using Anotar.MetroLog;
+using Cimbalino.Phone.Toolkit.Services;
 using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -33,6 +34,7 @@ namespace InTwo.ViewModel
     public class GameViewModel : ViewModelBase
     {
         private readonly IExtendedNavigationService _navigationService;
+        private readonly IApplicationSettingsService _applicationSettings;
         public const string AllGenres = "All Genres";
         private List<Product> _tracks;
         private readonly DispatcherTimer _gameTimer;
@@ -42,9 +44,10 @@ namespace InTwo.ViewModel
         /// <summary>
         /// Initializes a new instance of the GameViewModel class.
         /// </summary>
-        public GameViewModel(IExtendedNavigationService navigationService)
+        public GameViewModel(IExtendedNavigationService navigationService, IApplicationSettingsService applicationSettings)
         {
             _navigationService = navigationService;
+            _applicationSettings = applicationSettings;
             
             if (IsInDesignMode)
             {
@@ -656,6 +659,33 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(SubmitScore);
             }
+        }
+        #endregion
+
+        #region GameState methods
+        internal void RestoreGameState()
+        {
+            var gameState = _applicationSettings.Get<GameState>(Constants.Settings.GameState, null);
+            if (gameState == null) return;
+
+            Log.Info("Previous game state exists, restoring");
+
+            GameLength = gameState.GameLength;
+            SelectedGenre = gameState.GameGenre;
+            RoundNumber = gameState.RoundNumber;
+            RoundPoints = gameState.CurrentScore;
+
+            GameLocked = true;
+        }
+
+        internal void SaveGameState()
+        {
+            if (!GameLocked) return;
+
+            Log.Info("Saving game state");
+
+            var gameState = new GameState(GameLength, SelectedGenre, RoundNumber, RoundPoints);
+            _applicationSettings.Set(Constants.Settings.GameState, gameState);
         }
         #endregion
     }
