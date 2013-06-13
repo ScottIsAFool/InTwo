@@ -298,6 +298,10 @@ namespace InTwo
             {
                 e.Cancel = true;
             }
+            else if (e.NavigationMode == NavigationMode.New && e.Uri.ToString().Equals("app://external/"))
+            {
+                SimpleIoc.Default.GetInstance<GameViewModel>().SaveGameState();
+            }
         }
 
         private static void Navigate(Uri link)
