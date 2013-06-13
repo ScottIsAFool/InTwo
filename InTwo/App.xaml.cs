@@ -268,18 +268,20 @@ namespace InTwo
                 e.Cancel = true;
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    RootFrame.Navigate(new Uri(Constants.Pages.Welcome.WelcomePage, UriKind.Relative));
+                    Navigate(new Uri(Constants.Pages.Welcome.WelcomePage, UriKind.Relative));
                     _isFirstPass = false;
                 });
             }
             else if (e.NavigationMode == NavigationMode.Reset && SettingsWrapper.AppSettings.AlwaysStartFromTheBeginning)
             {
+                Log.Info("Ignoring Fast App Resume");
                 _isFromReset = true;
                 e.Cancel = true;
-                Deployment.Current.Dispatcher.BeginInvoke(() => RootFrame.Navigate(new Uri(Constants.Pages.MainPage, UriKind.Relative)));
+                Deployment.Current.Dispatcher.BeginInvoke(() => Navigate(new Uri(Constants.Pages.MainPage, UriKind.Relative)));
             }
             else if (e.NavigationMode == NavigationMode.Reset)
             {
+                Log.Info("Entering app via Fast App Resume");
                 _isFromReset = true;
             }
             else if (e.NavigationMode == NavigationMode.New
@@ -288,6 +290,12 @@ namespace InTwo
             {
                 e.Cancel = true;
             }
+        }
+
+        private void Navigate(Uri link)
+        {
+            Log.Info("Navigating to: {0}", link);
+            RootFrame.Navigate(link);
         }
 
         private void CheckForResetNavigation(object sender, NavigationEventArgs e)
