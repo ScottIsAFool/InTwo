@@ -44,28 +44,14 @@
         <coding4Fun:SuperImage Style="{StaticResource AppBackground}"
                                Sources="{Binding Source={StaticResource BackgroundImageSource}}" />
 
-        <Grid Margin="0,32,0,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <!--TitlePanel contains the name of the application and page title-->
-            <StackPanel x:Name="TitlePanel"
-                        Grid.Row="0"
-                        Margin="12,22,0,28">
+        <phone:Pivot>
+            <phone:Pivot.Title>
                 <Image Source="/Images/InTwoSmallLogo.png"
                        Height="20"
-                       HorizontalAlignment="Left"
-                       Margin="12,0" />
-                <TextBlock Text="how to play"
-                           Margin="9,-7,0,0"
-                           Style="{StaticResource PhoneTextTitle1Style}" />
-            </StackPanel>
+                       HorizontalAlignment="Left" />
+            </phone:Pivot.Title>
 
-            <!--ContentPanel - place additional content here-->
-            <Grid x:Name="ContentPanel"
-                  Grid.Row="1"
-                  Margin="12,0,12,0">
+            <phone:PivotItem Header="how to play">
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="After tapping the big green button and going to the game page, you can select your game options. These are the genre you want to play your game in, and how quickly you think you can name that tune."
                                TextWrapping="Wrap"
@@ -82,14 +68,47 @@
                     </Border>
                     <TextBlock Text="Once you're happy with that, tap the play button and begin your game. If you need to listen to the bit of music again, tap the repeat button."
                                TextWrapping="Wrap"
-                               Style="{StaticResource PhoneTextTitle3Style}"/>
+                               Style="{StaticResource PhoneTextTitle3Style}" />
                     <TextBlock Text="If you don't want to type your answers, tap the audio guess button and speak your answer."
                                TextWrapping="Wrap"
                                Style="{StaticResource PhoneTextTitle3Style}"
-                               Margin="12,6"/>
+                               Margin="12,6" />
                 </StackPanel>
-            </Grid>
-        </Grid>
+            </phone:PivotItem>
+
+            <phone:PivotItem Header="scoring">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="CORRECT ANSWERS"
+                               Style="{StaticResource HeaderStyle}" />
+                    <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
+                        <Run Text="Correct artist - " />
+                        <Run Text="50"
+                             FontSize="{StaticResource PhoneFontSizeLarge}" />
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
+                        <Run Text="Correct song - " />
+                        <Run Text="200"
+                             FontSize="{StaticResource PhoneFontSizeLarge}" />
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
+                        <Run Text="Bonus for correct artist and song - " />
+                        <Run Text="50"
+                             FontSize="{StaticResource PhoneFontSizeLarge}" />
+                    </TextBlock>
+                    <TextBlock Text="So the maximum you can get for each round is 300 points"
+                               Style="{StaticResource PhoneTextNormalStyle}"
+                               TextWrapping="Wrap"
+                               Margin="12,18,12,6" />
+                    <TextBlock Text="DIFFICULTY"
+                               Style="{StaticResource HeaderStyle}"
+                               Margin="12" />
+                    <TextBlock Text="After your correct scores are attained, the game length you chose is factored in and your points adjusted, this is percentage based."
+                               TextWrapping="Wrap"
+                               Style="{StaticResource PhoneTextNormalStyle}" />
+
+                </StackPanel>
+            </phone:PivotItem>
+        </phone:Pivot>
 
     </Grid>
 
