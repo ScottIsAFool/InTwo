@@ -255,6 +255,7 @@ namespace InTwo
         }
 
         private bool _isFirstPass = true;
+        private bool _isFromReset;
 
         private void RootFrameOnNavigating(object sender, NavigatingCancelEventArgs e)
         {
@@ -267,10 +268,25 @@ namespace InTwo
                 e.Cancel = true;
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
-                    var mainFrame = Application.Current.RootVisual as PhoneApplicationFrame;
-                    mainFrame.Navigate(new Uri(Constants.Pages.Welcome.WelcomePage, UriKind.Relative));
+                    RootFrame.Navigate(new Uri(Constants.Pages.Welcome.WelcomePage, UriKind.Relative));
                     _isFirstPass = false;
                 });
+            }
+            else if (e.NavigationMode == NavigationMode.Reset && SettingsWrapper.AppSettings.AlwaysStartFromTheBeginning)
+            {
+                _isFromReset = true;
+                e.Cancel = true;
+                Deployment.Current.Dispatcher.BeginInvoke(() => RootFrame.Navigate(new Uri(Constants.Pages.MainPage, UriKind.Relative)));
+            }
+            else if (e.NavigationMode == NavigationMode.Reset)
+            {
+                _isFromReset = true;
+            }
+            else if (e.NavigationMode == NavigationMode.New
+                     && e.Uri.ToString() == Constants.Pages.MainPage
+                     && _isFromReset)
+            {
+                e.Cancel = true;
             }
         }
 

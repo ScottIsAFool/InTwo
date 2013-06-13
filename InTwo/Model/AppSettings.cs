@@ -33,6 +33,7 @@ namespace InTwo.Model
             else
             {
                 PlayerWrapper = new PlayerWrapper();
+                AlwaysStartFromTheBeginning = true;
             }
             DefaultGameLength = TimeSpan.FromSeconds(2);
             DefaultGenre = new Genre {Name = GameViewModel.AllGenres};
@@ -46,6 +47,7 @@ namespace InTwo.Model
         public bool AllowStopMusic { get; set; }
         public bool UseProfilePictureInTile { get; set; }
         public bool UseTransparentTileBackground { get; set; }
+        public bool AlwaysStartFromTheBeginning { get; set; }
         public TimeSpan DefaultGameLength { get; set; }
         public Genre DefaultGenre { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
