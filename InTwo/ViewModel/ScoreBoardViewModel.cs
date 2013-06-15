@@ -46,7 +46,7 @@ namespace InTwo.ViewModel
                         best_score = "335",
                         rank = "2",
                     }
-                };
+                }; 
                 MostRecentScore = 336;
             }
         }
@@ -59,7 +59,7 @@ namespace InTwo.ViewModel
                 {
                     var type = (ShareType)m.Sender;
 
-                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! http://bit.ly/InTwo";
+                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! http://bit.ly/InTwoApp";
                     string message;
 
                     Log.Info("Sharing score via {0}", type);
