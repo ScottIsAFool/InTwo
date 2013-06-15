@@ -59,7 +59,7 @@ namespace InTwo.ViewModel
                 {
                     var type = (ShareType)m.Sender;
 
-                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! http://bit.ly/InTwoApp";
+                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! http://www.windowsphone.com/s?appid=219b592c-c382-4b87-95db-8c85c96651c2";
                     string message;
 
                     Log.Info("Sharing score via {0}", type);
@@ -78,7 +78,7 @@ namespace InTwo.ViewModel
                             break;
                         case ShareType.Social:
                             message = string.Format(messageTemplate, "@InTwoApp");
-                            new ShareStatusService().Show(message);
+                            new ShareLinkService().Show("", message, new Uri("http://www.windowsphone.com/s?appid=219b592c-c382-4b87-95db-8c85c96651c2", UriKind.Absolute));
                             break;
                     }
                 }
