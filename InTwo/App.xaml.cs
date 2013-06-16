@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Navigation;
-using Anotar.MetroLog;
+
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Ioc;
@@ -17,6 +17,7 @@ using Microsoft.Phone.Shell;
 using InTwo.Resources;
 using Microsoft.Practices.ServiceLocation;
 using Scoreoid;
+using ScottIsAFool.WindowsPhone.Logging;
 using Windows.ApplicationModel.Store;
 
 namespace InTwo
@@ -28,6 +29,8 @@ namespace InTwo
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+
+        public static ILog Log = new WPLogger(typeof (App));
 
         public static SettingsWrapper SettingsWrapper
         {
@@ -82,6 +85,8 @@ namespace InTwo
             ThemeManager.OverrideOptions = ThemeManagerOverrideOptions.SystemTrayAndApplicationBars;
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Green);
+
+            WPLogger.LoggingIsEnabled = true;
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
@@ -300,6 +305,7 @@ namespace InTwo
             }
             else if (e.NavigationMode == NavigationMode.New && e.Uri.ToString().Equals("app://external/"))
             {
+                Log.Info("App closing, calling SaveGameState()");
                 SimpleIoc.Default.GetInstance<GameViewModel>().SaveGameState();
             }
         }

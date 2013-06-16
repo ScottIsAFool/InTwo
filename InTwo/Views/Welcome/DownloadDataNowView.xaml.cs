@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Navigation;
-using Anotar.MetroLog;
+
 
 namespace InTwo.Views.Welcome
 {

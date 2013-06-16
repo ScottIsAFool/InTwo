@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
-using Anotar.MetroLog;
-using Cimbalino.Phone.Toolkit.Services;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using InTwo.Model;
+using ScottIsAFool.WindowsPhone.ViewModel;
 using Windows.ApplicationModel.Store;
 
 namespace InTwo.ViewModel

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Anotar.MetroLog;
+
 using Cimbalino.Phone.Toolkit.Services;
 using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;

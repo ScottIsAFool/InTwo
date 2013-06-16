@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Anotar.MetroLog;
 
 namespace InTwo.Views.Welcome
 {

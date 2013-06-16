@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Navigation;
-using Anotar.MetroLog;
+
 using FlurryWP8SDK.Models;
+using ScottIsAFool.WindowsPhone.Logging;
 
 namespace InTwo.Navigation
 {
     public class InTwoUriMapper : UriMapperBase
     {
+        public static ILog Log = new WPLogger(typeof(InTwoUriMapper));
         public override Uri MapUri(Uri uri)
         {
             var tempUri = System.Net.HttpUtility.UrlDecode(uri.ToString());

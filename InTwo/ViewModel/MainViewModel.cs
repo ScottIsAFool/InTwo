@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using Anotar.MetroLog;
+
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
@@ -33,7 +33,6 @@ namespace InTwo.ViewModel
         private readonly IExtendedNavigationService _navigationService;
         private readonly IAsyncStorageService _asyncStorageService;
         private readonly IApplicationSettingsService _settingsService;
-        private readonly ILogger _logger;
 
         private bool _hasCheckedForData;
 
@@ -45,7 +44,6 @@ namespace InTwo.ViewModel
             _navigationService = navigationService;
             _asyncStorageService = asyncStorageService;
             _settingsService = settingsService;
-            _logger = LogManagerFactory.DefaultLogManager.GetLogger<MainViewModel>();
 
             if (IsInDesignMode)
             {

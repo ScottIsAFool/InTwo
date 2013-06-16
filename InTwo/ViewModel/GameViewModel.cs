@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-using Anotar.MetroLog;
+
 using Cimbalino.Phone.Toolkit.Services;
 using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
@@ -391,6 +391,7 @@ namespace InTwo.ViewModel
         private static bool IsMusicPlaying()
         {
             FrameworkDispatcher.Update();
+
             var musicPlaying = !MediaPlayer.GameHasControl;
 
             return musicPlaying;
