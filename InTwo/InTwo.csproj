@@ -195,9 +195,6 @@
     <Compile Include="Views\Welcome\ScoreoidWelcomeView.xaml.cs">
       <DependentUpon>ScoreoidWelcomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Welcome\StopMusicView.xaml.cs">
-      <DependentUpon>StopMusicView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Welcome\WelcomeView.xaml.cs">
       <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
@@ -292,10 +289,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Welcome\StopMusicView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Welcome\WelcomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -356,9 +349,6 @@
     <Content Include="Images\InTwoLogo.png" />
     <Content Include="Images\InTwoSmallLogo.png" />
     <Content Include="Images\NokiaMusicLogo.png" />
-    <Content Include="Images\NowPlayingBackground-720p.jpg" />
-    <Content Include="Images\NowPlayingBackground-WVGA.jpg" />
-    <Content Include="Images\NowPlayingBackground-WXGA.jpg" />
     <Content Include="Images\ScoreoidBackground-720p.jpg" />
     <Content Include="Images\ScoreoidBackground-WVGA.jpg" />
     <Content Include="Images\ScoreoidBackground-WXGA.jpg" />

@@ -14,6 +14,7 @@ using GalaSoft.MvvmLight.Messaging;
 using InTwo.Controls;
 using InTwo.Model;
 using Microsoft.Phone.Controls;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 using Nokia.Music.Types;
 using Scoreoid;
@@ -389,6 +390,7 @@ namespace InTwo.ViewModel
 
         private static bool IsMusicPlaying()
         {
+            FrameworkDispatcher.Update();
             var musicPlaying = !MediaPlayer.GameHasControl;
 
             return musicPlaying;
