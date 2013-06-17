@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
-
 using Cimbalino.Phone.Toolkit.Services;
 using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
@@ -554,16 +553,25 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    var result = MessageBox.Show("Really? You're giving up? Are you sure?", "Really?", MessageBoxButton.OKCancel);
-
-                    if (result == MessageBoxResult.OK)
+                    var messageBox = new CustomMessageBox
                     {
-                        FlurryWP8SDK.Api.LogEvent("GivenUp");
+                        Title = "Really?",
+                        Message = "Really? You're giving up? Are you sure?",
+                        LeftButtonContent = "yeah :(",
+                        RightButtonContent = "no"
+                    };
+                    messageBox.Dismissed += (sender, args) =>
+                    {
+                        if(args.Result == CustomMessageBoxResult.LeftButton)
+                        {
+                            FlurryWP8SDK.Api.LogEvent("GivenUp");
 
-                        RoundNumber++;
-                        AudioUrl = null;
-                        CanShowAnswers = true;
-                    }
+                            RoundNumber++;
+                            AudioUrl = null;
+                            CanShowAnswers = true;
+                        }
+                    };
+                    messageBox.Show();
                 });
             }
         }

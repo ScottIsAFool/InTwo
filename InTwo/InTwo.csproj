@@ -367,14 +367,6 @@
     <Reference Include="AdvancedREI.Net.Http.Compression">
       <HintPath>..\packages\HttpClient.Compression.1.1.0\lib\portable-net4+sl4+wp7+win8\AdvancedREI.Net.Http.Compression.dll</HintPath>
     </Reference>
-    <Reference Include="Cimbalino.Phone.Toolkit, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cimbalino.Phone.Toolkit.3.0.0\lib\wp8\Cimbalino.Phone.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="Cimbalino.Phone.Toolkit.Background, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cimbalino.Phone.Toolkit.Background.3.0.0\lib\wp8\Cimbalino.Phone.Toolkit.Background.dll</HintPath>
-    </Reference>
     <Reference Include="Cimbalino.Phone.Toolkit.Camera, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Cimbalino.Phone.Toolkit.Camera.3.0.0\lib\wp8\Cimbalino.Phone.Toolkit.Camera.dll</HintPath>
@@ -486,7 +478,16 @@
       <HintPath>..\packages\Zlib.Portable.1.9.2\lib\portable-net4+sl4+wp71+win8\Zlib.Portable.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cimbalino-Phone-Toolkit\src\Cimbalino.Phone.Toolkit %28WP8%29\Cimbalino.Phone.Toolkit %28WP8%29.csproj">
+      <Project>{F75511BC-209A-485C-8952-33C638C56BA7}</Project>
+      <Name>Cimbalino.Phone.Toolkit %28WP8%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Cimbalino-Phone-Toolkit\src\Cimbalino.Phone.Toolkit.Background %28WP8%29\Cimbalino.Phone.Toolkit.Background %28WP8%29.csproj">
+      <Project>{93DA53CF-E4BE-43F1-904B-F0F7933A0AF6}</Project>
+      <Name>Cimbalino.Phone.Toolkit.Background %28WP8%29</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
