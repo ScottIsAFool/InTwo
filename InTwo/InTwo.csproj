@@ -411,6 +411,9 @@
     <Reference Include="Inneractive.Ad">
       <HintPath>..\3plib\NAX\Inneractive.Ad.dll</HintPath>
     </Reference>
+    <Reference Include="JetBrains.Annotations">
+      <HintPath>..\packages\JetBrains.Annotations.7.0\lib\sl4-wp71\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="MetroLog.WP8">
       <HintPath>..\packages\MetroLog.0.8.1.1\lib\portable-net45+wp8+win8\MetroLog.WP8.dll</HintPath>
     </Reference>

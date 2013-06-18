@@ -4,6 +4,7 @@ using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.ViewModel;
+using JetBrains.Annotations;
 using Nokia.Music.Types;
 using Scoreoid;
 
@@ -52,7 +53,8 @@ namespace InTwo.Model
         public Genre DefaultGenre { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
         public score MostRecentScore { get; set; }
-        
+
+        [UsedImplicitly]
         private void OnDefaultGameLengthChanged()
         {
             if (DefaultGameLength.Seconds == 0)
@@ -64,6 +66,7 @@ namespace InTwo.Model
             AlertTheGameViewModel();
         }
 
+        [UsedImplicitly]
         private void OnDefaultGenreChanged()
         {
             AlertTheGameViewModel();
@@ -74,11 +77,13 @@ namespace InTwo.Model
             Messenger.Default.Send(new NotificationMessage(Constants.Messages.UpdateTheDefaultsManMsg));
         }
 
+        [UsedImplicitly]
         private void OnUseProfilePictureInTileChanged()
         {
             UpdateTile();
         }
 
+        [UsedImplicitly]
         private void OnUseTransparentTileBackgroundChanged()
         {
             UpdateTile();

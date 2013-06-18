@@ -12,6 +12,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Controls;
 using InTwo.Model;
+using JetBrains.Annotations;
 using Microsoft.Phone.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
@@ -180,16 +181,19 @@ namespace InTwo.ViewModel
         }
 
         #region Property Changed Methods
+        [UsedImplicitly]
         private void OnArtistGuessChanged()
         {
             CalculateAvailableScore();
         }
-        
+
+        [UsedImplicitly]
         private void OnSongGuessChanged()
         {
             CalculateAvailableScore();
         }
 
+        [UsedImplicitly]
         private void OnGameLengthChanged()
         {
             _gameTimer.Interval = GameLength;
@@ -520,7 +524,7 @@ namespace InTwo.ViewModel
                             RightButtonContent = "nah, not yet"
                         };
 
-                        message.Dismissed += async (sender, args) =>
+                        message.Dismissed += (sender, args) =>
                         {
                             ((CustomMessageBox) sender).Dismissing += (o, eventArgs) => eventArgs.Cancel = true;
                             if (args.Result == CustomMessageBoxResult.LeftButton)
@@ -592,7 +596,7 @@ namespace InTwo.ViewModel
 
                     GameLocked = true;
 
-                    FlurryWP8SDK.Api.LogEvent("GameStarted", new List<Parameter> {new Parameter("GameLength", GameLength.Seconds.ToString()), new Parameter("GameGenre", SelectedGenre.Name)});
+                    FlurryWP8SDK.Api.LogEvent("GameStarted", new List<Parameter> {new Parameter("GameLength", GameLength.Seconds.ToString(CultureInfo.InvariantCulture)), new Parameter("GameGenre", SelectedGenre.Name)});
 
                     SetNextRound();
                 });
