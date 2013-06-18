@@ -404,7 +404,7 @@
                                             Header="Default genre:"
                                             SelectionChanged="ListPicker_OnSelectionChanged"
                                             SelectionMode="Multiple"
-                                            IsEnabled="{Binding Main.Genres, Source={StaticResource Locator}, Converter={StaticResource CountToEnabledConverter}, ConverterParameter=multiple}">
+                                            IsEnabled="{Binding Main.DataExists, Source={StaticResource Locator}}">
                             <toolkit:ListPicker.FullModeItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Name}"
