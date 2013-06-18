@@ -1,22 +1,23 @@
-﻿<scottisafool:BasePage xmlns:scottisafool="clr-namespace:ScottIsAFool.WindowsPhone.Controls;assembly=ScottIsAFool.WindowsPhone" x:Class="InTwo.Views.SettingsView"
-                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
-                            xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                            xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-                            xmlns:converters="clr-namespace:InTwo.Converters"
-                            xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
-                            FontFamily="{StaticResource PhoneFontFamilyNormal}"
-                            FontSize="{StaticResource PhoneFontSizeNormal}"
-                            Foreground="{StaticResource PhoneForegroundBrush}"
-                            SupportedOrientations="Portrait"
-                            Orientation="Portrait"
-                            mc:Ignorable="d"
-                            shell:SystemTray.IsVisible="True"
-                            shell:SystemTray.Opacity="0"
-                            toolkit:TiltEffect.IsTiltEnabled="True">
+﻿<scottisafool:BasePage xmlns:scottisafool="clr-namespace:ScottIsAFool.WindowsPhone.Controls;assembly=ScottIsAFool.WindowsPhone"
+                       x:Class="InTwo.Views.SettingsView"
+                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                       xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+                       xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                       xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+                       xmlns:converters="clr-namespace:InTwo.Converters"
+                       xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+                       FontFamily="{StaticResource PhoneFontFamilyNormal}"
+                       FontSize="{StaticResource PhoneFontSizeNormal}"
+                       Foreground="{StaticResource PhoneForegroundBrush}"
+                       SupportedOrientations="Portrait"
+                       Orientation="Portrait"
+                       mc:Ignorable="d"
+                       shell:SystemTray.IsVisible="True"
+                       shell:SystemTray.Opacity="0"
+                       toolkit:TiltEffect.IsTiltEnabled="True">
     <phone:PhoneApplicationPage.Resources>
         <Style x:Key="PhoneButtonBase"
                TargetType="ButtonBase">
@@ -402,7 +403,8 @@
                         <toolkit:ListPicker ItemsSource="{Binding Main.Genres, Source={StaticResource Locator}}"
                                             Header="Default genre:"
                                             SelectionChanged="ListPicker_OnSelectionChanged"
-                                            SelectionMode="Single">
+                                            SelectionMode="Multiple"
+                                            IsEnabled="{Binding Main.Genres, Source={StaticResource Locator}, Converter={StaticResource CountToEnabledConverter}, ConverterParameter=multiple}">
                             <toolkit:ListPicker.FullModeItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Name}"

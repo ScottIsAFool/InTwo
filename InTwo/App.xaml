@@ -51,6 +51,7 @@
             <localConverters:SecondsTextConverter x:Key="SecondsTextConverter" />
             <localConverters:NullBooleanConverter x:Key="NullBooleanConverter"
                                                   Inverted="True" />
+            <localConverters:ItemsCountToEnabledConverter x:Key="CountToEnabledConverter"/>
 
             <!-- Control Styles -->
             <Style x:Key="EmptyButtonStyle"
