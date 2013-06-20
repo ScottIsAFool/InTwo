@@ -13,9 +13,10 @@
     <Grid x:Name="LayoutRoot"
           Background="Black">
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="If you have been asked by us to send us your logs,"
+            <TextBlock Text="If you have been asked by us to send us your logs, or you've had In Two just disappear on you, then do please email your logs to us so we can improve your experience."
+                       TextWrapping="Wrap"
                        Style="{StaticResource PhoneTextNormalStyle}" />
-            <HyperlinkButton Content="click here"
+            <HyperlinkButton Content="Send logs"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
                              Foreground="{StaticResource PhoneAccentBrush}"

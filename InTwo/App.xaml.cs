@@ -200,16 +200,19 @@ namespace InTwo
 
             Log.FatalException("NavigationFailed: " + e.Uri, e.Exception);
 
+            //Log.DumpLogsToFile();
+
             SaveSettings();
         }
 
         // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
+            e.Handled = true;
+
             // I'm not logging the Nokia Ad Exchange's shitty exceptions
             if (e.ExceptionObject.StackTrace.Contains("Inneractive.Ad.InneractiveAdControl"))
             {
-                e.Handled = true;
                 return;
             }
 
@@ -222,6 +225,8 @@ namespace InTwo
             FlurryWP8SDK.Api.LogError("UnhandledException", e.ExceptionObject);
 
             Log.FatalException("UnhandledException", e.ExceptionObject);
+
+            Deployment.Current.Dispatcher.BeginInvoke(() => ShowMessage("Something went wrong, please send the logs"));
 
             SaveSettings();
         }
