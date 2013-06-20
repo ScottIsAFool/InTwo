@@ -57,11 +57,18 @@
     <Item Title="history"
           Type="text">
       0.0.0.x
-      This is the beta version.      
+      This is the beta version.
     </Item>
     <Item Title="powered by"
           Type="xaml">
       <inTwo:PoweredBy xmlns:inTwo="clr-namespace:InTwo.Controls;assembly=InTwo"
+                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Top"/>
+    </Item>
+    <Item Title="logs"
+          Type="xaml">
+      <inTwo:LogFiles xmlns:inTwo="clr-namespace:InTwo.Controls;assembly=InTwo"
                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Top"/>

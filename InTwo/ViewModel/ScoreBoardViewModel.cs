@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-
 using Cimbalino.Phone.Toolkit.Services;
 using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
@@ -59,7 +58,7 @@ namespace InTwo.ViewModel
                 {
                     var type = (ShareType)m.Sender;
 
-                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! http://www.windowsphone.com/s?appid=219b592c-c382-4b87-95db-8c85c96651c2";
+                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! ";
                     string message;
 
                     Log.Info("Sharing score via {0}", type);
@@ -69,11 +68,11 @@ namespace InTwo.ViewModel
                     switch (type)
                     {
                         case ShareType.Email:
-                            message = string.Format(messageTemplate, "In Two");
-                            new EmailComposeService().Show("I've been playing In Two", message);
+                            message = string.Format(messageTemplate + "http://www.windowsphone.com/s?appid=219b592c-c382-4b87-95db-8c85c96651c2", "In Two");
+                            new EmailComposeService().Show("I've been playing In Two for Windows Phone", message);
                             break;
                         case ShareType.Sms:
-                            message = string.Format(messageTemplate, "In Two");
+                            message = string.Format(messageTemplate + "http://www.windowsphone.com/s?appid=219b592c-c382-4b87-95db-8c85c96651c2", "In Two");
                             new SmsComposeService().Show("", message);
                             break;
                         case ShareType.Social:
