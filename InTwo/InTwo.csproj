@@ -135,6 +135,7 @@
     <Compile Include="Model\IExtendedNavigationService.cs" />
     <Compile Include="Model\ObservableObject.cs" />
     <Compile Include="Model\PlayerWrapper.cs" />
+    <Compile Include="Model\ScoreInfo.cs" />
     <Compile Include="Model\ScoreWrapper.cs" />
     <Compile Include="Model\SettingsWrapper.cs" />
     <Compile Include="Model\ShareType.cs" />
