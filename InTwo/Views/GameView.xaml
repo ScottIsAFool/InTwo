@@ -95,12 +95,11 @@
                                                         Command="{Binding ViewInNokiaMusicCommand}" />
                     <cimbalino:ApplicationBarIconButton Text="next round"
                                                         IconUri="/Icons/next.png"
-                                                        Command="{Binding NextRoundCommand}"
-                                                        IsVisible="{Binding IsLastRound, Converter={StaticResource NegativeBooleanConverter}}" />
+                                                        Command="{Binding NextRoundCommand}"/>
                     <cimbalino:ApplicationBarIconButton Text="submit score"
                                                         IconUri="/Icons/appbar.upload.png"
-                                                        Command="{Binding SubmitScoreCommand}"
-                                                        IsVisible="{Binding IsLastRound}" />
+                                                        Command="{Binding SubmitScoreCommand}" 
+                                                        IsEnabled="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullBooleanConverter}}"/>
                 </behaviours:CustomApplicationBar>
             </cimbalino:MultiApplicationBarBehavior>
         </i:Interaction.Behaviors>
