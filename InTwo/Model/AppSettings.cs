@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.ViewModel;
 using JetBrains.Annotations;
 using Nokia.Music.Types;
-using Scoreoid;
+using ScoreoidPortable.Entities;
+
 
 namespace InTwo.Model
 {
@@ -17,18 +17,17 @@ namespace InTwo.Model
             ShowWelcomeMessage = true;
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                PlayerWrapper = new PlayerWrapper(new player
+                PlayerWrapper = new PlayerWrapper(new Player
                 {
-                    username = "scottisafool",
-                    best_score = "336",
-                    rank = "1"
+                    Username = "scottisafool",
+                    BestScore = 336,
+                    Rank = 1
                 });
 
-                MostRecentScore = new score
+                MostRecentScore = new Score
                 {
-                    created = DateTime.Now.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
-                    data = "Rock",
-                    value = "666"
+                    Data = "Rock",
+                    TheScore = "666"
                 };
             }
             else
@@ -52,7 +51,7 @@ namespace InTwo.Model
         public TimeSpan DefaultGameLength { get; set; }
         public Genre DefaultGenre { get; set; }
         public PlayerWrapper PlayerWrapper { get; set; }
-        public score MostRecentScore { get; set; }
+        public Score MostRecentScore { get; set; }
 
         [UsedImplicitly]
         private void OnDefaultGameLengthChanged()

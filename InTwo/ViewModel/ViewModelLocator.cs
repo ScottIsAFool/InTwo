@@ -5,7 +5,8 @@ using InTwo.Design;
 using InTwo.Model;
 using Microsoft.Practices.ServiceLocation;
 using Nokia.Music;
-using Scoreoid;
+using ScoreoidPortable;
+
 
 namespace InTwo.ViewModel
 {
@@ -53,8 +54,8 @@ namespace InTwo.ViewModel
             if (!SimpleIoc.Default.IsRegistered<IMusicClient>())
                 SimpleIoc.Default.Register<IMusicClient>(() => new MusicClient(Constants.NokiaMusicAppId));
 
-            if(!SimpleIoc.Default.IsRegistered<ScoreoidClient>())
-                SimpleIoc.Default.Register(()=> new ScoreoidClient(Constants.ScoreoidApiKey, Constants.ScoreoidGameId));
+            if(!SimpleIoc.Default.IsRegistered<IScoreoidClient>())
+                SimpleIoc.Default.Register<IScoreoidClient>(()=> new ScoreoidClient(Constants.ScoreoidApiKey, Constants.ScoreoidGameId));
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ScoreoidViewModel>(true);

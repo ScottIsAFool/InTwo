@@ -16,7 +16,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using InTwo.Resources;
 using Microsoft.Practices.ServiceLocation;
-using Scoreoid;
+using ScoreoidPortable.Entities;
 using ScottIsAFool.WindowsPhone.Logging;
 using Windows.ApplicationModel.Store;
 
@@ -37,7 +37,7 @@ namespace InTwo
             get { return ((SettingsWrapper)Current.Resources["Settings"]); }
         }
 
-        public static player CurrentPlayer
+        public static Player CurrentPlayer
         {
             get { return SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer; }
             set { SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer = value; }
@@ -86,7 +86,8 @@ namespace InTwo
             ThemeManager.ToDarkTheme();
             ThemeManager.SetAccentColor(AccentColor.Green);
 
-            WPLogger.LoggingIsEnabled = true;
+            WPLogger.LogConfiguration.LoggingIsEnabled = true;
+            WPLogger.LogConfiguration.LogType = LogType.InMemory;
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)

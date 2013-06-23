@@ -62,7 +62,7 @@
                 <cimbalino:ApplicationBarIconButton Text="create user"
                                                     IconUri="/Icons/save.png"
                                                     Command="{Binding UpdateUserCommand}"
-                                                    IsEnabled="{Binding CurrentPlayer.username, Converter={StaticResource CanSendOrUpdateConverter}}" />
+                                                    IsEnabled="{Binding CurrentPlayer.Username, Converter={StaticResource CanSendOrUpdateConverter}}" />
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
         <coding4Fun:SuperImage Style="{StaticResource AppBackground}"

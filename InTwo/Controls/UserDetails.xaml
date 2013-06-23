@@ -26,10 +26,10 @@
                        Margin="12,0" />
                 <TextBlock Text="{Binding Description}"
                            Style="{StaticResource PhoneTextNormalStyle}" />
-                <TextBlock Text="username:"
+                <TextBlock Text="Username:"
                            Style="{StaticResource PhoneTextSubtleStyle}" />
-                <toolkit:PhoneTextBox Hint="Please enter a username"
-                                      Text="{Binding Player.username, Mode=TwoWay}">
+                <toolkit:PhoneTextBox Hint="Please enter a Username"
+                                      Text="{Binding Player.Username, Mode=TwoWay}">
                     <i:Interaction.Behaviors>
                         <behaviours:EnterKeyHandler />
                         <scottbehaviours:UpdateTextBindingOnPropertyChanged />

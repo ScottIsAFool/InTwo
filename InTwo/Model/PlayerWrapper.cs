@@ -1,12 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
-using Scoreoid;
+using ScoreoidPortable.Entities;
+
 
 namespace InTwo.Model
 {
     public class PlayerWrapper : ObservableObject
     {
-        public PlayerWrapper(player player)
+        public PlayerWrapper(Player player)
         {
             CurrentPlayer = player;
         }
@@ -25,10 +26,10 @@ namespace InTwo.Model
             }
         }
 
-        public player CurrentPlayer { get; set; }
-        public int NumberOfGames { get { return !string.IsNullOrEmpty(CurrentPlayer.boost) ? int.Parse(CurrentPlayer.boost) : 0; } }
-        public int TotalScore { get { return !string.IsNullOrEmpty(CurrentPlayer.bonus) ? int.Parse(CurrentPlayer.bonus) : 0; } }
-        public string BestScoreGenre { get { return CurrentPlayer.last_level; } }
-        public string BestScore { get { return CurrentPlayer.best_score; } }
+        public Player CurrentPlayer { get; set; }
+        public int NumberOfGames { get { return !string.IsNullOrEmpty(CurrentPlayer.Boost) ? int.Parse(CurrentPlayer.Boost) : 0; } }
+        public int TotalScore { get { return CurrentPlayer.Bonus; } }
+        public string BestScoreGenre { get { return CurrentPlayer.LastLevel; } }
+        public int BestScore { get { return CurrentPlayer.BestScore; } }
     }
 }

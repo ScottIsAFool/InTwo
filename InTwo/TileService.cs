@@ -63,7 +63,7 @@ namespace InTwo
             {
                 BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileIsoUri, UriKind.RelativeOrAbsolute) : null,
                 WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileIsoUri, UriKind.RelativeOrAbsolute) : null,
-                BackTitle = (showUsername && App.CurrentPlayer != null) ? App.CurrentPlayer.username : string.Empty,
+                BackTitle = (showUsername && App.CurrentPlayer != null) ? App.CurrentPlayer.Username : string.Empty,
                 BackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Medium),
                 WideBackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Large),
                 SmallBackgroundImage = CreateFrontTileImageUrl(false, TileSize.Small),
@@ -80,9 +80,9 @@ namespace InTwo
                 switch (tileSize)
                 {
                     case TileSize.Large:
-                        return new Uri(string.Format(Constants.Tiles.UserProfileWideIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute);
+                        return new Uri(string.Format(Constants.Tiles.UserProfileWideIsoUriFormat, App.CurrentPlayer.Username), UriKind.RelativeOrAbsolute);
                     case TileSize.Medium:
-                        return new Uri(string.Format(Constants.Tiles.UserProfileIsoUriFormat, App.CurrentPlayer.username), UriKind.RelativeOrAbsolute);
+                        return new Uri(string.Format(Constants.Tiles.UserProfileIsoUriFormat, App.CurrentPlayer.Username), UriKind.RelativeOrAbsolute);
                     default:
                         return null;
                 }
@@ -98,7 +98,7 @@ namespace InTwo
             var asyncService = SimpleIoc.Default.GetInstance<IAsyncStorageService>();
             return App.CurrentPlayer != null 
                 && App.SettingsWrapper.AppSettings.UseProfilePictureInTile 
-                && await asyncService.FileExistsAsync(string.Format(Constants.Tiles.UserProfileFileFormat, App.CurrentPlayer.username));
+                && await asyncService.FileExistsAsync(string.Format(Constants.Tiles.UserProfileFileFormat, App.CurrentPlayer.Username));
         }
 
         private static async void DeleteTileImages()

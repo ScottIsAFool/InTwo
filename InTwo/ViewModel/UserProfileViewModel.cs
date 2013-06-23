@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,7 +12,8 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
 using Microsoft.Phone.Tasks;
-using Scoreoid;
+using ScoreoidPortable;
+using ScoreoidPortable.Entities;
 using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
@@ -26,14 +27,14 @@ namespace InTwo.ViewModel
     public class UserProfileViewModel : ViewModelBase
     {
         private readonly IExtendedNavigationService _navigationService;
-        private readonly ScoreoidClient _scoreoidClient;
+        private readonly IScoreoidClient _scoreoidClient;
         private readonly IPhotoChooserService _photoChooserService;
         private readonly IAsyncStorageService _asyncStorageService;
 
         /// <summary>
         /// Initializes a new instance of the UserProfileViewModel class.
         /// </summary>
-        public UserProfileViewModel(IExtendedNavigationService navigationService, ScoreoidClient scoreoidClient, IPhotoChooserService photoChooserService, IAsyncStorageService asyncStorageService)
+        public UserProfileViewModel(IExtendedNavigationService navigationService, IScoreoidClient scoreoidClient, IPhotoChooserService photoChooserService, IAsyncStorageService asyncStorageService)
         {
             _navigationService = navigationService;
             _scoreoidClient = scoreoidClient;
@@ -42,11 +43,11 @@ namespace InTwo.ViewModel
 
             if (IsInDesignMode)
             {
-                CurrentPlayer = CurrentPlayer = new player
+                CurrentPlayer = new Player
                 {
-                    username = "scottisafool",
-                    best_score = "336",
-                    rank = "1"
+                    Username = "scottisafool",
+                    BestScore = 336,
+                    Rank = 1
                 }; 
             }
 
@@ -70,7 +71,7 @@ namespace InTwo.ViewModel
             });
         }
 
-        public player CurrentPlayer { get; set; }
+        public Player CurrentPlayer { get; set; }
         public int TotalScore { get; set; }
         public int NumberOfGames { get; set; }
 
@@ -118,8 +119,7 @@ namespace InTwo.ViewModel
                 {
                     if (!_navigationService.IsNetworkAvailable) return;
 
-                    ProgressIsVisible = true;
-                    ProgressText = "Getting latest information...";
+                    SetProgressBar("Getting latest information...");
 
                     Log.Info("Refreshing player details");
 
@@ -127,8 +127,7 @@ namespace InTwo.ViewModel
 
                     await GetPlayerInformation();
 
-                    ProgressIsVisible = false;
-                    ProgressText = string.Empty;
+                    SetProgressBar();
                 });
             }
         }
@@ -148,7 +147,7 @@ namespace InTwo.ViewModel
                     try
                     {
                         Log.Info("Deleting user");
-                        await _scoreoidClient.DeletePlayerAsync(App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer);
+                        await _scoreoidClient.DeletePlayerAsync(App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer.Username);
 
                         App.SettingsWrapper.AppSettings.PlayerWrapper = null;
 
@@ -181,7 +180,7 @@ namespace InTwo.ViewModel
                     if (photoResult.TaskResult == TaskResult.OK && photoResult.ChosenPhoto != null)
                     {
                         // Save the image to isolated storage
-                        var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
+                        var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.Username);
 
                         if (!await _asyncStorageService.DirectoryExistsAsync(Constants.ProfilePicturesFolder))
                         {
@@ -224,7 +223,7 @@ namespace InTwo.ViewModel
                 {
                     Log.Info("Clearing profile picture");
 
-                    var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
+                    var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.Username);
 
                     if (!(await _asyncStorageService.FileExistsAsync(fileName))) return;
 
@@ -261,38 +260,38 @@ namespace InTwo.ViewModel
         {
             try
             {
-                Log.Info("Getting all player's details for user [{0}]", CurrentPlayer.username);
+                Log.Info("Getting all player's details for user [{0}]", CurrentPlayer.Username);
 
-                var items = await _scoreoidClient.GetPlayerAsync(CurrentPlayer.username);
-                CurrentPlayer = items.items[0];
+                var items = await _scoreoidClient.GetPlayerAsync(CurrentPlayer.Username);
+                CurrentPlayer = items;
 
-                Log.Info("Getting all player's scores for user [{0}]", CurrentPlayer.username);
+                Log.Info("Getting all player's scores for user [{0}]", CurrentPlayer.Username);
 
-                var scores = await _scoreoidClient.GetPlayerScores(CurrentPlayer.username);
+                var scores = await _scoreoidClient.GetPlayerScoresAsync(CurrentPlayer.Username);
 
-                NumberOfGames = scores.items.Any() ? scores.items.Length : 0;
+                NumberOfGames = scores.Any() ? scores.Count : 0;
 
-                CurrentPlayer.boost = NumberOfGames.ToString();
+                CurrentPlayer.Boost = NumberOfGames.ToString(CultureInfo.InvariantCulture);
 
-                if (scores.items.Any())
+                if (scores.Any())
                 {
                     var totalScore = 0;
-                    foreach (var score in scores.items)
+                    foreach (var score in scores)
                     {
                         int count;
-                        if (int.TryParse(score.value, out count))
+                        if (int.TryParse(score.TheScore, out count))
                         {
                             totalScore += count;
                         }
 
-                        if (score.ToString() == CurrentPlayer.best_score)
+                        if (score.TheScore == CurrentPlayer.BestScore.ToString(CultureInfo.InvariantCulture))
                         {
-                            CurrentPlayer.last_level = score.data;
+                            CurrentPlayer.LastLevel = score.Data;
                         }
                     }
                     TotalScore = totalScore;
 
-                    CurrentPlayer.bonus = TotalScore.ToString();
+                    CurrentPlayer.Bonus = TotalScore;
                 }
             }
             catch (ScoreoidException ex)
@@ -308,7 +307,7 @@ namespace InTwo.ViewModel
         private async Task<bool> CheckForProfilePicture()
         {
             if (App.CurrentPlayer == null) return false;
-            var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.username);
+            var fileName = string.Format(Constants.ProfilePictureStorageFilePath, App.CurrentPlayer.Username);
 
             return await _asyncStorageService.FileExistsAsync(fileName);
         }
@@ -317,8 +316,8 @@ namespace InTwo.ViewModel
         {
             Log.Info("Creating tile images from user profile images");
 
-            var normalFileName = string.Format(Constants.Tiles.UserProfileFileFormat, CurrentPlayer.username);
-            var wideFileName = string.Format(Constants.Tiles.UserProfileWideFileFormat, CurrentPlayer.username);
+            var normalFileName = string.Format(Constants.Tiles.UserProfileFileFormat, CurrentPlayer.Username);
+            var wideFileName = string.Format(Constants.Tiles.UserProfileWideFileFormat, CurrentPlayer.Username);
 
             if (await _asyncStorageService.FileExistsAsync(normalFileName))
             {

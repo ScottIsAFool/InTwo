@@ -2,7 +2,8 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using Scoreoid;
+using ScoreoidPortable.Entities;
+
 
 namespace InTwo.Converters
 {
@@ -12,12 +13,12 @@ namespace InTwo.Converters
         {
             if (value == null) return Application.Current.Resources["PhoneForegroundBrush"];
 
-            var user = value as player;
+            var user = value as Player;
 
             if (user == null) return Application.Current.Resources["PhoneForegroundBrush"];
 
             return (App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer != null &&
-                    user.username == App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer.username)
+                    user.Username == App.SettingsWrapper.AppSettings.PlayerWrapper.CurrentPlayer.Username)
                        ? Application.Current.Resources["PhoneAccentBrush"]
                        : Application.Current.Resources["PhoneForegroundBrush"];
         }

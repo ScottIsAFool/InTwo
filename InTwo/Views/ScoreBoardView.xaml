@@ -118,7 +118,7 @@
                                 <TextBlock Text="{Binding rank, StringFormat='\{0\}.'}"
                                            Style="{StaticResource PhoneTextNormalStyle}"
                                            Foreground="{Binding Converter={StaticResource CurrentUserConverter}}" />
-                                <TextBlock Text="{Binding username}"
+                                <TextBlock Text="{Binding Username}"
                                            Style="{StaticResource PhoneTextNormalStyle}"
                                            Foreground="{Binding Converter={StaticResource CurrentUserConverter}}" />
                             </StackPanel>

@@ -1,7 +1,6 @@
 ﻿<scottisafool:BasePage xmlns:scottisafool="clr-namespace:ScottIsAFool.WindowsPhone.Controls;assembly=ScottIsAFool.WindowsPhone" x:Class="InTwo.Views.Scoreoid.UserProfileView"
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                            xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
                             xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -115,15 +114,15 @@
                                     Command="{Binding ChooseUserProfilePictureCommand}">
                                 <localControls:ProfilePicture />
                             </Button>
-                            <TextBlock Text="{Binding CurrentPlayer.username}"
+                            <TextBlock Text="{Binding CurrentPlayer.Username}"
                                        Style="{StaticResource PhoneTextLargeStyle}" />
                         </StackPanel>
 
                         <controls:HeaderAndDetail HeaderText="best score"
-                                                  DetailText="{Binding CurrentPlayer.best_score}"
+                                                  DetailText="{Binding CurrentPlayer.BestScore}"
                                                   Margin="-12,0,0,0" />
                         <controls:HeaderAndDetail HeaderText="current rank"
-                                                  DetailText="{Binding CurrentPlayer.rank}"
+                                                  DetailText="{Binding CurrentPlayer.Rank}"
                                                   Margin="-12,0,0,0" />
                         <controls:HeaderAndDetail HeaderText="total points"
                                                   DetailText="{Binding TotalScore}"

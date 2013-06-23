@@ -64,7 +64,7 @@
                 <cimbalino:ApplicationBarIconButton Text="create user"
                                                     IconUri="/Icons/check.png"
                                                     Command="{Binding CreateNewUserCommand}"
-                                                    IsEnabled="{Binding CurrentPlayer.username, Converter={StaticResource CanSendOrUpdateConverter}}" />
+                                                    IsEnabled="{Binding CurrentPlayer.Username, Converter={StaticResource CanSendOrUpdateConverter}}" />
                 <cimbalino:ApplicationBarIconButton Text="cancel"
                                                     IconUri="/Icons/cancel.png"
                                                     Command="{Binding CancelCreationCommand}" />

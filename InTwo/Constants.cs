@@ -15,7 +15,7 @@
 #endif
         public const string ScoreoidApiKey = "1fb20791da97e2395364b19595aace22d727de60";
         public const string UserCreatedSuccessfully = "The player has been created";
-        public const string UserAlreadyExists = "A player with that username already exists";
+        public const string UserAlreadyExists = "A player with that Username already exists";
         public const string ClearBackStack = "?clearbackstack=true";
 
         public const string ProfilePicturesFolder = "ProfilePictures";

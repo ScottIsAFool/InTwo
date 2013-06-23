@@ -17,7 +17,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Media;
 using Nokia.Music.Types;
-using Scoreoid;
+using ScoreoidPortable.Entities;
 using ScottIsAFool.WindowsPhone.ViewModel;
 using Windows.Phone.Speech.Recognition;
 using Windows.System;
@@ -446,12 +446,11 @@ namespace InTwo.ViewModel
 
             SubmittingScore = true;
 
-            var score = new score
+            var score = new Score
             {
-                data = SelectedGenre.Name,
-                platform = "WP8",
-                value = RoundPoints.ToString(CultureInfo.InvariantCulture),
-                created = DateTime.Now.ToString(CultureInfo.CurrentUICulture.DateTimeFormat)
+                Data = SelectedGenre.Name,
+                Platform = "WP8",
+                TheScore = RoundPoints.ToString(CultureInfo.InvariantCulture),
             };
 
             Messenger.Default.Send(new NotificationMessageAction<bool>(score, Constants.Messages.SubmitScoreMsg, success =>

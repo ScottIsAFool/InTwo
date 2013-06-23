@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Scoreoid;
+using ScoreoidPortable.Entities;
+
 
 namespace InTwo.Controls
 {
@@ -31,11 +32,11 @@ namespace InTwo.Controls
         }
 
         public static readonly DependencyProperty PlayerProperty =
-            DependencyProperty.Register("Player", typeof (player), typeof (UserDetails), new PropertyMetadata(default(player)));
+            DependencyProperty.Register("Player", typeof (Player), typeof (UserDetails), new PropertyMetadata(default(Player)));
 
-        public player Player
+        public Player Player
         {
-            get { return (player) GetValue(PlayerProperty); }
+            get { return (Player) GetValue(PlayerProperty); }
             set { SetValue(PlayerProperty, value); }
         }
 

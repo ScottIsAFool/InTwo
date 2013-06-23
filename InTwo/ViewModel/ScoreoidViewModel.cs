@@ -5,7 +5,8 @@ using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
-using Scoreoid;
+using ScoreoidPortable;
+using ScoreoidPortable.Entities;
 using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
@@ -19,23 +20,23 @@ namespace InTwo.ViewModel
     public class ScoreoidViewModel : ViewModelBase
     {
         private readonly IExtendedNavigationService _navigationService;
-        private readonly ScoreoidClient _scoreoidClient;
+        private readonly IScoreoidClient _scoreoidClient;
 
         /// <summary>
         /// Initializes a new instance of the ScoresViewModel class.
         /// </summary>
-        public ScoreoidViewModel(IExtendedNavigationService navigation, ScoreoidClient scoreoidClient)
+        public ScoreoidViewModel(IExtendedNavigationService navigation, IScoreoidClient scoreoidClient)
         {
             _navigationService = navigation;
             _scoreoidClient = scoreoidClient;
 
             if (IsInDesignMode)
             {
-                CurrentPlayer = new player
+                CurrentPlayer = new Player
                 {
-                    username = "scottisafool",
-                    best_score = "336",
-                    rank = "1"
+                    Username = "scottisafool",
+                    BestScore = 336,
+                    Rank = 1
                 };
             }
         }
@@ -46,7 +47,7 @@ namespace InTwo.ViewModel
             {
                 if (m.Notification.Equals(Constants.Messages.SubmitScoreMsg))
                 {
-                    var score = (score) m.Sender;
+                    var score = (Score) m.Sender;
 
                     var result = await SubmitScore(score);
 
@@ -55,7 +56,7 @@ namespace InTwo.ViewModel
             });
         }
 
-        private async Task<bool> SubmitScore(score score)
+        private async Task<bool> SubmitScore(Score score)
         {
             try
             {
@@ -65,9 +66,9 @@ namespace InTwo.ViewModel
                     return false;
                 }
 
-                Log.Info("Submitting score of [{0}] for user [{1}]", score.value, App.CurrentPlayer.username);
+                Log.Info("Submitting score of [{0}] for user [{1}]", score.TheScore, App.CurrentPlayer.Username);
 
-                await _scoreoidClient.CreateScoreAsync(App.CurrentPlayer.username, score);
+                await _scoreoidClient.CreateScoreAsync(App.CurrentPlayer.Username, score);
 
                 Log.Info("Score submitted");
 
@@ -88,14 +89,14 @@ namespace InTwo.ViewModel
             return false;
         }
 
-        public player CurrentPlayer { get; set; }
+        public Player CurrentPlayer { get; set; }
         
         public string Username { get; set; }
         public string Password { get; set; }
 
         public bool CanLogIn
         {
-            //get { return CurrentPlayer != null && CurrentPlayer.username.Length > 0 && !ProgressIsVisible; }
+            //get { return CurrentPlayer != null && CurrentPlayer.Username.Length > 0 && !ProgressIsVisible; }
             get { return true; }
         }
         
@@ -109,7 +110,7 @@ namespace InTwo.ViewModel
                 return new RelayCommand(() =>
                 {
                     Log.Info("CreateNewUserPageLoaded");
-                    CurrentPlayer = new player();
+                    CurrentPlayer = new Player();
                 });
             }
         }
@@ -133,16 +134,15 @@ namespace InTwo.ViewModel
                 return new RelayCommand(async () =>
                 {
                     if (CurrentPlayer == null
-                        || string.IsNullOrEmpty(CurrentPlayer.username)) return;
+                        || string.IsNullOrEmpty(CurrentPlayer.Username)) return;
 
                     if (!_navigationService.IsNetworkAvailable) return;
 
                     try
                     {
-                        ProgressIsVisible = true;
-                        ProgressText = "Creating user...";
+                        SetProgressBar("Creating user...");
 
-                        Log.Info("Submitting user [{0}] to be created.", CurrentPlayer.username);
+                        Log.Info("Submitting user [{0}] to be created.", CurrentPlayer.Username);
 
                         await _scoreoidClient.CreatePlayerAsync(CurrentPlayer);
 
@@ -150,7 +150,7 @@ namespace InTwo.ViewModel
 
                         App.CurrentPlayer = CurrentPlayer;
 
-                        MessageBox.Show("Player created successfully, you can now sign in with this username.", "Success", MessageBoxButton.OK);
+                        MessageBox.Show("Player created successfully, you can now sign in with this Username.", "Success", MessageBoxButton.OK);
 
                         _navigationService.GoBack();
                     }
@@ -165,8 +165,7 @@ namespace InTwo.ViewModel
                         MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
                     }
 
-                    ProgressIsVisible = false;
-                    ProgressText = string.Empty;
+                    SetProgressBar();
                 });
             }
         }
@@ -178,24 +177,28 @@ namespace InTwo.ViewModel
                 return new RelayCommand(async () =>
                 {
                     if (CurrentPlayer == null
-                        || string.IsNullOrEmpty(CurrentPlayer.username)) return;
+                        || string.IsNullOrEmpty(CurrentPlayer.Username)) return;
 
                     if (!_navigationService.IsNetworkAvailable) return;
 
                     try
                     {
-                        ProgressIsVisible = true;
-                        ProgressText = "Updating user...";
+                        SetProgressBar("Updating user...");
 
-                        Log.Info("Updating details for user [{0}].", CurrentPlayer.username);
+                        Log.Info("Updating details for user [{0}].", CurrentPlayer.Username);
 
-                        var response = await _scoreoidClient.UpdatePlayerAsync(CurrentPlayer);
+                        var response = await _scoreoidClient.EditPlayerAsync(CurrentPlayer);
 
-                        Log.Info("User details updated successfully");
+                        if (response)
+                        {
+                            Log.Info("User details updated successfully");
 
-                        App.CurrentPlayer = CurrentPlayer;
-
-                        MessageBox.Show(response, "Success", MessageBoxButton.OK);
+                            App.CurrentPlayer = CurrentPlayer;
+                        }
+                        else
+                        {
+                            Log.Info("There was an error editing this player");
+                        }
                     }
                     catch (ScoreoidException ex)
                     {
@@ -208,8 +211,7 @@ namespace InTwo.ViewModel
                         MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
                     }
 
-                    ProgressIsVisible = false;
-                    ProgressText = string.Empty;
+                    SetProgressBar();
                 });
             }
         }
@@ -224,21 +226,27 @@ namespace InTwo.ViewModel
 
                     if (!_navigationService.IsNetworkAvailable) return;
 
-                    ProgressIsVisible = true;
-                    ProgressText = "Signing in...";
+                    SetProgressBar("Signing in...");
 
                     try
                     {
                         Log.Info("Signing in as user [{0}]", Username);
 
-                        var response = await _scoreoidClient.GetPlayerAsync(Username, Password);
+                        var response = await _scoreoidClient.SignInAsync(Username, Password);
+
+                        if (!response)
+                        {
+                            Log.Info("Not signed in as [{0}]", Username);
+                            return;
+                        }
 
                         Log.Info("Successfully signed in as [{0}]", Username);
 
-                        App.CurrentPlayer = response.items[0];
+                        var player = await _scoreoidClient.GetPlayerAsync(Username);
 
-                        ProgressIsVisible = false;
-                        ProgressText = string.Empty;
+                        App.CurrentPlayer = player;
+
+                        SetProgressBar();
 
                         Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerInfoMsg));
 
@@ -255,8 +263,7 @@ namespace InTwo.ViewModel
                         MessageBox.Show("There was an error signing in as this player.", "Error", MessageBoxButton.OK);
                     }
 
-                    ProgressIsVisible = false;
-                    ProgressText = string.Empty;
+                    SetProgressBar();
                 });
             }
         }

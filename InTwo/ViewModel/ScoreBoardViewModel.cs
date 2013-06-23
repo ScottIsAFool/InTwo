@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Cimbalino.Phone.Toolkit.Services;
@@ -8,7 +7,8 @@ using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
-using Scoreoid;
+using ScoreoidPortable;
+using ScoreoidPortable.Entities;
 using ScottIsAFool.WindowsPhone.ViewModel;
 
 namespace InTwo.ViewModel
@@ -16,36 +16,42 @@ namespace InTwo.ViewModel
     public class ScoreBoardViewModel : ViewModelBase
     {
         private readonly IExtendedNavigationService _navigationService;
-        private readonly ScoreoidClient _scoreoidClient;
+        private readonly IScoreoidClient _scoreoidClient;
 
         private bool _scoresLoaded;
 
-        public ScoreBoardViewModel(IExtendedNavigationService navigationService, ScoreoidClient scoreoidClient)
+        public ScoreBoardViewModel(IExtendedNavigationService navigationService, IScoreoidClient scoreoidClient)
         {
             _navigationService = navigationService;
             _scoreoidClient = scoreoidClient;
 
             if (IsInDesignMode)
             {
-                ScoreBoardItems = new List<player>
+                ScoreBoardItems = new List<ScoreItem>
                 {
-                    new player
+                    new ScoreItem
                     {
-                        first_name = "Scott",
-                        last_name = "Lovegrove",
-                        username = "scottisafool",
-                        best_score = "336",
-                        rank = "1"
+                        Player = new Player
+                        {
+                            FirstName = "Scott",
+                            LastName = "Lovegrove",
+                            Username = "scottisafool",
+                            BestScore = 336,
+                            Rank = 1
+                        }
                     },
-                    new player
+                    new ScoreItem
                     {
-                        first_name = "Mel",
-                        last_name = "Sheppard",
-                        username = "msheppard27",
-                        best_score = "335",
-                        rank = "2",
+                        Player = new Player
+                        {
+                            FirstName = "Mel",
+                            LastName = "Sheppard",
+                            Username = "msheppard27",
+                            BestScore = 335,
+                            Rank = 2,
+                        }
                     }
-                }; 
+                };
                 MostRecentScore = 336;
             }
         }
@@ -58,7 +64,7 @@ namespace InTwo.ViewModel
                 {
                     var type = (ShareType)m.Sender;
 
-                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.best_score + ", try and beat me! ";
+                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.BestScore + ", try and beat me! ";
                     string message;
 
                     Log.Info("Sharing score via {0}", type);
@@ -84,7 +90,7 @@ namespace InTwo.ViewModel
             });
         }
         
-        public List<player> ScoreBoardItems { get; set; }
+        public List<ScoreItem> ScoreBoardItems { get; set; }
         public int MostRecentScore { get; set; }
 
         public RelayCommand ScoreBoardPageLoaded
@@ -122,15 +128,13 @@ namespace InTwo.ViewModel
             {
                 if (!_navigationService.IsNetworkAvailable) return;
 
-                ProgressText = "Getting scores...";
-                ProgressIsVisible = true;
+                SetProgressBar("Getting scores...");
 
                 await GetScores();
 
                 await UpdateUserScores();
 
-                ProgressIsVisible = false;
-                ProgressText = string.Empty;
+                SetProgressBar();
             }
         }
 
@@ -143,16 +147,16 @@ namespace InTwo.ViewModel
                     return;
                 }
 
-                Log.Info("Getting all scores for user [{0}].", App.CurrentPlayer.username);
-                var items = await _scoreoidClient.GetPlayerAsync(App.CurrentPlayer.username);
+                Log.Info("Getting all scores for user [{0}].", App.CurrentPlayer.Username);
+                var item = await _scoreoidClient.GetPlayerAsync(App.CurrentPlayer.Username);
 
-                if (items == null || !items.items.Any()) return;
+                if (item == null ) return;
 
-                App.CurrentPlayer = items.items[0];
+                App.CurrentPlayer = item;
             }
             catch (ScoreoidException ex)
             {
-                Log.Info("No scores for user [{0}]", App.CurrentPlayer.username);
+                Log.Info("No scores for user [{0}]", App.CurrentPlayer.Username);
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK);
             }
             catch (Exception ex)
@@ -169,7 +173,7 @@ namespace InTwo.ViewModel
                 Log.Info("Getting scores");
                 var scoresResult = await _scoreoidClient.GetBestScoresAsync();
 
-                ScoreBoardItems = scoresResult.items.ToList();
+                ScoreBoardItems = scoresResult;
 
                 _scoresLoaded = true;
             }
