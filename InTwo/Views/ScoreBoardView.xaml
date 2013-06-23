@@ -137,7 +137,7 @@
                         <Grid Margin="0,0,0,12">
                             <TextBlock Text="{Binding MostRecentScore, StringFormat='Your current score was \{0\}!!'}"
                                        Style="{StaticResource PhoneTextTitle2Style}"
-                                       Visibility="{Binding MostRecentScore, Converter={StaticResource }}"/>
+                                       Visibility="{Binding MostRecentScore, Converter={StaticResource CountToVisibilityConverter}}"/>
                         </Grid>
                     </phone:LongListSelector.ListHeader>
                     <phone:LongListSelector.ListFooter>

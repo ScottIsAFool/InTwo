@@ -118,6 +118,7 @@
     <Compile Include="Converters\BooleanToObjectConverter.cs" />
     <Compile Include="Converters\BooleanToOpacityConverter.cs" />
     <Compile Include="Converters\CanSendOrUpdateConverter.cs" />
+    <Compile Include="Converters\CountToVisibilityConverter.cs" />
     <Compile Include="Converters\ItemsCountToEnabledConverter.cs" />
     <Compile Include="Converters\CurrentUserConverter.cs" />
     <Compile Include="Converters\NullBooleanConverter.cs" />

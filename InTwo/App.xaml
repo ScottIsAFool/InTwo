@@ -50,6 +50,7 @@
             <localConverters:NullBooleanConverter x:Key="NullBooleanConverter"
                                                   Inverted="True" />
             <localConverters:ItemsCountToEnabledConverter x:Key="CountToEnabledConverter"/>
+            <localConverters:CountToVisibilityConverter x:Key="CountToVisibilityConverter"/>
 
             <!-- Control Styles -->
             <Style x:Key="EmptyButtonStyle"
