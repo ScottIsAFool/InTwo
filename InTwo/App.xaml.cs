@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Navigation;
-
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Ioc;
@@ -49,13 +48,14 @@ namespace InTwo
         /// <param name="message">The message.</param>
         /// <param name="title">The title.</param>
         /// <param name="action">The action.</param>
-        public static void ShowMessage(string message, string title = "", Action action = null)
+        /// <param name="wrapText">if set to <c>true</c> [wrap text].</param>
+        public static void ShowMessage(string message, string title = "", Action action = null, bool wrapText = false)
         {
             var prompt = new ToastPrompt
             {
                 Title = title,
                 Message = message,
-                //TextWrapping = TextWrapping.Wrap
+                TextWrapping = wrapText ? TextWrapping.Wrap : TextWrapping.NoWrap
                 //Margin = new Thickness(0, 32, 0, 0)
             };
 
@@ -125,7 +125,7 @@ namespace InTwo
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
-        private void Application_Launching(object sender, LaunchingEventArgs e)
+        private void ApplicationLaunching(object sender, LaunchingEventArgs e)
         {
             Log.Info("Application launching");
             InitializePhoneApplication();
@@ -153,7 +153,7 @@ namespace InTwo
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
-        private void Application_Activated(object sender, ActivatedEventArgs e)
+        private void ApplicationActivated(object sender, ActivatedEventArgs e)
         {
             Log.Info("Application activated");
             if (!e.IsApplicationInstancePreserved)
@@ -166,7 +166,7 @@ namespace InTwo
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
-        private void Application_Deactivated(object sender, DeactivatedEventArgs e)
+        private void ApplicationDeactivated(object sender, DeactivatedEventArgs e)
         {
             Log.Info("Application deactivated");
             SaveSettings();
@@ -183,7 +183,7 @@ namespace InTwo
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
-        private void Application_Closing(object sender, ClosingEventArgs e)
+        private void ApplicationClosing(object sender, ClosingEventArgs e)
         {
             Log.Info("Application closing");
             SaveSettings();
@@ -227,7 +227,7 @@ namespace InTwo
 
             Log.FatalException("UnhandledException", e.ExceptionObject);
 
-            Deployment.Current.Dispatcher.BeginInvoke(() => ShowMessage("Something went wrong, please send the logs"));
+            Deployment.Current.Dispatcher.BeginInvoke(() => ShowMessage("Something went wrong, please send the logs from the about page", wrapText: true));
 
             SaveSettings();
         }
@@ -350,23 +350,6 @@ namespace InTwo
 
         #endregion
 
-        // Initialize the app's font and flow direction as defined in its localized resource strings.
-        //
-        // To ensure that the font of your application is aligned with its supported languages and that the
-        // FlowDirection for each of those languages follows its traditional direction, ResourceLanguage
-        // and ResourceFlowDirection should be initialized in each resx file to match these values with that
-        // file's culture. For example:
-        //
-        // AppResources.es-ES.resx
-        //    ResourceLanguage's value should be "es-ES"
-        //    ResourceFlowDirection's value should be "LeftToRight"
-        //
-        // AppResources.ar-SA.resx
-        //     ResourceLanguage's value should be "ar-SA"
-        //     ResourceFlowDirection's value should be "RightToLeft"
-        //
-        // For more info on localizing Windows Phone apps see http://go.microsoft.com/fwlink/?LinkId=262072.
-        //
         private void InitializeLanguage()
         {
             try
