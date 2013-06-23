@@ -72,13 +72,13 @@
 
         <coding4Fun:SuperImage Style="{StaticResource AppBackground}"
                                Sources="{Binding Source={StaticResource BackgroundImageSource}}" />
-        
+
         <Grid Margin="0,32,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <!--TitlePanel contains the name of the application and page title-->
             <StackPanel Grid.Row="0"
                         Margin="12,17,0,28">
@@ -103,7 +103,7 @@
                     Visibility="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
                     Margin="0,24,24,0">
                 <controls:ProfilePicture IsClipped="True"
-                                         Height="50" />
+                                         Height="50"/>
             </Button>
 
             <!--ContentPanel - place additional content here-->
@@ -111,45 +111,49 @@
                   Grid.Row="1"
                   Margin="12,0,12,0">
                 <phone:LongListSelector ItemsSource="{Binding ScoreBoardItems}">
-                <phone:LongListSelector.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,0,0,6">
-                            <StackPanel Orientation="Horizontal"
-                                        HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding Rank, StringFormat='\{0\}.'}"
-                                           Style="{StaticResource PhoneTextNormalStyle}"
-                                           Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}" />
-                                <TextBlock Text="{Binding Score.Player.Username}"
-                                           Style="{StaticResource PhoneTextNormalStyle}"
-                                           Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}" />
-                            </StackPanel>
-                            <TextBlock Text="{Binding Score.Score.TheScore}"
-                                       Style="{StaticResource PhoneTextNormalStyle}"
-                                       Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}"
-                                       HorizontalAlignment="Right" />
+                    <phone:LongListSelector.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,0,0,6">
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Rank, StringFormat='\{0\}.'}"
+                                               Style="{StaticResource PhoneTextTitle3Style}"
+                                               Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}"
+                                               FontFamily="Segoe WP Semibold" />
+                                    <TextBlock Text="{Binding Score.Player.Username}"
+                                               Style="{StaticResource PhoneTextTitle3Style}"
+                                               FontFamily="Segoe WP Semibold"
+                                               Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}" />
+                                </StackPanel>
+                                <TextBlock Text="{Binding Score.Score.TheScore}"
+                                           Style="{StaticResource PhoneTextTitle3Style}"
+                                           Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}"
+                                           FontFamily="Segoe WP Semibold"
+                                           HorizontalAlignment="Right" />
+                            </Grid>
+                        </DataTemplate>
+                    </phone:LongListSelector.ItemTemplate>
+                    <phone:LongListSelector.ListHeader>
+                        <Grid Margin="0,0,0,12">
+                            <TextBlock Text="{Binding MostRecentScore, StringFormat='Your current score was \{0\}!!'}"
+                                       Style="{StaticResource PhoneTextTitle2Style}"
+                                       Visibility="{Binding MostRecentScore, Converter={StaticResource }}"/>
                         </Grid>
-                    </DataTemplate>
-                </phone:LongListSelector.ItemTemplate>
-                <phone:LongListSelector.ListHeader>
-                    <Grid Margin="0,0,0,12">
-                        <TextBlock Text="{Binding MostRecentScore, StringFormat='Your current score was \{0\}!!'}"
-                                   Style="{StaticResource PhoneTextTitle2Style}" />
-                    </Grid>
-                </phone:LongListSelector.ListHeader>
-                <phone:LongListSelector.ListFooter>
-                    <StackPanel Orientation="Horizontal"
-                                Margin="0,24,12,0"
-                                HorizontalAlignment="Right">
-                        <TextBlock Text="powered by"
-                                   Style="{StaticResource PhoneTextSmallStyle}"
-                                   Foreground="{StaticResource PhoneForegroundBrush}"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Top" />
-                        <Image Source="/Images/ScoreoidLogo.png"
-                               Height="50" />
-                    </StackPanel>
-                </phone:LongListSelector.ListFooter>
-            </phone:LongListSelector>
+                    </phone:LongListSelector.ListHeader>
+                    <phone:LongListSelector.ListFooter>
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,24,12,0"
+                                    HorizontalAlignment="Right">
+                            <TextBlock Text="powered by"
+                                       Style="{StaticResource PhoneTextSmallStyle}"
+                                       Foreground="{StaticResource PhoneForegroundBrush}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Top" />
+                            <Image Source="/Images/ScoreoidLogo.png"
+                                   Height="50" />
+                        </StackPanel>
+                    </phone:LongListSelector.ListFooter>
+                </phone:LongListSelector>
             </Grid>
         </Grid>
     </Grid>

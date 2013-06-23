@@ -28,9 +28,9 @@ namespace InTwo.Controls
             pp.BorderToClip.Clip = pp.IsClipped
                                        ? new EllipseGeometry
                                              {
-                                                 Center = new Point(88, 88),
-                                                 RadiusX = 88,
-                                                 RadiusY = 88
+                                                 Center = new Point(85, 85),
+                                                 RadiusX = 85,
+                                                 RadiusY = 85
                                              }
                                        : null;
         }

@@ -127,6 +127,7 @@
     <Compile Include="Design\DesignApplicationSettingsService.cs" />
     <Compile Include="Design\DesignAsyncStorageService.cs" />
     <Compile Include="Design\DesignPhotoChooserService.cs" />
+    <Compile Include="Design\DesignScoreoidClient.cs" />
     <Compile Include="Extensions\LinqToVisualTree.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\AppSettings.cs" />
@@ -298,7 +299,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Fody.targets" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>

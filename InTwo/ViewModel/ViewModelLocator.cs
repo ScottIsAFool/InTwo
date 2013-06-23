@@ -34,6 +34,9 @@ namespace InTwo.ViewModel
 
                 if (!SimpleIoc.Default.IsRegistered<IAsyncStorageService>())
                     SimpleIoc.Default.Register<IAsyncStorageService, DesignAsyncStorageService>();
+
+                if(!SimpleIoc.Default.IsRegistered<IScoreoidClient>())
+                    SimpleIoc.Default.Register<IScoreoidClient, DesignScoreoidClient>();
             }
             else
             {
@@ -46,6 +49,9 @@ namespace InTwo.ViewModel
 
                 if(!SimpleIoc.Default.IsRegistered<IAsyncStorageService>())
                     SimpleIoc.Default.Register<IAsyncStorageService, AsyncStorageService>();
+
+                if (!SimpleIoc.Default.IsRegistered<IScoreoidClient>())
+                    SimpleIoc.Default.Register<IScoreoidClient>(() => new ScoreoidClient(Constants.ScoreoidApiKey, Constants.ScoreoidGameId));
             }
 
             if (!SimpleIoc.Default.IsRegistered<IExtendedNavigationService>())
@@ -53,9 +59,6 @@ namespace InTwo.ViewModel
 
             if (!SimpleIoc.Default.IsRegistered<IMusicClient>())
                 SimpleIoc.Default.Register<IMusicClient>(() => new MusicClient(Constants.NokiaMusicAppId));
-
-            if(!SimpleIoc.Default.IsRegistered<IScoreoidClient>())
-                SimpleIoc.Default.Register<IScoreoidClient>(()=> new ScoreoidClient(Constants.ScoreoidApiKey, Constants.ScoreoidGameId));
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ScoreoidViewModel>(true);
