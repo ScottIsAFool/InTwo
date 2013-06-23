@@ -67,21 +67,32 @@ namespace InTwo.ViewModel
         {
             var genres = _settingsService.Get("Genres", default(List<Genre>));
 
-            if (genres == default(List<Genre>))
+            if (genres != default(List<Genre>))
             {
-                return false;
+                await _asyncStorageService.WriteAllTextAsync(Constants.GenreDataFile, await JsonConvert.SerializeObjectAsync(genres));
+                _settingsService.Reset("Genres");
             }
-
-            var allGenreCheck = genres.FirstOrDefault(x => x.Name.Equals(GameViewModel.AllGenres));
-            if (allGenreCheck == default(Genre))
+            else
             {
-                genres.Insert(0, new Genre {Name = GameViewModel.AllGenres});
-            }
+                var genreJson = await _asyncStorageService.ReadAllTextAsync(Constants.GenreDataFile);
+                genres = await JsonConvert.DeserializeObjectAsync<List<Genre>>(genreJson);
 
-            var comedyGenreCheck = genres.FirstOrDefault(x => x.Name.Equals("Comedy"));
-            if (comedyGenreCheck != default(Genre))
-            {
-                genres.Remove(comedyGenreCheck);
+                if (genres == null || !genres.Any())
+                {
+                    return false;
+                }
+
+                var allGenreCheck = genres.FirstOrDefault(x => x.Name.Equals(GameViewModel.AllGenres));
+                if (allGenreCheck == default(Genre))
+                {
+                    genres.Insert(0, new Genre {Name = GameViewModel.AllGenres});
+                }
+
+                var comedyGenreCheck = genres.FirstOrDefault(x => x.Name.Equals("Comedy"));
+                if (comedyGenreCheck != default(Genre))
+                {
+                    genres.Remove(comedyGenreCheck);
+                }
             }
 
             Genres = genres;

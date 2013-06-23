@@ -86,10 +86,9 @@ namespace InTwo.ViewModel
 
                 var genres = genresResponse.Result;
 
-                _settingsService.Set("Genres", genres);
-                _settingsService.Save();
+                await _asyncStorageService.WriteAllTextAsync(Constants.GenreDataFile, await JsonConvert.SerializeObjectAsync(genres));
 
-                Log.Info("Genres saved");
+                Log.Info("Genres written to IsolatedStorage");
 
                 var tracks = new List<Product>();
                 foreach (var genre in genres.Where(x => !x.Name.Equals("Comedy")))

@@ -22,6 +22,7 @@
         public static readonly string ProfilePictureUri = "isostore:/" + ProfilePicturesFolder + "/{0}.jpg";
         public static readonly string ProfilePictureStorageFilePath = ProfilePicturesFolder + "\\{0}.jpg";
         public const string GameDataFile = "GameData.json";
+        public const string GenreDataFile = "GenreData.json";
 
         public const string RemoveAdsProduct = "RemoveAds";
 
