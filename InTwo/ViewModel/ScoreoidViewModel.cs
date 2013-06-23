@@ -105,8 +105,8 @@ namespace InTwo.ViewModel
 
         public bool CanLogIn
         {
-            //get { return CurrentPlayer != null && CurrentPlayer.Username.Length > 0 && !ProgressIsVisible; }
-            get { return true; }
+            get { return !string.IsNullOrEmpty(Username) && !ProgressIsVisible; }
+            //get { return true; }
         }
         
         #region Commands
