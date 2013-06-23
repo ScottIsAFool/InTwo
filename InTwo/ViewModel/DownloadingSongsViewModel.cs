@@ -76,6 +76,7 @@ namespace InTwo.ViewModel
                 if (genresResponse.Error != null || (genresResponse.Result == null))
                 {
                     Log.ErrorException("Error getting genres", genresResponse.Error);
+                    
                     // TODO: Display an error
                     RetryIsVisible = true;
                     ProgressIsVisible = false;
@@ -98,6 +99,16 @@ namespace InTwo.ViewModel
                     if (trackResponse.Error == null)
                     {
                         tracks.AddRange(trackResponse.Result);
+                    }
+
+                    trackResponse = await _musicClient.GetNewReleasesForGenreAsync(genre, Category.Track, 0, 100);
+
+                    if (trackResponse.Error == null)
+                    {
+                        foreach (var track in trackResponse.Result.Where(track => !tracks.Contains(track)))
+                        {
+                            tracks.Add(track);
+                        }
                     }
                 }
 
