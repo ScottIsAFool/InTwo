@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using Cimbalino.Phone.Toolkit.Extensions;
 using Cimbalino.Phone.Toolkit.Services;
 using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
@@ -177,6 +178,14 @@ namespace InTwo.ViewModel
                     return CanShowAnswers ? 2 : 1;
                 }
                 return 0;
+            }
+        }
+
+        public void DoINeedToSubmitScores()
+        {
+            if (IsLastRound)
+            {
+                SubmitScore();
             }
         }
 
@@ -489,14 +498,6 @@ namespace InTwo.ViewModel
             message.Show();
         }
 
-        public void DoINeedToSubmitScores()
-        {
-            if (IsLastRound)
-            {
-                SubmitScore();
-            }
-        }
-
         #region Commands
         public RelayCommand GamePageLoaded
         {
@@ -512,6 +513,8 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                 {
+                    AudioUrl = null;
+
                     if (CheckAnswers())
                     {
                         CanShowAnswers = true;
@@ -556,6 +559,8 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(() =>
                 {
+                    AudioUrl = null;
+
                     var messageBox = new CustomMessageBox
                     {
                         Title = "Really?",
@@ -672,6 +677,47 @@ namespace InTwo.ViewModel
             get
             {
                 return new RelayCommand(SubmitScore);
+            }
+        }
+
+        public RelayCommand NewGameCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    AudioUrl = null;
+
+                    if (RoundNumber > 1)
+                    {
+                        var messageBox = new CustomMessageBox
+                        {
+                            Title = "Are you sure?",
+                            Message = "You haven't submitted your score yet, are you sure you want to start a new game? You weren't doing that badly, you did have " + RoundPoints + " points already!",
+                            LeftButtonContent = "do it!",
+                            RightButtonContent = "no, wait!"
+                        };
+
+                        messageBox.Dismissed += (sender, args) =>
+                        {
+                            if (args.Result == CustomMessageBoxResult.LeftButton)
+                            {
+                                var score = new Score
+                                {
+                                    TheScore = RoundPoints.ToString(CultureInfo.InvariantCulture),
+                                    CreatedDate = DateTime.Now,
+                                    Data = SelectedGenre.Name
+                                };
+
+                                App.SettingsWrapper.AppSettings.MostRecentScore = score;
+
+                                StartNewGame();
+                            }
+                        };
+
+                        messageBox.Show();
+                    }
+                });
             }
         }
         #endregion

@@ -90,6 +90,8 @@
                 </behaviours:CustomApplicationBar>
                 <behaviours:CustomApplicationBar x:Name="EndOfRoundAppBar"
                                                  IsMenuEnabled="{Binding SubmittingScore, Converter={StaticResource NegativeBooleanConverter}}">
+                    <cimbalino:ApplicationBarIconButton Text="new game"
+                                                        Command="{Binding NewGameCommand}"/>
                     <cimbalino:ApplicationBarIconButton Text="nokia music"
                                                         IconUri="/Icons/NokiaMusic.png"
                                                         Command="{Binding ViewInNokiaMusicCommand}" />
