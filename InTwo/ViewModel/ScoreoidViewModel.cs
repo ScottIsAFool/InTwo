@@ -78,6 +78,8 @@ namespace InTwo.ViewModel
 
                     App.SettingsWrapper.AppSettings.MostRecentScore = score;
 
+                    Messenger.Default.Send(new NotificationMessage(Constants.Messages.NewGameMsg));
+
                     Messenger.Default.Send(new NotificationMessage(Constants.Messages.ForceSettingsSaveMsg));
 
                     return true;

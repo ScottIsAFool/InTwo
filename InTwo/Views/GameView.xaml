@@ -98,8 +98,7 @@
                                                         Command="{Binding NextRoundCommand}"/>
                     <cimbalino:ApplicationBarIconButton Text="submit score"
                                                         IconUri="/Icons/appbar.upload.png"
-                                                        Command="{Binding SubmitScoreCommand}" 
-                                                        IsEnabled="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullBooleanConverter}}"/>
+                                                        Command="{Binding SubmitScoreCommand}" />
                 </behaviours:CustomApplicationBar>
             </cimbalino:MultiApplicationBarBehavior>
         </i:Interaction.Behaviors>
