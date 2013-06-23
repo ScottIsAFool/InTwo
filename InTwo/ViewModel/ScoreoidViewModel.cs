@@ -106,7 +106,6 @@ namespace InTwo.ViewModel
         public bool CanLogIn
         {
             get { return !string.IsNullOrEmpty(Username) && !ProgressIsVisible; }
-            //get { return true; }
         }
         
         #region Commands
