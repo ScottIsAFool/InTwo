@@ -287,6 +287,11 @@ namespace InTwo.ViewModel
                 return new RelayCommand(() => NavigateTo(Constants.Pages.HowToPlay));
             }
         }
+
+        public RelayCommand GoToScoreboardCommand
+        {
+            get{ return new RelayCommand(() => NavigateTo(Constants.Pages.ScoreBoard));}
+        }
         #endregion
     }
 }

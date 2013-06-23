@@ -126,7 +126,7 @@
                 <StackPanel Orientation="Horizontal">
                     <toolkit:ListPicker ItemsSource="{Binding Genres}"
                                         SelectedItem="{Binding SelectedGenre, Mode=TwoWay}"
-                                        SelectionMode="Multiple"
+                                        SelectionMode="Single"
                                         Header="Select a genre"
                                         HorizontalAlignment="Left"
                                         Width="173"

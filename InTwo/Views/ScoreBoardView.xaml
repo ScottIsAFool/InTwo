@@ -56,8 +56,7 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot"
-          Background="Transparent"
-          Margin="0,32,0,0">
+          Background="Transparent">
         <i:Interaction.Behaviors>
             <custom:CustomApplicationBarBehaviour IsMenuEnabled="True">
                 <cimbalino:ApplicationBarIconButton Text="share"
@@ -70,61 +69,63 @@
                 </custom:CustomApplicationBarBehaviour.MenuItems>
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
         <coding4Fun:SuperImage Style="{StaticResource AppBackground}"
                                Sources="{Binding Source={StaticResource BackgroundImageSource}}" />
+        
+        <Grid Margin="0,32,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <!--TitlePanel contains the name of the application and page title-->
+            <StackPanel Grid.Row="0"
+                        Margin="12,17,0,28">
+                <Image Source="/Images/InTwoSmallLogo.png"
+                       Height="20"
+                       HorizontalAlignment="Left"
+                       Margin="12,0" />
+                <TextBlock Text="scoreboard"
+                           Margin="9,-10,0,0"
+                           Style="{StaticResource PhoneTextTitle1Style}" />
+            </StackPanel>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0"
-                    Margin="12,17,0,28">
-            <Image Source="/Images/InTwoSmallLogo.png"
-                   Height="20"
-                   HorizontalAlignment="Left"
-                   Margin="12,0" />
-            <TextBlock Text="scoreboard"
-                       Margin="9,-10,0,0"
-                       Style="{StaticResource PhoneTextTitle1Style}" />
-        </StackPanel>
+            <Button Style="{StaticResource EmptyButtonStyle}"
+                    toolkit:TiltEffect.IsTiltEnabled="True"
+                    Command="{Binding Main.NavigateToPage, Source={StaticResource Locator}}"
+                    CommandParameter="/Views/Scoreoid/UserProfileView.xaml"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Top"
+                    Grid.Row="0"
+                    Visibility="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
+                    Margin="0,24,24,0">
+                <controls:ProfilePicture IsClipped="True"
+                                         Height="50" />
+            </Button>
 
-        <Button Style="{StaticResource EmptyButtonStyle}"
-                toolkit:TiltEffect.IsTiltEnabled="True"
-                Command="{Binding Main.NavigateToPage, Source={StaticResource Locator}}"
-                CommandParameter="/Views/Scoreoid/UserProfileView.xaml"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                HorizontalContentAlignment="Left"
-                VerticalContentAlignment="Top"
-                Grid.Row="0"
-                Visibility="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
-                Margin="0,24,24,0">
-            <controls:ProfilePicture IsClipped="True"
-                                     Height="50" />
-        </Button>
-
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel"
-              Grid.Row="1"
-              Margin="12,0,12,0">
-            <phone:LongListSelector ItemsSource="{Binding ScoreBoardItems}">
+            <!--ContentPanel - place additional content here-->
+            <Grid x:Name="ContentPanel"
+                  Grid.Row="1"
+                  Margin="12,0,12,0">
+                <phone:LongListSelector ItemsSource="{Binding ScoreBoardItems}">
                 <phone:LongListSelector.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,0,0,6">
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding rank, StringFormat='\{0\}.'}"
+                                <TextBlock Text="{Binding Player.Rank, StringFormat='\{0\}.'}"
                                            Style="{StaticResource PhoneTextNormalStyle}"
-                                           Foreground="{Binding Converter={StaticResource CurrentUserConverter}}" />
-                                <TextBlock Text="{Binding Username}"
+                                           Foreground="{Binding Player, Converter={StaticResource CurrentUserConverter}}" />
+                                <TextBlock Text="{Binding Player.Username}"
                                            Style="{StaticResource PhoneTextNormalStyle}"
-                                           Foreground="{Binding Converter={StaticResource CurrentUserConverter}}" />
+                                           Foreground="{Binding Player, Converter={StaticResource CurrentUserConverter}}" />
                             </StackPanel>
-                            <TextBlock Text="{Binding best_score}"
+                            <TextBlock Text="{Binding Score.TheScore}"
                                        Style="{StaticResource PhoneTextNormalStyle}"
-                                       Foreground="{Binding Converter={StaticResource CurrentUserConverter}}"
+                                       Foreground="{Binding Player, Converter={StaticResource CurrentUserConverter}}"
                                        HorizontalAlignment="Right" />
                         </Grid>
                     </DataTemplate>
@@ -149,6 +150,7 @@
                     </StackPanel>
                 </phone:LongListSelector.ListFooter>
             </phone:LongListSelector>
+            </Grid>
         </Grid>
     </Grid>
 

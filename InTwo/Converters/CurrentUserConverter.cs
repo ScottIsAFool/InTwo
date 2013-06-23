@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Data;
 using ScoreoidPortable.Entities;
 
-
 namespace InTwo.Converters
 {
     public class CurrentUserConverter : IValueConverter

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using Cimbalino.Phone.Toolkit.Services;
@@ -27,7 +28,7 @@ namespace InTwo.ViewModel
 
             if (IsInDesignMode)
             {
-                ScoreBoardItems = new List<ScoreItem>
+                ScoreBoardItems = new ObservableCollection<ScoreItem>
                 {
                     new ScoreItem
                     {
@@ -53,6 +54,10 @@ namespace InTwo.ViewModel
                     }
                 };
                 MostRecentScore = 336;
+            }
+            else
+            {
+                ScoreBoardItems = new ObservableCollection<ScoreItem>();
             }
         }
 
@@ -90,7 +95,7 @@ namespace InTwo.ViewModel
             });
         }
         
-        public List<ScoreItem> ScoreBoardItems { get; set; }
+        public ObservableCollection<ScoreItem> ScoreBoardItems { get; set; }
         public int MostRecentScore { get; set; }
 
         public RelayCommand ScoreBoardPageLoaded
@@ -173,7 +178,7 @@ namespace InTwo.ViewModel
                 Log.Info("Getting scores");
                 var scoresResult = await _scoreoidClient.GetBestScoresAsync();
 
-                ScoreBoardItems = scoresResult;
+                scoresResult.ForEach(ScoreBoardItems.Add);
 
                 _scoresLoaded = true;
             }

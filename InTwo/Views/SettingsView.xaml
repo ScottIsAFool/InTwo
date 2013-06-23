@@ -403,7 +403,7 @@
                         <toolkit:ListPicker ItemsSource="{Binding Main.Genres, Source={StaticResource Locator}}"
                                             Header="Default genre:"
                                             SelectionChanged="ListPicker_OnSelectionChanged"
-                                            SelectionMode="Multiple"
+                                            SelectionMode="Single"
                                             IsEnabled="{Binding Main.DataExists, Source={StaticResource Locator}}">
                             <toolkit:ListPicker.FullModeItemTemplate>
                                 <DataTemplate>
@@ -420,7 +420,6 @@
                         <TextBlock Text="GENERAL"
                                    Style="{StaticResource HeaderStyle}" />
                         <CheckBox IsChecked="{Binding AlwaysStartFromTheBeginning, Mode=TwoWay}"
-                                  VerticalContentAlignment="Center"
                                   Style="{StaticResource CentredCheckBox}">
                             <TextBlock Text="Always start a new game when coming from the tile"
                                        TextWrapping="Wrap" />
