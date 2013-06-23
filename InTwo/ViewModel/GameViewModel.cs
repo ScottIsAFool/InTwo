@@ -39,6 +39,7 @@ namespace InTwo.ViewModel
         private readonly IApplicationSettingsService _applicationSettings;
         public const string AllGenres = "All Genres";
         private List<Product> _tracks;
+        private List<string> _usedTracks; 
         private readonly DispatcherTimer _gameTimer;
 
         private bool _alreadyAskedAboutMusic;
@@ -75,6 +76,8 @@ namespace InTwo.ViewModel
 
                 _gameTimer.Interval = GameLength;
                 _gameTimer.Tick += GameTimerOnTick;
+
+                _usedTracks = new List<string>();
 
                 GetDefaults();
             }
@@ -272,18 +275,31 @@ namespace InTwo.ViewModel
             
             if (SelectedGenre.Name.Equals(AllGenres))
             {
+                var availableTracks = _tracks.Where(x => !_usedTracks.Contains(x.Id)).ToList();
                 var randomNumber = Utils.GetRandomNumber(0, _tracks.Count);
 
-                GameTrack = _tracks[randomNumber];
+                if (availableTracks.Count == 0)
+                {
+                    // TODO: Get more tracks??
+                }
+
+                GameTrack = availableTracks[randomNumber];
+                _usedTracks.Add(GameTrack.Id);
             }
             else
             {
-                var genreTracks = _tracks.Where(x => x.Genres.Contains(SelectedGenre))
+                var genreTracks = _tracks.Where(x => x.Genres.Contains(SelectedGenre) && !_usedTracks.Contains(x.Id))
                                          .ToList();
+
+                if (genreTracks.Count == 0)
+                {
+                    // TODO: Get more tracks??
+                }
 
                 var randomNumber = Utils.GetRandomNumber(0, genreTracks.Count);
 
                 GameTrack = genreTracks[randomNumber];
+                _usedTracks.Add(GameTrack.Id);
             }
 
             Debug.WriteLine("Artist: {0}", GameTrack.Performers[0].Name);
@@ -363,6 +379,7 @@ namespace InTwo.ViewModel
         private void StartNewGame()
         {
             GameLocked = false;
+            _usedTracks = new List<string>();
             RoundPoints = 0;
             ResetGameForNewRound();
         }
