@@ -148,17 +148,17 @@
                                     Visibility="{Binding DataContext, RelativeSource={RelativeSource Self}, Converter={StaticResource NullVisibilityConverter}}">
                             <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
                                 <Run Text="Last game played on " />
-                                <Run Text="{Binding created}"
+                                <Run Text="{Binding CreatedDate}"
                                      Foreground="{StaticResource PhoneAccentBrush}" />
                             </TextBlock>
                             <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
                                 <Run Text="Genre played was " />
-                                <Run Text="{Binding data}"
+                                <Run Text="{Binding Data}"
                                      Foreground="{StaticResource PhoneAccentBrush}" />
                             </TextBlock>
                             <TextBlock Style="{StaticResource PhoneTextTitle3Style}">
                                 <Run Text="And you scored " />
-                                <Run Text="{Binding value}"
+                                <Run Text="{Binding TheScore}"
                                      Foreground="{StaticResource PhoneAccentBrush}" />
                             </TextBlock>
                         </StackPanel>

@@ -289,7 +289,6 @@ namespace InTwo.ViewModel
             CanShowAnswers = false;
             ArtistGuess = string.Empty;
             SongGuess = string.Empty;
-            RoundPoints = 0;
             RoundNumber = 0;
 
             CalculateAvailableScore();
@@ -319,7 +318,7 @@ namespace InTwo.ViewModel
                 score += Constants.Scores.CorrectSongAndArtistBonus;
             }
 
-            RoundPoints = AdjustScoreForGameLength(score);
+            RoundPoints += AdjustScoreForGameLength(score);
 
             return (artistGuessCorrect || songGuessCorrect);
         }
@@ -355,6 +354,7 @@ namespace InTwo.ViewModel
         private void StartNewGame()
         {
             GameLocked = false;
+            RoundPoints = 0;
             ResetGameForNewRound();
         }
 
@@ -518,7 +518,7 @@ namespace InTwo.ViewModel
                         var message = new CustomMessageBox
                         {
                             Title = "Congratulations!",
-                            Message = string.Format("Well done, you scored {0} points this round. Right, enough jibba jabba, {1}", RoundPoints, AnotherRoundOrNot),
+                            Message = string.Format("Well done, you've scored {0} points so far in this game. Right, enough jibba jabba, {1}", RoundPoints, AnotherRoundOrNot),
                             LeftButtonContent = "yes please",
                             RightButtonContent = "nah, not yet"
                         };

@@ -68,15 +68,22 @@ namespace InTwo.ViewModel
 
                 Log.Info("Submitting score of [{0}] for user [{1}]", score.TheScore, App.CurrentPlayer.Username);
 
-                await _scoreoidClient.CreateScoreAsync(App.CurrentPlayer.Username, score);
+                var response = await _scoreoidClient.CreateScoreAsync(App.CurrentPlayer.Username, score);
 
-                Log.Info("Score submitted");
+                if (response)
+                {
+                    Log.Info("Score submitted");
 
-                App.SettingsWrapper.AppSettings.MostRecentScore = score;
+                    score.CreatedDate = DateTime.Now;
 
-                Messenger.Default.Send(new NotificationMessage(Constants.Messages.ForceSettingsSaveMsg));
+                    App.SettingsWrapper.AppSettings.MostRecentScore = score;
 
-                return true;
+                    Messenger.Default.Send(new NotificationMessage(Constants.Messages.ForceSettingsSaveMsg));
+
+                    return true;
+                }
+
+                return false;
             }
             catch (ScoreoidException sex)
             {

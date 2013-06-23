@@ -176,7 +176,7 @@ namespace InTwo.ViewModel
             try
             {
                 Log.Info("Getting scores");
-                var scoresResult = await _scoreoidClient.GetBestScoresAsync();
+                var scoresResult = await _scoreoidClient.GetBestScoresAsync(SortBy.Score, OrderBy.Descending);
 
                 scoresResult.ForEach(ScoreBoardItems.Add);
 
