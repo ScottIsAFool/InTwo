@@ -28,36 +28,44 @@ namespace InTwo.ViewModel
 
             if (IsInDesignMode)
             {
-                ScoreBoardItems = new ObservableCollection<ScoreItem>
+                ScoreBoardItems = new ObservableCollection<ScoreWrapper>
                 {
-                    new ScoreItem
+                    new ScoreWrapper
                     {
-                        Player = new Player
+                        Score = new ScoreItem
                         {
-                            FirstName = "Scott",
-                            LastName = "Lovegrove",
-                            Username = "scottisafool",
-                            BestScore = 336,
-                            Rank = 1
-                        }
+                            Player = new Player
+                            {
+                                FirstName = "Scott",
+                                LastName = "Lovegrove",
+                                Username = "scottisafool",
+                                BestScore = 336,
+                                Rank = 1
+                            }
+                        },
+                        Rank = 1
                     },
-                    new ScoreItem
+                    new ScoreWrapper
                     {
-                        Player = new Player
+                        Score = new ScoreItem
                         {
-                            FirstName = "Mel",
-                            LastName = "Sheppard",
-                            Username = "msheppard27",
-                            BestScore = 335,
-                            Rank = 2,
-                        }
+                            Player = new Player
+                            {
+                                FirstName = "Mel",
+                                LastName = "Sheppard",
+                                Username = "msheppard27",
+                                BestScore = 335,
+                                Rank = 2,
+                            }
+                        },
+                        Rank = 2
                     }
                 };
                 MostRecentScore = 336;
             }
             else
             {
-                ScoreBoardItems = new ObservableCollection<ScoreItem>();
+                ScoreBoardItems = new ObservableCollection<ScoreWrapper>();
             }
         }
 
@@ -74,7 +82,7 @@ namespace InTwo.ViewModel
 
                     Log.Info("Sharing score via {0}", type);
 
-                    FlurryWP8SDK.Api.LogEvent("SharedScore", new List<Parameter> {new Parameter("ShareType", type.ToString())});
+                    FlurryWP8SDK.Api.LogEvent("SharedScore", new List<Parameter> { new Parameter("ShareType", type.ToString()) });
 
                     switch (type)
                     {
@@ -94,8 +102,8 @@ namespace InTwo.ViewModel
                 }
             });
         }
-        
-        public ObservableCollection<ScoreItem> ScoreBoardItems { get; set; }
+
+        public ObservableCollection<ScoreWrapper> ScoreBoardItems { get; set; }
         public int MostRecentScore { get; set; }
 
         public RelayCommand ScoreBoardPageLoaded
@@ -155,7 +163,7 @@ namespace InTwo.ViewModel
                 Log.Info("Getting all scores for user [{0}].", App.CurrentPlayer.Username);
                 var item = await _scoreoidClient.GetPlayerAsync(App.CurrentPlayer.Username);
 
-                if (item == null ) return;
+                if (item == null) return;
 
                 App.CurrentPlayer = item;
             }
@@ -178,7 +186,18 @@ namespace InTwo.ViewModel
                 Log.Info("Getting scores");
                 var scoresResult = await _scoreoidClient.GetBestScoresAsync(SortBy.Score, OrderBy.Descending);
 
-                scoresResult.ForEach(ScoreBoardItems.Add);
+                ScoreBoardItems.Clear();
+
+                var i = 1;
+                scoresResult.ForEach(score =>
+                {
+                    ScoreBoardItems.Add(new ScoreWrapper
+                    {
+                        Rank = i,
+                        Score = score
+                    });
+                    i++;
+                });
 
                 _scoresLoaded = true;
             }

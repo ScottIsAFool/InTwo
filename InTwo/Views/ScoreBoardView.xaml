@@ -116,16 +116,16 @@
                         <Grid Margin="0,0,0,6">
                             <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Left">
-                                <TextBlock Text="{Binding Player.Rank, StringFormat='\{0\}.'}"
+                                <TextBlock Text="{Binding Rank, StringFormat='\{0\}.'}"
                                            Style="{StaticResource PhoneTextNormalStyle}"
-                                           Foreground="{Binding Player, Converter={StaticResource CurrentUserConverter}}" />
-                                <TextBlock Text="{Binding Player.Username}"
+                                           Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}" />
+                                <TextBlock Text="{Binding Score.Player.Username}"
                                            Style="{StaticResource PhoneTextNormalStyle}"
-                                           Foreground="{Binding Player, Converter={StaticResource CurrentUserConverter}}" />
+                                           Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}" />
                             </StackPanel>
-                            <TextBlock Text="{Binding Score.TheScore}"
+                            <TextBlock Text="{Binding Score.Score.TheScore}"
                                        Style="{StaticResource PhoneTextNormalStyle}"
-                                       Foreground="{Binding Player, Converter={StaticResource CurrentUserConverter}}"
+                                       Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}"
                                        HorizontalAlignment="Right" />
                         </Grid>
                     </DataTemplate>
