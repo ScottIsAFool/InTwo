@@ -100,7 +100,7 @@
                     HorizontalContentAlignment="Left"
                     VerticalContentAlignment="Top"
                     Grid.Row="0"
-                    Visibility="{Binding AppSettings.PlayerWrapper, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
+                    Visibility="{Binding AppSettings.PlayerWrapper.CurrentPlayer, Source={StaticResource Settings}, Converter={StaticResource NullVisibilityConverter}}"
                     Margin="0,24,24,0">
                 <controls:ProfilePicture IsClipped="True"
                                          Height="50"/>
@@ -114,22 +114,30 @@
                     <phone:LongListSelector.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="0,0,0,6">
-                                <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Left">
-                                    <TextBlock Text="{Binding Rank, StringFormat='\{0\}.'}"
-                                               Style="{StaticResource PhoneTextTitle3Style}"
-                                               Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}"
-                                               FontFamily="Segoe WP Semibold" />
-                                    <TextBlock Text="{Binding Score.Player.Username}"
-                                               Style="{StaticResource PhoneTextTitle3Style}"
-                                               FontFamily="Segoe WP Semibold"
-                                               Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}" />
-                                </StackPanel>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="9*" />
+                                    <ColumnDefinition Width="3*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="{Binding Rank, StringFormat='\{0\}.'}"
+                                           Style="{StaticResource PhoneTextTitle3Style}"
+                                           Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}"
+                                           FontFamily="Segoe WP Semibold"
+                                           Grid.Column="0"/>
+                                
+                                <TextBlock Text="{Binding Score.Player.Username}"
+                                           Style="{StaticResource PhoneTextTitle3Style}"
+                                           FontFamily="Segoe WP Semibold"
+                                           Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}"
+                                           Grid.Column="1"/>
+                                
                                 <TextBlock Text="{Binding Score.Score.TheScore}"
                                            Style="{StaticResource PhoneTextTitle3Style}"
                                            Foreground="{Binding Score.Player, Converter={StaticResource CurrentUserConverter}}"
                                            FontFamily="Segoe WP Semibold"
-                                           HorizontalAlignment="Right" />
+                                           HorizontalAlignment="Right" 
+                                           Grid.Column="2"/>
                             </Grid>
                         </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
