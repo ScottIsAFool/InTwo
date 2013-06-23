@@ -99,6 +99,9 @@
     <Compile Include="Behaviours\CustomApplicationBar.cs" />
     <Compile Include="Behaviours\EnterKeyBehaviour.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controls\LogFiles.xaml.cs">
+      <DependentUpon>LogFiles.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PoweredBy.xaml.cs">
       <DependentUpon>PoweredBy.xaml</DependentUpon>
     </Compile>
@@ -217,6 +220,10 @@
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+    <Page Include="Controls\LogFiles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\PoweredBy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
