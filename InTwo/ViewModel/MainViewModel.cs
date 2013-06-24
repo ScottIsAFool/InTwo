@@ -33,6 +33,7 @@ namespace InTwo.ViewModel
         private readonly IApplicationSettingsService _settingsService;
 
         private bool _hasCheckedForData;
+        private bool _isFirstRun = true;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -186,6 +187,18 @@ namespace InTwo.ViewModel
                     }
 
                     _hasCheckedForData = true;
+
+                    if (_isFirstRun)
+                    {
+                        _isFirstRun = false;
+                    }
+                    else
+                    {
+                        if (ReviewBugger.IsTimeForReview())
+                        {
+                            ReviewBugger.PromptUser();
+                        }
+                    }
 
                     if (App.CurrentPlayer != null)
                     {

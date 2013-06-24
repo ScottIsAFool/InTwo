@@ -131,6 +131,8 @@ namespace InTwo
             InitializePhoneApplication();
             GetSettings();
             SetFlurry();
+
+            ReviewBugger.CheckNumOfRuns();
         }
 
         private static void GetSettings()

@@ -146,6 +146,7 @@
     <Compile Include="Model\ShareType.cs" />
     <Compile Include="Model\SuperImageSourceCollection.cs" />
     <Compile Include="Navigation\InTwoUriMapper.cs" />
+    <Compile Include="ReviewBugger.cs" />
     <Compile Include="ThemeManager.cs" />
     <Compile Include="TileService.cs" />
     <Compile Include="Utils.cs" />

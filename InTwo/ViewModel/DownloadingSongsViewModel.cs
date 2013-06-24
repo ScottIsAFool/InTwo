@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using InTwo.Model;
@@ -25,16 +24,15 @@ namespace InTwo.ViewModel
         private readonly IExtendedNavigationService _navigationService;
         private readonly IMusicClient _musicClient;
         private readonly IAsyncStorageService _asyncStorageService;
-        private readonly IApplicationSettingsService _settingsService;
+
         /// <summary>
         /// Initializes a new instance of the DownloadingSongsViewModel class.
         /// </summary>
-        public DownloadingSongsViewModel(IExtendedNavigationService navigationService, IMusicClient musicClient, IAsyncStorageService asyncStorageService, IApplicationSettingsService settingsService)
+        public DownloadingSongsViewModel(IExtendedNavigationService navigationService, IMusicClient musicClient, IAsyncStorageService asyncStorageService)
         {
             _navigationService = navigationService;
             _musicClient = musicClient;
             _asyncStorageService = asyncStorageService;
-            _settingsService = settingsService;
         }
 
         public bool RetryIsVisible { get; set; }
