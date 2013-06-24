@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -122,9 +123,9 @@ namespace InTwo.ViewModel
                     return true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                
+                Log.ErrorException("Deserializing tracks", ex);
             }
 
             return false;

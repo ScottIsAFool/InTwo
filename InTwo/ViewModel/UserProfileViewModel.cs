@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -48,12 +47,12 @@ namespace InTwo.ViewModel
                     Username = "scottisafool",
                     BestScore = 336,
                     Rank = 1
-                }; 
+                };
             }
 
             TotalScore = NumberOfGames = 0;
         }
-        
+
         public override void WireMessages()
         {
             Messenger.Default.Register<NotificationMessage>(this, async m =>
@@ -200,7 +199,7 @@ namespace InTwo.ViewModel
                             var writeableBitmap = new WriteableBitmap(bitmap);
                             writeableBitmap.SaveJpeg(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
 
-                            await CreateTileImages(bitmap);
+                            await CreateTileImages(writeableBitmap);
                         }
 
                         FlurryWP8SDK.Api.LogEvent("UserPhotoCreated");
@@ -214,7 +213,7 @@ namespace InTwo.ViewModel
                 });
             }
         }
-        
+
         public RelayCommand ClearProfilePicture
         {
             get
@@ -311,8 +310,8 @@ namespace InTwo.ViewModel
 
             return await _asyncStorageService.FileExistsAsync(fileName);
         }
-        
-        private async Task CreateTileImages(ImageSource image)
+
+        private async Task CreateTileImages(WriteableBitmap image)
         {
             Log.Info("Creating tile images from user profile images");
 
@@ -340,24 +339,43 @@ namespace InTwo.ViewModel
             Messenger.Default.Send(new NotificationMessage(Constants.Messages.UpdatePrimaryTileMsg));
         }
 
-        private static UIElement CreateProfileTileImages(ImageSource theImage, int height, int width)
+        private static UIElement CreateProfileTileImages(WriteableBitmap image, int height, int width)
         {
+            var resizedImage = image.PixelWidth < image.PixelHeight
+                                               ? image.Resize(691, (image.PixelHeight*691/image.PixelWidth), WriteableBitmapExtensions.Interpolation.Bilinear)
+                                               : image.Resize((image.PixelWidth*691/image.PixelHeight), 691, WriteableBitmapExtensions.Interpolation.Bilinear);
+
+            if (width > height)
+            {
+                var top = resizedImage.PixelHeight > resizedImage.PixelWidth
+// ReSharper disable PossibleLossOfFraction
+                              ? (int)Math.Floor((double)((resizedImage.PixelHeight - 336)/2))
+// ReSharper restore PossibleLossOfFraction
+                              : 0;
+                var left = resizedImage.PixelWidth > resizedImage.PixelHeight
+// ReSharper disable PossibleLossOfFraction
+                               ? (int)Math.Floor((double) ((resizedImage.PixelWidth - 691)/2))
+// ReSharper restore PossibleLossOfFraction
+                               : 0;
+                resizedImage = resizedImage.Crop(left, top, width, height);
+            }
+
             var grid = new Grid
             {
                 Height = height,
                 Width = width
             };
 
-            var image = new Image
+            var theImage = new Image
             {
-                Source = theImage,
+                Source = resizedImage,
                 Stretch = Stretch.Fill,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
                 Width = width,
                 Height = height
             };
-            grid.Children.Add(image);
+            grid.Children.Add(theImage);
 
             return grid;
         }
