@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -97,6 +98,7 @@ namespace InTwo.ViewModel
 
                     if (trackResponse.Error == null)
                     {
+                        Debug.WriteLine("TopProductsForGenre ({0}): {1} tracks", genre.Name, trackResponse.Result.Count);
                         tracks.AddRange(trackResponse.Result);
                     }
 
@@ -106,6 +108,7 @@ namespace InTwo.ViewModel
                     {
                         foreach (var track in trackResponse.Result.Where(track => !tracks.Contains(track)))
                         {
+                            Debug.WriteLine("NewReleasesForGenre ({0}): {1} tracks", genre.Name, trackResponse.Result.Count);
                             tracks.Add(track);
                         }
                     }
