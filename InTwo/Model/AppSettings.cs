@@ -33,7 +33,7 @@ namespace InTwo.Model
             else
             {
                 PlayerWrapper = new PlayerWrapper();
-                AlwaysStartFromTheBeginning = true;
+                AlwaysStartFromTheBeginning = false;
             }
             DefaultGameLength = TimeSpan.FromSeconds(2);
             DefaultGenre = new Genre {Name = GameViewModel.AllGenres};
