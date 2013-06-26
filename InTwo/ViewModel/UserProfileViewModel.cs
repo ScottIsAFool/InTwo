@@ -191,16 +191,16 @@ namespace InTwo.ViewModel
                             await _asyncStorageService.DeleteFileAsync(fileName);
                         }
 
-                        using (var file = await _asyncStorageService.CreateFileAsync(fileName))
-                        {
+                        //using (var file = await _asyncStorageService.CreateFileAsync(fileName))
+                        //{
                             var bitmap = new BitmapImage();
                             bitmap.SetSource(photoResult.ChosenPhoto);
 
                             var writeableBitmap = new WriteableBitmap(bitmap);
-                            writeableBitmap.SaveJpeg(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
+                            //writeableBitmap.SaveJpeg(file, writeableBitmap.PixelWidth, writeableBitmap.PixelHeight, 0, 85);
 
-                            await CreateTileImages(writeableBitmap);
-                        }
+                            await CreateImages(writeableBitmap);
+                        //}
 
                         FlurryWP8SDK.Api.LogEvent("UserPhotoCreated");
 
@@ -311,10 +311,11 @@ namespace InTwo.ViewModel
             return await _asyncStorageService.FileExistsAsync(fileName);
         }
 
-        private async Task CreateTileImages(WriteableBitmap image)
+        private async Task CreateImages(WriteableBitmap image)
         {
             Log.Info("Creating tile images from user profile images");
 
+            var profileFileName = string.Format(Constants.ProfilePictureStorageFilePath, CurrentPlayer.Username);
             var normalFileName = string.Format(Constants.Tiles.UserProfileFileFormat, CurrentPlayer.Username);
             var wideFileName = string.Format(Constants.Tiles.UserProfileWideFileFormat, CurrentPlayer.Username);
 
@@ -332,6 +333,11 @@ namespace InTwo.ViewModel
 
             var wideTile = CreateProfileTileImages(image, 336, 691);
 
+            // Overwrite the profile image with the cropped version
+            await Utils.SaveTile(normalTile, 336, 336, profileFileName);
+
+            Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerMsg));
+
             await Utils.SaveTile(normalTile, 336, 336, normalFileName);
 
             await Utils.SaveTile(wideTile, 336, 691, wideFileName);
@@ -341,21 +347,40 @@ namespace InTwo.ViewModel
 
         private static UIElement CreateProfileTileImages(WriteableBitmap image, int height, int width)
         {
+            var scaledSize = image.PixelWidth < image.PixelHeight
+                                 ? (image.PixelHeight*((double) 691/image.PixelWidth))
+                                 : (image.PixelWidth*((double) 691/image.PixelHeight));
+
             var resizedImage = image.PixelWidth < image.PixelHeight
-                                               ? image.Resize(691, (image.PixelHeight*691/image.PixelWidth), WriteableBitmapExtensions.Interpolation.Bilinear)
-                                               : image.Resize((image.PixelWidth*691/image.PixelHeight), 691, WriteableBitmapExtensions.Interpolation.Bilinear);
+                                               ? image.Resize(691, (int)Math.Floor(scaledSize), WriteableBitmapExtensions.Interpolation.Bilinear)
+                                               : image.Resize((int)Math.Floor(scaledSize), 691, WriteableBitmapExtensions.Interpolation.Bilinear);
 
             if (width > height)
             {
                 var top = resizedImage.PixelHeight > resizedImage.PixelWidth
-// ReSharper disable PossibleLossOfFraction
-                              ? (int)Math.Floor((double)((resizedImage.PixelHeight - 336)/2))
-// ReSharper restore PossibleLossOfFraction
+                    // ReSharper disable PossibleLossOfFraction
+                              ? (int)Math.Floor((double)((resizedImage.PixelHeight - 336) / 2))
+                    // ReSharper restore PossibleLossOfFraction
                               : 0;
                 var left = resizedImage.PixelWidth > resizedImage.PixelHeight
-// ReSharper disable PossibleLossOfFraction
-                               ? (int)Math.Floor((double) ((resizedImage.PixelWidth - 691)/2))
-// ReSharper restore PossibleLossOfFraction
+                               ? 0
+                    // ReSharper disable PossibleLossOfFraction
+                               : (int)Math.Floor((double)((resizedImage.PixelWidth - 691) / 2));
+                // ReSharper restore PossibleLossOfFraction
+
+                resizedImage = resizedImage.Crop(left, top, width, height);
+            }
+            else
+            {
+                var top = resizedImage.PixelHeight > resizedImage.PixelWidth
+                    // ReSharper disable PossibleLossOfFraction
+                              ? (int)Math.Floor((double)((resizedImage.PixelHeight - 336) / 2))
+                    // ReSharper restore PossibleLossOfFraction
+                              : 0;
+                var left = resizedImage.PixelWidth > resizedImage.PixelHeight
+                    // ReSharper disable PossibleLossOfFraction
+                               ? (int)Math.Floor((double)((resizedImage.PixelWidth - 336) / 2))
+                    // ReSharper restore PossibleLossOfFraction
                                : 0;
                 resizedImage = resizedImage.Crop(left, top, width, height);
             }
@@ -369,7 +394,7 @@ namespace InTwo.ViewModel
             var theImage = new Image
             {
                 Source = resizedImage,
-                Stretch = Stretch.Fill,
+                Stretch = Stretch.UniformToFill,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
                 Width = width,

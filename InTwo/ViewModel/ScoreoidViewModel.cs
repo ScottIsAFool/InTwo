@@ -245,6 +245,7 @@ namespace InTwo.ViewModel
                         if (!response)
                         {
                             Log.Info("Not signed in as [{0}]", Username);
+                            SetProgressBar();
                             return;
                         }
 
@@ -257,6 +258,8 @@ namespace InTwo.ViewModel
                         SetProgressBar();
 
                         Messenger.Default.Send(new NotificationMessage(Constants.Messages.RefreshCurrentPlayerInfoMsg));
+
+                        Messenger.Default.Send(new NotificationMessage(Constants.Messages.ForceSettingsSaveMsg));
 
                         _navigationService.GoBack();
                     }
