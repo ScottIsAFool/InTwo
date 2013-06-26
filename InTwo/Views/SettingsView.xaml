@@ -442,8 +442,7 @@
                                    Style="{StaticResource HeaderStyle}" />
                         <CheckBox Content="Use profile picture (if set) for tile front"
                                   IsChecked="{Binding UseProfilePictureInTile, Mode=TwoWay}"
-                                  IsEnabled="{Binding PlayerWrapper.CurrentPlayer, Converter={StaticResource NullBooleanConverter}}"
-                                  Visibility="Collapsed" />
+                                  IsEnabled="{Binding PlayerWrapper.CurrentPlayer, Converter={StaticResource NullBooleanConverter}}" />
 
                         <TextBlock Text="Which style tile would you like?"
                                    Style="{Binding UseProfilePictureInTile, Converter={StaticResource SubtleBrushConverter}}" />

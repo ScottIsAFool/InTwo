@@ -246,6 +246,7 @@ namespace InTwo.ViewModel
                         {
                             Log.Info("Not signed in as [{0}]", Username);
                             SetProgressBar();
+                            MessageBox.Show("There was a problem signing into your account. This could be because of network issues or an incorrect username/password. Please try again.", "Couldn't sign you in", MessageBoxButton.OK);
                             return;
                         }
 
