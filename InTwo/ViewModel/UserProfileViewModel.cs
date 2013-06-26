@@ -347,13 +347,13 @@ namespace InTwo.ViewModel
 
         private static UIElement CreateProfileTileImages(WriteableBitmap image, int height, int width)
         {
-            var scaledSize = image.PixelWidth < image.PixelHeight
+            var scaledSize = image.PixelWidth > image.PixelHeight
                                  ? (image.PixelHeight*((double) 691/image.PixelWidth))
-                                 : (image.PixelWidth*((double) 691/image.PixelHeight));
+                                 : (image.PixelWidth*((double) 336/image.PixelHeight));
 
-            var resizedImage = image.PixelWidth < image.PixelHeight
+            var resizedImage = image.PixelWidth > image.PixelHeight
                                                ? image.Resize(691, (int)Math.Floor(scaledSize), WriteableBitmapExtensions.Interpolation.Bilinear)
-                                               : image.Resize((int)Math.Floor(scaledSize), 691, WriteableBitmapExtensions.Interpolation.Bilinear);
+                                               : image.Resize((int)Math.Floor(scaledSize), 336, WriteableBitmapExtensions.Interpolation.Bilinear);
 
             if (width > height)
             {
