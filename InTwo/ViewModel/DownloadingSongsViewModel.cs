@@ -92,7 +92,6 @@ namespace InTwo.ViewModel
                 var tracks = new List<Product>();
                 foreach (var genre in genres.Where(x => !x.Name.Equals("Comedy")))
                 {
-                    //var trackResponse = await _musicClient.GetTopProductsForGenreAsync(genre, Category.Track, 0, 100);
                     var trackResponse = await _musicClient.SearchGenreAsync(genre.Id, category: Category.Track, startIndex: 0, itemsPerPage: 100);
                     
                     if (trackResponse.Error == null)
@@ -100,17 +99,6 @@ namespace InTwo.ViewModel
                         Debug.WriteLine("TopProductsForGenre ({0}): {1} tracks", genre.Name, trackResponse.Result.Count);
                         tracks.AddRange(trackResponse.Result.Cast<Product>());
                     }
-
-                    //trackResponse = await _musicClient.GetNewReleasesForGenreAsync(genre, Category.Track, 0, 100);
-
-                    //if (trackResponse.Error == null)
-                    //{
-                    //    foreach (var track in trackResponse.Result.Where(track => !tracks.Contains(track)))
-                    //    {
-                    //        Debug.WriteLine("NewReleasesForGenre ({0}): {1} tracks", genre.Name, trackResponse.Result.Count);
-                    //        tracks.Add(track);
-                    //    }
-                    //}
                 }
 
                 await _asyncStorageService.WriteAllTextAsync(Constants.GameDataFile, await JsonConvert.SerializeObjectAsync(tracks));
