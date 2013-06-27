@@ -7,7 +7,7 @@ namespace InTwo.Controls
 {
     public partial class Tile : UserControl
     {
-        public Tile(string score, string genre, TileTypes tileTypes)
+        public Tile()
         {
             InitializeComponent();
 
@@ -18,16 +18,24 @@ namespace InTwo.Controls
                 BestScoreText = "3368";
                 TileType = TileTypes.Normal;
             }
-            else
-            {
-                BestScoreText = score;
-                GenreText = genre;
-                TileType = tileTypes;
-            }
         }
 
         public static readonly DependencyProperty BestScoreTextProperty =
-            DependencyProperty.Register("BestScoreText", typeof(string), typeof(Tile), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("BestScoreText", typeof(string), typeof(Tile), new PropertyMetadata(default(string), OnBestScoreTextChanged));
+
+        private static void OnBestScoreTextChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var tile = sender as Tile;
+
+            if (tile == null)
+            {
+                return;
+            }
+
+            var bestScoreText = string.Format("Best score: {0}", e.NewValue);
+            tile.BestScoreNormal.Text = bestScoreText;
+            tile.BestScoreWide.Text = bestScoreText;
+        }
 
         public string BestScoreText
         {
@@ -36,7 +44,19 @@ namespace InTwo.Controls
         }
 
         public static readonly DependencyProperty GenreTextProperty =
-            DependencyProperty.Register("GenreText", typeof(string), typeof(Tile), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("GenreText", typeof(string), typeof(Tile), new PropertyMetadata(default(string), OnGenreTextChanged));
+
+        private static void OnGenreTextChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var tile = sender as Tile;
+            if (tile == null)
+            {
+                return;
+            }
+
+            tile.GenreTextNormal.Text = (string) e.NewValue;
+            tile.GenreTextWide.Text = string.Format("Genre: {0}", e.NewValue);
+        }
 
         public string GenreText
         {
@@ -75,12 +95,14 @@ namespace InTwo.Controls
 
         internal async Task<bool> SaveWideTile()
         {
-            return await Utils.SaveTile(this, 336, 691, Constants.Tiles.WideTileFile);
+            InvalidateMeasure();
+            return await Utils.SaveTile(this, 336, 691, string.Format(Constants.Tiles.WideTileBackFile, App.CurrentPlayer.Username));
         }
 
         internal async Task<bool> SaveNormalTile()
         {
-            return await Utils.SaveTile(this, 336, 336, Constants.Tiles.NormalTileFile);
+            InvalidateMeasure();
+            return await Utils.SaveTile(this, 336, 336, string.Format(Constants.Tiles.NormalTileBackFile, App.CurrentPlayer.Username));
         }
         
         public enum TileTypes

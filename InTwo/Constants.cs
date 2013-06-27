@@ -43,6 +43,10 @@
             private const string SharedFolderIsoPath = "isostore:/Shared/ShellContent/";
             public const string WideTileFile = SharedFolderPath + WideTileFileName;
             public const string WideTileIsoUri = SharedFolderIsoPath + WideTileFileName;
+            public const string WideTileBackFile = SharedFolderPath + "{0}-Back-Wide.png";
+            public const string WideTileBackIsoUri = SharedFolderIsoPath + "{0}-Back-Wide.png";
+            public const string NormalTileBackFile = SharedFolderPath + "{0}-Back.png";
+            public const string NormalTileBackIsoUri = SharedFolderIsoPath + "{0}-Back.png";
 
             public const string NormalTileFile = SharedFolderPath + NormalTileFileName;
             public const string NormalTileIsoUri = SharedFolderIsoPath + NormalTileFileName;

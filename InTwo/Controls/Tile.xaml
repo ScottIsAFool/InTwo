@@ -14,21 +14,22 @@
           Background="Red">
         <StackPanel Orientation="Vertical"
                     x:Name="WideStack">
-            <TextBlock Text="{Binding BestScoreText, StringFormat='Best score: \{0\}'}"
+            <TextBlock x:Name="BestScoreWide"
                        Style="{StaticResource PhoneTextExtraLargeStyle}"
                        FontSize="95" />
-            <TextBlock Text="{Binding GenreText, StringFormat='Genre: \{0\}'}"
+            <TextBlock x:Name="GenreTextWide"
                        Style="{StaticResource PhoneTextExtraLargeStyle}"
                        FontSize="95" />
         </StackPanel>
         
         <StackPanel Orientation="Vertical"
-                    x:Name="NormalStack">
-            <TextBlock Text="{Binding BestScoreText, StringFormat='Best score: \{0\}'}"
+                    x:Name="NormalStack"
+                    Visibility="Collapsed">
+            <TextBlock x:Name="BestScoreNormal" 
                        Style="{StaticResource PhoneTextExtraLargeStyle}"/>
             <TextBlock Text="Genre:"
                        Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-            <TextBlock Text="{Binding GenreText}"
+            <TextBlock x:Name="GenreTextNormal"
                        Style="{StaticResource PhoneTextExtraLargeStyle}" />
         </StackPanel>
     </Grid>

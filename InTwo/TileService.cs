@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using Cimbalino.Phone.Toolkit.Extensions;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using InTwo.Controls;
@@ -20,21 +24,26 @@ namespace InTwo
 
         public async void UpdatePrimaryTile()
         {
-            if (App.CurrentPlayer != null)
+            ShellTileServiceFlipTileData shellData;
+            if (App.CurrentPlayer != null && App.SettingsWrapper.AppSettings.PlayerWrapper.BestScore > 0)
             {
                 var score = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScore;
                 var genre = App.SettingsWrapper.AppSettings.PlayerWrapper.BestScoreGenre;
 
                 // Create wide tile image
-                //var wideTileCreated = await new Tile(score, genre, Tile.TileTypes.Wide).SaveWideTile();
+                var wideTile = CreateBackImage(score.ToStringInvariantCulture(), genre, true);
+                var wideTileCreated = await Utils.SaveTile(wideTile, 336, 691, string.Format(Constants.Tiles.WideTileBackFile, App.CurrentPlayer.Username));
 
-                //// Create normal tile image
-                //var normalTileCreated = await new Tile(score, genre, Tile.TileTypes.Normal).SaveNormalTile();
+                // Create normal tile image
+                var normalTile = CreateBackImage(score.ToStringInvariantCulture(), genre, false);
+                var normalTileCreated = await Utils.SaveTile(normalTile, 336, 336, string.Format(Constants.Tiles.NormalTileBackFile, App.CurrentPlayer.Username));
 
-                //var shellData = await CreateTileData(wideTileCreated, normalTileCreated, true);
+                shellData = await CreateTileData(wideTileCreated, normalTileCreated, true);
             }
-
-            var shellData = await CreateTileData(false, false, true);
+            else
+            {
+                shellData = await CreateTileData(false, false, true);
+            }
 
             UpdateTile(shellData);
         }
@@ -61,8 +70,8 @@ namespace InTwo
 
             var shell = new ShellTileServiceFlipTileData
             {
-                BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileIsoUri, UriKind.RelativeOrAbsolute) : null,
-                WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileIsoUri, UriKind.RelativeOrAbsolute) : null,
+                BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileBackIsoUri, UriKind.RelativeOrAbsolute) : null,
+                WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileBackIsoUri, UriKind.RelativeOrAbsolute) : null,
                 BackTitle = (showUsername && App.CurrentPlayer != null) ? App.CurrentPlayer.Username : string.Empty,
                 BackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Medium),
                 WideBackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Large),
@@ -116,6 +125,68 @@ namespace InTwo
             }
         }
 
-        
+        private static UIElement CreateBackImage(string score, string genre, bool isWideTile)
+        {
+            var grid = new Grid
+            {
+                Height = 336,
+                Width = isWideTile ? 691 : 336
+            };
+
+            var stackpanel = new StackPanel
+            {
+                Orientation = Orientation.Vertical
+            };
+
+            if (isWideTile)
+            {
+                var scoreText = string.Format("Best score: {0}", score);
+                var scoreBlock = CreateTextBlock(scoreText, 95);
+                stackpanel.Children.Add(scoreBlock);
+
+                var genreText = string.Format("Genre: {0}", genre);
+                var genreBlock = CreateTextBlock(genreText, 95, new Thickness(12, 100, 0, 0));
+                stackpanel.Children.Add(genreBlock);
+
+                grid.Children.Add(stackpanel);
+            }
+            else
+            {
+                var scoreText = string.Format("Best score: {0}", score);
+                var scoreBlock = CreateTextBlock(scoreText);
+                stackpanel.Children.Add(scoreBlock);
+
+                var genreLabel = CreateTextBlock("Genre:", margin: new Thickness(12, 100, 0, 0));
+                stackpanel.Children.Add(genreLabel);
+
+                var genreBlock = CreateTextBlock(genre, margin: new Thickness(12, 150, 0, 0));
+                stackpanel.Children.Add(genreBlock);
+
+                grid.Children.Add(stackpanel);
+            }
+
+            return grid;
+        }
+
+        private static TextBlock CreateTextBlock(string text, int? fontHeight = null, Thickness? margin = null)
+        {
+            var textBlock = new TextBlock
+            {
+                Text = text,
+                Style = (Style) Application.Current.Resources["PhoneTextExtraLargeStyle"]
+            };
+
+            if (fontHeight.HasValue)
+            {
+                textBlock.FontSize = fontHeight.Value;
+            }
+
+            if (margin.HasValue)
+            {
+                textBlock.Margin = margin.Value;
+            }
+
+            return textBlock;
+        }
     }
 }
