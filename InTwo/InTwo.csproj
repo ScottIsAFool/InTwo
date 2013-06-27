@@ -114,9 +114,6 @@
     <Compile Include="Controls\UserDetails.xaml.cs">
       <DependentUpon>UserDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\Tile.xaml.cs">
-      <DependentUpon>Tile.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Converters\ArrayToStringConverter.cs" />
     <Compile Include="Converters\BooleanToObjectConverter.cs" />
     <Compile Include="Converters\BooleanToOpacityConverter.cs" />
@@ -238,10 +235,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\UserDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\Tile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,6 +9,7 @@ using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using InTwo.Controls;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 
 namespace InTwo
 {
@@ -53,6 +54,12 @@ namespace InTwo
             var primaryTile = ShellTileService.ActiveTiles.First();
 
             primaryTile.Update(shellData);
+
+            new ShellTileSchedule
+            {
+                Recurrence = UpdateRecurrence.Onetime,
+                StartTime = DateTime.Now
+            }.Start();
         }
 
         public async void ClearTile()
@@ -70,8 +77,8 @@ namespace InTwo
 
             var shell = new ShellTileServiceFlipTileData
             {
-                BackBackgroundImage = normalTileCreated ? new Uri(Constants.Tiles.NormalTileBackIsoUri, UriKind.RelativeOrAbsolute) : null,
-                WideBackBackgroundImage = wideTileCreated ? new Uri(Constants.Tiles.WideTileBackIsoUri, UriKind.RelativeOrAbsolute) : null,
+                BackBackgroundImage = normalTileCreated ? new Uri(string.Format(Constants.Tiles.NormalTileBackIsoUri, App.CurrentPlayer.Username), UriKind.RelativeOrAbsolute) : null,
+                WideBackBackgroundImage = wideTileCreated ? new Uri(string.Format(Constants.Tiles.WideTileBackIsoUri, App.CurrentPlayer.Username), UriKind.RelativeOrAbsolute) : null,
                 BackTitle = (showUsername && App.CurrentPlayer != null) ? App.CurrentPlayer.Username : string.Empty,
                 BackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Medium),
                 WideBackgroundImage = CreateFrontTileImageUrl(useProfilePicture, TileSize.Large),
