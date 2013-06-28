@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Cimbalino.Phone.Toolkit.Helpers;
 using Cimbalino.Phone.Toolkit.Services;
 using ScottIsAFool.WindowsPhone.Logging;
 
@@ -15,10 +14,8 @@ namespace InTwo.Controls
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var logs = WPLogger.GetLogs();
-
-            var version = new ApplicationManifest().App.Version;
-
-            new EmailComposeService().Show(string.Format("In Two Logs (from {0})", version), logs);
+            
+            new EmailComposeService().Show(string.Format("In Two Logs (from {0})", WPLogger.AppVersion), logs);
         }
     }
 }

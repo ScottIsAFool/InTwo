@@ -54,12 +54,6 @@ namespace InTwo
             var primaryTile = ShellTileService.ActiveTiles.First();
 
             primaryTile.Update(shellData);
-
-            new ShellTileSchedule
-            {
-                Recurrence = UpdateRecurrence.Onetime,
-                StartTime = DateTime.Now
-            }.Start();
         }
 
         public async void ClearTile()

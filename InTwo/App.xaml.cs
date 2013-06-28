@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using Cimbalino.Phone.Toolkit.Helpers;
 using Cimbalino.Phone.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Ioc;
@@ -88,6 +89,7 @@ namespace InTwo
 
             WPLogger.LogConfiguration.LoggingIsEnabled = true;
             WPLogger.LogConfiguration.LogType = LogType.InMemory;
+            WPLogger.AppVersion = ApplicationManifest.Current.App.Version;
 
             // Show graphics profiling information while debugging.
             if (Debugger.IsAttached)
