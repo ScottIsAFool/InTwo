@@ -91,7 +91,8 @@
                 <behaviours:CustomApplicationBar x:Name="EndOfRoundAppBar"
                                                  IsMenuEnabled="{Binding SubmittingScore, Converter={StaticResource NegativeBooleanConverter}}">
                     <cimbalino:ApplicationBarIconButton Text="new game"
-                                                        Command="{Binding NewGameCommand}"/>
+                                                        Command="{Binding NewGameCommand}"
+                                                        IconUri="/Icons/add.png"/>
                     <cimbalino:ApplicationBarIconButton Text="nokia music"
                                                         IconUri="/Icons/NokiaMusic.png"
                                                         Command="{Binding ViewInNokiaMusicCommand}" />
@@ -110,7 +111,6 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel"
-              Grid.Row="1"
               Margin="12,32,12,0"
               IsHitTestVisible="{Binding SubmittingScore, Converter={StaticResource NegativeBooleanConverter}}"
               Opacity="{Binding SubmittingScore, Converter={StaticResource BooleanToOpacityConverter}}">
