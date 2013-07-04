@@ -76,6 +76,11 @@ namespace InTwo.ViewModel
             }
             else
             {
+                if (!await _asyncStorageService.FileExistsAsync(Constants.GenreDataFile))
+                {
+                    return false;
+                }
+
                 var genreJson = await _asyncStorageService.ReadAllTextAsync(Constants.GenreDataFile);
                 genres = await JsonConvert.DeserializeObjectAsync<List<Genre>>(genreJson);
 
