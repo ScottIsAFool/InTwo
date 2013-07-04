@@ -94,6 +94,10 @@
                     <TextBlock Text="Well, either that or you really dislike ads!"
                                Style="{StaticResource PhoneTextNormalStyle}"
                                Margin="12"/>
+                    <TextBlock Text="Removal of ads will cost 79p in the UK and the equivalent price bracket in other countries. Clicking the purchase button will give you the price before you actually purchase."
+                               TextWrapping="Wrap"
+                               Style="{StaticResource PhoneTextNormalStyle}"
+                               Margin="12"/>
                     <TextBlock Text="Click the purchase button below to remove the ads."
                                TextWrapping="Wrap"
                                Style="{StaticResource PhoneTextNormalStyle}"
