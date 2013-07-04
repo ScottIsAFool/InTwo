@@ -471,12 +471,7 @@ namespace InTwo.ViewModel
 
             SubmittingScore = true;
 
-            var score = new Score
-            {
-                Data = SelectedGenre.Name,
-                Platform = "WP8",
-                TheScore = RoundPoints.ToString(CultureInfo.InvariantCulture),
-            };
+            var score = CreateNewScore();
 
             Messenger.Default.Send(new NotificationMessageAction<bool>(score, Constants.Messages.SubmitScoreMsg, success =>
             {
@@ -492,6 +487,18 @@ namespace InTwo.ViewModel
                     DisplayRetryPrompt();
                 }
             }));
+        }
+
+        private Score CreateNewScore()
+        {
+            var score = new Score
+            {
+                Data = SelectedGenre.Name,
+                Platform = "WP8",
+                TheScore = RoundPoints.ToString(CultureInfo.InvariantCulture),
+
+            };
+            return score;
         }
 
         private void DisplayRetryPrompt()
@@ -550,6 +557,11 @@ namespace InTwo.ViewModel
                                 if (AnotherRoundOrNot.Equals("ready for another?"))
                                 {
                                     RoundNumber++;
+                                    
+                                    var score = CreateNewScore();
+                                    score.CreatedDate = DateTime.Now;
+                                    App.SettingsWrapper.AppSettings.MostRecentScore = score;
+
                                     SetNextRound();
                                 }
                                 else
