@@ -33,6 +33,7 @@
             public const int CorrectArtist = 50;
             public const int CorrectSong = 200;
             public const int CorrectSongAndArtistBonus = 50;
+            public const int ShowHintPunishment = 50;
         }
 
         public static class Tiles

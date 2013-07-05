@@ -148,9 +148,10 @@ namespace InTwo.ViewModel
         public Genre SelectedGenre { get; set; }
         public Product GameTrack { get; set; }
         public Uri AudioUrl { get; set; }
-        public Uri ArtistImage { get { return CanShowAnswers ? GameTrack.Thumb320Uri : new Uri("/Images/ArtistImagePlaceholder.png", UriKind.Relative); } }
+        public Uri ArtistImage { get { return CanShowAnswers || ShowHint ? GameTrack.Thumb320Uri : new Uri("/Images/ArtistImagePlaceholder.png", UriKind.Relative); } }
         public TimeSpan GameLength { get; set; }
         public bool IsPlaying { get; set; }
+        public bool ShowHint { get; set; }
 
         public bool GameLocked { get; set; }
         public bool CanShowAnswers { get; set; }
@@ -229,6 +230,11 @@ namespace InTwo.ViewModel
             if (!string.IsNullOrEmpty(SongGuess) && !string.IsNullOrEmpty(ArtistGuess))
             {
                 score += Constants.Scores.CorrectSongAndArtistBonus;
+            }
+
+            if (ShowHint)
+            {
+                score -= Constants.Scores.ShowHintPunishment;
             }
 
             MaximumRoundPoints = AdjustScoreForGameLength(score); 
@@ -311,7 +317,7 @@ namespace InTwo.ViewModel
         private void ResetGameForNewRound()
         {
             AudioUrl = null;
-            CanShowAnswers = false;
+            CanShowAnswers = ShowHint = false;
             ArtistGuess = string.Empty;
             SongGuess = string.Empty;
             RoundNumber = 0;
@@ -341,6 +347,11 @@ namespace InTwo.ViewModel
             if (artistGuessCorrect && songGuessCorrect)
             {
                 score += Constants.Scores.CorrectSongAndArtistBonus;
+            }
+
+            if (score > 0 && ShowHint)
+            {
+                score -= Constants.Scores.ShowHintPunishment;
             }
 
             RoundPoints += AdjustScoreForGameLength(score);
@@ -749,6 +760,34 @@ namespace InTwo.ViewModel
 
                         messageBox.Show();
                     }
+                });
+            }
+        }
+
+        public RelayCommand ShowHintCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    var messageBox = new CustomMessageBox
+                    {
+                        Title = "Show hint?",
+                        Message = "Are you sure you want a hint? This will display the album cover, but more importantly, it will knock 50 points off what you can get this round. Carry on?",
+                        LeftButtonContent = "Yeah, go on",
+                        RightButtonContent = "No, thanks"
+                    };
+
+                    messageBox.Dismissed += (sender, args) =>
+                    {
+                        if (args.Result == CustomMessageBoxResult.LeftButton)
+                        {
+                            ShowHint = true;
+                            CalculateAvailableScore();
+                        }
+                    };
+
+                    messageBox.Show();
                 });
             }
         }
