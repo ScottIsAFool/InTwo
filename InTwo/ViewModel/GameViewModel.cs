@@ -350,6 +350,9 @@ namespace InTwo.ViewModel
 
         private async Task LaunchSpeech()
         {
+            // This is needed so that the music isn't playing while you're trying to guess
+            AudioUrl = null;
+
             var speechRecognizer = new SpeechRecognizerUI();
             speechRecognizer.Settings.ExampleText = "Artist is Aerosmith";
             speechRecognizer.Settings.ListenText = "Make your guess";
