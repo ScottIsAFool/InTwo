@@ -1,3 +1,5 @@
+using System.Net;
+using System.Net.Http;
 using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -60,6 +62,7 @@ namespace InTwo.ViewModel
             if (!SimpleIoc.Default.IsRegistered<IMusicClient>())
                 SimpleIoc.Default.Register<IMusicClient>(() => new MusicClient(Constants.NokiaMusicAppId));
 
+            SimpleIoc.Default.Register(() => new HttpClient(new HttpClientHandler{AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip}));
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ScoreoidViewModel>(true);
             SimpleIoc.Default.Register<ScoreBoardViewModel>();
