@@ -303,6 +303,7 @@ namespace InTwo.ViewModel
 
             Debug.WriteLine("Artist: {0}", GameTrack.Performers[0].Name);
             Debug.WriteLine("Track: {0}", GameTrack.Name);
+            Log.Debug("ID: [{0}]Artist: [{1}], Track: [{2}]", GameTrack.Id, GameTrack.Performers[0].Name, GameTrack.Name);
 
             AudioUrl = GameTrack.GetSampleUri();
         }
