@@ -4,6 +4,7 @@
     {
         Email,
         Sms,
-        Social
+        Social,
+        Mehdoh
     }
 }

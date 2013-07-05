@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Windows;
 using Coding4Fun.Toolkit.Controls;
 using FlurryWP8SDK.Models;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
+using Windows.System;
 using Cimbalino.Phone.Toolkit.Services;
 using FlurryWP8SDK.Models;
 using GalaSoft.MvvmLight.Command;
@@ -97,6 +98,10 @@ namespace InTwo.ViewModel
                         case ShareType.Social:
                             message = string.Format(messageTemplate, "@InTwoApp");
                             new ShareLinkService().Show("", message, new Uri("http://www.windowsphone.com/s?appid=219b592c-c382-4b87-95db-8c85c96651c2", UriKind.Absolute));
+                            break;
+                        case ShareType.Mehdoh:
+                            message = string.Format(messageTemplate + "http://www.windowsphone.com/s?appid=219b592c-c382-4b87-95db-8c85c96651c2", "@InTwoApp");
+                            Launcher.LaunchUriAsync(new Uri("mehdoh:TwitterPost?Text=" + message));
                             break;
                     }
                 }

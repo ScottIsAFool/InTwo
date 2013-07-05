@@ -17,7 +17,8 @@ namespace InTwo.Views
         {
             new AppBarPrompt(new AppBarPromptAction("share by sms", () => Messenger.Default.Send(new NotificationMessage(ShareType.Sms, Constants.Messages.ShareScoreMsg))),
                              new AppBarPromptAction("share by email", () => Messenger.Default.Send(new NotificationMessage(ShareType.Email, Constants.Messages.ShareScoreMsg))),
-                             new AppBarPromptAction("share on social networks", () => Messenger.Default.Send(new NotificationMessage(ShareType.Social, Constants.Messages.ShareScoreMsg))))
+                             new AppBarPromptAction("share on social networks", () => Messenger.Default.Send(new NotificationMessage(ShareType.Social, Constants.Messages.ShareScoreMsg))),
+                             new AppBarPromptAction("share with Mehdoh", () => Messenger.Default.Send(new NotificationMessage(ShareType.Mehdoh, Constants.Messages.ShareScoreMsg))))
                 .Show();
         }
     }
