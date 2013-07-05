@@ -206,6 +206,9 @@
                                FontSize="100"
                                FontWeight="Bold" />
                 </StackPanel>
+                <Button Content="Show hint"
+                        Background="{StaticResource PhoneAccentBrush}"
+                        Command="{Binding ShowHintCommand}"/>
             </StackPanel>
 
             <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
