@@ -59,7 +59,8 @@
                                                     IconUri="/Icons/appbar.currency.dollar.png"
                                                     Command="{Binding RemoveAdsCommand}"/>
                 <cimbalino:ApplicationBarBehavior.MenuItems>
-                    <cimbalino:ApplicationBarMenuItem Text="enter code"/>
+                    <cimbalino:ApplicationBarMenuItem Text="enter code"
+                                                      Command="{Binding EnterCodeCommand}"/>
                 </cimbalino:ApplicationBarBehavior.MenuItems>
             </custom:CustomApplicationBarBehaviour>
         </i:Interaction.Behaviors>
