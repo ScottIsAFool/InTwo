@@ -15,7 +15,7 @@ namespace InTwo.Controls
         {
             var logs = WPLogger.GetLogs();
             
-            new EmailComposeService().Show(string.Format("In Two Logs (from {0})", WPLogger.AppVersion), logs);
+            new EmailComposeService().Show("intwoapp@outlook.com", string.Format("In Two Logs (from {0})", WPLogger.AppVersion), logs);
         }
     }
 }
