@@ -22,6 +22,11 @@
                             shell:SystemTray.IsVisible="True"
                             shell:SystemTray.Opacity="0"
                             DataContext="{Binding RemoveAds, Source={StaticResource Locator}}">
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="True"
+                                 Text="{Binding ProgressText}"
+                                 IsVisible="{Binding ProgressIsVisible}" />
+    </shell:SystemTray.ProgressIndicator>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <command:EventToCommand Command="{Binding RemoveAdsPageLoaded}" />

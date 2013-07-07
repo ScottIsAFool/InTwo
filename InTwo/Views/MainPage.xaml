@@ -172,7 +172,7 @@
                             toolkit:TiltEffect.IsTiltEnabled="True"
                             IsEnabled="{Binding DataExists}"
                             Command="{Binding GoToGameCommand}"
-                            Margin="12"
+                            Margin="12,12,12,30"
                             Grid.Row="2">
                         <Border Background="Black">
                             <Border.Clip>

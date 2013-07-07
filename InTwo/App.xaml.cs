@@ -142,7 +142,7 @@ namespace InTwo
             var settingsService = ServiceLocator.Current.GetInstance<IApplicationSettingsService>();
 
             var appSettings = settingsService.Get(Constants.Settings.AppSettings, new AppSettings());
-            var hasRemovedAds = CurrentApp.LicenseInformation.ProductLicenses[Constants.RemoveAdsProduct].IsActive;
+            var hasRemovedAds = CurrentApp.LicenseInformation.ProductLicenses[Constants.RemoveAdsProduct].IsActive || settingsService.Get(Constants.Settings.HasRemovedAds, false);
 
             SettingsWrapper.AppSettings = appSettings;
             SettingsWrapper.HasRemovedAds = hasRemovedAds;
@@ -181,6 +181,7 @@ namespace InTwo
             var settingsService = ServiceLocator.Current.GetInstance<IApplicationSettingsService>();
 
             settingsService.Set(Constants.Settings.AppSettings, SettingsWrapper.AppSettings);
+            settingsService.Set(Constants.Settings.HasRemovedAds, SettingsWrapper.HasRemovedAds);
 
             settingsService.Save();
         }
