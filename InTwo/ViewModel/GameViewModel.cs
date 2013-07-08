@@ -40,8 +40,10 @@ namespace InTwo.ViewModel
         private List<Product> _tracks;
         private List<string> _usedTracks; 
         private readonly DispatcherTimer _gameTimer;
+        private SpeechRecognizerUI _speechRecognizer;
 
         private bool _alreadyAskedAboutMusic;
+        private bool _speechIsSupported;
 
         /// <summary>
         /// Initializes a new instance of the GameViewModel class.
@@ -364,11 +366,10 @@ namespace InTwo.ViewModel
             // This is needed so that the music isn't playing while you're trying to guess
             AudioUrl = null;
 
-            var speechRecognizer = new SpeechRecognizerUI();
-            speechRecognizer.Settings.ExampleText = "Artist is Aerosmith";
-            speechRecognizer.Settings.ListenText = "Make your guess";
-            
-            var result = await speechRecognizer.RecognizeWithUIAsync();
+            _speechRecognizer.Settings.ExampleText = "Artist is Aerosmith";
+            _speechRecognizer.Settings.ListenText = "Make your guess";
+
+            var result = await _speechRecognizer.RecognizeWithUIAsync();
             
             if (result.ResultStatus == SpeechRecognitionUIStatus.Succeeded)
             {
@@ -400,6 +401,18 @@ namespace InTwo.ViewModel
 
         private void CheckIfMusicPlayingAndCanStopIt()
         {
+            try
+            {
+                _speechRecognizer = new SpeechRecognizerUI();
+                _speechRecognizer.Recognizer.GetRecognizer();
+                _speechIsSupported = true;
+            }
+            catch (Exception ex)
+            {
+                _speechIsSupported = false;
+                Log.ErrorException("CheckForSupportedSpeech", ex);
+            }
+
             if (IsMusicPlaying())
             {
                 if (App.SettingsWrapper.AppSettings.AllowStopMusic || _alreadyAskedAboutMusic)
@@ -687,6 +700,12 @@ namespace InTwo.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
+                    if (!_speechIsSupported)
+                    {
+                        MessageBox.Show("Unfortunately, your current language is not supported for speech recognition, sorry for any inconvenience.", "Unsupported Language", MessageBoxButton.OK);
+                        return;
+                    }
+
                     if (!App.SettingsWrapper.AppSettings.DontShowSpeechGuessprompt)
                     {
                         var message = new CustomMessageBox
