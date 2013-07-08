@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows;
 using Windows.System;
@@ -78,7 +79,9 @@ namespace InTwo.ViewModel
                 {
                     var type = (ShareType)m.Sender;
 
-                    var messageTemplate = "I've been playing {0}, my current best score is " + App.CurrentPlayer.BestScore + ", try and beat me! ";
+                    var score = App.CurrentPlayer != null ? App.CurrentPlayer.BestScore.ToString(CultureInfo.InvariantCulture) : App.SettingsWrapper.AppSettings.MostRecentScore.TheScore;
+
+                    var messageTemplate = "I've been playing {0}, my current best score is " + score + ", try and beat me! ";
                     string message;
 
                     Log.Info("Sharing score via {0}", type);

@@ -34,6 +34,7 @@ namespace InTwo.Model
             {
                 PlayerWrapper = new PlayerWrapper();
                 AlwaysStartFromTheBeginning = false;
+                MostRecentScore = new Score {TheScore = "0"};
             }
             DefaultGameLength = TimeSpan.FromSeconds(2);
             DefaultGenre = new Genre {Name = GameViewModel.AllGenres};

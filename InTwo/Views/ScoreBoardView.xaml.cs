@@ -2,7 +2,6 @@
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using InTwo.Model;
-using Microsoft.Phone.Controls;
 
 namespace InTwo.Views
 {
