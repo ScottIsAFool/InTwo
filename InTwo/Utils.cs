@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,8 +12,6 @@ using Cimbalino.Phone.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using ImageTools;
 using ImageTools.IO.Png;
-using InTwo.Model;
-using InTwo.ViewModel;
 using Nokia.Music;
 using Nokia.Music.Types;
 
@@ -59,7 +59,12 @@ namespace InTwo
 
         private static bool CheckWords(MusicItem gameInfo, string guess, ref bool guessCorrect)
         {
-            var splitWords = gameInfo.Name.ToLower().Split(new[] { ' ' }).ToList();
+            var correctAnswer = gameInfo.Name.ToLower()
+                                             .RemovePhrases()
+                                             .RemoveCharacters();
+
+            var splitWords = correctAnswer.Split(new[] { ' ' }).ToList();
+
             splitWords.ForEach(word =>
             {
                 if (IgnoredWords.Contains(word))
@@ -68,7 +73,11 @@ namespace InTwo
                 }
             });
 
-            var guessSplitWords = guess.ToLower().Split(new[] { ' ' }).ToList();
+            var guessSplitWords = guess.ToLower()
+                                       .RemovePhrases()
+                                       .RemoveCharacters()
+                                       .Split(new[] { ' ' })
+                                       .ToList();
             guessSplitWords.ForEach(word =>
             {
                 if (IgnoredWords.Contains(word))
@@ -80,18 +89,45 @@ namespace InTwo
             var numberOfCorrectWords = 0;
             guessSplitWords.ForEach(word =>
             {
-                if (splitWords.Contains(word))
+                if (word.Contains("feat"))
+                {
+                    if (splitWords.Contains("feat") || splitWords.Contains("featuring"))
+                    {
+                        numberOfCorrectWords++;
+                    }
+                }
+                else if (splitWords.Contains(word))
                 {
                     numberOfCorrectWords++;
                 }
             });
 
-            if (numberOfCorrectWords > (splitWords.Count * 0.6))
+            if ((double)numberOfCorrectWords > (((double)splitWords.Count) * 0.6))
             {
                 guessCorrect = true;
                 return true;
             }
             return false;
+        }
+
+        private static string RemoveCharacters(this string text)
+        {
+            return text.Replace("-", " ")
+                       .Replace(".", " ")
+                       .Replace(",", " ")
+                       .Replace("(", string.Empty)
+                       .Replace(")", string.Empty);
+        }
+
+        private static string RemovePhrases(this string correctAnswer)
+        {
+            const string versionExpression = @"\(.* [v|V]ersion\)";
+            const string radioEditExpression = @"\(.*[r|R]adio.*\)";
+
+            correctAnswer = Regex.Replace(correctAnswer, versionExpression, string.Empty);
+            correctAnswer = Regex.Replace(correctAnswer, radioEditExpression, string.Empty);
+
+            return correctAnswer;
         }
 
         internal static CheckBox CreateDontShowCheckBox(string propertyName)
