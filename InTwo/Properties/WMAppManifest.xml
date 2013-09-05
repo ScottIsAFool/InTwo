@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-GB" />
-  <App xmlns="" ProductID="{4d4ca645-ed0f-4f8b-9560-a99e4405cda1}" Title="In Two Beta" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="InTwo author" Description="Sample description" Publisher="InTwo" PublisherID="{8bffb82b-1c29-48f7-bbd7-ed14d1b383e8}">
+  <App xmlns="" ProductID="{4d4ca645-ed0f-4f8b-9560-a99e4405cda1}" Title="In Two" RuntimeType="Silverlight" Version="1.0.0.5" Genre="apps.normal" Author="InTwo author" Description="Sample description" Publisher="InTwo" PublisherID="{8bffb82b-1c29-48f7-bbd7-ed14d1b383e8}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
