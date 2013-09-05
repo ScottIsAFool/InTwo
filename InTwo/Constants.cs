@@ -3,7 +3,7 @@
     public static class Constants
     {
         public const string NokiaMusicAppId = "";
-        public const string NokiaMusicToken = "WL5DlkicWmj5lSRzO0etQ";
+        public const string NokiaMusicToken = "";
 
 #if DEBUG
         public const string ScoreoidGameId = ""; // In Two Test
