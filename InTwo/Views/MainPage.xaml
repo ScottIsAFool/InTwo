@@ -13,8 +13,8 @@
                        xmlns:cimbalino="clr-namespace:Cimbalino.Phone.Toolkit.Behaviors;assembly=Cimbalino.Phone.Toolkit"
                        xmlns:converters="clr-namespace:InTwo.Converters"
                        xmlns:custom="clr-namespace:InTwo.Behaviours"
-                       xmlns:ad="clr-namespace:Inneractive.Nokia.Ad;assembly=Inneractive.Ad"
                        xmlns:coding4Fun="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
+                       xmlns:adDuplex="clr-namespace:AdDuplex;assembly=AdDuplex.WindowsPhone"
                        mc:Ignorable="d"
                        FontFamily="{StaticResource PhoneFontFamilyNormal}"
                        FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -198,9 +198,7 @@
                     </Button>
                 </Grid>
 
-                <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
-                                  AdType="IaAdType_Banner"
-                                  ReloadTime="30"
+                <adDuplex:AdControl AppId="54107"
                                   HorizontalAlignment="Left"
                                   VerticalAlignment="Bottom"
                                   Grid.Row="1"

@@ -13,8 +13,8 @@
                        xmlns:scottbehaviours="clr-namespace:ScottIsAFool.WindowsPhone.Behaviours;assembly=ScottIsAFool.WindowsPhone"
                        xmlns:behaviours="clr-namespace:InTwo.Behaviours"
                        xmlns:command="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP8"
-                       xmlns:ad="clr-namespace:Inneractive.Nokia.Ad;assembly=Inneractive.Ad"
                        xmlns:converters="clr-namespace:InTwo.Converters"
+                       xmlns:adDuplex="clr-namespace:AdDuplex;assembly=AdDuplex.WindowsPhone"
                        FontFamily="{StaticResource PhoneFontFamilyNormal}"
                        FontSize="{StaticResource PhoneFontSizeNormal}"
                        Foreground="{StaticResource PhoneForegroundBrush}"
@@ -92,13 +92,13 @@
                                                  IsMenuEnabled="{Binding SubmittingScore, Converter={StaticResource NegativeBooleanConverter}}">
                     <cimbalino:ApplicationBarIconButton Text="new game"
                                                         Command="{Binding NewGameCommand}"
-                                                        IconUri="/Icons/add.png"/>
+                                                        IconUri="/Icons/add.png" />
                     <cimbalino:ApplicationBarIconButton Text="nokia music"
                                                         IconUri="/Icons/NokiaMusic.png"
                                                         Command="{Binding ViewInNokiaMusicCommand}" />
                     <cimbalino:ApplicationBarIconButton Text="next round"
                                                         IconUri="/Icons/next.png"
-                                                        Command="{Binding NextRoundCommand}"/>
+                                                        Command="{Binding NextRoundCommand}" />
                     <cimbalino:ApplicationBarIconButton Text="submit score"
                                                         IconUri="/Icons/appbar.upload.png"
                                                         Command="{Binding SubmitScoreCommand}" />
@@ -208,18 +208,15 @@
                 </StackPanel>
                 <Button Content="Show hint"
                         Background="{StaticResource PhoneAccentBrush}"
-                        Command="{Binding ShowHintCommand}"/>
+                        Command="{Binding ShowHintCommand}" />
             </StackPanel>
 
-            <ad:InneractiveAd AppID="ScottLovegrove_InTwo_WP"
-                              AdType="IaAdType_Banner"
-                              ReloadTime="30"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Bottom"
-                              Grid.Row="1"
-                              Height="80"
-                              Visibility="{Binding HasRemovedAds, Source={StaticResource Settings}, Converter={StaticResource InvertedBooleanToVisibilityConverter}}"
-                              Margin="0,100,0,0" />
+            <adDuplex:AdControl AppId="54107"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Grid.Row="1"
+                                Height="80"
+                                Visibility="{Binding HasRemovedAds, Source={StaticResource Settings}, Converter={StaticResource InvertedBooleanToVisibilityConverter}}" />
         </Grid>
     </Grid>
 
